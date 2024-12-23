@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_23_091643) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_23_101026) do
   create_table "bookings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "offre_id", null: false
@@ -19,6 +19,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_23_091643) do
     t.datetime "updated_at", null: false
     t.index ["offre_id"], name: "index_bookings_on_offre_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
+
+  create_table "favoris", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "offre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["offre_id"], name: "index_favoris_on_offre_id"
+    t.index ["user_id"], name: "index_favoris_on_user_id"
   end
 
   create_table "fournisseurs", force: :cascade do |t|
@@ -52,6 +61,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_23_091643) do
 
   add_foreign_key "bookings", "offres"
   add_foreign_key "bookings", "users"
+  add_foreign_key "favoris", "offres"
+  add_foreign_key "favoris", "users"
   add_foreign_key "fournisseurs", "users"
   add_foreign_key "offres", "fournisseurs"
 end
