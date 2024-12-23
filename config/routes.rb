@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   root "offres#index"
 
   resources :offres
+  resources :bookings
+  resources :fournisseurs
 end

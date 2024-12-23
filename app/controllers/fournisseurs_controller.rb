@@ -9,6 +9,7 @@ class FournisseursController < ApplicationController
 
   def show
     @fournisseur = Fournisseur.find_by(user_id: current_user.id)
+    @offres = Offre.where(fournisseur_id: @fournisseur.id)
   end
 
   private

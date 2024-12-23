@@ -1,0 +1,15 @@
+<h1>My bookings</h1>
+<div class="row">
+  <% @bookings.each do |booking| %>
+    <div class="col-md-4 mb-4">
+      <div class="card" style="background-color: white;">
+        <div class="card-body">
+          <h5 class="card-title"><%= booking.offre.fournisseur.name %></h5>
+          <p class="card-text"><%= booking.status %></p>
+          <%= link_to 'modifier', booking_path(booking), class: 'btn btn-primary' %>
+          <%= link_to 'annuler', booking_path(booking), class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
