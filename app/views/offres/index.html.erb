@@ -1,0 +1,9 @@
+<h1>Offres</h1>
+<ul>
+  <% @offres.each do |offre| %>
+  <li>
+    <%= offre.price %>
+    <%= offre.fournisseur.name %>
+  </li>
+  <% end %>
+</ul>

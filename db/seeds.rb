@@ -7,3 +7,27 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+10.times do
+  user = User.create(
+    email: Faker::Internet.email,
+    password: "password"
+  )
+
+  fournisseur= Fournisseur.create(
+    bio: Faker::Lorem.paragraph,
+    user_id: user.id,
+    name: Faker::Name.name
+  )
+
+  offre = Offre.create(
+    price: Faker::Number.decimal(l_digits: 2),
+    fournisseur_id: fournisseur.id
+  )
+
+  booking = Booking.create(
+    user_id: 1,
+    offre_id: offre.id,
+    status: "pending"
+  )
+end
