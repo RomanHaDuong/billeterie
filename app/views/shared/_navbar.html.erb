@@ -13,7 +13,11 @@
           <%= link_to 'Mes résevations', bookings_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Mon profil fournisseur', fournisseur_path(Fournisseur.find_by(user_id: current_user.id)), class: 'nav-link' %>
+          <% if @current_user_fournisseur.present? %>
+            <%= link_to 'Mon profil fournisseur', fournisseur_path(@current_user_fournisseur), class: 'nav-link' %>
+          <% else %>
+            <%= link_to 'Devenir fournisseur', new_fournisseur_path, class: 'nav-link' %>
+          <% end %>
         </li>
         <li class="nav-item">
           <%= link_to 'Mes favoris', favoris_path, class: 'nav-link' %>
