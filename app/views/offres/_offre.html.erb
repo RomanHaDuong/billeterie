@@ -10,9 +10,15 @@
           <i class="fa-solid fa-heart"></i>
         <% end %>
       <% end %>
-      <h5 class="card-title"><%= offre.name %></h5>
-      <p class="card-text"><%= offre.fournisseur.bio %></p>
-      <strong>Price: $<%= offre.price %></strong>
+      <h5 class="card-title">
+        <%= offre.name %>
+      </h5>
+      <p class="card-text">
+        <%= offre.fournisseur.bio %>
+      </p>
+      <strong>
+        Price: $<%= offre.price %>
+      </strong>
       <%= link_to 'Show More', offre_path(offre), class: 'btn btn-primary mt-2' %>
     </div>
   </div>

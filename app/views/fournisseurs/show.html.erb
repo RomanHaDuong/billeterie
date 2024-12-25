@@ -4,14 +4,21 @@
 
 <%= @fournisseur.bio %>
 
-<h1>Les offres de ce fournisseur</h1>
+<h1>
+  Les offres de ce fournisseur
+</h1>
+
 <div class="row">
   <% @offres.each do |offre| %>
     <div class="col-md-4 mb-4">
       <div class="card" style="background-color: white;">
         <div class="card-body">
-          <h5 class="card-title"><%= offre.fournisseur.name %></h5>
-          <p class="card-text"><%= offre.fournisseur.bio %></p>
+          <h5 class="card-title">
+            <%= offre.fournisseur.name %>
+          </h5>
+          <p class="card-text">
+            <%= offre.fournisseur.bio %>
+          </p>
           <%= link_to 'Voir plus', offre_path(offre), class: 'btn btn-primary' %>
         </div>
       </div>
