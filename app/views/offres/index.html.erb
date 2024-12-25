@@ -1,36 +1,42 @@
-<h1>
-  Offres
-</h1>
+<div class="container p-5 my-5 bg-light border rounded">
+  <h1>
+    Offres
+  </h1>
 
-<div class="row">
-  <% @offres.each do |offre| %>
-    <div class="col-md-4 mb-4">
-      <div class="card" style="background-color: white;">
-        <div class="card-body">
-          <% if current_user.favori_offres.include?(offre) %>
-            <%= button_to offre_favori_path(offre), method: :delete, class: 'btn heart-btn' do %>
-              <i class="fa-solid fa-heart text-danger"></i>
-            <% end %>
-          <% else %>
-            <%= button_to offre_favori_path(offre), method: :post, class: 'btn heart-btn' do %>
-              <i class="fa-solid fa-heart"></i>
-            <% end %>
-          <% end %>
-          <h5 class="card-title">
-            <%= offre.fournisseur.name %>
-          </h5>
-          <p class="card-text">
-            <%= offre.fournisseur.bio %>
-          </p>
-          <strong>
-            Price: $<%= offre.price %>
-          </strong>
-          <%= link_to 'Show More', offre_path(offre), class: 'btn btn-primary mt-2' %>
+  <div class="container-fluid">
+    <div class="row g-4">
+      <% @offres.each do |offre| %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow border-0" style="background-color: white;">
+            <div class="card-body">
+              <% if current_user.favori_offres.include?(offre) %>
+                <%= button_to offre_favori_path(offre), method: :delete, class: 'btn heart-btn' do %>
+                  <i class="fa-solid fa-heart text-danger" data-bs-toggle="tooltip" title="Retirer des favoris"></i>
+                <% end %>
+              <% else %>
+                <%= button_to offre_favori_path(offre), method: :post, class: 'btn heart-btn' do %>
+                  <i class="fa-solid fa-heart" data-bs-toggle="tooltip" title="Ajouter aux favoris"></i>
+                <% end %>
+              <% end %>
+              <h5 class="card-title">
+                <%= offre.fournisseur.name %>
+              </h5>
+              <p class="card-text text-muted">
+                <%= offre.fournisseur.bio %>
+              </p>
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <strong>
+                  Price: $<%= offre.price %>
+                </strong>
+                <%= link_to 'Voir plus', offre_path(offre), class: 'btn btn-primary btn-sm mt-2' %>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
 
+  <%= link_to 'Create Fournisseur', new_fournisseur_path, class: 'btn btn-success mt-3' %>
 
-<%= link_to 'create fournisseur', new_fournisseur_path %>
+<div>
