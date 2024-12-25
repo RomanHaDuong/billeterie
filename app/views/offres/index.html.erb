@@ -1,4 +1,7 @@
-<h1>Offres</h1>
+<h1>
+  Offres
+</h1>
+
 <div class="row">
   <% @offres.each do |offre| %>
     <div class="col-md-4 mb-4">
@@ -22,3 +25,6 @@
     </div>
   <% end %>
 </div>
+
+
+<%= link_to 'create fournisseur', new_fournisseur_path %>

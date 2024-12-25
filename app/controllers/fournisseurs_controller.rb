@@ -1,10 +1,15 @@
 class FournisseursController < ApplicationController
   def new
-    @fournisseur = Fournisseur.new
+    @fournisseur = Fournisseur.new(user_id: current_user.id)
   end
 
   def create
     @fournisseur = Fournisseur.new(fournisseur_params)
+    if @fournisseur.save
+      redirect_to fournisseur_path(@fournisseur)
+    else
+      render :new
+    end
   end
 
   def show
