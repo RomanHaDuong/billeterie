@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_25_145711) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_25_152005) do
   create_table "bookings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "offre_id", null: false
@@ -43,6 +43,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_25_145711) do
     t.integer "fournisseur_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_prevue"
+    t.string "autre_info_date"
+    t.string "statut"
+    t.string "titre"
+    t.string "intervenant"
+    t.string "descriptif"
+    t.string "intention"
+    t.string "causes"
+    t.string "cible"
+    t.string "valeur_apportee"
+    t.string "duree"
+    t.string "besoin_espace"
+    t.string "besoin_logistique"
+    t.string "autre_commentaire"
     t.index ["fournisseur_id"], name: "index_offres_on_fournisseur_id"
   end
 
