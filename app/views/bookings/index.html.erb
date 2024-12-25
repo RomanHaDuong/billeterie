@@ -1,15 +1,22 @@
-<h1>My bookings</h1>
-<div class="row">
-  <% @bookings.each do |booking| %>
-    <div class="col-md-4 mb-4">
-      <div class="card" style="background-color: white;">
-        <div class="card-body">
-          <h5 class="card-title"><%= booking.offre.fournisseur.name %></h5>
-          <p class="card-text"><%= booking.status %></p>
-          <%= link_to 'modifier', booking_path(booking), class: 'btn btn-primary' %>
-          <%= link_to 'annuler', booking_path(booking), class: 'btn btn-primary' %>
+<div class="container p-5 my-5 bg-light border rounded">
+  <h1>
+    My bookings
+  </h1>
+
+  <div class="container-fluid">
+    <div class="row g-4">
+      <% @bookings.each do |booking| %>
+        <div class="col-md-4 mb-4">
+          <div class="card shadow border-0" style="background-color: white;">
+            <div class="card-body">
+              <h5 class="card-title"><%= booking.offre.fournisseur.name %></h5>
+              <p class="card-text text-muted"><%= booking.status %></p>
+              <%= link_to 'modifier', booking_path(booking), class: 'btn btn-primary' %>
+              <%= link_to 'annuler', booking_path(booking), class: 'btn btn-primary btn-danger' %>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
