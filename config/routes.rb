@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :offres
   resources :bookings
   resources :fournisseurs
+  resources :users, only: [:index, :show]
   resources :favoris do
     post 'favori', to: 'favoris#create'
     delete 'favori', to: 'favoris#destroy'

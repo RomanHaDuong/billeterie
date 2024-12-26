@@ -1,26 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="<%= root_path %>">Logo?</a>
+  <a class="navbar-brand" href="<%= root_path %>">Brand</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to 'Les Ateliers', offres_path, class: 'nav-link' %>
+      </li>
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Mes résevations', bookings_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <% if @current_user_fournisseur.present? %>
-            <%= link_to 'Mon profil fournisseur', fournisseur_path(@current_user_fournisseur), class: 'nav-link' %>
-          <% else %>
-            <%= link_to 'Devenir fournisseur', new_fournisseur_path, class: 'nav-link' %>
-          <% end %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Mes favoris', favoris_path, class: 'nav-link' %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag(current_user.avatar.url, class: 'rounded-circle', size: '30x30') if current_user.avatar.present? %>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+            <%= link_to 'Mon profil', user_path(current_user), class: 'dropdown-item' %>
+          </div>
         </li>
       <% else %>
         <li class="nav-item">
@@ -30,9 +26,6 @@
           <%= link_to 'Sign up', new_user_registration_path, class: 'nav-link' %>
         </li>
       <% end %>
-      <li>
-        <%= link_to 'Les Ateliers', offres_path, class: 'nav-link' %>
-      </li>
     </ul>
   </div>
 </nav>
