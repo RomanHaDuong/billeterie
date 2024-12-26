@@ -1,24 +1,13 @@
-<h1>Mes favoris</h1>
-<div class="row">
-  <% @favoris.each do |offre| %>
-    <div class="col-md-4 mb-4">
-      <div class="card" style="background-color: white;">
-        <div class="card-body">
-          <% if current_user.favori_offres.include?(offre) %>
-            <%= button_to offre_favori_path(offre), method: :delete, class: 'btn heart-btn' do %>
-              <i class="fa-solid fa-heart text-danger"></i>
-            <% end %>
-          <% else %>
-            <%= button_to offre_favori_path(offre), method: :post, class: 'btn heart-btn' do %>
-              <i class="fa-solid fa-heart"></i>
-            <% end %>
-          <% end %>
-          <h5 class="card-title"><%= offre.fournisseur.name %></h5>
-          <p class="card-text"><%= offre.fournisseur.bio %></p>
-          <strong>Price: $<%= offre.price %></strong>
-          <%= link_to 'Show More', offre_path(offre), class: 'btn btn-primary mt-2' %>
-        </div>
-      </div>
+<div class="container p-5 my-5 bg-light border rounded ">
+  <h1>
+    Mes favoris
+  </h1>
+
+  <div class="container-fluid">
+    <div class="row g-4">
+      <% @offres_favori.each do |offre| %>
+        <%= render partial: 'shared/offres_index', locals: { offre: offre } %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

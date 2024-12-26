@@ -2,8 +2,7 @@ class FavorisController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @favoris = Favori.where(user_id: current_user.id)
-    @favoris = @favoris.map(&:offre)
+    @offres_favori = Favori.where(user_id: current_user.id).map(&:offre)
   end
 
   def new
