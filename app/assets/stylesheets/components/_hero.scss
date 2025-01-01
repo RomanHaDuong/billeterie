@@ -1,0 +1,21 @@
+.hero-banner {
+  img {
+    height: 300px;
+    object-fit: cover;
+  }
+}
+
+.card {
+  &.hover-card {
+    transition: transform 0.3s ease;
+
+    img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
