@@ -1,17 +1,3 @@
-.card {
-  &.hover-card {
-    transition: transform 0.3s ease;
-
-    img {
-      height: 200px;
-      object-fit: cover;
-    }
-
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
-}
 // Base card styles
 .card {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -34,12 +20,42 @@
   }
 }
 
-
-// Workshop/Offer cards
 .workshop-card {
   border: none;
   border-radius: 0.5rem;
   overflow: hidden;
+
+  .workshop-card-img-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .workshop-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .workshop-card-img {
+    transform: scale(1.05);
+  }
+
+  .favorite-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    border-radius: 50%;
+    padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1;
+
+    i {
+      font-size: 1.25rem;
+    }
+  }
 
   .card-body {
     padding: 1.5rem;
@@ -61,19 +77,5 @@
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--bs-primary);
-  }
-
-  .favorite-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: white;
-    border-radius: 50%;
-    padding: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-
-    i {
-      font-size: 1.25rem;
-    }
   }
 }

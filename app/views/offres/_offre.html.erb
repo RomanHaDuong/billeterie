@@ -1,6 +1,12 @@
 <div class="col-md-4 mb-4">
   <div class="card workshop-card h-100 shadow-sm">
-    <div class="card-body position-relative">
+    <%# Image Section %>
+    <div class="workshop-card-img-wrapper">
+      <% if offre.image.attached? %>
+        <%= image_tag offre.image, class: "workshop-card-img" %>
+      <% else %>
+        <%= image_tag "festival_banner.jpg", class: "workshop-card-img" %>
+      <% end %>
       <%# Favorite button %>
       <div class="favorite-btn">
         <% if current_user.favori_offres.include?(offre) %>
@@ -13,7 +19,9 @@
           <% end %>
         <% end %>
       </div>
+    </div>
 
+    <div class="card-body position-relative">
       <%# Content %>
       <h5 class="card-title"><%= offre.titre %></h5>
 
