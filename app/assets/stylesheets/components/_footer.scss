@@ -1,0 +1,17 @@
+.footer {
+  margin-top: auto;  // Pushes footer to bottom if content is short
+
+  a {
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--bs-primary) !important;
+    }
+  }
+
+  .social-links {
+    a {
+      font-size: 1.25rem;
+    }
+  }
+}

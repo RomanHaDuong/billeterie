@@ -1,21 +1,14 @@
 // bootstrap overriding and setting brand colors
 $primary: #506b64;
-$secondary: #f69b62;
-$success: #20c997;
-$background: #94c4ad;
-$text: #212529;
+$secondary: #94c4ad;
 
 $theme-colors: (
   "primary": $primary,
-  "secondary": $secondary,
-  "success": $success
+  "secondary": $secondary
 );
 
 // saving brand colors
 :root {
   --primary-color: #{$primary};
   --secondary-color: #{$secondary};
-  --accent-color: #{$success};
-  --background-color: #{$background};
-  --text-color: #{$text};
 }

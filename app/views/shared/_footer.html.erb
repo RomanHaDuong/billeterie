@@ -1,0 +1,76 @@
+<footer class="footer bg-white py-4 shadow-sm">
+  <div class="container">
+    <div class="row g-4">
+      <%# Brand column %>
+      <div class="col-lg-4 mb-3">
+        <%= link_to root_path, class: "text-decoration-none" do %>
+          <span class="fw-bold fs-4 text-primary">Festival</span>
+        <% end %>
+        <p class="text-muted mt-2">Un festival unique au coeur de Paris pour vivre et partager des moments inoubliables.</p>
+      </div>
+
+      <%# Quick Links %>
+      <div class="col-lg-2 col-md-4 mb-3">
+        <h5 class="fw-bold mb-3">Le Festival</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <%= link_to 'Ateliers', offres_path, class: 'text-decoration-none text-muted' %>
+          </li>
+          <li class="mb-2">
+            <%= link_to 'Intervenants', fournisseurs_path, class: 'text-decoration-none text-muted' %>
+          </li>
+          <li class="mb-2">
+            <%= link_to 'Programme', lieu_path, class: 'text-decoration-none text-muted' %>
+          </li>
+        </ul>
+      </div>
+
+      <%# Legal Links %>
+      <div class="col-lg-2 col-md-4 mb-3">
+        <h5 class="fw-bold mb-3">Le Cadre</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <%= link_to 'Le 47.', lieu_path, class: 'text-decoration-none text-muted' %>
+          </li>
+        </ul>
+      </div>
+
+      <%# Contact %>
+      <div class="col-lg-4 col-md-4 mb-3">
+        <h5 class="fw-bold mb-3">Contact</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2 text-muted">
+            <i class="bi bi-geo-alt me-2"></i>47 Boulevard de Sébastopol, 75001 Paris
+          </li>
+          <li class="mb-2">
+            <a href="mailto:contact@festival.fr" class="text-decoration-none text-muted">
+              <i class="bi bi-envelope me-2"></i>contact@festivaldu47.fr
+            </a>
+          </li>
+          <li class="mb-2">
+            <a href="tel:+33123456789" class="text-decoration-none text-muted">
+              <i class="bi bi-telephone me-2"></i>0000000000
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <%# Copyright %>
+    <div class="border-top pt-3 mt-3">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <small class="text-muted">&copy; <%= Time.current.year %> <%= link_to 'Le 47', 'https://opencollective.com/le-47', target: "_blank", rel: "noopener noreferrer" %>
+ Tous droits réservés.</small>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <div class="social-links">
+            <a href="#" class="text-muted me-3"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-muted me-3"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="text-muted"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
