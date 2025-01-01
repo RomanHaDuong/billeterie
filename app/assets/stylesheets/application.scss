@@ -14,5 +14,9 @@
  *= require_self
  */
 
- @import "bootstrap";
- @import "components/hero";
+@import "config/variables";
+
+@import "bootstrap";
+
+@import "components/hero";
+@import "components/navbar";
