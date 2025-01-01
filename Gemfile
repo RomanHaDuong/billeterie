@@ -73,3 +73,8 @@ gem 'simple_form'
 gem 'csv'
 gem 'sassc-rails'
 gem 'bootstrap', '~> 5.3.2'
+
+group :development do
+  gem 'solargraph', require: false
+  gem 'ruby-lsp', require: false
+end

@@ -1,7 +1,61 @@
-<h1>
-  Pages#home
-</h1>
+<div class="container-fluid p-0">
+  <!-- Hero Banner Section -->
+  <div class="hero-banner position-relative">
+    <%= image_tag "festival_banner.jpg", class: "w-100", alt: "Banner", style: "height: 600px; object-fit: cover;" %>
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+      <h1 class="display-3 fw-bold">Welcome to Billeterie</h1>
+      <p class="lead">Find and book your favorite events</p>
+    </div>
+  </div>
 
-<p>
-  Find me in app/views/pages/home.html.erb
-</p>
+  <!-- Cards Section -->
+  <div class="container my-5">
+    <div class="row g-4">
+      <!-- Card 1 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+          <img src="path_to_card_image1.jpg" class="card-img-top" alt="Card 1" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Concerts</h5>
+            <p class="card-text">Discover upcoming concerts and live music events in your area.</p>
+            <a href="#" class="btn btn-primary stretched-link">Browse Concerts</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+          <img src="path_to_card_image2.jpg" class="card-img-top" alt="Card 2" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Sports Events</h5>
+            <p class="card-text">Get tickets for the biggest sports events of the season.</p>
+            <a href="#" class="btn btn-primary stretched-link">View Sports</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+          <img src="path_to_card_image3.jpg" class="card-img-top" alt="Card 3" style="height: 200px; object-fit: cover;">
+          <div class="card-body">
+            <h5 class="card-title">Theater Shows</h5>
+            <p class="card-text">Experience the magic of live theater and performances.</p>
+            <a href="#" class="btn btn-primary stretched-link">Explore Theater</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .hover-card {
+    transition: transform 0.3s ease;
+  }
+
+  .hover-card:hover {
+    transform: translateY(-5px);
+  }
+</style>
