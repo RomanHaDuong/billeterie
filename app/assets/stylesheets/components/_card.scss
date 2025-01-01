@@ -12,3 +12,68 @@
     }
   }
 }
+// Base card styles
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .btn-outline-primary {
+    transition: all 0.2s ease;
+
+    &:hover i {
+      transform: translateX(5px);
+    }
+  }
+
+  i {
+    transition: transform 0.2s ease;
+  }
+}
+
+
+// Workshop/Offer cards
+.workshop-card {
+  border: none;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .card-text {
+    color: #6b7280;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .price-tag {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--bs-primary);
+  }
+
+  .favorite-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    border-radius: 50%;
+    padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+    i {
+      font-size: 1.25rem;
+    }
+  }
+}
