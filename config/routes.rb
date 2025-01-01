@@ -26,4 +26,7 @@ Rails.application.routes.draw do
     post 'favori', to: 'favoris#create'
     delete 'favori', to: 'favoris#destroy'
   end
+
+  get 'pages/lieu', to: 'pages#lieu', as: 'lieu'
+  get 'pages/programme', to: 'pages#programme', as: 'programme'
 end
