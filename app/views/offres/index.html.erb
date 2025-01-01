@@ -1,16 +1,13 @@
 <div class="container p-5 my-5 bg-light border rounded">
-  <h1>
-    Offres
+  <h1 class="text-center text-primary mb-5">
+    Ateliers
   </h1>
 
   <div class="container-fluid">
     <div class="row g-4">
       <% @offres.each do |offre| %>
-        <%= render partial: 'shared/offres_index', locals: { offre: offre } %>
+        <%= render partial: 'offre', locals: { offre: offre } %>
       <% end %>
     </div>
   </div>
-
-  <%= link_to 'Create Fournisseur', new_fournisseur_path, class: 'btn btn-success mt-3' %>
-
-<div>
+</div>

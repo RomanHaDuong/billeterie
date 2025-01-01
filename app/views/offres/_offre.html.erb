@@ -1,25 +1,35 @@
 <div class="col-md-4 mb-4">
-  <div class="card" style="background-color: white;">
-    <div class="card-body">
-      <% if current_user.favori_offres.include?(offre) %>
-        <%= button_to offre_favori_path(offre), method: :delete, class: 'btn heart-btn' do %>
-          <i class="fa-solid fa-heart text-danger"></i>
+  <div class="card h-100 shadow-sm border-0">
+    <div class="card-body position-relative p-4">
+      <%# Favorite button %>
+      <div class="position-absolute top-0 end-0 p-3">
+        <% if current_user.favori_offres.include?(offre) %>
+          <%= button_to offre_favori_path(offre), method: :delete, class: 'btn p-0' do %>
+            <i class="fa-solid fa-heart fs-4 text-danger"></i>
+          <% end %>
+        <% else %>
+          <%= button_to offre_favori_path(offre), method: :post, class: 'btn p-0' do %>
+            <i class="fa-regular fa-heart fs-4 text-secondary"></i>
+          <% end %>
         <% end %>
-      <% else %>
-        <%= button_to offre_favori_path(offre), method: :post, class: 'btn heart-btn' do %>
-          <i class="fa-solid fa-heart"></i>
-        <% end %>
-      <% end %>
-      <h5 class="card-title">
-        <%= offre.name %>
-      </h5>
-      <p class="card-text">
+      </div>
+
+      <%# Content %>
+      <h5 class="card-title fw-bold mb-3"><%= offre.titre %></h5>
+
+      <p class="card-text text-muted mb-4" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
         <%= offre.fournisseur.bio %>
       </p>
-      <strong>
-        Price: $<%= offre.price %>
-      </strong>
-      <%= link_to 'Show More', offre_path(offre), class: 'btn btn-primary mt-2' %>
+
+      <%# Footer %>
+      <div class="d-flex justify-content-between align-items-center mt-auto">
+        <span class="fs-5 fw-semibold text-secondary">
+          <%= number_to_currency(offre.fournisseur_id, unit: "€") %>
+        </span>
+        <%= link_to offre_path(offre), class: 'btn btn-outline-primary' do %>
+          En savoir plus <i class="fa-solid fa-arrow-right ms-2"></i>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
