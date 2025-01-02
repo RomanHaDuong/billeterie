@@ -2,7 +2,7 @@ require 'csv'
 
 csv_file_path = Rails.root.join('db', 'csv', 'offres.csv')
 
-
+Favori.destroy_all
 Offre.destroy_all
 Fournisseur.destroy_all
 User.destroy_all
@@ -11,6 +11,9 @@ user = User.create!(
   email: "roman@me.com",
   password: "password"
 )
+
+
+
 
 fournisseur = Fournisseur.create!(
   bio: Faker::Lorem.paragraph,
@@ -37,3 +40,29 @@ CSV.foreach(csv_file_path, headers: true) do |row|
     fournisseur_id: fournisseur.id
   )
 end
+
+fournisseur = Fournisseur.create!(
+  bio: Faker::Lorem.paragraph,
+  user_id: user.id,
+  name: "Raphael Szmir"
+)
+
+fournisseur = Fournisseur.create!(
+  bio: Faker::Lorem.paragraph,
+  user_id: user.id,
+  name: "Alexandra Ha Duong"
+)
+
+fournisseur = Fournisseur.create!(
+  bio: Faker::Lorem.paragraph,
+  user_id: user.id,
+  name: "Duc Ha Duong"
+)
+
+fournisseur = Fournisseur.create!(
+  bio: Faker::Lorem.paragraph,
+  user_id: user.id,
+  name: "Ludovic Odier"
+)
+
+puts "Seed done"
