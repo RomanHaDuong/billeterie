@@ -41,22 +41,24 @@
       </div>
 
       <%# Intervenant Info %>
-      <div class="card border-0 shadow-sm p-4 mb-4">
-        <div class="d-flex align-items-center mb-3">
-          <% if @offre.fournisseur.image.attached? %>
-            <%= image_tag @offre.fournisseur.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
-          <% else %>
-            <div class="bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
-              <i class="bi bi-person text-muted"></i>
+      <%= link_to fournisseur_path(@offre.fournisseur), class: "text-decoration-none" do %>
+        <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card">
+          <div class="d-flex align-items-center mb-3">
+            <% if Fournisseur.last.image.attached? %>
+              <%= image_tag Fournisseur.last.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+            <% else %>
+              <div class="bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+                <i class="bi bi-person text-muted"></i>
+              </div>
+            <% end %>
+            <div>
+              <h5 class="mb-0 fw-bold text-dark"><%= Fournisseur.last.name %></h5>
+              <p class="mb-0 text-muted">Animateur</p>
             </div>
-          <% end %>
-          <div>
-            <h5 class="mb-0 fw-bold">Intervenant</h5>
-            <p class="mb-0 text-muted"><%= @offre.fournisseur.name %></p>
           </div>
+          <p class="mb-0 text-dark"><%= @offre.fournisseur.bio %></p>
         </div>
-        <p class="mb-0"><%= @offre.fournisseur.bio %></p>
-      </div>
+      <% end %>
 
       <%# Description %>
       <div class="card border-0 shadow-sm p-4">
@@ -68,7 +70,7 @@
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="fa-regular fa-clock text-primary me-2"></i>
-              <span>Durée: 2h</span>
+              <span>Durée: <%= @offre.duree %></span>
             </div>
           </div>
           <div class="col-6">
@@ -80,13 +82,13 @@
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-location-dot text-primary me-2"></i>
-              <span>Salle: Studio 1</span>
+              <span>Salle: BlaBla room</span>
             </div>
           </div>
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-calendar text-primary me-2"></i>
-              <span>Date: 15 Mars 2024</span>
+              <span>Date: 15 Janvier 2025</span>
             </div>
           </div>
         </div>

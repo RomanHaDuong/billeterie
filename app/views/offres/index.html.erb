@@ -6,7 +6,7 @@
   <div class="container-fluid">
     <div class="row g-4">
       <% @offres.each do |offre| %>
-        <%= render partial: 'offre', locals: { offre: offre } %>
+        <%= render partial: 'shared/offre', locals: { offre: offre } %>
       <% end %>
     </div>
   </div>

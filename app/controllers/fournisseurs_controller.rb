@@ -17,6 +17,11 @@ class FournisseursController < ApplicationController
   end
 
   def show
+    @fournisseur = Fournisseur.find(params[:id])
+    @offres = Offre.where(fournisseur_id: @fournisseur.id)
+  end
+
+  def your_profile
     @fournisseur = Fournisseur.find_by(user_id: current_user.id)
     @offres = Offre.where(fournisseur_id: @fournisseur.id)
   end

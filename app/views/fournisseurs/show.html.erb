@@ -1,33 +1,157 @@
-<h1>
-  Le fournisseur <%= @fournisseur.name %>
-</h1>
+<div class="container py-5">
+  <%# Header Section %>
+  <div class="row mb-5">
+    <div class="col-lg-4 text-center text-lg-start">
+      <div class="position-relative mb-4">
+        <% if @fournisseur.image.attached? %>
+          <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm", style: "width: 100%; height: 300px; object-fit: cover;" %>
+        <% else %>
+          <div class="bg-light rounded-3 d-flex align-items-center justify-content-center" style="height: 300px;">
+            <i class="bi bi-person display-1 text-muted"></i>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-<%= @fournisseur.bio %>
+    <div class="col-lg-8">
+      <h1 class="fw-bold mb-3"><%= @fournisseur.name %></h1>
 
-<h1>
-  Les offres de ce fournisseur
-</h1>
+      <%# Quick Stats %>
+      <div class="row g-3 mb-4">
+        <div class="col-sm-4">
+          <div class="card border-0 bg-light">
+            <div class="card-body text-center">
+              <h3 class="mb-1"><%= @fournisseur.offres.count %></h3>
+              <p class="text-muted mb-0">Ateliers</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card border-0 bg-light">
+            <div class="card-body text-center">
+              <h3 class="mb-1">1er</h3>
+              <p class="text-muted mb-0">Festival</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="card border-0 bg-light">
+            <div class="card-body text-center">
+              <h3 class="mb-1">127</h3>
+              <p class="text-muted mb-0">Participants</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-<div class="row">
-  <% @offres.each do |offre| %>
-    <div class="col-md-4 mb-4">
-      <div class="card" style="background-color: white;">
-        <div class="card-body">
-          <h5 class="card-title">
-            <%= offre.fournisseur.name %>
-          </h5>
-          <p class="card-text">
-            <%= offre.fournisseur.bio %>
-          </p>
-          <%= link_to 'Voir plus', offre_path(offre), class: 'btn btn-primary' %>
+      <%# Bio %>
+      <div class="mb-4">
+        <h5 class="fw-bold mb-3">À propos</h5>
+        <p class="text-muted"><%= @fournisseur.bio %></p>
+      </div>
+
+      <%# Contact/Social %>
+      <div class="d-flex gap-2">
+        <a href="#" class="btn btn-outline-primary">
+          <i class="bi bi-envelope me-2"></i>Contact
+        </a>
+        <a href="#" class="btn btn-outline-dark">
+          <i class="bi bi-instagram me-2"></i>Instagram
+        </a>
+        <a href="#" class="btn btn-outline-dark">
+          <i class="bi bi-linkedin me-2"></i>LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <%# Tabs Section %>
+  <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ateliers">
+        Ateliers (<%= @fournisseur.offres.count %>)
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#parcours">
+        Parcours
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#avis">
+        Avis
+      </button>
+    </li>
+  </ul>
+
+  <%# Tab Contents %>
+  <div class="tab-content">
+    <%# Ateliers Tab %>
+    <div class="tab-pane fade show active" id="ateliers">
+      <div class="row g-4">
+        <% @fournisseur.offres.each do |offre| %>
+          <%= render partial: 'shared/offre', locals: { offre: offre } %>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Parcours Tab %>
+    <div class="tab-pane fade" id="parcours">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-marker bg-primary"></div>
+          <div class="timeline-content">
+            <h5 class="mb-2">Directeur Artistique</h5>
+            <p class="text-muted mb-1">Studio Design Paris</p>
+            <small class="text-muted">2018 - Présent</small>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-marker bg-primary"></div>
+          <div class="timeline-content">
+            <h5 class="mb-2">Designer Senior</h5>
+            <p class="text-muted mb-1">Agence Creative</p>
+            <small class="text-muted">2015 - 2018</small>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-marker bg-primary"></div>
+          <div class="timeline-content">
+            <h5 class="mb-2">Formation Design</h5>
+            <p class="text-muted mb-1">École des Arts Décoratifs</p>
+            <small class="text-muted">2012 - 2015</small>
+          </div>
         </div>
       </div>
     </div>
-  <% end %>
-</div>
 
-<% if @current_user_fournisseur.present? %>
-<h1>
-  afficher ici les réservations faites sur les offres de ce fournisseur
-</h1>
-<% end %>
+    <%# Avis Tab %>
+    <div class="tab-pane fade" id="avis">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <div class="bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+                  <i class="bi bi-person text-muted"></i>
+                </div>
+                <div>
+                  <h6 class="mb-0 fw-bold">Marie L.</h6>
+                  <small class="text-muted">Il y a 2 jours</small>
+                </div>
+              </div>
+              <div class="mb-2">
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+                <i class="bi bi-star-fill text-warning"></i>
+              </div>
+              <p class="mb-0">Excellent atelier, très enrichissant et bien structuré. L'intervenant est passionné et sait transmettre son savoir.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

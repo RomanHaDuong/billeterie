@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   root "pages#home"
 
   resources :offres
-  resources :bookings
   resources :fournisseurs
   resources :users, only: [:index, :show]
   resources :favoris do

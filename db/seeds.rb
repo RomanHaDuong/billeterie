@@ -62,7 +62,15 @@ fournisseur = Fournisseur.create!(
 fournisseur = Fournisseur.create!(
   bio: Faker::Lorem.paragraph,
   user_id: user.id,
-  name: "Ludovic Odier"
+  name: "Ludovic Odier",
 )
+
+Fournisseur.all.each do |fournisseur|
+  fournisseur.image.attach(
+    io: File.open('app/assets/images/man_image_seed.jpeg'),
+    filename: 'man_image_seed.jpeg',
+    content_type: 'man_image_seed/jpeg'
+  )
+end
 
 puts "Seed done"
