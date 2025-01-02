@@ -1,7 +1,96 @@
-<h1>
-  Atelier animé par <%= @offre.intervenant %>
-</h1>
+<div class="container py-5">
+  <div class="row">
+    <%# Left Column - Image %>
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="workshop-show-img-wrapper rounded-3 overflow-hidden shadow-sm">
+        <% if @offre.image.attached? %>
+          <%= image_tag @offre.image, class: "workshop-show-img" %>
+        <% else %>
+          <%= image_tag "festival_banner.jpg", class: "workshop-show-img" %>
+        <% end %>
+      </div>
+    </div>
 
-<p>
-  <%= @offre.descriptif %>
-</p>
+    <%# Right Column - Content %>
+    <div class="col-lg-6">
+      <div class="d-flex justify-content-between align-items-start mb-4">
+        <h1 class="fw-bold mb-0"><%= @offre.titre %></h1>
+        <% if current_user %>
+          <div class="favorite-btn-lg">
+            <% if current_user.favori_offres.include?(@offre) %>
+              <%= button_to offre_favori_path(@offre), method: :delete, class: 'btn btn-light rounded-circle p-2 shadow-sm' do %>
+                <i class="fa-solid fa-heart text-danger fs-4"></i>
+              <% end %>
+            <% else %>
+              <%= button_to offre_favori_path(@offre), method: :post, class: 'btn btn-light rounded-circle p-2 shadow-sm' do %>
+                <i class="fa-regular fa-heart text-secondary fs-4"></i>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <%# Price and Booking Button %>
+      <div class="d-flex align-items-center mb-4">
+        <span class="price-tag fs-2 me-4">
+          <%= number_to_currency(@offre.fournisseur_id, unit: "€") %>
+        </span>
+        <%= link_to "#", class: "btn btn-primary btn-lg" do %>
+          Réserver <i class="fa-solid fa-ticket ms-2"></i>
+        <% end %>
+      </div>
+
+      <%# Intervenant Info %>
+      <div class="card border-0 shadow-sm p-4 mb-4">
+        <div class="d-flex align-items-center mb-3">
+          <% if @offre.fournisseur.image.attached? %>
+            <%= image_tag @offre.fournisseur.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+          <% else %>
+            <div class="bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
+              <i class="bi bi-person text-muted"></i>
+            </div>
+          <% end %>
+          <div>
+            <h5 class="mb-0 fw-bold">Intervenant</h5>
+            <p class="mb-0 text-muted"><%= @offre.fournisseur.name %></p>
+          </div>
+        </div>
+        <p class="mb-0"><%= @offre.fournisseur.bio %></p>
+      </div>
+
+      <%# Description %>
+      <div class="card border-0 shadow-sm p-4">
+        <h5 class="fw-bold mb-3">Description de l'atelier</h5>
+        <p class="mb-4"><%= @offre.descriptif %></p>
+
+        <%# Details %>
+        <div class="row g-4">
+          <div class="col-6">
+            <div class="d-flex align-items-center">
+              <i class="fa-regular fa-clock text-primary me-2"></i>
+              <span>Durée: 2h</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-users text-primary me-2"></i>
+              <span>Places: 12</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-location-dot text-primary me-2"></i>
+              <span>Salle: Studio 1</span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-calendar text-primary me-2"></i>
+              <span>Date: 15 Mars 2024</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

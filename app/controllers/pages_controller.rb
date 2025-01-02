@@ -7,4 +7,7 @@ class PagesController < ApplicationController
 
   def programme
   end
+
+  def booking
+  end
 end
