@@ -20,41 +20,14 @@
   }
 }
 
-.workshop-card {
+// Shared card styles
+%card-shared {
   border: none;
   border-radius: 0.5rem;
   overflow: hidden;
 
-  .workshop-card-img-wrapper {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-  }
-
-  .workshop-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover .workshop-card-img {
+  &:hover &-img {
     transform: scale(1.05);
-  }
-
-  .favorite-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: white;
-    border-radius: 50%;
-    padding: 0.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 1;
-
-    i {
-      font-size: 1.25rem;
-    }
   }
 
   .card-body {
@@ -77,5 +50,62 @@
     font-size: 1.25rem;
     font-weight: 600;
     color: var(--bs-primary);
+  }
+}
+
+// Workshop card
+.workshop-card {
+  @extend %card-shared;
+
+  .favorite-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: white;
+    border-radius: 50%;
+    padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 1;
+
+    i {
+      font-size: 1.25rem;
+    }
+  }
+
+  .price-tag {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--bs-primary);
+  }
+
+  &-img-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  &-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+}
+
+// Person card
+.person-card {
+  @extend %card-shared;
+
+  &-img-wrapper {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+  }
+
+  &-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
   }
 }

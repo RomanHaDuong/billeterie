@@ -1,0 +1,32 @@
+<div class="col-md-4 mb-4">
+  <div class="card person-card h-100">
+    <%# Image %>
+    <div class="person-card-img-wrapper">
+      <% if fournisseur.image.attached? %>
+        <%= image_tag fournisseur.image, class: "person-card-img" %>
+      <% else %>
+        <%= image_tag "festival_banner.jpg", class: "person-card-img" %>
+      <% end %>
+    </div>
+
+    <div class="card-body">
+      <%# Card content %>
+      <h5 class="card-title"><%= fournisseur.name %></h5>
+
+      <%# Description with line clamp moved to CSS %>
+      <p class="card-text line-clamp">
+        <%= fournisseur.bio %>
+      </p>
+
+      <%# Footer %>
+      <div class="mt-4 d-flex justify-content-between align-items-center">
+        <span class="price-tag">
+          <%= number_to_currency(fournisseur.id, unit: "€") %>
+        </span>
+        <%= link_to fournisseur_path(fournisseur), class: 'btn btn-outline-primary' do %>
+          Voir plus <i class="fa-solid fa-arrow-right ms-2"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

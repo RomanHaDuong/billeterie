@@ -1,0 +1,13 @@
+<div class="container p-5 my-5 bg-light border rounded">
+  <h1 class="text-center text-primary mb-5">
+    Intervants
+  </h1>
+
+  <div class="container-fluid">
+    <div class="row g-4">
+      <% @fournisseurs.each do |fournisseur| %>
+        <%= render partial: 'shared/person_card', locals: { fournisseur: fournisseur } %>
+      <% end %>
+    </div>
+  </div>
+</div>

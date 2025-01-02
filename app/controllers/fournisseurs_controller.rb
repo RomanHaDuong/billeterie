@@ -1,4 +1,8 @@
 class FournisseursController < ApplicationController
+  def index
+    @fournisseurs = Fournisseur.all
+  end
+
   def new
     @fournisseur = Fournisseur.new(user_id: current_user.id)
   end
