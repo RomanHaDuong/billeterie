@@ -73,6 +73,8 @@ gem 'simple_form'
 gem 'csv'
 gem 'sassc-rails'
 gem 'bootstrap', '~> 5.3.2'
+gem 'dotenv-rails'
+gem 'sendgrid-ruby'
 
 group :development do
   gem 'solargraph', require: false

@@ -1,16 +1,33 @@
-<h2>Forgot your password?</h2>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-5">
+          <h2 class="text-center mb-4 fw-bold">Mot de passe oublié ?</h2>
+          <p class="text-muted text-center mb-4">Entrez votre email pour recevoir les instructions de réinitialisation</p>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <div class="form-group mb-4">
+              <%= f.label :email, class: "form-label fw-medium" %>
+              <%= f.email_field :email, autofocus: true,
+                  autocomplete: "email",
+                  class: "form-control form-control-lg",
+                  placeholder: "Entrez votre email" %>
+            </div>
+
+            <%= f.submit "Réinitialiser mon mot de passe",
+                class: "btn btn-primary w-100 btn-lg mb-4" %>
+          <% end %>
+
+          <div class="text-center">
+            <p class="text-muted">Retour à la</p>
+            <%= link_to "page de connexion", new_session_path(resource_name),
+                class: "text-decoration-none fw-medium" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>
