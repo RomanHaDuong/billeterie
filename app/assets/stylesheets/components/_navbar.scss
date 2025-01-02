@@ -53,3 +53,30 @@
 .navbar-toggler:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
+
+.dropdown {
+  .nav-link {
+    cursor: pointer;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .dropdown-menu {
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+
+    .dropdown-item {
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+
+      &.text-danger:hover {
+        background-color: #fff5f5;
+      }
+    }
+  }
+}

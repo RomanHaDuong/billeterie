@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-
+  has_one_attached :avatar
   has_many :favoris
   has_many :favori_offres, through: :favoris, source: :offre
 
