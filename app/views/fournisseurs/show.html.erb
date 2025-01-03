@@ -6,9 +6,7 @@
         <% if @fournisseur.image.attached? %>
           <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm", style: "width: 100%; height: 300px; object-fit: cover;" %>
         <% else %>
-          <div class="bg-light rounded-3 d-flex align-items-center justify-content-center" style="height: 300px;">
-            <i class="bi bi-person display-1 text-muted"></i>
-          </div>
+          <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm", style: "width: 100%; height: 300px; object-fit: cover;" %>
         <% end %>
       </div>
     </div>
@@ -70,11 +68,6 @@
     <li class="nav-item" role="presentation">
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ateliers">
         Ateliers (<%= @fournisseur.offres.count %>)
-      </button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#parcours">
-        Parcours
       </button>
     </li>
     <li class="nav-item" role="presentation">

@@ -6,7 +6,7 @@
         <% if @offre.image.attached? %>
           <%= image_tag @offre.image, class: "workshop-show-img" %>
         <% else %>
-          <%= image_tag "festival_banner.png", class: "workshop-show-img" %>
+          <%= image_tag "placeholder_offre.png", class: "workshop-show-img" %>
         <% end %>
       </div>
     </div>
@@ -47,9 +47,7 @@
             <% if Fournisseur.last.image.attached? %>
               <%= image_tag Fournisseur.last.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
             <% else %>
-              <div class="bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 48px; height: 48px;">
-                <i class="bi bi-person text-muted"></i>
-              </div>
+              <%= image_tag "placeholder_person.png", class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
             <% end %>
             <div>
               <h5 class="mb-0 fw-bold text-dark"><%= Fournisseur.last.name %></h5>

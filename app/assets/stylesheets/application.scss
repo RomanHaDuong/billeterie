@@ -25,3 +25,21 @@
 @import "components/show_pages";
 
 @import "devise";
+
+.banner-title {
+  text-align: center;
+  font-size: 64px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 10px rgba(76, 29, 149, 0.5),
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Arial Black', 'Helvetica Bold', sans-serif;
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
