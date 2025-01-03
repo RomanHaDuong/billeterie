@@ -21,6 +21,13 @@ class BookingsController < ApplicationController
     end
   end
 
+  def book_event
+    booking = Booking.create!(user: current_user, event: @event)
+    calendar_event = CalendarService.new(current_user, @event).create_calendar_event
+    booking.update(calendar_event_id: calendar_event.id)
+    redirect_to @event, notice: 'Booking confirmed! Check your email for calendar invite.'
+  end
+
   private
 
   def booking_params

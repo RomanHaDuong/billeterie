@@ -42,4 +42,3 @@ db/csv/offres.csv
 /deploy.sh
 /app.tar.gz
 /billeterie.tar
-/credentials_calendar_api.json
