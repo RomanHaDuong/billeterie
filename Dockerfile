@@ -1,73 +1,70 @@
 # syntax = docker/dockerfile:1
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
 ARG RUBY_VERSION=3.3.5
 FROM --platform=linux/arm64/v8 registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
-# Rails app lives here
 WORKDIR /rails
 
-# Set production environment
 ENV RAILS_ENV="production" \
   BUNDLE_DEPLOYMENT="1" \
   BUNDLE_PATH="/usr/local/bundle" \
-  BUNDLE_WITHOUT="development"
+  BUNDLE_WITHOUT="development" \
+  BUNDLE_BUILD__SASSC=--disable-march-tune-native
 
-
-# Throw-away build stage to reduce size of final image
 FROM base as build
 
-# Install packages needed to build gems
+# Install all dependencies in one layer
 RUN apt-get update -qq && \
-  apt-get install --no-install-recommends -y build-essential git libvips pkg-config
+  apt-get install --no-install-recommends -y \
+  build-essential \
+  git \
+  libvips \
+  pkg-config \
+  libssl-dev \
+  zlib1g-dev \
+  gcc \
+  make \
+  libc6-dev \
+  nodejs \
+  npm && \
+  rm -rf /var/lib/apt/lists/*
 
-# Install application gems
+# Copy Gemfiles first for better caching
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-  rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-  bundle exec bootsnap precompile --gemfile
+
+# Install sassc separately first to avoid ARM64 compilation issues
+RUN gem install sassc:2.4.0 --disable-march-tune-native && \
+  gem install msgpack --disable-march-tune-native
+
+# Single bundle install
+RUN bundle config set --local frozen false && \
+  bundle install && \
+  rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
 # Copy application code
 COPY . .
 
-# Install Node.js
-RUN apt-get update -qq && \
-  apt-get install -y nodejs npm
+# Precompile bootsnap and assets
+RUN bundle exec bootsnap precompile app/ lib/ && \
+  SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-# Verify installation
-RUN node --version
-RUN npm --version
-
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
-
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-
-# Final stage for app image
 FROM base
 
-# Install packages needed for deployment
+# Install runtime dependencies only
 RUN apt-get update -qq && \
   apt-get install --no-install-recommends -y curl libsqlite3-0 libvips && \
   rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
-# Create necessary directories
-RUN mkdir -p db log storage tmp
-
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
+RUN mkdir -p db log storage tmp && \
+  useradd rails --create-home --shell /bin/bash && \
   chown -R rails:rails db log storage tmp
+
 USER rails:rails
 
-# Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/rails", "server"]
