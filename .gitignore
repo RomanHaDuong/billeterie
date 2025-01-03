@@ -35,3 +35,10 @@
 /config/master.key
 
 db/csv/offres.csv
+
+# Ignore docker compose file
+/docker-compose.yml
+/restart.sh
+/deploy.sh
+/app.tar.gz
+/billeterie.tar
