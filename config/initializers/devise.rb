@@ -319,10 +319,6 @@ Devise.setup do |config|
     scope: 'userinfo.email, calendar',
     image_aspect_ratio: 'square',
     image_size: 50,
-    provider_ignores_state: false,
-    skip_jwt: true,
-    setup: (lambda do |env|
-      puts "OAuth2 Request: #{env['omniauth.strategy'].options}"
-    end)
+    provider_ignores_state: false
   }
 end
