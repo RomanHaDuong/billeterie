@@ -75,6 +75,9 @@ gem 'sassc-rails'
 gem 'bootstrap', '~> 5.3.2'
 gem 'dotenv-rails'
 gem 'sendgrid-ruby'
+gem 'omniauth-google-oauth2'
+gem 'google-api-client', require: 'google/apis/calendar_v3'
+gem 'omniauth-rails_csrf_protection'
 
 group :development do
   gem 'solargraph', require: false
