@@ -9,7 +9,8 @@ ENV RAILS_ENV="production" \
   BUNDLE_DEPLOYMENT="1" \
   BUNDLE_PATH="/usr/local/bundle" \
   BUNDLE_WITHOUT="development" \
-  BUNDLE_BUILD__SASSC=--disable-march-tune-native
+  BUNDLE_BUILD__SASSC=--disable-march-tune-native \
+  BUNDLE_BUILD__MSGPACK=--disable-march-tune-native
 
 FROM base as build
 
@@ -32,9 +33,11 @@ RUN apt-get update -qq && \
 # Copy Gemfiles first for better caching
 COPY Gemfile Gemfile.lock ./
 
-# Install sassc separately first to avoid ARM64 compilation issues
-RUN gem install sassc:2.4.0 --disable-march-tune-native && \
-  gem install msgpack --disable-march-tune-native
+RUN gem install bcrypt -v '3.1.20' && \
+  gem install sassc:2.4.0 && \
+  gem install bigdecimal -v '3.1.8' && \
+  gem install msgpack
+
 
 # Single bundle install
 RUN bundle config set --local frozen false && \
