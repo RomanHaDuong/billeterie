@@ -40,5 +40,6 @@ db/csv/offres.csv
 /docker-compose.yml
 /restart.sh
 /deploy.sh
+/deploy_production.sh
 /app.tar.gz
 /billeterie.tar
