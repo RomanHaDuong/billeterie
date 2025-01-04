@@ -1,0 +1,87 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <%# Header with Image %>
+        <div class="card-img-top workshop-show-img-wrapper overflow-hidden" style="height: 200px;">
+          <% if @booking.offre.image.attached? %>
+            <%= image_tag @booking.offre.image, class: "w-100 h-100", style: "object-fit: cover;" %>
+          <% else %>
+            <%= image_tag "placeholder_offre.png", class: "w-100 h-100", style: "object-fit: cover;" %>
+          <% end %>
+        </div>
+
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-start mb-4">
+            <h2 class="fw-bold mb-0">Détails de votre réservation</h2>
+            <span class="badge bg-success fs-6">Confirmée</span>
+          </div>
+
+          <%# Workshop Details %>
+          <div class="mb-4">
+            <h5 class="fw-bold mb-3">Atelier</h5>
+            <p class="fs-5 mb-4"><%= @booking.offre.titre %></p>
+
+            <div class="row g-3">
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fa-regular fa-clock text-primary me-2"></i>
+                  <span>Durée: <%= "1h" %></span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-calendar text-primary me-2"></i>
+                  <span>Date: <%= "20/01/25" %></span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-location-dot text-primary me-2"></i>
+                  <span>Salle: <%= "BlaBla room" %></span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-euro-sign text-primary me-2"></i>
+                  <span>Prix: <%= number_to_currency(@booking.offre.id, unit: "€") %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <%# Reservation Info %>
+          <div class="mb-4">
+            <h5 class="fw-bold mb-3">Informations de réservation</h5>
+            <div class="bg-light p-3 rounded">
+              <div class="row g-3">
+                <div class="col-6">
+                  <p class="mb-1"><strong>Nom:</strong></p>
+                  <p class="mb-0"><%= @booking.user.name %></p>
+                </div>
+                <div class="col-6">
+                  <p class="mb-1"><strong>Email:</strong></p>
+                  <p class="mb-0"><%= @booking.user.email %></p>
+                </div>
+                <div class="col-12">
+                  <p class="mb-1"><strong>Numéro de réservation:</strong></p>
+                  <p class="mb-0">#<%= @booking.id %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <%# Actions %>
+          <div class="d-flex gap-3">
+            <%= link_to "Voir mes réservations", bookings_path, class: "btn btn-outline-secondary flex-grow-1" %>
+            <%= button_to "Annuler la réservation",
+                booking_path(@booking),
+                method: :delete,
+                data: { turbo_confirm: "Êtes-vous sûr de vouloir annuler cette réservation ?" },
+                class: "btn btn-danger flex-grow-1" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

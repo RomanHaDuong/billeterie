@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_03_222122) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_04_210011) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_03_222122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "creneau"
+    t.string "user_name"
+    t.string "user_email"
     t.index ["offre_id"], name: "index_bookings_on_offre_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -98,7 +100,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_03_222122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar"
-    t.string "image"
     t.string "provider"
     t.string "uid"
     t.string "name"

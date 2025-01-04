@@ -9,6 +9,23 @@
           <%= image_tag "placeholder_offre.png", class: "workshop-show-img" %>
         <% end %>
       </div>
+
+      <%# Attendees Section %>
+      <div class="d-flex align-items-center gap-2 mt-3">
+        <h6 class="fw-bold mb-0">Participants</h6>
+        <span class="badge bg-primary"><%= @offre.bookings.count %> inscrits</span>
+        <div class="attendees-grid d-flex gap-1 ms-2">
+          <% @offre.bookings.includes(:user).each do |booking| %>
+            <div class="attendee-avatar" data-bs-toggle="tooltip" title="<%= booking.user.name %>">
+              <% if booking.user.image.attached? %>
+                <%= image_tag booking.user.image, class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>
+              <% else %>
+                <%= image_tag "placeholder_person.png", class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <%# Right Column - Content %>

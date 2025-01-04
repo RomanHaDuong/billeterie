@@ -1,22 +1,69 @@
-<div class="container p-5 my-5 bg-light border rounded">
-  <h1>
-    My bookings
-  </h1>
-
-  <div class="container-fluid">
-    <div class="row g-4">
-      <% @bookings.each do |booking| %>
-        <div class="col-md-4 mb-4">
-          <div class="card shadow border-0" style="background-color: white;">
-            <div class="card-body">
-              <h5 class="card-title"><%= booking.offre.fournisseur.name %></h5>
-              <p class="card-text text-muted"><%= booking.status %></p>
-              <%= link_to 'modifier', booking_path(booking), class: 'btn btn-primary' %>
-              <%= link_to 'annuler', booking_path(booking), class: 'btn btn-primary btn-danger' %>
-            </div>
-          </div>
-        </div>
-      <% end %>
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold mb-0">Mes réservations</h2>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-primary active">Liste</button>
+      <button type="button" class="btn btn-outline-primary">Agenda</button>
     </div>
   </div>
+
+  <%# Table View %>
+  <div class="card border-0 shadow-sm">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">Atelier</th>
+            <th scope="col">Date</th>
+            <th scope="col">Salle</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Statut</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bookings.each do |booking| %>
+            <tr>
+              <td class="align-middle">
+                <div class="d-flex align-items-center">
+                  <% if booking.offre.image.attached? %>
+                    <%= image_tag booking.offre.image, class: "rounded me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+                  <% end %>
+                  <div>
+                    <h6 class="mb-0"><%= booking.offre.titre %></h6>
+                    <small class="text-muted">Réservation #<%= booking.id %></small>
+                  </div>
+                </div>
+              </td>
+              <td class="align-middle">
+                <%= "20/01/25" %>
+              </td>
+              <td class="align-middle"><%= "BlaBla Room" %></td>
+              <td class="align-middle">€<%= booking.offre.id %></td>
+              <td class="align-middle">
+                <span class="badge bg-success">Confirmée</span>
+              </td>
+              <td class="align-middle">
+                <%= link_to booking_path(booking), class: "btn btn-outline-primary btn-sm" do %>
+                  Voir détails <i class="fa-solid fa-arrow-right ms-1"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <%# Empty State %>
+  <% if @bookings.empty? %>
+    <div class="text-center py-5">
+      <div class="mb-4">
+        <i class="fa-regular fa-calendar fa-3x text-muted"></i>
+      </div>
+      <h3 class="fw-bold">Aucune réservation</h3>
+      <p class="text-muted mb-4">Vous n'avez pas encore de réservation.</p>
+      <%= link_to "Voir le programme", offres_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
 </div>

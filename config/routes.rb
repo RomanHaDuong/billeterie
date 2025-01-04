@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
+
+  resources :bookings, only: [:create, :show, :destroy, :index]
   resources :bookings, only: [:index]
   resources :offres do
     member do
@@ -36,5 +38,5 @@ Rails.application.routes.draw do
 
   get 'pages/lieu', to: 'pages#lieu', as: 'lieu'
   get 'pages/programme', to: 'pages#programme', as: 'programme'
-  get 'pages/booking', to: 'pages#booking', as: 'booking'
+  # get 'pages/booking', to: 'pages#booking', as: 'booking'
 end

@@ -1,23 +1,36 @@
 class BookingsController < ApplicationController
-  def index
-    @bookings = Booking.where(user_id: current_user.id)
+  before_action :authenticate_user!
+
+  def show
+    @booking = Booking.find(params[:id])
   end
+
+  def index
+    @bookings = current_user.bookings.includes(:offre).order(created_at: :desc)
+  end
+
 
   def new
     @offre = Offre.find(params[:id])
+    @booking = Booking.new
   end
 
   def create
     @booking = Booking.new(booking_params)
-    @offre = Offre.find(params[:offre_id])
-    @booking.offre = @offre
     @booking.user = current_user
-    @booking.creneau = params[:creneau]
+
     if @booking.save
-      redirect_to bookings_path
+      redirect_to @booking, notice: 'Réservation confirmée!'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @booking = Booking.find(params[:id])
+    @booking.destroy
+
+    redirect_to bookings_path, notice: 'Votre réservation a été annulée.'
   end
 
   def book_event
@@ -30,6 +43,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:date)
+    params.require(:booking).permit(:user_name, :user_email, :offre_id)
   end
 end
