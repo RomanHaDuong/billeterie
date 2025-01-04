@@ -57,12 +57,12 @@
 
             <div class='mb-3'>
               <%= f.label :name, 'Votre nom', class: "form-label fw-bold" %>
-              <%= f.text_field :user_name, value: current_user.name, class: 'form-control form-control-lg', readonly: true %>
+              <%= f.text_field :user_name, value: current_user.name, class: 'form-control form-control-lg' %>
             </div>
 
             <div class='mb-4'>
               <%= f.label :email, 'Votre email', class: "form-label fw-bold" %>
-              <%= f.email_field :user_email, value: current_user.email, class: 'form-control form-control-lg', readonly: true %>
+              <%= f.email_field :user_email, value: current_user.email, class: 'form-control form-control-lg' %>
             </div>
 
             <%= f.submit "Confirmer la réservation", class: "btn btn-primary w-100" %>
