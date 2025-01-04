@@ -1,0 +1,72 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <%# Header with Image %>
+        <div class="card-img-top workshop-show-img-wrapper overflow-hidden" style="height: 200px;">
+          <% if @offre.image.attached? %>
+            <%= image_tag @offre.image, class: "w-100 h-100", style: "object-fit: cover;" %>
+          <% else %>
+            <%= image_tag "placeholder_offre.png", class: "w-100 h-100", style: "object-fit: cover;" %>
+          <% end %>
+        </div>
+
+        <div class="card-body p-4">
+          <h2 class="fw-bold text-center mb-4">Confirmer votre réservation</h2>
+
+          <%# Workshop Details %>
+          <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0">Détails de l'atelier</h5>
+              <span class="price-tag fs-4">€<%= @offre.fournisseur_id %></span>
+            </div>
+            <p class="fs-5 mb-4"><%= @offre.titre %></p>
+
+            <%# Info Grid %>
+            <div class="row g-3 mb-4">
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fa-regular fa-clock text-primary me-2"></i>
+                  <span>Durée: <%= @offre.duree %></span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-calendar text-primary me-2"></i>
+                  <span>Date: <%= @offre.date_prevue %></span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-location-dot text-primary me-2"></i>
+                  <span>Salle: <%= @offre.titre %></span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-users text-primary me-2"></i>
+                  <span>Places: <%= @offre.id %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <%# Booking Form %>
+          <%= form_with url: bookings_path, method: :post do |f| %>
+            <div class="mb-3">
+              <label class="form-label fw-bold">Votre nom</label>
+              <%= f.text_field :name, value: current_user.name, class: "form-control form-control-lg" %>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-bold">Votre email</label>
+              <%= f.email_field :email, value: current_user.email, class: "form-control form-control-lg", readonly: true %>
+            </div>
+
+            <%= f.submit "Confirmer la réservation", class: "btn btn-primary btn-lg w-100" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

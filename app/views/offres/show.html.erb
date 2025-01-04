@@ -35,7 +35,7 @@
         <span class="price-tag fs-2 me-4">
           <%= number_to_currency(@offre.fournisseur_id, unit: "€") %>
         </span>
-        <%= link_to "#", class: "btn btn-primary btn-lg" do %>
+        <%= link_to book_offre_path(@offre), class: "btn btn-primary btn-lg" do %>
           Réserver <i class="fa-solid fa-ticket ms-2"></i>
         <% end %>
       </div>

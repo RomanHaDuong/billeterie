@@ -9,6 +9,40 @@
   }
 }
 
+.workshop-show-img-wrapper {
+  position: relative;
+  background-color: #f8f9fa;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.form-control-lg {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+
+  &[readonly] {
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
 .favorite-btn-lg {
   .btn {
     transition: transform 0.2s ease;

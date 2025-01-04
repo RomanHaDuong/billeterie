@@ -16,7 +16,12 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
-  resources :offres
+  resources :bookings, only: [:index]
+  resources :offres do
+    member do
+      get 'book', to: 'bookings#new'
+    end
+  end
   resources :fournisseurs
   resources :users, only: [:index, :show]
   resources :favoris do
