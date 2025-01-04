@@ -34,7 +34,7 @@
             <span>Mon profil</span>
           <% end %>
 
-          <% if current_user.image.present? %>
+          <% if current_user.image.attached? %>
             <%= image_tag current_user.image,
                 class: 'rounded-circle me-2',
                 size: '32x32',

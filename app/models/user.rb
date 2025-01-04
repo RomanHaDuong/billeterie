@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one_attached :image
   has_many :favoris
   has_many :bookings
   has_many :favori_offres, through: :favoris, source: :offre
@@ -14,7 +15,12 @@ class User < ApplicationRecord
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
-      user.image = auth.info.image  # Google profile picture URL
+
+      if auth.info.image.present?
+        downloaded_image = URI.open(auth.info.image)
+        user.image.attach(io: downloaded_image, filename: "profile.jpg")
+      end
+
       user.google_token = auth.credentials.token
       user.google_refresh_token = auth.credentials.refresh_token
     end
