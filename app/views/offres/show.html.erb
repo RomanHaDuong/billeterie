@@ -17,7 +17,7 @@
         <div class="attendees-grid d-flex gap-1 ms-2">
           <% @offre.bookings.includes(:user).each do |booking| %>
             <div class="attendee-avatar" data-bs-toggle="tooltip" title="<%= booking.user.name %>">
-              <% if booking.user.image.attached? %>
+              <% if booking.user.image.present? %>
                 <%= image_tag booking.user.image, class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>
               <% else %>
                 <%= image_tag "placeholder_person.png", class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>

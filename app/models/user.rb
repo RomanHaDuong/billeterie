@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  has_one_attached :image
   has_many :favoris
   has_many :bookings
   has_many :favori_offres, through: :favoris, source: :offre

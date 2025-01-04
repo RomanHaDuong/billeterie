@@ -3,6 +3,7 @@ require 'csv'
 csv_file_path = Rails.root.join('db', 'csv', 'offres.csv')
 
 Favori.destroy_all
+Booking.destroy_all
 Offre.destroy_all
 Fournisseur.destroy_all
 User.destroy_all
