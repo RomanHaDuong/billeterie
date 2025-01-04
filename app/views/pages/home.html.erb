@@ -3,8 +3,12 @@
   <div class="hero-banner position-relative">
     <%= image_tag "festival_cropped_banner.png", class: "w-100", alt: "Banner" %>
     <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
-      <div class="banner-title">
-        Festival
+      <div class="text-bold text-primary">
+        <h1>
+          3ème festival du 47 <br>
+          du 21 au 25 janvier 2025 <br>
+          Ramène tes causes !
+        </h1>
       </div>
     </div>
   </div>
@@ -14,11 +18,10 @@
     <div class="row g-4">
       <div class="col-md-4">
         <div class="card h-100 shadow-sm hover-card">
-          <%= image_tag "festival_banner.png", class:"card-img-top", alt:"Card 1" %>
-          <div class="card-body">
-            <h5 class="card-title">Programme</h5>
-            <p class="card-text">Placeholder text</p>
-            <%= link_to 'Voir le programme', programme_path, class: 'btn btn-secondary stretched-link' %>
+          <%= image_tag "programme_hero.png", class:"card-img-top", alt:"Card 1" %>
+          <div class="card-body text-center">
+            <%= link_to 'Voir le programme', programme_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text">Ateliers, miniconférences, inspirations, découverte de soi et des autres, par la tête, le coeur, les tripes</p>
           </div>
         </div>
       </div>
@@ -26,11 +29,10 @@
   <%# card 2 %>
       <div class="col-md-4">
         <div class="card h-100 shadow-sm hover-card">
-          <%= image_tag "festival_banner.png", class:"card-img-top", alt:"Card 2" %>
-          <div class="card-body">
-            <h5 class="card-title">Intervenants</h5>
-            <p class="card-text">Placeholder text</p>
-            <%= link_to 'Rencontrez les intervenants', fournisseurs_path, class: 'btn btn-secondary stretched-link' %>
+          <%= image_tag "intervenants_hero.png", class:"card-img-top", alt:"Card 2" %>
+          <div class="card-body text-center">
+            <%= link_to 'Rencontrez les intervenants', fournisseurs_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text">Qui connaissez-vous, qui souhaiteriez-vous connaitre ? Et pourquoi n'êtes vous pas dans cette liste, au juste ?</p>
           </div>
         </div>
       </div>
@@ -38,11 +40,10 @@
   <%# card 3 %>
       <div class="col-md-4">
         <div class="card h-100 shadow-sm hover-card">
-          <%= image_tag "festival_banner.png", class:"card-img-top", alt:"Card 3" %>
-          <div class="card-body">
-            <h5 class="card-title">Lieu</h5>
-            <p class="card-text">Placeholder text</p>
-            <%= link_to 'Découvrez le lieu', lieu_path, class: 'btn btn-secondary stretched-link' %>
+          <%= image_tag "lieu_hero.jpg", class:"card-img-top", alt:"Card 3" %>
+          <div class="card-body text-center">
+            <%= link_to 'Découvrez le lieu', lieu_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text">Premier contact avec le 47 ? On vous en a parlé, vous voulez en avoir le coeur net ? Bonne découverte !</p>
           </div>
         </div>
       </div>
