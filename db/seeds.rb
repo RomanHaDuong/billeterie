@@ -65,12 +65,4 @@ fournisseur = Fournisseur.create!(
   name: "Ludovic Odier",
 )
 
-Fournisseur.all.each do |fournisseur|
-  fournisseur.image.attach(
-    io: File.open('app/assets/images/man_image_seed.jpeg'),
-    filename: 'man_image_seed.jpeg',
-    content_type: 'man_image_seed/jpeg'
-  )
-end
-
 puts "Seed done"
