@@ -52,8 +52,16 @@
         <span class="price-tag fs-2 me-4">
           <%= number_to_currency(@offre.fournisseur_id, unit: "€") %>
         </span>
-        <%= link_to book_offre_path(@offre), class: "btn btn-primary btn-lg" do %>
-          Réserver <i class="fa-solid fa-ticket ms-2"></i>
+        <% if current_user && @offre.bookings.exists?(user: current_user) %>
+          <%= link_to booking_path(@offre.bookings.find_by(user: current_user)),
+              method: :delete,
+              class: "btn btn-primary btn-lg" do %>
+            Voir ma réservation <i class="fa-solid fa-ticket ms-2"></i>
+          <% end %>
+        <% else %>
+          <%= link_to book_offre_path(@offre), class: "btn btn-primary btn-lg" do %>
+            Réserver <i class="fa-solid fa-ticket ms-2"></i>
+          <% end %>
         <% end %>
       </div>
 
