@@ -1,12 +1,12 @@
-<div class="container p-5 my-5 bg-light border rounded ">
-  <h1>
+<div class="container p-5 my-5 bg-light rounded-3">
+  <h1 class="text-center text-primary mb-5">
     Mes favoris
   </h1>
 
   <div class="container-fluid">
     <div class="row g-4">
-      <% @offres_favori.each do |offre| %>
-        <%= render partial: 'shared/offres_index', locals: { offre: offre } %>
+      <% @offres.each do |offre| %>
+        <%= render partial: 'shared/offre', locals: { offre: offre } %>
       <% end %>
     </div>
   </div>

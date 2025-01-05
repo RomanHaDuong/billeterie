@@ -3,7 +3,7 @@
     <div class="row g-4">
       <%# Brand column %>
       <div class="col-lg-4 mb-3">
-        <%= link_to root_path, class: "text-decoration-none" do %>
+        <%= link_to root_path, class: "footer-link text-decoration-none" do %>
           <span class="fw-bold fs-4 text-primary">Festival du 47</span>
         <% end %>
         <p class="text-muted mt-2">
@@ -18,23 +18,23 @@
 
       <%# Quick Links %>
       <div class="col-lg-2 col-md-4 mb-3">
-        <h5 class="fw-bold mb-3">Le Festival</h5>
+        <h5 class="fw-bold mb-3"><%= link_to "Le Festival", root_path, class: 'footer-link text-decoration-none text-muted' %></h5>
         <ul class="list-unstyled">
           <li class="mb-2">
-            <%= link_to 'Programme', offres_path, class: 'text-decoration-none text-muted' %>
+            <%= link_to 'Programme', offres_path, class: 'footer-link text-decoration-none text-muted' %>
           </li>
           <li class="mb-2">
-            <%= link_to 'Intervenants', fournisseurs_path, class: 'text-decoration-none text-muted' %>
+            <%= link_to 'Intervenants', fournisseurs_path, class: 'footer-link text-decoration-none text-muted' %>
           </li>
           <li class="mb-2">
-            <%= link_to 'Proposer une animation', lieu_path, class: 'text-decoration-none text-muted' %>
+            <%= link_to 'Proposer une animation', lieu_path, class: 'footer-link text-decoration-none text-muted' %>
           </li>
         </ul>
       </div>
 
       <%# Legal Links %>
       <div class="col-lg-2 col-md-4 mb-3">
-        <h5 class="fw-bold mb-3">Le 47</h5>
+        <h5 class="fw-bold mb-3"><%= link_to "Le 47", lieu_path, class: 'footer-link text-decoration-none text-muted' %></h5>
         <ul class="list-unstyled">
           <li class="mb-2">
             <%= link_to 'Le 47 est l\'espace d\'une communauté d\'acteurs engagés aui s\'entraident pour réaliser leurs causes.', lieu_path, class: 'text-decoration-none text-muted' %>
@@ -62,7 +62,7 @@
     <div class="border-top pt-3 mt-3">
       <div class="row align-items-center">
         <div class="col-md-6 text-center text-md-start">
-          <small class="text-muted">&copy; <%= Time.current.year %> <%= link_to 'Roman Ha Duong.', 'https://www.linkedin.com/in/roman-ha-duong-gautrand/', target: "_blank", rel: "noopener noreferrer" %>
+          <small class="text-muted">&copy; <%= Time.current.year %> <%= link_to 'Roman Ha Duong Gautrand.', 'https://www.linkedin.com/in/roman-ha-duong-gautrand/', target: "_blank", rel: "noopener noreferrer" %>
  Tous droits réservés.</small>
         </div>
         <div class="col-md-6 text-center text-md-end">

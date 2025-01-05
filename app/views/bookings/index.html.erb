@@ -3,16 +3,16 @@
     <h2 class="fw-bold mb-0">Mes réservations</h2>
     <ul class="nav nav-pills">
       <li class="nav-item">
-        <a class="nav-link active" data-bs-toggle="tab" href="#list-view">Liste</a>
+        <a class="nav-link" data-bs-toggle="tab" href="#list-view">Liste</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#agenda-view">Agenda</a>
+        <a class="nav-link active" data-bs-toggle="tab" href="#agenda-view">Agenda</a>
       </li>
     </ul>
   </div>
 
   <div class="tab-content">
-    <div class="tab-pane fade show active" id="list-view">
+    <div class="tab-pane fade" id="list-view">
       <div class="card border-0 shadow-sm">
         <div class="table-responsive">
           <table class="table table-hover mb-0">
@@ -27,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              <% @bookings.each do |booking| %>
+              <% @bookings.sort_by { |b| (b.offre.date_prevue&.to_time || Time.new(9999)) - Time.current }.each do |booking| %>
                 <tr>
                   <td class="align-middle">
                     <div class="d-flex align-items-center">
@@ -61,15 +61,16 @@
       </div>
     </div>
 
-    <div class="tab-pane fade" id="agenda-view">
-      <% @bookings.group_by { |b| b.offre.date_prevue&.beginning_of_month }.each do |month, bookings| %>
+    <div class="tab-pane fade show active" id="agenda-view">
+      <% @bookings.group_by { |b| b.offre.date_prevue&.beginning_of_month }.sort_by { |month, _| month || Date.new(9999) }
+      .each do |month, bookings| %>
         <div class="card border-0 shadow-sm mb-4">
           <div class="card-header bg-white border-0 py-3">
             <h5 class="fw-bold mb-0"><%= month&.strftime("%B %Y") %></h5>
           </div>
 
           <div class="list-group list-group-flush">
-            <% bookings.sort_by { |b| b.offre.date_prevue }.each do |booking| %>
+            <% bookings.sort_by { |b| (b.offre.date_prevue&.to_time || Time.new(9999)) - Time.current }.each do |booking| %>
               <%= link_to booking_path(booking), class: "list-group-item list-group-item-action p-4 border-0" do %>
                 <div class="row align-items-center">
                   <div class="col-auto">

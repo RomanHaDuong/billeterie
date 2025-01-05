@@ -19,6 +19,31 @@
     width: 100%;
   }
 }
+// footer hover effect
+.footer-link {
+  position: relative;
+  transition: color 0.2s ease;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--bs-secondary);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  &:hover {
+    color: #4a5568 !important;
+
+    &:after {
+      width: 100%;
+    }
+  }
+}
 
 .dropdown-menu {
   border-radius: 0.5rem;
