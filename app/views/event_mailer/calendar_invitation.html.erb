@@ -1,5 +1,12 @@
-<h1>Votre réservation pour <%= @offre.titre %></h1>
+<h1>Cher Frestivalier, Voici ta confirmation d'inscription.</h1>
 
-<p>L'événement aura lieu le <%= @offre.date_prevue %></p>
+<p>Merci de ta participation, nous avons hâte de nous retrouver tous ensemble !</p>
 
-<p>Vous trouverez en pièce jointe une invitation à ajouter à votre calendrier.</p>
+<p>
+  Si tu ne l'as pas encore fait tu peux toujours prendre ton passe <%= link_to 'ici', 'https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/contribute/forfait-illimite-83105/checkout?interval=oneTime&amount=100&contributeAs=me', target: :blank %>
+  , et tu recevras par retour d'email l'adresse exacte du lieu et le digicode.
+</p>
+
+<p>Ce festival se veut en participation consciente collective. Nous aurons à la fin une session rétrospective pour ajuster nos contributions afin de rétribuer le travail des uns et des autres et la valeur créée au plus juste.</p>
+
+<p>Bon festival !</p>
