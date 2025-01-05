@@ -8,6 +8,6 @@ class PagesController < ApplicationController
   def programme
   end
 
-  def booking
+  def legal
   end
 end

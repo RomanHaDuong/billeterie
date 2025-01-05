@@ -38,4 +38,5 @@ Rails.application.routes.draw do
 
   get 'pages/lieu', to: 'pages#lieu', as: 'lieu'
   get 'pages/programme', to: 'pages#programme', as: 'programme'
+  get 'pages/legal', to: 'pages#legal', as: 'legal'
 end
