@@ -1,3 +1,99 @@
-<h1>
-  My dashboard
-</h1>
+<div class="container py-5">
+  <div class="row">
+    <%# Left Column - User Profile %>
+    <div class="col-lg-6 mb-4 mb-lg-0">
+      <div class="card border-0 shadow-sm p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-start mb-4">
+          <div class="d-flex align-items-center">
+            <% if current_user.image.attached? %>
+              <%= image_tag current_user.image, class: "rounded-circle me-3", style: "width: 64px; height: 64px; object-fit: cover;" %>
+            <% else %>
+              <%= image_tag "placeholder_person.png", class: "rounded-circle me-3", style: "width: 64px; height: 64px; object-fit: cover;" %>
+            <% end %>
+            <div>
+              <h2 class="fw-bold mb-0"><%= current_user.name %></h2>
+              <p class="text-muted mb-0"><%= current_user.email %></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2 mb-4">
+          <%= link_to "Modifier le profil", profile_path, class: "btn btn-outline-primary" %>
+          <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %>
+        </div>
+      </div>
+
+      <%# Next Booking Section %>
+      <div class="card border-0 shadow-sm p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold mb-0">Mon prochain atelier</h5>
+          <%= link_to "Voir plus", bookings_path, class: "btn btn-outline-primary btn-sm" %>
+        </div>
+
+        <% if next_booking = current_user.bookings.includes(:offre).future.first %>
+          <%= link_to booking_path(next_booking), class: "text-decoration-none" do %>
+            <div class="workshop-card p-3 rounded-3 shadow-sm hover-card">
+              <div class="d-flex align-items-center gap-3">
+                <% if next_booking.offre.image.attached? %>
+                  <%= image_tag next_booking.offre.image, class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
+                <% else %>
+                  <%= image_tag "placeholder_offre.png", class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
+                <% end %>
+                <div>
+                  <h6 class="fw-bold mb-1 text-dark"><%= next_booking.offre.titre %></h6>
+                  <div class="d-flex align-items-center text-muted">
+                    <i class="fa-regular fa-calendar me-2"></i>
+                    <span><%= next_booking.offre.date_prevue %></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted">Aucun atelier à venir</p>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Right Column - Past Bookings %>
+    <div class="col-lg-6">
+      <div class="card border-0 shadow-sm p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="fw-bold mb-0">Mes ateliers passés</h5>
+          <%= link_to "Voir tous mes ateliers", bookings_path, class: "btn btn-outline-primary btn-sm" %>
+        </div>
+
+        <% current_user.bookings.joins(:offre).where('offres.date_prevue < ?', DateTime.now).limit(3).each do |booking| %>
+          <div class="workshop-card p-3 rounded-3 shadow-sm mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center gap-3">
+                <% if booking.offre.image.attached? %>
+                  <%= image_tag booking.offre.image, class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
+                <% else %>
+                  <%= image_tag "placeholder_offre.png", class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
+                <% end %>
+                <div>
+                  <h6 class="fw-bold mb-1"><%= booking.offre.titre %></h6>
+                  <div class="d-flex align-items-center text-muted">
+                    <i class="fa-regular fa-calendar me-2"></i>
+                    <span><%= booking.offre.date_prevue %></span>
+                  </div>
+                </div>
+              </div>
+              <%= link_to "Donner mon avis", booking_path(booking), class: "btn btn-outline-primary btn-sm" %>
+            </div>
+          </div>
+        <% end %>
+
+        <% if current_user.bookings.joins(:offre).where('offres.date_prevue < ?', DateTime.now).empty? %>
+          <p class="text-muted">Aucun atelier passé</p>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%= render 'shared/bookings_index' %>
+
+<%= render 'shared/favoris_index' %>
