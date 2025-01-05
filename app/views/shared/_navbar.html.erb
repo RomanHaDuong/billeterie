@@ -24,7 +24,7 @@
 
       <div class="d-flex align-items-center gap-3">
         <% if user_signed_in? %>
-          <%= link_to "Billeterie", payment_path, class: 'btn btn-danger' %>
+          <%= link_to "Billetterie", payment_path, class: 'btn btn-danger' %>
 
           <%= link_to user_path(current_user), class: 'nav-link' do %>
             <i class="bi bi-person-circle me-1"></i>
@@ -43,7 +43,7 @@
                 alt: 'Placeholder picture' %>
           <% end %>
         <% else %>
-          <%= link_to "Billeterie", payment_path, class: 'btn btn-danger' %>
+          <%= link_to "Billetterie", payment_path, class: 'btn btn-danger' %>
 
           <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary me-2' %>
 
