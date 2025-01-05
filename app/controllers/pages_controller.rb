@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def lieu
   end
 
-  def programme
+  def payment
   end
 
   def legal

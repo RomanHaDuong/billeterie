@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   end
 
   get 'pages/lieu', to: 'pages#lieu', as: 'lieu'
-  get 'pages/programme', to: 'pages#programme', as: 'programme'
+  get 'pages/payment', to: 'pages#payment', as: 'payment'
   get 'pages/legal', to: 'pages#legal', as: 'legal'
   get 'pages/profile', to: 'pages#profile', as: 'profile'
 end
