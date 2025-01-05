@@ -1,14 +1,17 @@
 // bootstrap overriding and setting brand colors
 $primary: #506b64;
 $secondary: #94c4ad;
+$danger: #fc7c77;
 
 $theme-colors: (
   "primary": $primary,
   "secondary": $secondary
-);
+  "danger": $danger
+  );
 
 // saving brand colors
 :root {
   --primary-color: #{$primary};
   --secondary-color: #{$secondary};
+  --danger-color: #{$danger};
 }
