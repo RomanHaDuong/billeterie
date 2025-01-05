@@ -1,5 +1,5 @@
 ActionMailer::Base.smtp_settings = {
-  domain: 'romanhdg.com',
+  domain: 'les-ecoworkers.fr',
   address: 'smtp.sendgrid.net',
   port: 587,
   authentication: :plain,
