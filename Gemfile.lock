@@ -183,6 +183,10 @@ GEM
     httpclient (2.8.3)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
+    icalendar (2.10.3)
+      ice_cube (~> 0.16)
+      ostruct
+    ice_cube (0.17.0)
     importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -269,6 +273,7 @@ GEM
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
     os (1.1.4)
+    ostruct (0.6.1)
     parallel (1.26.3)
     parser (3.3.6.0)
       ast (~> 2.4.1)
@@ -483,6 +488,7 @@ DEPENDENCIES
   dotenv-rails
   faker
   google-api-client
+  icalendar
   importmap-rails
   jbuilder
   omniauth-google-oauth2

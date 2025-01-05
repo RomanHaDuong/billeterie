@@ -78,6 +78,7 @@ gem 'sendgrid-ruby'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 gem 'omniauth-rails_csrf_protection'
+gem 'icalendar'
 
 group :development do
   gem 'solargraph', require: false
