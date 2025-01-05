@@ -22,7 +22,7 @@ class EventMailer < ApplicationMailer
     cal = Icalendar::Calendar.new
     event = Icalendar::Event.new
     event.dtstart = @offre.date_prevue
-    event.dtend = @offre.date_prevue + @offre.duree.hours
+    # event.dtend = @offre.date_prevue + @offre.duree.hours
     event.summary = @offre.titre
     event.description = @offre.descriptif
     event.location = "47 boulevard de Sébastopol, 75001 Paris"
