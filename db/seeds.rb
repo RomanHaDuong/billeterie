@@ -66,5 +66,10 @@ fournisseur = Fournisseur.create!(
   name: "Ludovic Odier",
 )
 
+Offre.all.each do |offre|
+  random_date = Date.new(2025, 1, 1) + rand(365)
+  offre.update(date_prevue: random_date)
+end
+
 
 puts "Seed done"
