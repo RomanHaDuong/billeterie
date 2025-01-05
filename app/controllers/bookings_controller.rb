@@ -18,6 +18,8 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
+    current_user.name = @booking.user_name
+    current_user.save
 
     if @booking.save
       redirect_to @booking, notice: 'Réservation confirmée!'
