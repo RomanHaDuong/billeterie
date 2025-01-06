@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -40,8 +43,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
   end
 
   create_table "bookings", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "offre_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "offre_id", null: false
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,8 +56,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
   end
 
   create_table "favoris", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "offre_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "offre_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["offre_id"], name: "index_favoris_on_offre_id"
@@ -63,7 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
 
   create_table "fournisseurs", force: :cascade do |t|
     t.string "bio"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -71,7 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
   end
 
   create_table "offres", force: :cascade do |t|
-    t.integer "fournisseur_id", null: false
+    t.bigint "fournisseur_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "date_prevue"
