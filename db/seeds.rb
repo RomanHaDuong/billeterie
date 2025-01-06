@@ -1,6 +1,7 @@
 require 'csv'
+require 'open-uri'
 
-csv_file_path = Rails.root.join('db', 'csv', 'offres.csv')
+csv_file_path = Rails.root.join('db', 'csv', 'source_offres.csv')
 
 Favori.destroy_all
 Booking.destroy_all
@@ -8,67 +9,147 @@ Offre.destroy_all
 Fournisseur.destroy_all
 User.destroy_all
 
-user = User.create!(
-  email: "roman@me.com",
-  password: "password"
-)
-
-
-
-
-fournisseur = Fournisseur.create!(
-  bio: Faker::Lorem.paragraph,
-  user_id: user.id,
-  name: Faker::Name.name
-)
-
 CSV.foreach(csv_file_path, headers: true) do |row|
-  Offre.create!(
-    date_prevue: row['Date'],
-    autre_info_date: row['Autres informations sur les dates et heures possibles'],
-    statut: row['Statut'  ],
-    titre: row['Titre'],
-    intervenant: row['Intervenant / animateur /  source'],
-    descriptif: row['Descriptif'],
-    intention: row['intention'],
-    causes: row['La.les causes défendues '],
-    cible: row['Le public visé'],
-    valeur_apportee: row['La valeur apportée '],
-    duree: row['Durée'],
-    besoin_espace: row["Besoin en termes despace (Taille salle, nombre participants envisagés, salle envisagée)"],
-    besoin_logistique: row['Besoins logistiques (nb chaises, tables, paper-board, coussins, tapis rouge...)'],
-    autre_commentaire: row["Autre"],
-    fournisseur_id: fournisseur.id
-  )
+  begin
+    user = nil
+
+    if row['intervenant'].present?
+      user = User.create!(
+        email: Faker::Internet.email,
+        password: "password",
+        name: row['intervenant']
+      )
+
+      fournisseur = Fournisseur.create!(
+        bio: row['presentation_intervenant'],
+        user_id: user.id,
+        name: row['intervenant']
+      )
+    else
+      fournisseur = Fournisseur.create!(
+        bio: row['Cette offre n\'a pas d\'intervenant valide'],
+        name: row['intervenant']
+      )
+    end
+
+    date_time = DateTime.strptime("#{row['date']} #{row['heure']}", "%d/%m/%Y %H:%M")
+
+    offre = Offre.create!(
+      date_prevue: date_time,
+      duree: row['duree'],
+      salle: row['salle'],
+      titre: row['titre'],
+      intervenant: row['intervenant'],
+      descriptif: row['descriptif'],
+      categories: row['categories'],
+      fournisseur_id: fournisseur.id
+    )
+
+    if row['visuel_atelier'].present?
+      begin
+        file = URI.open(row['visuel_atelier'])
+        offre.image.attach(
+          io: file,
+          filename: File.basename(row['visuel_atelier']),
+          content_type: 'image/jpeg'
+        )
+      rescue OpenURI::HTTPError => e
+        puts "Could not download image for offre #{offre.id}: #{e.message}"
+      end
+    end
+
+    if row['visuel_intervenant'].present? && fournisseur.present?
+      begin
+        file = URI.open(row['visuel_intervenant'])  # Fixed typo in 'visuel_intervevant'
+        fournisseur.image.attach(
+          io: file,
+          filename: File.basename(row['visuel_intervenant']),
+          content_type: 'image/jpeg'
+        )
+      rescue OpenURI::HTTPError => e
+        puts "Could not download image for fournisseur #{fournisseur.id}: #{e.message}"
+      end
+    end
+
+  rescue Date::Error => e
+    puts "Error parsing date for row: #{row.inspect}"
+    puts "Error message: #{e.message}"
+    next
+  end
 end
 
-fournisseur = Fournisseur.create!(
-  bio: Faker::Lorem.paragraph,
-  user_id: user.id,
-  name: "Raphael Szmir"
-)
+CSV.foreach(csv_file_path, headers: true, encoding: 'bom|utf-8', row_sep: "\r\n") do |row|
+  begin
+    # Skip header row and empty rows
+    next if row['date'] == 'Obligatoire' || row['date'].nil? || row['heure'].nil?
 
-fournisseur = Fournisseur.create!(
-  bio: Faker::Lorem.paragraph,
-  user_id: user.id,
-  name: "Alexandra Ha Duong"
-)
+    user = nil
+    fournisseur = nil
 
-fournisseur = Fournisseur.create!(
-  bio: Faker::Lorem.paragraph,
-  user_id: user.id,
-  name: "Duc Ha Duong"
-)
+    if row['intervenant'].present?
+      user = User.create!(
+        email: Faker::Internet.email,
+        password: "password",
+        name: row['intervenant']
+      )
 
-fournisseur = Fournisseur.create!(
-  bio: Faker::Lorem.paragraph,
-  user_id: user.id,
-  name: "Ludovic Odier",
-)
+      fournisseur = Fournisseur.create!(
+        bio: row['presentation_intervenant'],
+        user_id: user.id,
+        name: row['intervenant']
+      )
+    end
 
-Offre.all.each do |offre|
-  random_date = Date.new(2025, 1, 1) + rand(365)
-  offre.update(date_prevue: random_date)
+    # Only try to create date_time if both date and time are present
+    date_time = if row['heure'].present?
+      DateTime.strptime("#{row['date']} #{row['heure']}", "%d/%m/%Y %H:%M")
+    else
+      # If no time provided, default to noon
+      DateTime.strptime("#{row['date']} 12:00", "%d/%m/%Y %H:%M")
+    end
+
+    offre = Offre.create!(
+      date_prevue: date_time,
+      duree: row['duree'],
+      salle: row['salle'],
+      titre: row['titre'],
+      intervenant: row['intervenant'],
+      descriptif: row['descriptif'],
+      categories: row['categories'],
+      fournisseur_id: fournisseur&.id
+    )
+
+    if row['visuel_atelier'].present? && row['visuel_atelier'] != "RAS"
+      begin
+        file = URI.open(row['visuel_atelier'])
+        offre.image.attach(
+          io: file,
+          filename: File.basename(row['visuel_atelier']),
+          content_type: 'image/jpeg'
+        )
+      rescue OpenURI::HTTPError, Errno::ENOENT => e
+        puts "Could not download image for offre #{offre.id}: #{e.message}"
+      end
+    end
+
+    if row['visuel_intervenant'].present? && row['visuel_intervenant'] != "RAS" && fournisseur.present?
+      begin
+        file = URI.open(row['visuel_intervenant'])
+        fournisseur.image.attach(
+          io: file,
+          filename: File.basename(row['visuel_intervenant']),
+          content_type: 'image/jpeg'
+        )
+      rescue OpenURI::HTTPError, Errno::ENOENT => e
+        puts "Could not download image for fournisseur #{fournisseur.id}: #{e.message}"
+      end
+    end
+
+  rescue Date::Error => e
+    puts "Error parsing date for row: #{row.inspect}"
+    puts "Error message: #{e.message}"
+    next
+  end
 end
 
 
