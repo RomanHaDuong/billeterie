@@ -9,9 +9,13 @@ Offre.destroy_all
 Fournisseur.destroy_all
 User.destroy_all
 
-CSV.foreach(csv_file_path, headers: true, encoding: 'bom|utf-8', row_sep: "\r\n") do |row|
+CSV.foreach(csv_file_path, headers: true) do |row|
   begin
+    # Skip header row and empty rows
+    next if row['date'] == 'Obligatoire' || row['date'].nil? || row['heure'].nil?
+
     user = nil
+    fournisseur = nil
 
     if row['intervenant'].present?
       user = User.create!(
@@ -32,7 +36,13 @@ CSV.foreach(csv_file_path, headers: true, encoding: 'bom|utf-8', row_sep: "\r\n"
       )
     end
 
-    date_time = DateTime.strptime("#{row['date']} #{row['heure']}", "%d/%m/%Y %H:%M")
+    # Only try to create date_time if both date and time are present
+    date_time = if row['heure'].present?
+      DateTime.strptime("#{row['date']} #{row['heure']}", "%d/%m/%Y %H:%M")
+    else
+      # If no time provided, default to noon
+      DateTime.strptime("#{row['date']} 12:00", "%d/%m/%Y %H:%M")
+    end
 
     offre = Offre.create!(
       date_prevue: date_time,
@@ -42,10 +52,10 @@ CSV.foreach(csv_file_path, headers: true, encoding: 'bom|utf-8', row_sep: "\r\n"
       intervenant: row['intervenant'],
       descriptif: row['descriptif'],
       categories: row['categories'],
-      fournisseur_id: fournisseur.id
+      fournisseur_id: fournisseur&.id
     )
 
-    if row['visuel_atelier'].present?
+    if row['visuel_atelier'].present? && row['visuel_atelier'] != "RAS"
       begin
         file = URI.open(row['visuel_atelier'])
         offre.image.attach(
@@ -53,20 +63,20 @@ CSV.foreach(csv_file_path, headers: true, encoding: 'bom|utf-8', row_sep: "\r\n"
           filename: File.basename(row['visuel_atelier']),
           content_type: 'image/jpeg'
         )
-      rescue OpenURI::HTTPError => e
+      rescue OpenURI::HTTPError, Errno::ENOENT => e
         puts "Could not download image for offre #{offre.id}: #{e.message}"
       end
     end
 
-    if row['visuel_intervenant'].present? && fournisseur.present?
+    if row['visuel_intervenant'].present? && row['visuel_intervenant'] != "RAS" && fournisseur.present?
       begin
-        file = URI.open(row['visuel_intervenant'])  # Fixed typo in 'visuel_intervevant'
+        file = URI.open(row['visuel_intervenant'])
         fournisseur.image.attach(
           io: file,
           filename: File.basename(row['visuel_intervenant']),
           content_type: 'image/jpeg'
         )
-      rescue OpenURI::HTTPError => e
+      rescue OpenURI::HTTPError, Errno::ENOENT => e
         puts "Could not download image for fournisseur #{fournisseur.id}: #{e.message}"
       end
     end
@@ -77,6 +87,7 @@ CSV.foreach(csv_file_path, headers: true, encoding: 'bom|utf-8', row_sep: "\r\n"
     next
   end
 end
+
 
 
 puts "Seed done"
