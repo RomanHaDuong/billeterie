@@ -98,7 +98,7 @@
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-users text-primary me-2"></i>
-              <span>Places: 12</span>
+              <span><%= @offre.bookings.count %> participants</span>
             </div>
           </div>
           <div class="col-6">
@@ -111,9 +111,9 @@
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-calendar text-primary me-2"></i>
               <span><%= l(@offre.date_prevue.beginning_of_day, format: :long) %></span>
-
             </div>
           </div>
+
         </div>
       </div>
     </div>

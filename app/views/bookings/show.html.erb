@@ -32,19 +32,19 @@
               <div class="col-6">
                 <div class="d-flex align-items-center">
                   <i class="fa-solid fa-calendar text-primary me-2"></i>
-                  <span>Date: <%= @booking.offre.date_prevue %></span>
+                  <span><%= l(@booking.offre.date_prevue, format: :long) %></span>
                 </div>
               </div>
               <div class="col-6">
                 <div class="d-flex align-items-center">
                   <i class="fa-solid fa-location-dot text-primary me-2"></i>
-                  <span>Salle: <%= "BlaBla room" %></span>
+                  <span><%= @booking.offre.salle %></span>
                 </div>
               </div>
               <div class="col-6">
                 <div class="d-flex align-items-center">
-                  <i class="fa-solid fa-euro-sign text-primary me-2"></i>
-                  <span>Prix: <%= number_to_currency(@booking.offre.id, unit: "€") %></span>
+                  <i class="fa-solid fa-users text-primary me-2"></i>
+                  <span><%= @booking.offre.bookings.count %> inscrits</span>
                 </div>
               </div>
             </div>
