@@ -9,7 +9,9 @@ Offre.destroy_all
 Fournisseur.destroy_all
 User.destroy_all
 
-CSV.foreach(csv_file_path, headers: true) do |row|
+content = File.read(csv_file_path)
+content.gsub!("\r\n", "\n")
+CSV.parse(content, headers: true) do |row|
   begin
     # Skip header row and empty rows
     next if row['date'] == 'Obligatoire' || row['date'].nil? || row['heure'].nil?
