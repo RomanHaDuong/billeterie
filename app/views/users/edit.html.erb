@@ -1,0 +1,55 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-0">
+        <div class="card-body p-5">
+          <h2 class="text-center mb-4 fw-bold">Modifier votre profil</h2>
+
+          <%= form_for(current_user, url: user_path(current_user), html: { method: :patch }) do |f| %>
+            <% if current_user.errors.any? %>
+              <div class="alert alert-danger">
+                <%= current_user.errors.full_messages.to_sentence %>
+              </div>
+            <% end %>
+
+            <%# Profile picture %>
+            <div class="form-group mb-4 text-center">
+              <div class="avatar-upload">
+                <div class="avatar-preview mb-3">
+                  <% if current_user.image.attached? %>
+                    <%= image_tag current_user.image, class: "rounded-circle", width: 100, height: 100, id: "avatarPreview" %>
+                  <% else %>
+                    <img id="avatarPreview" src="https://via.placeholder.com/150" class="rounded-circle" width="100" height="100">
+                  <% end %>
+                </div>
+                <%= f.label :image, class: "btn btn-outline-primary btn-sm" do %>
+                  <i class="bi bi-camera me-2"></i>Changer la photo
+                  <%= f.file_field :image, class: "d-none", accept: "image/*",
+                      onchange: "document.getElementById('avatarPreview').src = window.URL.createObjectURL(this.files[0])" %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <%= f.label :name, "Nom", class: "form-label fw-medium" %>
+              <%= f.text_field :name, class: "form-control form-control-lg",
+                  placeholder: "Votre nom" %>
+            </div>
+
+            <div class="form-group mb-3">
+              <%= f.label :email, "Email", class: "form-label fw-medium" %>
+              <%= f.email_field :email, class: "form-control form-control-lg",
+                  placeholder: "Votre email" %>
+            </div>
+
+            <%= f.submit "Mettre à jour", class: "btn btn-primary w-100 btn-lg mb-4" %>
+          <% end %>
+
+          <div class="text-center">
+            <%= link_to "Retour", :back, class: "text-decoration-none" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
