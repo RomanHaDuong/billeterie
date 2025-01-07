@@ -1,0 +1,45 @@
+       <% @offres.group_by { |o| o.date_prevue&.beginning_of_day }.sort_by { |day, _| day || Date.new(9999) }.each do |day, offres| %>
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white border-0 py-3">
+              <h5 class="fw-bold mb-0"><%= l(day, format: :long) %></h5>
+            </div>
+
+              <div class="list-group list-group-flush">
+                <% offres.sort_by { |o| o.date_prevue&.to_time || Time.new(9999) }.each do |offre| %>
+                  <%= link_to offre_path(offre), class: "list-group-item list-group-item-action p-4 border-0" do %>
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+                        <div class="date-badge text-center">
+                          <div class="month text-uppercase small">
+                            <% offre.duree %>
+                          </div>
+                          <div class="day fw-bold fs-6">
+                            <%= l(offre.date_prevue, format: :time_only) %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="d-flex align-items-center">
+                          <% if offre.image.attached? %>
+                            <%= image_tag offre.image, class: "rounded me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+                          <% end %>
+                          <div>
+                            <h6 class="mb-0 fw-bold"><%= offre.titre %></h6>
+                            <p class="text-muted mb-0 small">
+                              <i class="fa-regular fa-clock me-1"></i> <%= offre.duree %>
+                              <i class="fa-solid fa-location-dot ms-3 me-1"></i> <%= offre.salle %>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-auto">
+                        <span class="badge bg-primary"></span>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>

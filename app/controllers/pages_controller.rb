@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @offres = Offre.all.order(date_prevue: :asc)
   end
 
   def lieu

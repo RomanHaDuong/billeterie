@@ -50,17 +50,16 @@
       <%# Price and Booking Button %>
       <div class="d-flex align-items-center mb-4">
         <span class="price-tag fs-2 me-4">
-          <%= number_to_currency(@offre.fournisseur_id, unit: "€") %>
+          <% number_to_currency(@offre.fournisseur_id, unit: "€") %>
         </span>
         <% if current_user && @offre.bookings.exists?(user: current_user) %>
           <%= link_to booking_path(@offre.bookings.find_by(user: current_user)),
-              method: :delete,
               class: "btn btn-primary btn-lg" do %>
             Voir ma réservation <i class="fa-solid fa-ticket ms-2"></i>
           <% end %>
         <% else %>
           <%= link_to book_offre_path(@offre), class: "btn btn-primary btn-lg" do %>
-            Réserver <i class="fa-solid fa-ticket ms-2"></i>
+            Notifier ma venue <i class="fa-solid fa-ticket ms-2"></i>
           <% end %>
         <% end %>
       </div>
@@ -93,7 +92,7 @@
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="fa-regular fa-clock text-primary me-2"></i>
-              <span>Durée: <%= @offre.duree %></span>
+              <span><%= @offre.duree %></span>
             </div>
           </div>
           <div class="col-6">
@@ -105,7 +104,7 @@
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-location-dot text-primary me-2"></i>
-              <span>Salle: BlaBla room</span>
+              <span><%= @offre.salle %></span>
             </div>
           </div>
           <div class="col-6">

@@ -12,13 +12,13 @@ class FavorisController < ApplicationController
   def create
     @offre = Offre.find(params[:offre_id])
     @favori = current_user.favoris.create(offre: @offre)
-    redirect_to offres_path
+    redirect_back(fallback_location: offres_path)
   end
 
   def destroy
     @offre = Offre.find(params[:offre_id])
     @favori = current_user.favoris.find_by(offre: @offre)
     @favori.destroy if @favori
-    redirect_to offres_path
+    redirect_back(fallback_location: offres_path)
   end
 end

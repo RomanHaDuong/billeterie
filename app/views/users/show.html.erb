@@ -59,34 +59,34 @@
     <div class="col-lg-6">
       <div class="card border-0 shadow-sm p-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="fw-bold mb-0">Mes ateliers passés</h5>
-          <% link_to "Voir tous mes ateliers", bookings_path, class: "btn btn-outline-primary btn-sm" %>
+          <h5 class="fw-bold mb-0">Vos offres en favori</h5>
+          <%= link_to "Voir tous mes favoris", favoris_path, class: "btn btn-outline-primary btn-sm" %>
         </div>
 
-        <% current_user.bookings.joins(:offre).where('offres.date_prevue < ?', DateTime.now).limit(3).each do |booking| %>
+        <% current_user.favoris.joins(:offre).limit(3).each do |favori| %>
           <div class="workshop-card p-3 rounded-3 shadow-sm mb-3">
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex align-items-center gap-3">
-                <% if booking.offre.image.attached? %>
-                  <%= image_tag booking.offre.image, class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
+                <% if favori.offre.image.attached? %>
+                  <%= image_tag favori.offre.image, class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
                 <% else %>
                   <%= image_tag "placeholder_offre.png", class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
                 <% end %>
                 <div>
-                  <h6 class="fw-bold mb-1"><%= booking.offre.titre %></h6>
+                  <h6 class="fw-bold mb-1"><%= favori.offre.titre %></h6>
                   <div class="d-flex align-items-center text-muted">
                     <i class="fa-regular fa-calendar me-2"></i>
-                    <span><%= booking.offre.date_prevue %></span>
+                    <span><%= favori.offre.date_prevue %></span>
                   </div>
                 </div>
               </div>
-              <% link_to "Donner mon avis", booking_path(booking), class: "btn btn-outline-primary btn-sm" %>
+              <% link_to "Donner mon avis", offre_path(favori.offre), class: "btn btn-outline-primary btn-sm" %>
             </div>
           </div>
         <% end %>
 
-        <% if current_user.bookings.joins(:offre).where('offres.date_prevue < ?', DateTime.now).empty? %>
-          <p class="text-muted">Aucun atelier passé</p>
+        <% if current_user.favoris.joins(:offre).empty? %>
+          <p class="text-muted">Aucune offre en favori</p>
         <% end %>
       </div>
     </div>

@@ -21,7 +21,7 @@
       <%# Footer %>
       <div class="mt-4 d-flex justify-content-between align-items-center">
         <span class="price-tag">
-          <%= number_to_currency(fournisseur.id, unit: "€") %>
+          <%# <%= number_to_currency(fournisseur.id, unit: "€") %>
         </span>
         <%= link_to fournisseur_path(fournisseur), class: 'btn btn-outline-primary' do %>
           Voir plus <i class="fa-solid fa-arrow-right ms-2"></i>
