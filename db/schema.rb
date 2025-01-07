@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
     t.bigint "fournisseur_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "date_prevue"
+    t.datetime "date_prevue"
     t.string "titre"
     t.string "intervenant"
     t.string "descriptif"

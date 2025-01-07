@@ -3,11 +3,137 @@
     Ateliers
   </h1>
 
-  <div class="container-fluid">
-    <div class="row g-4">
-      <% @offres.each do |offre| %>
-        <%= render partial: 'shared/offre', locals: { offre: offre } %>
-      <% end %>
+  <div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="fw-bold mb-0"></h2>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" href="#list-view">Liste</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" data-bs-toggle="tab" href="#agenda-view">Agenda</a>
+        </li>
+      </ul>
     </div>
+
+    <div class="tab-content">
+
+      <%# list view %>
+      <div class="tab-pane fade" id="list-view">
+        <div class="container-fluid">
+          <div class="row g-4">
+            <% @offres.each do |offre| %>
+
+              <div class="col-md-4 mb-4">
+
+                <div class="card workshop-card h-100 shadow-sm">
+                  <%# Image Section %>
+                  <div class="workshop-card-img-wrapper">
+                    <% if offre.image.attached? %>
+                      <%= image_tag offre.image, class: "workshop-card-img" %>
+                    <% else %>
+                      <%= image_tag "placeholder_offre.png", class: "workshop-card-img" %>
+                    <% end %>
+                    <%# Favorite button %>
+                    <% if current_user %>
+                      <div class="favorite-btn">
+                        <% if current_user.favori_offres.include?(offre) %>
+                          <%= button_to offre_favori_path(offre), method: :delete, class: 'btn p-0' do %>
+                            <i class="fa-solid fa-heart text-danger"></i>
+                          <% end %>
+                        <% else %>
+                          <%= button_to offre_favori_path(offre), method: :post, class: 'btn p-0' do %>
+                            <i class="fa-regular fa-heart text-secondary"></i>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    <% end%>
+                  </div>
+
+                  <div class="card-body position-relative">
+                    <%# Content %>
+                    <h5 class="card-title"><%= offre.titre %></h5>
+
+                    <p class="card-text" style="-webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; display: -webkit-box;">
+                      <%= offre.fournisseur.bio %>
+                    </p>
+
+                    <%# Footer %>
+                    <div class="mt-4 d-flex justify-content-between align-items-center">
+                      <div class="col-auto">
+                        <div class="date-badge text-center">
+                          <div class="month text-uppercase small">
+                            <i class="fa-regular fa-clock me-1"></i> <%= offre.duree %>
+                          </div>
+                          <div class="day fw-bold fs-6">
+                            <%= l(offre.date_prevue, format: :time_only) %>
+                          </div>
+                        </div>
+                      </div>
+                      <%= link_to offre_path(offre), class: 'btn btn-outline-primary' do %>
+                        Voir plus <i class="fa-solid fa-arrow-right ms-2"></i>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%# agenda view %>
+      <div class="tab-pane fade show active" id="agenda-view">
+        <% @offres.group_by { |o| o.date_prevue&.beginning_of_day }.sort_by { |day, _| day || Date.new(9999) }.each do |day, offres| %>
+          <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white border-0 py-3">
+              <h5 class="fw-bold mb-0"><%= l(day, format: :long) %></h5>
+            </div>
+
+              <div class="list-group list-group-flush">
+                <% offres.sort_by { |o| o.date_prevue&.to_time || Time.new(9999) }.each do |offre| %>
+                  <%= link_to offre_path(offre), class: "list-group-item list-group-item-action p-4 border-0" do %>
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+                        <div class="date-badge text-center">
+                          <div class="month text-uppercase small">
+                            <% offre.duree %>
+                          </div>
+                          <div class="day fw-bold fs-6">
+                            <%= l(offre.date_prevue, format: :time_only) %>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="d-flex align-items-center">
+                          <% if offre.image.attached? %>
+                            <%= image_tag offre.image, class: "rounded me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+                          <% end %>
+                          <div>
+                            <h6 class="mb-0 fw-bold"><%= offre.titre %></h6>
+                            <p class="text-muted mb-0 small">
+                              <i class="fa-regular fa-clock me-1"></i> <%= offre.duree %>
+                              <i class="fa-solid fa-location-dot ms-3 me-1"></i> <%= offre.salle %>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-auto">
+                        <span class="badge bg-primary">Available</span>
+                      </div>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+
+    </div>
+
   </div>
 </div>

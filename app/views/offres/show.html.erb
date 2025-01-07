@@ -69,13 +69,13 @@
       <%= link_to fournisseur_path(@offre.fournisseur), class: "text-decoration-none" do %>
         <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card">
           <div class="d-flex align-items-center mb-3">
-            <% if Fournisseur.last.image.attached? %>
-              <%= image_tag Fournisseur.last.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+            <% if @offre.fournisseur.image.attached? %>
+              <%= image_tag @offre.fournisseur.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
             <% else %>
               <%= image_tag "placeholder_person.png", class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
             <% end %>
             <div>
-              <h5 class="mb-0 fw-bold text-dark"><%= Fournisseur.last.name %></h5>
+              <h5 class="mb-0 fw-bold text-dark"><%= @offre.fournisseur.name %></h5>
               <p class="mb-0 text-muted">Animateur</p>
             </div>
           </div>
@@ -111,7 +111,8 @@
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-calendar text-primary me-2"></i>
-              <span>Date: <%= @offre.date_prevue %></span>
+              <span><%= l(@offre.date_prevue.beginning_of_day, format: :long) %></span>
+
             </div>
           </div>
         </div>

@@ -80,6 +80,8 @@ gem 'omniauth-google-oauth2'
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 gem 'omniauth-rails_csrf_protection'
 gem 'icalendar'
+gem 'rails-i18n'
+
 
 group :development do
   gem 'solargraph', require: false

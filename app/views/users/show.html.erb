@@ -27,7 +27,7 @@
       <div class="card border-0 shadow-sm p-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5 class="fw-bold mb-0">Mon prochain atelier</h5>
-          <%= link_to "Voir plus", bookings_path, class: "btn btn-outline-primary btn-sm" %>
+          <% link_to "Voir plus", bookings_path, class: "btn btn-outline-primary btn-sm" %>
         </div>
 
         <% if next_booking = current_user.bookings.includes(:offre).future.first %>
@@ -60,7 +60,7 @@
       <div class="card border-0 shadow-sm p-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h5 class="fw-bold mb-0">Mes ateliers passés</h5>
-          <%= link_to "Voir tous mes ateliers", bookings_path, class: "btn btn-outline-primary btn-sm" %>
+          <% link_to "Voir tous mes ateliers", bookings_path, class: "btn btn-outline-primary btn-sm" %>
         </div>
 
         <% current_user.bookings.joins(:offre).where('offres.date_prevue < ?', DateTime.now).limit(3).each do |booking| %>
@@ -80,7 +80,7 @@
                   </div>
                 </div>
               </div>
-              <%= link_to "Donner mon avis", booking_path(booking), class: "btn btn-outline-primary btn-sm" %>
+              <% link_to "Donner mon avis", booking_path(booking), class: "btn btn-outline-primary btn-sm" %>
             </div>
           </div>
         <% end %>

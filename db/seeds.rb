@@ -88,6 +88,18 @@ CSV.foreach(csv_file_path, headers: true) do |row|
   end
 end
 
+Offre.all.each do |offre|
+  if offre.date_prevue&.year == 25
+    new_date = offre.date_prevue.change(year: 2025)
+    offre.update(date_prevue: new_date)
+    puts "Updated offre '#{offre.titre}' date from #{offre.date_prevue} to #{new_date}"
+  end
 
+  if offre.duree.present?
+    new_duree = offre.duree[0...-3]
+    offre.update(duree: new_duree)
+    puts "Updated duree for '#{offre.titre}' from #{offre.duree} to #{new_duree}"
+  end
+end
 
 puts "Seed done"

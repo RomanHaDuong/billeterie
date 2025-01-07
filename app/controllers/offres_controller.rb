@@ -1,6 +1,6 @@
 class OffresController < ApplicationController
   def index
-    @offres = Offre.all
+    @offres = Offre.all.order(date_prevue: :asc)
   end
 
   def show

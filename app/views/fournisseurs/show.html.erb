@@ -20,26 +20,26 @@
           <div class="card border-0 bg-light">
             <div class="card-body text-center">
               <h3 class="mb-1"><%= @fournisseur.offres.count %></h3>
-              <p class="text-muted mb-0">Ateliers</p>
+              <p class="text-muted mb-0"><%= @fournisseur.offres.count > 1 ? 'Ateliers' : 'Atelier' %></p>
             </div>
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="card border-0 bg-light">
-            <div class="card-body text-center">
-              <h3 class="mb-1">1er</h3>
-              <p class="text-muted mb-0">Festival</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card border-0 bg-light">
-            <div class="card-body text-center">
-              <h3 class="mb-1">127</h3>
-              <p class="text-muted mb-0">Participants</p>
-            </div>
-          </div>
-        </div>
+        <%# <div class="col-sm-4"> %>
+          <%# <div class="card border-0 bg-light"> %>
+            <%# <div class="card-body text-center"> %>
+              <%# <h3 class="mb-1">1er</h3> %>
+              <%# <p class="text-muted mb-0">Festival</p> %>
+            <%# </div> %>
+          <%# </div> %>
+        <%# </div> %>
+        <%# <div class="col-sm-4"> %>
+          <%# <div class="card border-0 bg-light"> %>
+            <%# <div class="card-body text-center"> %>
+              <%# <h3 class="mb-1">127</h3> %>
+              <%# <p class="text-muted mb-0">Participants</p> %>
+            <%# </div> %>
+          <%# </div> %>
+        <%# </div> %>
       </div>
 
       <%# Bio %>
@@ -51,13 +51,13 @@
       <%# Contact/Social %>
       <div class="d-flex gap-2">
         <a href="#" class="btn btn-outline-primary">
-          <i class="bi bi-envelope me-2"></i>Contact
+          <i class="bi bi-envelope me-2"></i>Linkedin
         </a>
         <a href="#" class="btn btn-outline-dark">
           <i class="bi bi-instagram me-2"></i>Instagram
         </a>
         <a href="#" class="btn btn-outline-dark">
-          <i class="bi bi-linkedin me-2"></i>LinkedIn
+          <i class="bi bi-linkedin me-2"></i>Offinity
         </a>
       </div>
     </div>
@@ -70,11 +70,11 @@
         Ateliers (<%= @fournisseur.offres.count %>)
       </button>
     </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" data-bs-toggle="tab" data-bs-target="#avis">
-        Avis
-      </button>
-    </li>
+    <%# <li class="nav-item" role="presentation"> %>
+      <%# <button class="nav-link" data-bs-toggle="tab" data-bs-target="#avis"> %>
+        <%# Avis %>
+      <%# </button> %>
+    <%# </li> %>
   </ul>
 
   <%# Tab Contents %>
@@ -119,32 +119,32 @@
     </div>
 
     <%# Avis Tab %>
-    <div class="tab-pane fade" id="avis">
-      <div class="row g-4">
-        <div class="col-md-6">
-          <div class="card border-0 shadow-sm">
-            <div class="card-body">
-              <div class="d-flex align-items-center mb-3">
-                <div class="bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
-                  <i class="bi bi-person text-muted"></i>
-                </div>
-                <div>
-                  <h6 class="mb-0 fw-bold">Marie L.</h6>
-                  <small class="text-muted">Il y a 2 jours</small>
-                </div>
-              </div>
-              <div class="mb-2">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-              </div>
-              <p class="mb-0">Excellent atelier, très enrichissant et bien structuré. L'intervenant est passionné et sait transmettre son savoir.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%# <div class="tab-pane fade" id="avis"> %>
+      <%# <div class="row g-4"> %>
+        <%# <div class="col-md-6"> %>
+          <%# <div class="card border-0 shadow-sm"> %>
+            <%# <div class="card-body"> %>
+              <%# <div class="d-flex align-items-center mb-3"> %>
+                <%# <div class="bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"> %>
+                  <%# <i class="bi bi-person text-muted"></i> %>
+                <%# </div> %>
+                <%# <div> %>
+                  <%# <h6 class="mb-0 fw-bold">Marie L.</h6> %>
+                  <%# <small class="text-muted">Il y a 2 jours</small> %>
+                <%# </div> %>
+              <%# </div> %>
+              <%# <div class="mb-2"> %>
+                <%# <i class="bi bi-star-fill text-warning"></i> %>
+                <%# <i class="bi bi-star-fill text-warning"></i> %>
+                <%# <i class="bi bi-star-fill text-warning"></i> %>
+                <%# <i class="bi bi-star-fill text-warning"></i> %>
+                <%# <i class="bi bi-star-fill text-warning"></i> %>
+              <%# </div> %>
+              <%# <p class="mb-0">Excellent atelier, très enrichissant et bien structuré. L'intervenant est passionné et sait transmettre son savoir.</p> %>
+            <%# </div> %>
+          <%# </div> %>
+        <%# </div> %>
+      <%# </div> %>
+    <%# </div> %>
   </div>
 </div>

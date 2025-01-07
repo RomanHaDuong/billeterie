@@ -1,0 +1,17 @@
+fr:
+  date:
+    formats:
+      long: "%A %d %B %Y"
+      time_only: "%H:%M"
+      day_only: "%d"
+      default: "%d/%m/%Y"
+      short: "%e %b"
+    day_names: [Dimanche, Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi]
+    month_names: [~, Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Août, Septembre, Octobre, Novembre, Décembre]
+  time:
+    formats:
+      time_only: "%H:%M"
+      day_only: "%d"
+      default: "%d %B %Y %H:%M:%S"
+      short: "%d %b %H:%M"
+      long: "%A %d %B %Y"
