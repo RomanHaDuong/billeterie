@@ -20,7 +20,7 @@
           <div class="card border-0 bg-light">
             <div class="card-body text-center">
               <h3 class="mb-1"><%= @fournisseur.offres.count %></h3>
-              <p class="text-muted mb-0"><%= @fournisseur.offres.count > 1 ? 'Ateliers' : 'Atelier' %></p>
+              <p class="text-muted mb-0"><%= @fournisseur.offres.count > 1 ? 'Animations' : 'Animation' %></p>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
   <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ateliers">
-        Ateliers (<%= @fournisseur.offres.count %>)
+        Animations (<%= @fournisseur.offres.count %>)
       </button>
     </li>
     <%# <li class="nav-item" role="presentation"> %>
