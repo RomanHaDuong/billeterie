@@ -24,7 +24,9 @@
 
       <div class="d-flex align-items-center gap-3">
         <% if user_signed_in? %>
-          <%= link_to "Billetterie", payment_path, class: 'btn btn-danger' %>
+          <%= link_to "Whatsapp", "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S ", class: 'btn btn-secondary', target: :blank %>
+
+          <%= link_to "Billetterie", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
 
           <%= link_to user_path(current_user), class: 'nav-link' do %>
             <i class="bi bi-person-circle me-1"></i>
@@ -43,7 +45,9 @@
                 alt: 'Placeholder picture' %>
           <% end %>
         <% else %>
-          <%= link_to "Billetterie", payment_path, class: 'btn btn-danger' %>
+          <%= link_to "Whatsapp", "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S ", class: 'btn btn-secondary', target: :blank %>
+
+          <%= link_to "Billetterie", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
 
           <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary me-2' %>
 
