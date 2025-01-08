@@ -22,7 +22,7 @@
                       <div class="col">
                         <div class="d-flex align-items-center">
                           <% if offre.image.attached? %>
-                            <%= image_tag offre.image, class: "rounded me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+                            <% image_tag offre.image, class: "rounded me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
                           <% end %>
                           <div>
                             <h6 class="mb-0 fw-bold"><%= offre.titre %></h6>
