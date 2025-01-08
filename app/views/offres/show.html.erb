@@ -54,7 +54,7 @@
         </span>
         <% if current_user && @offre.bookings.exists?(user: current_user) %>
           <%= link_to booking_path(@offre.bookings.find_by(user: current_user)), class: "btn btn-primary btn-lg" do %>
-            Voir ma réservation <i class="fa-solid fa-ticket ms-2"></i>
+            Voir les détails <i class="fa-solid fa-ticket ms-2"></i>
           <% end %>
         <% elsif @offre.bookings.count >= @offre.place %>
           <button class="btn btn-secondary btn-lg" disabled>
@@ -62,7 +62,7 @@
           </button>
         <% else %>
           <%= link_to book_offre_path(@offre), class: "btn btn-primary btn-lg" do %>
-            Notifier ma venue <i class="fa-solid fa-ticket ms-2"></i>
+            Partager mon intention de venir <i class="fa-solid fa-ticket ms-2"></i>
           <% end %>
         <% end %>
       </div>

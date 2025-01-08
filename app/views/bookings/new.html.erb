@@ -12,7 +12,7 @@
         </div>
 
         <div class="card-body p-4">
-          <h2 class="fw-bold text-center mb-4">Confirmer votre réservation</h2>
+          <h2 class="fw-bold text-center mb-4">Confirmer votre intention de venir</h2>
 
           <%# Workshop Details %>
           <div class="mb-4">
@@ -64,7 +64,7 @@
               <%= f.email_field :user_email, value: current_user.email, class: 'form-control form-control-lg' %>
             </div>
 
-            <%= f.submit "Confirmer la réservation", class: "btn btn-primary w-100" %>
+            <%= f.submit "Confirmer", class: "btn btn-primary w-100" %>
           <% end %>
         </div>
       </div>

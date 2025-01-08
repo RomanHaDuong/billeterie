@@ -33,7 +33,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find(params[:id])
     @booking.destroy
 
-    redirect_to bookings_path, notice: 'Votre réservation a été annulée.'
+    redirect_to user_path(current_user), notice: 'Votre réservation a été annulée.'
   end
 
   def book_event
