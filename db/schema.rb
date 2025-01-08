@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_08_102551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "instagram"
+    t.string "offinity"
+    t.string "linkedin"
     t.index ["user_id"], name: "index_fournisseurs_on_user_id"
   end
 
@@ -89,6 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_06_152200) do
     t.string "autre_commentaire"
     t.string "salle"
     t.string "categories"
+    t.integer "place"
     t.index ["fournisseur_id"], name: "index_offres_on_fournisseur_id"
   end
 

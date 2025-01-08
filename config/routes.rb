@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     end
   end
   resources :fournisseurs
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :edit, :update, :new]
   resources :favoris do
     post 'favori', to: 'favoris#create'
     delete 'favori', to: 'favoris#destroy'

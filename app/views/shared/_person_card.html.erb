@@ -15,7 +15,7 @@
 
       <%# Description with line clamp moved to CSS %>
       <p class="card-text line-clamp">
-        <%= fournisseur.bio %>
+        <%= truncate(fournisseur.bio, length: 150, separator: ' ', omission: '...') %>
       </p>
 
       <%# Footer %>

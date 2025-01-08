@@ -14,12 +14,13 @@ content.gsub!("\r\n", "\n")
 CSV.parse(content, headers: true) do |row|
   begin
     # Skip header row and empty rows
-    next if row['date'] == 'Obligatoire' || row['date'].nil? || row['heure'].nil?
+    next if row['descriptif'] == 'Obligatoire' || row['date'].nil? || row['heure'].nil?
+    next if row['heure'] == 'Obligatoire'
 
     user = nil
-    fournisseur = nil
+    fournisseur = Fournisseur.find_by(name: row['intervenant'])
 
-    if row['intervenant'].present?
+    if fournisseur.nil?
       user = User.create!(
         email: Faker::Internet.email,
         password: "password",
@@ -29,13 +30,14 @@ CSV.parse(content, headers: true) do |row|
       fournisseur = Fournisseur.create!(
         bio: row['presentation_intervenant'],
         user_id: user.id,
-        name: row['intervenant']
+        name: row['intervenant'],
+        instagram: row['insta_intervenant'],
+        linkedin: row['linkedin_intervenant'],
+        offinity: row['offinity_intervenant']
+
       )
     else
-      fournisseur = Fournisseur.create!(
-        bio: row['Cette offre n\'a pas d\'intervenant valide'],
-        name: row['intervenant']
-      )
+      user = fournisseur.user
     end
 
     # Only try to create date_time if both date and time are present
@@ -54,6 +56,7 @@ CSV.parse(content, headers: true) do |row|
       intervenant: row['intervenant'],
       descriptif: row['descriptif'],
       categories: row['categories'],
+      place: row['places'],
       fournisseur_id: fournisseur&.id
     )
 
@@ -79,7 +82,7 @@ CSV.parse(content, headers: true) do |row|
           content_type: 'image/jpeg'
         )
       rescue OpenURI::HTTPError, Errno::ENOENT => e
-        puts "Could not download image for fournisseur #{fournisseur.id}: #{e.message}"
+        puts "Could not download image for fournisseur #{fournisseur.name}: #{e.message}"
       end
     end
 
@@ -98,8 +101,13 @@ Offre.all.each do |offre|
   end
 
   if offre.duree.present?
-    new_duree = offre.duree[0...-3]
+    # cut out the useless zeros
+    new_duree = offre.duree[3..-1]
     offre.update(duree: new_duree)
+    # append 'h' to duree
+    new_duree = offre.duree + 'h'
+    offre.update(duree: new_duree)
+
     puts "Updated duree for '#{offre.titre}' from #{offre.duree} to #{new_duree}"
   end
 end
