@@ -88,6 +88,14 @@ CSV.parse(content, headers: true) do |row|
       end
     end
 
+    if row['intervenant'] == 'Duc Ha Duong'
+      fournisseur.image.attach(io: File.open('app/assets/images/duc.jpeg'), filename: 'duc.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Emmanuelle Roux'
+      fournisseur.image.attach(io: File.open('app/assets/images/roux.jpeg'), filename: 'roux.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Matthieu Dardaillon'
+      fournisseur.image.attach(io: File.open('app/assets/images/matthieu.jpeg'), filename: 'matthieu.jpeg', content_type: 'image/jpeg')
+    end
+
   rescue Date::Error => e
     puts "Error parsing date for row: #{row.inspect}"
     puts "Error message: #{e.message}"
