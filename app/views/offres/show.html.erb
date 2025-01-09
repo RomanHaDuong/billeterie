@@ -133,7 +133,7 @@
           <div class="col-6">
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-calendar text-primary me-2"></i>
-              <span><%= l(@offre.date_prevue.beginning_of_day, format: :long) %></span>
+              <span><%= l(@offre.date_prevue.beginning_of_day, format: :long) %>, <%= l(@offre.date_prevue, format: :time_only) %>h</span>
             </div>
           </div>
 

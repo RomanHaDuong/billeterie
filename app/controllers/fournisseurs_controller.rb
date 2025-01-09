@@ -1,7 +1,9 @@
 class FournisseursController < ApplicationController
+# In your controller
   def index
-    @fournisseurs = Fournisseur.all
+    @fournisseurs = Fournisseur.all.order(:name)
   end
+
 
   def new
     @fournisseur = Fournisseur.new(user_id: current_user.id)
