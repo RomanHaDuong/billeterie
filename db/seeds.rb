@@ -20,7 +20,12 @@ CSV.parse(content, headers: true) do |row|
     next unless row['statut'] == '3. Programmé'
 
     user = nil
-    fournisseur = Fournisseur.find_by(name: row['intervenant'])
+    fournisseur = if row['intervenant'].present?
+      Fournisseur.all.find { |f| f.name.present? && row['intervenant'].include?(f.name) }
+    else
+      nil
+    end
+
 
     if fournisseur.nil?
       user = User.create!(
@@ -88,6 +93,9 @@ CSV.parse(content, headers: true) do |row|
       end
     end
 
+
+    # bespoke offres
+
     if row['intervenant'] == 'Duc Ha Duong'
       fournisseur.image.attach(io: File.open('app/assets/images/duc.jpeg'), filename: 'duc.jpeg', content_type: 'image/jpeg')
     elsif row['intervenant'] == 'Emmanuelle Roux'
@@ -95,6 +103,84 @@ CSV.parse(content, headers: true) do |row|
     elsif row['intervenant'] == 'Matthieu Dardaillon'
       fournisseur.image.attach(io: File.open('app/assets/images/matthieu.jpeg'), filename: 'matthieu.jpeg', content_type: 'image/jpeg')
     end
+
+    if row['titre'] == 'Voyage en 2030 Glorieuses (version classique)'
+      fournisseur.update!(
+        bio: 'Olivier Ménicot est un entrepreneur systémique dont la cause est la transformation écologique des organisations. Il aime voyager dans le temps pour réflechir au Monde d\'Après.',
+        name: 'Olivier Ménicot',
+        linkedin: 'www.linkedin.com/in/oliviermenicot'
+      )
+
+      unless Fournisseur.exists?(name: 'Christophe Limon')
+        user = User.create!(
+          email: Faker::Internet.email,
+          password: "password",
+          name: 'Christophe Limon'
+        )
+
+        secondary_fournisseur = Fournisseur.create!(
+          bio: 'Christophe Limon accompagne les entreprises à intégrer les démarches à impact positif dans leur modèle d\'affaires. j\'aime les embarquer en 2030 Glorieuses pour se libérer du présent et mieux imaginer leur futur.',
+          user_id: user.id,
+          name: 'Christophe Limon',
+          linkedin: 'https://www.linkedin.com/in/christophe-limon-%F0%9F%92%9A-a37a332a/'
+        )
+
+        offre.update!(secondary_fournisseur: secondary_fournisseur)
+      end
+    end
+
+    if row['titre'] == 'Jeu "En-quête de soi"'
+      fournisseur.update!(
+        bio: 'Corinne Risse est accompagnante et créatrice - facilitatrice d\'ateliers, spécialisée sur les stratégies mentales et sur l\'intuition.',
+        name: 'Corinne Risse',
+        linkedin: 'https://www.linkedin.com/in/corinne-risse-12b731125/',
+        instagram: 'https://www.instagram.com/humainenherbe/'
+      )
+
+      begin
+        file = URI.open('https://lh3.googleusercontent.com/pw/AP1GczPKonFcxQz1GNo7aGK1lwTlePxxBom3Golz0uN7yZN6I1xtsWKuQOgidIn7HAjoTgrdIkFRnMvDfXJ-whY5yyDYO1XZZOL90mfZ1pD9sfETRhOsnLnXOltYuUBRw23Z6n3l1kJ7NgOfVQobEQ6fqhyt=w800-h800-s-no-gm?authuser=0')
+        fournisseur.image.attach(
+          io: file,
+          filename: File.basename('https://lh3.googleusercontent.com/pw/AP1GczPKonFcxQz1GNo7aGK1lwTlePxxBom3Golz0uN7yZN6I1xtsWKuQOgidIn7HAjoTgrdIkFRnMvDfXJ-whY5yyDYO1XZZOL90mfZ1pD9sfETRhOsnLnXOltYuUBRw23Z6n3l1kJ7NgOfVQobEQ6fqhyt=w800-h800-s-no-gm?authuser=0'),
+          content_type: 'image/jpeg'
+        )
+      rescue OpenURI::HTTPError, Errno::ENOENT => e
+        puts "Could not download image for fournisseur #{fournisseur.name}: #{e.message}"
+      end
+
+
+      unless Fournisseur.exists?(name: 'Damien Syren')
+        user = User.create!(
+          email: Faker::Internet.email,
+          password: "password",
+          name: 'Damien Syren'
+        )
+
+        secondary_fournisseur = Fournisseur.create!(
+          bio: 'Damien Syren est Head of Customer Success chez Medoucine et fondateur de @plus.de.serenite, service d\'accompagnement autour de la santé mentale et du burn-out..',
+          user_id: user.id,
+          name: 'Damien Syren',
+          linkedin: 'https://www.linkedin.com/in/damien-syren/',
+          instagram: 'https://www.instagram.com/plus.de.serenite/'
+        )
+
+        begin
+          file = URI.open('https://lh3.googleusercontent.com/pw/AP1GczPHYz6UinEsc7PpWtZy6pZsh3i0nmeLZbgggFn8dTJqmgZ-DbYutjwWd4lF1pa7o6yxMWpTemnBtPgyyzla3DmqYzuIcuuQrM7qOXCl6eHasEtWuUyc0snQYf5vplhl6WQEaK0S3K30YburI3I2IyfQ=w799-h800-s-no-gm?authuser=0')
+          secondary_fournisseur.image.attach(
+            io: file,
+            filename: File.basename('https://lh3.googleusercontent.com/pw/AP1GczPHYz6UinEsc7PpWtZy6pZsh3i0nmeLZbgggFn8dTJqmgZ-DbYutjwWd4lF1pa7o6yxMWpTemnBtPgyyzla3DmqYzuIcuuQrM7qOXCl6eHasEtWuUyc0snQYf5vplhl6WQEaK0S3K30YburI3I2IyfQ=w799-h800-s-no-gm?authuser=0'),
+            content_type: 'image/jpeg'
+          )
+        rescue OpenURI::HTTPError, Errno::ENOENT => e
+          puts "Could not download image for fournisseur #{fournisseur.name}: #{e.message}"
+        end
+
+        offre.update!(secondary_fournisseur: secondary_fournisseur)
+      end
+    end
+
+
+
 
   rescue Date::Error => e
     puts "Error parsing date for row: #{row.inspect}"

@@ -19,6 +19,7 @@ class FournisseursController < ApplicationController
   def show
     @fournisseur = Fournisseur.find(params[:id])
     @offres = Offre.where(fournisseur_id: @fournisseur.id)
+    @all_offres = @fournisseur.offres + @fournisseur.secondary_offres
   end
 
   def your_profile

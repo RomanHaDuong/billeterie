@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_01_08_102551) do
+ActiveRecord::Schema[7.1].define(version: 2025_01_09_152133) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,7 +93,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_08_102551) do
     t.string "salle"
     t.string "categories"
     t.integer "place"
+    t.bigint "secondary_fournisseur_id"
     t.index ["fournisseur_id"], name: "index_offres_on_fournisseur_id"
+    t.index ["secondary_fournisseur_id"], name: "index_offres_on_secondary_fournisseur_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -122,4 +124,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_01_08_102551) do
   add_foreign_key "favoris", "users"
   add_foreign_key "fournisseurs", "users"
   add_foreign_key "offres", "fournisseurs"
+  add_foreign_key "offres", "fournisseurs", column: "secondary_fournisseur_id"
 end

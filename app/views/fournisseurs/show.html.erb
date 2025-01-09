@@ -67,14 +67,9 @@
   <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ateliers">
-        Animations (<%= @fournisseur.offres.count %>)
+        Animations (<%= @all_offres.count %>)
       </button>
     </li>
-    <%# <li class="nav-item" role="presentation"> %>
-      <%# <button class="nav-link" data-bs-toggle="tab" data-bs-target="#avis"> %>
-        <%# Avis %>
-      <%# </button> %>
-    <%# </li> %>
   </ul>
 
   <%# Tab Contents %>
@@ -82,69 +77,11 @@
     <%# Ateliers Tab %>
     <div class="tab-pane fade show active" id="ateliers">
       <div class="row g-4">
-        <% @fournisseur.offres.each do |offre| %>
+        <% @all_offres.each do |offre| %>
           <%= render partial: 'shared/offre', locals: { offre: offre } %>
         <% end %>
       </div>
     </div>
 
-    <%# Parcours Tab %>
-    <div class="tab-pane fade" id="parcours">
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-marker bg-primary"></div>
-          <div class="timeline-content">
-            <h5 class="mb-2">Directeur Artistique</h5>
-            <p class="text-muted mb-1">Studio Design Paris</p>
-            <small class="text-muted">2018 - Présent</small>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker bg-primary"></div>
-          <div class="timeline-content">
-            <h5 class="mb-2">Designer Senior</h5>
-            <p class="text-muted mb-1">Agence Creative</p>
-            <small class="text-muted">2015 - 2018</small>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker bg-primary"></div>
-          <div class="timeline-content">
-            <h5 class="mb-2">Formation Design</h5>
-            <p class="text-muted mb-1">École des Arts Décoratifs</p>
-            <small class="text-muted">2012 - 2015</small>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <%# Avis Tab %>
-    <%# <div class="tab-pane fade" id="avis"> %>
-      <%# <div class="row g-4"> %>
-        <%# <div class="col-md-6"> %>
-          <%# <div class="card border-0 shadow-sm"> %>
-            <%# <div class="card-body"> %>
-              <%# <div class="d-flex align-items-center mb-3"> %>
-                <%# <div class="bg-light rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"> %>
-                  <%# <i class="bi bi-person text-muted"></i> %>
-                <%# </div> %>
-                <%# <div> %>
-                  <%# <h6 class="mb-0 fw-bold">Marie L.</h6> %>
-                  <%# <small class="text-muted">Il y a 2 jours</small> %>
-                <%# </div> %>
-              <%# </div> %>
-              <%# <div class="mb-2"> %>
-                <%# <i class="bi bi-star-fill text-warning"></i> %>
-                <%# <i class="bi bi-star-fill text-warning"></i> %>
-                <%# <i class="bi bi-star-fill text-warning"></i> %>
-                <%# <i class="bi bi-star-fill text-warning"></i> %>
-                <%# <i class="bi bi-star-fill text-warning"></i> %>
-              <%# </div> %>
-              <%# <p class="mb-0">Excellent atelier, très enrichissant et bien structuré. L'intervenant est passionné et sait transmettre son savoir.</p> %>
-            <%# </div> %>
-          <%# </div> %>
-        <%# </div> %>
-      <%# </div> %>
-    <%# </div> %>
   </div>
 </div>

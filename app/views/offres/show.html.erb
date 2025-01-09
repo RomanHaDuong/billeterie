@@ -85,6 +85,26 @@
         </div>
       <% end %>
 
+      <%# 2nd intervenant info %>
+      <% if @offre.secondary_fournisseur %>
+        <%= link_to fournisseur_path(@offre.secondary_fournisseur), class: "text-decoration-none" do %>
+          <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card">
+            <div class="d-flex align-items-center mb-3">
+              <% if @offre.secondary_fournisseur.image.attached? %>
+                <%= image_tag @offre.secondary_fournisseur.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+              <% else %>
+                <%= image_tag "placeholder_person.png", class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+              <% end %>
+              <div>
+                <h5 class="mb-0 fw-bold text-dark"><%= @offre.secondary_fournisseur.name %></h5>
+                <p class="mb-0 text-muted">Animateur-ice</p>
+              </div>
+            </div>
+            <p class="mb-0 text-dark"><%= @offre.secondary_fournisseur.bio %></p>
+          </div>
+        <% end %>
+      <% end %>
+
       <%# Description %>
       <div class="card border-0 shadow-sm p-4">
         <h5 class="fw-bold mb-3">Description de l'animation</h5>
