@@ -40,4 +40,6 @@ Rails.application.routes.draw do
   get 'pages/payment', to: 'pages#payment', as: 'payment'
   get 'pages/legal', to: 'pages#legal', as: 'legal'
   get 'pages/profile', to: 'pages#profile', as: 'profile'
+  get '/le47/festival', to: redirect('/')
+
 end
