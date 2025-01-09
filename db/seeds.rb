@@ -14,8 +14,10 @@ content.gsub!("\r\n", "\n")
 CSV.parse(content, headers: true) do |row|
   begin
     # Skip header row and empty rows
+    next if row['heure'] == 'Heure'
     next if row['descriptif'] == 'Obligatoire' || row['date'].nil? || row['heure'].nil?
     next if row['heure'] == 'Obligatoire'
+    next unless row['statut'] == '3. Programmé'
 
     user = nil
     fournisseur = Fournisseur.find_by(name: row['intervenant'])
