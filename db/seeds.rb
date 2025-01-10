@@ -117,8 +117,6 @@ CSV.parse(content, headers: true) do |row|
       fournisseur.image.attach(io: File.open('app/assets/images/bechir.jpeg'), filename: 'bechir.jpeg', content_type: 'image/jpeg')
     elsif row['intervenant'] == 'Caroline Sally'
       fournisseur.image.attach(io: File.open('app/assets/images/caroline.jpeg'), filename: 'caroline.jpeg', content_type: 'image/jpeg')
-    elsif row['intervenant'] == 'Caroline Sally'
-      fournisseur.image.attach(io: File.open('app/assets/images/caroline.jpeg'), filename: 'caroline.jpeg', content_type: 'image/jpeg')
     end
 
     if row['titre'] == 'Voyage en 2030 Glorieuses (version classique)'
