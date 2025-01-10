@@ -16,9 +16,8 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
-
-  resources :bookings, only: [:create, :show, :destroy, :index]
-  resources :bookings, only: [:index]
+  # client chooses to remove booking feature
+  # resources :bookings, only: [:create, :show, :destroy, :index]
   resources :offres do
     member do
       get 'book', to: 'bookings#new'

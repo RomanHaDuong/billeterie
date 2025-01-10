@@ -23,15 +23,17 @@
       </ul>
 
       <div class="d-flex flex-column flex-sm-row align-items-center gap-3">
-        <div class="d-flex gap-2 mb-2 mb-sm-0">
-          <%= link_to "Whatsapp", "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S ", class: 'btn btn-secondary', target: :blank %>
-          <%= link_to "Billetterie", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
-        </div>
+      <div class="d-flex gap-2 mb-2 mb-sm-0">
+        <%= link_to "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S", class: 'btn btn-secondary', target: :blank do %>
+          <i class="bi bi-whatsapp me-2"></i>Rejoins nous
+        <% end %>
+        <%= link_to "Je prends mon pass!", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
+      </div>
+
 
         <% if user_signed_in? %>
           <div class="d-flex align-items-center">
             <%= link_to user_path(current_user), class: 'nav-link' do %>
-              <i class="bi bi-person-circle me-1"></i>
               <span>Tableau de bord</span>
             <% end %>
 

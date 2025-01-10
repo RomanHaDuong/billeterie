@@ -236,8 +236,8 @@ Offre.all.each do |offre|
     puts "Updated duree for '#{offre.titre}' from #{offre.duree} to #{new_duree}"
   end
 
-  if offre.place.present?
-    offre.update(place: 0)
+  if offre.place.nil? || offre.place.zero?
+    offre.update(place: 10)
     puts "Updated place for '#{offre.titre}'"
   end
 end

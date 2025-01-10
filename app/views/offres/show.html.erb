@@ -10,15 +10,15 @@
         <% end %>
       </div>
 
-      <%# Attendees Section %>
+      <%# Likes Section %>
       <div class="d-flex align-items-center gap-2 mt-3">
-        <h6 class="fw-bold mb-0">Participants</h6>
-        <span class="badge bg-primary"><%= @offre.bookings.count %> inscrits</span>
+        <%# <h6 class="fw-bold mb-0">Likes</h6> %>
+        <span class="badge bg-primary"><%= @offre.favoris.count >= 1 ? "#{@offre.favoris.count} like" : "#{@offre.favoris.count} likes" %></span>
         <div class="attendees-grid d-flex gap-1 ms-2">
-          <% @offre.bookings.includes(:user).each do |booking| %>
-            <div class="attendee-avatar" data-bs-toggle="tooltip" title="<%= booking.user.name %>">
-              <% if booking.user.image.attached? %>
-                <%= image_tag booking.user.image, class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>
+          <% @offre.favoris.includes(:user).each do |like| %>
+            <div class="attendee-avatar" data-bs-toggle="tooltip" title="<%= like.user.name %>">
+              <% if like.user.image.attached? %>
+                <%= image_tag like.user.image, class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>
               <% else %>
                 <%= image_tag "placeholder_person.png", class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>
               <% end %>
@@ -52,17 +52,13 @@
         <span class="price-tag fs-2 me-4">
           <% number_to_currency(@offre.fournisseur_id, unit: "€") %>
         </span>
-        <% if current_user && @offre.bookings.exists?(user: current_user) %>
-          <%= link_to booking_path(@offre.bookings.find_by(user: current_user)), class: "btn btn-primary btn-lg" do %>
-            Voir les détails <i class="fa-solid fa-ticket ms-2"></i>
+        <% if current_user && @offre.favoris.exists?(user: current_user) %>
+          <%= link_to user_path(current_user), class: "btn btn-primary btn-lg" do %>
+            Voir mes likes <i class="fa-solid fa-heart text-danger ms-2"></i>
           <% end %>
-        <% elsif @offre.bookings.count >= @offre.place %>
-          <button class="btn btn-secondary btn-lg" disabled>
-            Cette offre n'a plus de places disponibles <i class="fa-solid fa-ticket ms-2"></i>
-          </button>
         <% else %>
-          <%= link_to book_offre_path(@offre), class: "btn btn-primary btn-lg" do %>
-            Partager mon intention de venir <i class="fa-solid fa-ticket ms-2"></i>
+          <%= button_to offre_favori_path(@offre), method: :post, class: "btn btn-primary btn-lg" do %>
+            Liker <i class="fa-solid fa-heart ms-2"></i>
           <% end %>
         <% end %>
       </div>
