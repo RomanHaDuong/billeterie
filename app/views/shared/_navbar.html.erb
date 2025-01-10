@@ -22,36 +22,36 @@
         </li>
       </ul>
 
-      <div class="d-flex align-items-center gap-3">
+      <div class="d-flex flex-column flex-sm-row align-items-center gap-3">
+        <div class="d-flex gap-2 mb-2 mb-sm-0">
+          <%= link_to "Whatsapp", "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S ", class: 'btn btn-secondary', target: :blank %>
+          <%= link_to "Billetterie", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
+        </div>
+
         <% if user_signed_in? %>
-          <%= link_to "Whatsapp", "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S ", class: 'btn btn-secondary', target: :blank %>
+          <div class="d-flex align-items-center">
+            <%= link_to user_path(current_user), class: 'nav-link' do %>
+              <i class="bi bi-person-circle me-1"></i>
+              <span>Tableau de bord</span>
+            <% end %>
 
-          <%= link_to "Billetterie", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
-
-          <%= link_to user_path(current_user), class: 'nav-link' do %>
-            <i class="bi bi-person-circle me-1"></i>
-            <span>Tableau de bord</span>
-          <% end %>
-
-          <% if current_user.image.attached? %>
-            <%= image_tag current_user.image,
-                class: 'rounded-circle me-2',
-                size: '32x32',
-                alt: 'Profile picture' %>
-          <% else %>
-            <%= image_tag "placeholder_person.png",
-                class: 'rounded-circle me-2',
-                size: '32x32',
-                alt: 'Placeholder picture' %>
-          <% end %>
+            <% if current_user.image.attached? %>
+              <%= image_tag current_user.image,
+                  class: 'rounded-circle ms-2',
+                  size: '32x32',
+                  alt: 'Profile picture' %>
+            <% else %>
+              <%= image_tag "placeholder_person.png",
+                  class: 'rounded-circle ms-2',
+                  size: '32x32',
+                  alt: 'Placeholder picture' %>
+            <% end %>
+          </div>
         <% else %>
-          <%= link_to "Whatsapp", "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S ", class: 'btn btn-secondary', target: :blank %>
-
-          <%= link_to "Billetterie", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
-
-          <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary me-2' %>
-
-          <%= link_to "S'inscrire", new_user_registration_path, class: 'btn btn-primary' %>
+          <div class="d-flex gap-2">
+            <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary' %>
+            <%= link_to "S'inscrire", new_user_registration_path, class: 'btn btn-primary' %>
+          </div>
         <% end %>
       </div>
     </div>
