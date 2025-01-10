@@ -104,7 +104,7 @@ CSV.parse(content, headers: true) do |row|
       fournisseur.image.attach(io: File.open('app/assets/images/roux_atelier.png'), filename: 'roux_atelier.png', content_type: 'image/png')
     elsif row['intervenant'] == 'Matthieu Dardaillon'
       fournisseur.image.attach(io: File.open('app/assets/images/matthieu.jpeg'), filename: 'matthieu.jpeg', content_type: 'image/jpeg')
-      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/dardaillon.png'), filename: 'dardaillon.png', content_type: 'image/png')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/dardaillon_atelier.png'), filename: 'dardaillon_atelier.png', content_type: 'image/png')
     elsif row['intervenant'] == 'Emmanuelle Hoss'
       fournisseur.image.attach(io: File.open('app/assets/images/hoss.png'), filename: 'hoss.png', content_type: 'image/png')
       fournisseur.offres.first.image.attach(io: File.open('app/assets/images/hoss_atelier.png'), filename: 'hoss_atelier.png', content_type: 'image/png')
@@ -213,8 +213,10 @@ user = User.create!(
 
 fournisseur = Fournisseur.create!(
   user_id: user.id,
-  name: "Cedric Ringenbach"
-)
+  name: "Cedric Ringenbach",
+  bio: "Cédric Ringenbach est un ingénieur et conférencier spécialisé dans le changement climatique. Fondateur de la Fresque du Climat en 2015, premier directeur du Shift Project (2010-2016), il enseigne dans les grandes écoles et dirige Blue Choice, une société de conseil en stratégie climatique.",
+  linkedin: "https://www.linkedin.com/in/cedringen/",
+  )
 
 fournisseur.image.attach(io: File.open('app/assets/images/cedric.jpeg'), filename: 'cedric.jpeg', content_type: 'image/jpeg')
 

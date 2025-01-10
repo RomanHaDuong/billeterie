@@ -49,16 +49,25 @@
       </div>
 
       <%# Contact/Social %>
+
       <div class="d-flex gap-2">
-        <a href="<%= @fournisseur.linkedin %>" target="_blank" class="btn btn-outline-primary">
-          <i class="bi bi-envelope me-2"></i>Linkedin
-        </a>
-        <a href="<%= @fournisseur.instagram %>" target="_blank" class="btn btn-outline-dark">
-          <i class="bi bi-instagram me-2"></i>Instagram
-        </a>
-        <a href="<%= @fournisseur.offinity %>" target="_blank" class="btn btn-outline-dark">
-          <i class="bi bi-linkedin me-2"></i>Offinity
-        </a>
+        <% if @fournisseur.linkedin.present? %>
+          <a href="<%= @fournisseur.linkedin %>" target="_blank" class="btn btn-outline-primary">
+            <i class="bi bi-linkedin me-2"></i>Linkedin
+          </a>
+        <% end %>
+
+        <% if @fournisseur.instagram.present? %>
+          <a href="<%= @fournisseur.instagram %>" target="_blank" class="btn btn-outline-dark">
+            <i class="bi bi-instagram me-2"></i>Instagram
+          </a>
+        <% end %>
+
+        <% if @fournisseur.offinity.present? %>
+          <a href="<%= @fournisseur.offinity %>" target="_blank" class="btn btn-outline-dark">
+            <i class="bi bi-link-45deg me-2"></i>Offinity
+          </a>
+        <% end %>
       </div>
     </div>
   </div>
