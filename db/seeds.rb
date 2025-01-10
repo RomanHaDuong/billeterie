@@ -235,6 +235,34 @@ CSV.parse(content, headers: true) do |row|
       end
     end
 
+    if row['titre'] == 'L’Hypnose & le chant fluidifient-ils la collaboration?'
+      if Fournisseur.exists?(name: 'Stéphane Gabbay')
+        fournisseur = Fournisseur.find_by(name: 'Stéphane Gabbay')
+      else
+        fournisseur.update!(
+          bio: 'Stéphane Gabbay met la musique et l\'intelligence collective au service des transitions (www.facilitationmusicale.com)',
+          name: 'Stéphane Gabbay',
+          linkedin: 'https://www.linkedin.com/in/sgabbay/',
+          instagram: 'https://www.instagram.com/stephane.gabbay/'
+        )
+      end
+
+      unless Fournisseur.exists?(name: 'Lena Jaros')
+        user = User.create!(
+          email: Faker::Internet.email,
+          password: "password",
+          name: 'Lena Jaros'
+        )
+
+        secondary_fournisseur = Fournisseur.create!(
+          user_id: user.id,
+          name: 'Lena Jaros'
+        )
+
+        offre.update!(secondary_fournisseur: secondary_fournisseur)
+      end
+    end
+
 
   rescue Date::Error => e
     puts "Error parsing date for row: #{row.inspect}"
