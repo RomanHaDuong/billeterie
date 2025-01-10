@@ -56,40 +56,7 @@
     </div>
 
     <%# Right Column %>
-    <div class="col-lg-6">
-      <div class="card border-0 shadow-sm p-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h5 class="fw-bold mb-0">Vos offres en favori</h5>
-          <%= link_to "Voir tous mes favoris", favoris_path, class: "btn btn-outline-primary btn-sm" %>
-        </div>
-
-        <% current_user.favoris.joins(:offre).limit(3).each do |favori| %>
-          <div class="workshop-card p-3 rounded-3 shadow-sm mb-3">
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex align-items-center gap-3">
-                <% if favori.offre.image.attached? %>
-                  <%= image_tag favori.offre.image, class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
-                <% else %>
-                  <%= image_tag "placeholder_offre.png", class: "rounded-3", style: "width: 80px; height: 80px; object-fit: cover;" %>
-                <% end %>
-                <div>
-                  <h6 class="fw-bold mb-1"><%= favori.offre.titre %></h6>
-                  <div class="d-flex align-items-center text-muted">
-                    <i class="fa-regular fa-calendar me-2"></i>
-                      <span><%= l(favori.offre.date_prevue.beginning_of_day, format: :long) %>, <%= l(favori.offre.date_prevue, format: :time_only) %>h</span>
-                  </div>
-                </div>
-              </div>
-              <% link_to "Donner mon avis", offre_path(favori.offre), class: "btn btn-outline-primary btn-sm" %>
-            </div>
-          </div>
-        <% end %>
-
-        <% if current_user.favoris.joins(:offre).empty? %>
-          <p class="text-muted">Aucune offre en favori</p>
-        <% end %>
-      </div>
-    </div>
+    <% render 'right_column' %>
 
   </div>
 </div>
@@ -99,5 +66,5 @@
     <h1 class="fw-bold mb-4">Mes likes</h1>
   </div>
 
-  <%= render 'shared/offres_agenda_view' %>
+  <%= render 'shared/favoris_index' %>
 </div>
