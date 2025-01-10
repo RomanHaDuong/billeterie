@@ -108,7 +108,7 @@ CSV.parse(content, headers: true) do |row|
     elsif row['intervenant'] == 'Emmanuelle Hoss'
       fournisseur.image.attach(io: File.open('app/assets/images/hoss.png'), filename: 'hoss.png', content_type: 'image/png')
       fournisseur.offres.first.image.attach(io: File.open('app/assets/images/hoss_atelier.png'), filename: 'hoss_atelier.png', content_type: 'image/png')
-    elsif row['titre'] == 'Cérémonie de cloture'
+    elsif row['titre'] == 'Cérémonie de cloture' || row['titre'] == 'Cérémonie de l\'argent'
       offre.image.attach(io: File.open('app/assets/images/logo.png'), filename: 'logo.png', content_type: 'image/png')
     elsif row['intervenant'] == 'Attaa Ben Elafdil'
       fournisseur.image.attach(io: File.open('app/assets/images/atta.jpeg'), filename: 'atta.jpeg', content_type: 'image/jpeg')
@@ -236,6 +236,11 @@ Offre.all.each do |offre|
     offre.update(duree: new_duree)
 
     puts "Updated duree for '#{offre.titre}' from #{offre.duree} to #{new_duree}"
+  end
+
+  if offre.place.present?
+    offre.update(place: 0)
+    puts "Updated place for '#{offre.titre}'"
   end
 end
 

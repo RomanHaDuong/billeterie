@@ -4,9 +4,9 @@
     <div class="col-lg-4 text-center text-lg-start">
       <div class="position-relative mb-4">
         <% if @fournisseur.image.attached? %>
-          <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm", style: "width: 100%; height: 300px; object-fit: cover;" %>
+          <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm", style: "width: 100%; height: 380px; object-fit: cover;" %>
         <% else %>
-          <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm", style: "width: 100%; height: 300px; object-fit: cover;" %>
+          <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm", style: "width: 100%; height: 380px; object-fit: cover;" %>
         <% end %>
       </div>
     </div>
@@ -24,22 +24,6 @@
             </div>
           </div>
         </div>
-        <%# <div class="col-sm-4"> %>
-          <%# <div class="card border-0 bg-light"> %>
-            <%# <div class="card-body text-center"> %>
-              <%# <h3 class="mb-1">1er</h3> %>
-              <%# <p class="text-muted mb-0">Festival</p> %>
-            <%# </div> %>
-          <%# </div> %>
-        <%# </div> %>
-        <%# <div class="col-sm-4"> %>
-          <%# <div class="card border-0 bg-light"> %>
-            <%# <div class="card-body text-center"> %>
-              <%# <h3 class="mb-1">127</h3> %>
-              <%# <p class="text-muted mb-0">Participants</p> %>
-            <%# </div> %>
-          <%# </div> %>
-        <%# </div> %>
       </div>
 
       <%# Bio %>
