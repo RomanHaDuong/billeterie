@@ -98,10 +98,27 @@ CSV.parse(content, headers: true) do |row|
 
     if row['intervenant'] == 'Duc Ha Duong'
       fournisseur.image.attach(io: File.open('app/assets/images/duc.jpeg'), filename: 'duc.jpeg', content_type: 'image/jpeg')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/duc_atelier.png'), filename: 'duc_atelier.png', content_type: 'image/png')
     elsif row['intervenant'] == 'Emmanuelle Roux'
       fournisseur.image.attach(io: File.open('app/assets/images/roux.jpeg'), filename: 'roux.jpeg', content_type: 'image/jpeg')
+      fournisseur.image.attach(io: File.open('app/assets/images/roux_atelier.png'), filename: 'roux_atelier.png', content_type: 'image/png')
     elsif row['intervenant'] == 'Matthieu Dardaillon'
       fournisseur.image.attach(io: File.open('app/assets/images/matthieu.jpeg'), filename: 'matthieu.jpeg', content_type: 'image/jpeg')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/dardaillon.png'), filename: 'dardaillon.png', content_type: 'image/png')
+    elsif row['intervenant'] == 'Emmanuelle Hoss'
+      fournisseur.image.attach(io: File.open('app/assets/images/hoss.png'), filename: 'hoss.png', content_type: 'image/png')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/hoss_atelier.png'), filename: 'hoss_atelier.png', content_type: 'image/png')
+    elsif row['titre'] == 'Cérémonie de cloture'
+      offre.image.attach(io: File.open('app/assets/images/logo.png'), filename: 'logo.png', content_type: 'image/png')
+    elsif row['intervenant'] == 'Attaa Ben Elafdil'
+      fournisseur.image.attach(io: File.open('app/assets/images/atta.jpeg'), filename: 'atta.jpeg', content_type: 'image/jpeg')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/atta_atelier.png'), filename: 'atta_atelier.png', content_type: 'image/png')
+    elsif row['intervenant'] == 'Béchir Jiwee et sa tribu'
+      fournisseur.image.attach(io: File.open('app/assets/images/bechir.jpeg'), filename: 'bechir.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Caroline Sally'
+      fournisseur.image.attach(io: File.open('app/assets/images/caroline.jpeg'), filename: 'caroline.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Caroline Sally'
+      fournisseur.image.attach(io: File.open('app/assets/images/caroline.jpeg'), filename: 'caroline.jpeg', content_type: 'image/jpeg')
     end
 
     if row['titre'] == 'Voyage en 2030 Glorieuses (version classique)'
@@ -179,15 +196,27 @@ CSV.parse(content, headers: true) do |row|
       end
     end
 
-
-
-
   rescue Date::Error => e
     puts "Error parsing date for row: #{row.inspect}"
     puts "Error message: #{e.message}"
     next
   end
 end
+
+# Cedric Ringenbach
+
+user = User.create!(
+  email: Faker::Internet.email,
+  password: "password",
+  name: "Cedric Ringenbach"
+)
+
+fournisseur = Fournisseur.create!(
+  user_id: user.id,
+  name: "Cedric Ringenbach"
+)
+
+fournisseur.image.attach(io: File.open('app/assets/images/cedric.jpeg'), filename: 'cedric.jpeg', content_type: 'image/jpeg')
 
 Offre.all.each do |offre|
   if offre.date_prevue&.year == 25
