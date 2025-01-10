@@ -117,6 +117,17 @@ CSV.parse(content, headers: true) do |row|
       fournisseur.image.attach(io: File.open('app/assets/images/bechir.jpeg'), filename: 'bechir.jpeg', content_type: 'image/jpeg')
     elsif row['intervenant'] == 'Caroline Sally'
       fournisseur.image.attach(io: File.open('app/assets/images/caroline.jpeg'), filename: 'caroline.jpeg', content_type: 'image/jpeg')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/caroline_atelier.jpeg'), filename: 'caroline_atelier.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Taoufik Vallipuram'
+      fournisseur.image.attach(io: File.open('app/assets/images/taoufik.jpeg'), filename: 'taoufik.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Boris Aubligine (Aubel)'
+      fournisseur.image.attach(io: File.open('app/assets/images/boris.jpeg'), filename: 'boris.jpeg', content_type: 'image/jpeg')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/boris_atelier.jpeg'), filename: 'boris_atelier.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Morgane ROLLANDO'
+      fournisseur.image.attach(io: File.open('app/assets/images/morgane.jpeg'), filename: 'morgane.jpeg', content_type: 'image/jpeg')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/morgane_atelier.jpeg'), filename: 'morgane_atelier.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Valérie Vajou'
+      fournisseur.image.attach(io: File.open('app/assets/images/valerie.jpeg'), filename: 'valerie.jpeg', content_type: 'image/jpeg')
     end
 
     if row['titre'] == 'Voyage en 2030 Glorieuses (version classique)'
@@ -193,6 +204,37 @@ CSV.parse(content, headers: true) do |row|
         offre.update!(secondary_fournisseur: secondary_fournisseur)
       end
     end
+
+
+    if row['titre'] == 'Chant et travail qui relie.'
+      fournisseur.update!(
+        bio: 'Stéphane Gabbay met la musique et l\'intelligence collective au service des transitions (www.facilitationmusicale.com)',
+        name: 'Stéphane Gabbay',
+        linkedin: 'https://www.linkedin.com/in/sgabbay/',
+        instagram: 'https://www.instagram.com/stephane.gabbay/'
+      )
+
+      unless Fournisseur.exists?(name: 'Sandrine Laplace')
+        user = User.create!(
+          email: Faker::Internet.email,
+          password: "password",
+          name: 'Sandrine Laplace'
+        )
+
+        secondary_fournisseur = Fournisseur.create!(
+          bio: 'Sandrine Laplace est une scientifique qui explore d\'autres manières d\'envisager le monde. Elle propose des expériences qui mèlent les sciences, les émotions, la poésie et le corps pour élargir nos visions du monde. Elle a créé l\'association 7ème Génération qui oeuvre avec ces expériences pour que le monde soit encore habitable pour les futures générations (https://www.7eme-generation.org/)',
+          user_id: user.id,
+          name: 'Sandrine Laplace',
+          linkedin: 'https://www.linkedin.com/in/sandrinelaplace2/'
+        )
+
+        secondary_fournisseur.image.attach(io: File.open('app/assets/images/sandrine.jpeg'), filename: 'sandrine.jpeg', content_type: 'image/jpeg')
+
+
+        offre.update!(secondary_fournisseur: secondary_fournisseur)
+      end
+    end
+
 
   rescue Date::Error => e
     puts "Error parsing date for row: #{row.inspect}"
