@@ -1,5 +1,4 @@
 class FournisseursController < ApplicationController
-# In your controller
   def index
     @fournisseurs = Fournisseur.all.order(:name)
   end

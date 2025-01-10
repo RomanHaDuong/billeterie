@@ -19,32 +19,21 @@ CSV.parse(content, headers: true) do |row|
     next if row['heure'] == 'Obligatoire'
     next unless row['statut'] == '3. Programmé'
 
-    user = nil
     fournisseur = if row['intervenant'].present?
       Fournisseur.all.find { |f| f.name.present? && row['intervenant'].include?(f.name) }
     else
       nil
     end
 
-
     if fournisseur.nil?
-      user = User.create!(
-        email: Faker::Internet.email,
-        password: "password",
-        name: row['intervenant']
-      )
-
       fournisseur = Fournisseur.create!(
         bio: row['presentation_intervenant'],
-        user_id: user.id,
         name: row['intervenant'],
         instagram: row['insta_intervenant'],
         linkedin: row['linkedin_intervenant'],
         offinity: row['offinity_intervenant']
 
       )
-    else
-      user = fournisseur.user
     end
 
     # Only try to create date_time if both date and time are present
@@ -138,15 +127,8 @@ CSV.parse(content, headers: true) do |row|
       )
 
       unless Fournisseur.exists?(name: 'Christophe Limon')
-        user = User.create!(
-          email: Faker::Internet.email,
-          password: "password",
-          name: 'Christophe Limon'
-        )
-
         secondary_fournisseur = Fournisseur.create!(
           bio: 'Christophe Limon accompagne les entreprises à intégrer les démarches à impact positif dans leur modèle d\'affaires. j\'aime les embarquer en 2030 Glorieuses pour se libérer du présent et mieux imaginer leur futur.',
-          user_id: user.id,
           name: 'Christophe Limon',
           linkedin: 'https://www.linkedin.com/in/christophe-limon-%F0%9F%92%9A-a37a332a/'
         )
@@ -176,15 +158,8 @@ CSV.parse(content, headers: true) do |row|
 
 
       unless Fournisseur.exists?(name: 'Damien Syren')
-        user = User.create!(
-          email: Faker::Internet.email,
-          password: "password",
-          name: 'Damien Syren'
-        )
-
         secondary_fournisseur = Fournisseur.create!(
           bio: 'Damien Syren est Head of Customer Success chez Medoucine et fondateur de @plus.de.serenite, service d\'accompagnement autour de la santé mentale et du burn-out..',
-          user_id: user.id,
           name: 'Damien Syren',
           linkedin: 'https://www.linkedin.com/in/damien-syren/',
           instagram: 'https://www.instagram.com/plus.de.serenite/'
@@ -215,15 +190,8 @@ CSV.parse(content, headers: true) do |row|
       )
 
       unless Fournisseur.exists?(name: 'Sandrine Laplace')
-        user = User.create!(
-          email: Faker::Internet.email,
-          password: "password",
-          name: 'Sandrine Laplace'
-        )
-
         secondary_fournisseur = Fournisseur.create!(
           bio: 'Sandrine Laplace est une scientifique qui explore d\'autres manières d\'envisager le monde. Elle propose des expériences qui mèlent les sciences, les émotions, la poésie et le corps pour élargir nos visions du monde. Elle a créé l\'association 7ème Génération qui oeuvre avec ces expériences pour que le monde soit encore habitable pour les futures générations (https://www.7eme-generation.org/)',
-          user_id: user.id,
           name: 'Sandrine Laplace',
           linkedin: 'https://www.linkedin.com/in/sandrinelaplace2/'
         )
@@ -248,14 +216,7 @@ CSV.parse(content, headers: true) do |row|
       end
 
       unless Fournisseur.exists?(name: 'Lena Jaros')
-        user = User.create!(
-          email: Faker::Internet.email,
-          password: "password",
-          name: 'Lena Jaros'
-        )
-
         secondary_fournisseur = Fournisseur.create!(
-          user_id: user.id,
           name: 'Lena Jaros'
         )
 
@@ -273,14 +234,7 @@ end
 
 # Cedric Ringenbach
 
-user = User.create!(
-  email: Faker::Internet.email,
-  password: "password",
-  name: "Cedric Ringenbach"
-)
-
 fournisseur = Fournisseur.create!(
-  user_id: user.id,
   name: "Cedric Ringenbach",
   bio: "Cédric Ringenbach est un ingénieur et conférencier spécialisé dans le changement climatique. Fondateur de la Fresque du Climat en 2015, premier directeur du Shift Project (2010-2016), il enseigne dans les grandes écoles et dirige Blue Choice, une société de conseil en stratégie climatique.",
   linkedin: "https://www.linkedin.com/in/cedringen/",
