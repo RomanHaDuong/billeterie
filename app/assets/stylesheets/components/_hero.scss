@@ -11,3 +11,11 @@
   object-fit: cover;
   width: 100%;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  color: #007bff;
+}

@@ -201,6 +201,17 @@ CSV.parse(content, headers: true) do |row|
         instagram: 'https://www.instagram.com/stephane.gabbay/'
       )
 
+      begin
+        file = URI.open('https://media.licdn.com/dms/image/v2/D4E03AQEqLuihGJfmfQ/profile-displayphoto-shrink_800_800/B4EZNrBnsoHAAc-/0/1732667408162?e=1742428800&v=beta&t=G3X_9owlytN321kNnOLPyJkhBSpvxyEg0LnXLryWACU')
+        fournisseur.image.attach(
+          io: file,
+          filename: File.basename('https://media.licdn.com/dms/image/v2/D4E03AQEqLuihGJfmfQ/profile-displayphoto-shrink_800_800/B4EZNrBnsoHAAc-/0/1732667408162?e=1742428800&v=beta&t=G3X_9owlytN321kNnOLPyJkhBSpvxyEg0LnXLryWACU'),
+          content_type: 'image/jpeg'
+        )
+      rescue OpenURI::HTTPError, Errno::ENOENT => e
+        puts "Could not download image for fournisseur #{fournisseur.name}: #{e.message}"
+      end
+
       unless Fournisseur.exists?(name: 'Sandrine Laplace')
         secondary_fournisseur = Fournisseur.create!(
           bio: 'Sandrine Laplace est une scientifique qui explore d\'autres manières d\'envisager le monde. Elle propose des expériences qui mèlent les sciences, les émotions, la poésie et le corps pour élargir nos visions du monde. Elle a créé l\'association 7ème Génération qui oeuvre avec ces expériences pour que le monde soit encore habitable pour les futures générations (https://www.7eme-generation.org/)',
@@ -288,5 +299,20 @@ Offre.all.each do |offre|
     puts "Updated place for '#{offre.titre}'"
   end
 end
+
+# image stephane gabbay
+fournisseur = Fournisseur.find_by(name: 'Stéphane Gabbay')
+
+begin
+  file = URI.open('https://media.licdn.com/dms/image/v2/D4E03AQEqLuihGJfmfQ/profile-displayphoto-shrink_800_800/B4EZNrBnsoHAAc-/0/1732667408162?e=1742428800&v=beta&t=G3X_9owlytN321kNnOLPyJkhBSpvxyEg0LnXLryWACU')
+  fournisseur.image.attach(
+    io: file,
+    filename: File.basename('https://media.licdn.com/dms/image/v2/D4E03AQEqLuihGJfmfQ/profile-displayphoto-shrink_800_800/B4EZNrBnsoHAAc-/0/1732667408162?e=1742428800&v=beta&t=G3X_9owlytN321kNnOLPyJkhBSpvxyEg0LnXLryWACU'),
+    content_type: 'image/jpeg'
+  )
+rescue OpenURI::HTTPError, Errno::ENOENT => e
+  puts "Could not download image for fournisseur #{fournisseur.name}: #{e.message}"
+end
+
 
 puts "Seed done"

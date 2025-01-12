@@ -63,7 +63,7 @@
 
 <div class="container py-5">
   <div class="text-center">
-    <h1 class="fw-bold mb-4">Mes likes</h1>
+    <h1 class="fw-bold mb-4"><%= 'Mes likes' if current_user.favoris.count >= 1 %></h1>
   </div>
 
   <%= render 'shared/favoris_index' %>
