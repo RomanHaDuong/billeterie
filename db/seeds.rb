@@ -36,7 +36,7 @@ CSV.parse(content, headers: true) do |row|
       )
     end
 
-    # Only try to create date_time if both date and time are present
+    # Only try to create date_time if btoh date and time are present
     date_time = if row['heure'].present?
       DateTime.strptime("#{row['date']} #{row['heure']}", "%d/%m/%Y %H:%M")
     else
@@ -53,7 +53,8 @@ CSV.parse(content, headers: true) do |row|
       descriptif: row['descriptif'],
       categories: row['categories'],
       place: row['places'],
-      fournisseur_id: fournisseur&.id
+      fournisseur_id: fournisseur&.id,
+      sous_titre: row['sous_titre']
     )
 
     if row['visuel_atelier'].present? && row['visuel_atelier'] != "RAS"
@@ -132,6 +133,17 @@ CSV.parse(content, headers: true) do |row|
           name: 'Christophe Limon',
           linkedin: 'https://www.linkedin.com/in/christophe-limon-%F0%9F%92%9A-a37a332a/'
         )
+
+        begin
+          file = URI.open('https://media.licdn.com/dms/image/v2/D4E03AQELiHNgjLiTyA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1707342600929?e=1742428800&v=beta&t=uQvRKOhiNJBGg7LRpbe4lsSVNVAj8rh3Ey7YgSpFgjA')
+          secondary_fournisseur.image.attach(
+            io: file,
+            filename: File.basename('https://media.licdn.com/dms/image/v2/D4E03AQELiHNgjLiTyA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1707342600929?e=1742428800&v=beta&t=uQvRKOhiNJBGg7LRpbe4lsSVNVAj8rh3Ey7YgSpFgjA'),
+            content_type: 'image/jpeg'
+          )
+        rescue OpenURI::HTTPError, Errno::ENOENT => e
+          puts "Could not download image for fournisseur #{fournisseur.name}: #{e.message}"
+        end
 
         offre.update!(secondary_fournisseur: secondary_fournisseur)
       end
@@ -219,6 +231,17 @@ CSV.parse(content, headers: true) do |row|
         secondary_fournisseur = Fournisseur.create!(
           name: 'Lena Jaros'
         )
+
+        begin
+          file = URI.open('https://media.licdn.com/dms/image/v2/D4E03AQEp9OwLp9CF5A/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1698000650058?e=1742428800&v=beta&t=QYz1uX19QT9pjwBz0HJAZU3zVtXBaYTaHada09n-xeg')
+          secondary_fournisseur.image.attach(
+            io: file,
+            filename: File.basename('https://media.licdn.com/dms/image/v2/D4E03AQEp9OwLp9CF5A/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1698000650058?e=1742428800&v=beta&t=QYz1uX19QT9pjwBz0HJAZU3zVtXBaYTaHada09n-xeg'),
+            content_type: 'image/jpeg'
+          )
+        rescue OpenURI::HTTPError, Errno::ENOENT => e
+          puts "Could not download image for fournisseur #{fournisseur.name}: #{e.message}"
+        end
 
         offre.update!(secondary_fournisseur: secondary_fournisseur)
       end

@@ -13,7 +13,7 @@
                 <div class="month text-uppercase small">
                   <% offre.duree %>
                 </div>
-                <div class="day fw-bold fs-6">
+                <div class="day fw-bold fs-7">
                   <%= l(offre.date_prevue, format: :time_only) %>
                 </div>
               </div>
@@ -22,8 +22,8 @@
             <div class="col">
               <%= link_to offre_path(offre), class: "text-decoration-none text-reset" do %>
                 <div class="d-flex align-items-center">
-                  <% if offre.image.attached? %>
-                    <%= image_tag offre.image, class: "rounded me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+                  <% if offre.fournisseur.image.attached? %>
+                    <%= image_tag offre.fournisseur.image, class: "rounded me-3 d-md-block", style: "width: 48px; height: 48px; object-fit: cover;" %>
                   <% end %>
                   <div>
                     <h6 class="mb-0 fw-bold"><%= offre.titre %></h6>
