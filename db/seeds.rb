@@ -90,8 +90,8 @@ CSV.parse(content, headers: true) do |row|
       fournisseur.image.attach(io: File.open('app/assets/images/duc.jpeg'), filename: 'duc.jpeg', content_type: 'image/jpeg')
       fournisseur.offres.first.image.attach(io: File.open('app/assets/images/duc_atelier.png'), filename: 'duc_atelier.png', content_type: 'image/png')
     elsif row['intervenant'] == 'Emmanuelle Roux'
-      fournisseur.image.attach(io: File.open('app/assets/images/roux.jpeg'), filename: 'roux.jpeg', content_type: 'image/jpeg')
-      fournisseur.image.attach(io: File.open('app/assets/images/roux_atelier.png'), filename: 'roux_atelier.png', content_type: 'image/png')
+      fournisseur.image.attach(io: File.open('app/assets/images/roux_ema.jpeg'), filename: 'roux.jpeg', content_type: 'image/jpeg')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/roux_event.png'), filename: 'roux_atelier.png', content_type: 'image/png')
     elsif row['intervenant'] == 'Matthieu Dardaillon'
       fournisseur.image.attach(io: File.open('app/assets/images/matthieu.jpeg'), filename: 'matthieu.jpeg', content_type: 'image/jpeg')
       fournisseur.offres.first.image.attach(io: File.open('app/assets/images/dardaillon_atelier.png'), filename: 'dardaillon_atelier.png', content_type: 'image/png')
@@ -118,6 +118,8 @@ CSV.parse(content, headers: true) do |row|
       fournisseur.offres.first.image.attach(io: File.open('app/assets/images/morgane_atelier.jpeg'), filename: 'morgane_atelier.jpeg', content_type: 'image/jpeg')
     elsif row['intervenant'] == 'Valérie Vajou'
       fournisseur.image.attach(io: File.open('app/assets/images/valerie.jpeg'), filename: 'valerie.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Etienne Gauthier'
+      fournisseur.image.attach(io: File.open('app/assets/images/etienne.jpg'), filename: 'etienne.jpg', content_type: 'image/jpg')
     end
 
     if row['titre'] == 'Voyage en 2030 Glorieuses (version classique)'
@@ -314,5 +316,25 @@ rescue OpenURI::HTTPError, Errno::ENOENT => e
   puts "Could not download image for fournisseur #{fournisseur.name}: #{e.message}"
 end
 
+raphael = Fournisseur.find_by(name: 'Raphael Szmir')
+
+begin
+  file = URI.open('https://lh3.googleusercontent.com/pw/AP1GczNKXfOHwnG7L6C7Jck_ZZi4nsuy-xM-Bw69HxpUjwmX8D1mcFUIgY9WZ_nBbSvk-yAyFav8NMbaQcaptCnOY60N3qsW3MH4hXdG4o7nfWwjFrzKPXjAM5HHTC99Muw57tRf0VE2pdqNyXIbFNToa4DCwg=w975-h650-s-no-gm?authuser=0')
+  raphael.image.attach(
+    io: file,
+    filename: File.basename('https://lh3.googleusercontent.com/pw/AP1GczNKXfOHwnG7L6C7Jck_ZZi4nsuy-xM-Bw69HxpUjwmX8D1mcFUIgY9WZ_nBbSvk-yAyFav8NMbaQcaptCnOY60N3qsW3MH4hXdG4o7nfWwjFrzKPXjAM5HHTC99Muw57tRf0VE2pdqNyXIbFNToa4DCwg=w975-h650-s-no-gm?authuser=0'),
+    content_type: 'image/jpeg'
+  )
+rescue OpenURI::HTTPError, Errno::ENOENT => e
+  puts "Could not download image for raphael #{raphael.name}: #{e.message}"
+end
+
+anne_nil = Fournisseur.where(name: 'Anne Leger', bio: nil).first
+
+anne = Fournisseur.where("LOWER(name) LIKE ?", 'anne leger%').where.not(bio: nil).first
+
+anne_nil.offres.update_all(fournisseur_id: anne.id)
+
+anne_nil.destroy
 
 puts "Seed done"
