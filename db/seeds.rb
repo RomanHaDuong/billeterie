@@ -118,8 +118,6 @@ CSV.parse(content, headers: true) do |row|
       fournisseur.offres.first.image.attach(io: File.open('app/assets/images/morgane_atelier.jpeg'), filename: 'morgane_atelier.jpeg', content_type: 'image/jpeg')
     elsif row['intervenant'] == 'Valérie Vajou'
       fournisseur.image.attach(io: File.open('app/assets/images/valerie.jpeg'), filename: 'valerie.jpeg', content_type: 'image/jpeg')
-    elsif row['intervenant'] == 'Etienne Gauthier'
-      fournisseur.image.attach(io: File.open('app/assets/images/etienne.jpg'), filename: 'etienne.jpg', content_type: 'image/jpg')
     end
 
     if row['titre'] == 'Voyage en 2030 Glorieuses (version classique)'
@@ -240,9 +238,9 @@ CSV.parse(content, headers: true) do |row|
         )
       end
 
-      unless Fournisseur.exists?(name: 'Lena Jaros')
+      unless Fournisseur.exists?(name: 'Léna Jaros')
         secondary_fournisseur = Fournisseur.create!(
-          name: 'Lena Jaros'
+          name: 'Léna Jaros'
         )
 
         begin
@@ -329,12 +327,21 @@ rescue OpenURI::HTTPError, Errno::ENOENT => e
   puts "Could not download image for raphael #{raphael.name}: #{e.message}"
 end
 
-anne_nil = Fournisseur.where(name: 'Anne Leger', bio: nil).first
+# anne_nil = Fournisseur.where(name: 'Anne Léger', bio: nil).first
 
-anne = Fournisseur.where("LOWER(name) LIKE ?", 'anne leger%').where.not(bio: nil).first
+# anne = Fournisseur.where("LOWER(name) LIKE ?", 'anne léger%').where.not(bio: nil).first
 
-anne_nil.offres.update_all(fournisseur_id: anne.id)
+# anne_nil.offres.update_all(fournisseur_id: anne.id)
 
-anne_nil.destroy
+# anne_nil.destroy
+
+
+offre_thomas_aurelien = Offre.find_by(titre: 'C\'est quoi tes causes ? Prends le micro. #SpectacleParticipatif')
+
+offre_thomas_aurelien.update!(fournisseur_id: Fournisseur.find_by(name: 'Thomas Pittau').id)
+
+offre_thomas_aurelien.update!(secondary_fournisseur: Fournisseur.find_by(name: 'Aurélien Lambert'))
+
+
 
 puts "Seed done"

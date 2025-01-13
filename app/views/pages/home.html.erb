@@ -18,6 +18,24 @@
     <%= link_to "Je prends mon pass!", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger btn-lg px-4 py-2 fs-3', target: :blank %>
   </div>
 
+  <%# videos %>
+<div class="container text-center my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="row">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <%= video_tag "video_corinne.mp4", controls: true, autobuffer: true, class: "img-fluid w-75", style: "height: auto;" %>
+        </div>
+        <div class="col-md-6">
+          <%= video_tag "video_corinne.mp4", controls: true, autobuffer: true, class: "img-fluid w-75", style: "height: auto;" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
   <%= render 'texte_homepage' %>
 
   <%# card 1 %>
