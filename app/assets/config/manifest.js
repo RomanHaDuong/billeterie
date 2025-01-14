@@ -5,3 +5,4 @@
 //= link popper.js
 //= link bootstrap.min.js
 //= link video_corinne.mp4
+//= link video_raphael.mp4

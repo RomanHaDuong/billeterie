@@ -2,7 +2,10 @@ class FournisseursController < ApplicationController
   def index
     @fournisseurs = Fournisseur.where.not(name: nil).order(:name)
     no_render = Fournisseur.find_by(name: "Isabelle Forestier, Lucille Couturier, Prisca Elizabeth")
+    alex = Fournisseur.find_by(name: "Alexandra Gautrand Ha Duong")
     @fournisseurs = @fournisseurs - [no_render]
+    @fournisseurs = @fournisseurs - [alex]
+
   end
 
 
