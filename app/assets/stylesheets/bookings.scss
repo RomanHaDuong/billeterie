@@ -153,3 +153,57 @@
   opacity: 0;
   display: none !important;
 }
+
+.sponsors-section {
+  h2 {
+    font-weight: bold;
+    color: #333;
+  }
+}
+
+.sponsor-img {
+  object-fit: contain;
+  background: white;
+  padding: 1rem;
+  margin: 0 auto;
+  display: block;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.sponsor-img.premium {
+  width: 250px;
+  height: 250px;
+}
+
+.sponsor-img.regular {
+  width: 180px;
+  height: 180px;
+}
+
+@media (max-width: 768px) {
+  .sponsor-img.premium {
+    width: 200px;
+    height: 200px;
+  }
+
+  .sponsor-img.regular {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sponsor-img.premium {
+    width: 150px;
+    height: 150px;
+  }
+
+  .sponsor-img.regular {
+    width: 120px;
+    height: 120px;
+  }
+}
