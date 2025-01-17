@@ -3,6 +3,8 @@ require 'open-uri'
 
 csv_file_path = Rails.root.join('db', 'csv', 'source_offres.csv')
 
+
+puts "Destroying all records..."
 Favori.destroy_all
 Booking.destroy_all
 Offre.destroy_all
@@ -118,6 +120,12 @@ CSV.parse(content, headers: true) do |row|
       fournisseur.offres.first.image.attach(io: File.open('app/assets/images/morgane_atelier.jpeg'), filename: 'morgane_atelier.jpeg', content_type: 'image/jpeg')
     elsif row['intervenant'] == 'Valérie Vajou'
       fournisseur.image.attach(io: File.open('app/assets/images/valerie.jpeg'), filename: 'valerie.jpeg', content_type: 'image/jpeg')
+    elsif row['intervenant'] == 'Solenn Thomas'
+      fournisseur.image.attach(io: File.open('app/assets/images/solenn.png'), filename: 'solenn.png', content_type: 'image/png')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/solenn_event.png'), filename: 'solenn_event.png', content_type: 'image/png')
+    elsif row['titre'] == 'Episode 16 de  Soi.s Vi.e.s Aime, avec Duc'
+      fournisseur.image.attach(io: File.open('app/assets/images/steph.jpg'), filename: 'steph.jpg', content_type: 'image/jpg')
+      fournisseur.offres.first.image.attach(io: File.open('app/assets/images/papa_event.jpg'), filename: 'papa_event.jpg', content_type: 'image/jpg')
     end
 
     if row['titre'] == 'Voyage en 2030 Glorieuses (version classique)'
@@ -193,7 +201,7 @@ CSV.parse(content, headers: true) do |row|
     end
 
 
-    if row['titre'] == 'Chant et travail qui relie.'
+    if row['titre'] == 'Explorer son engagement écologique avec le chant et le travail qui relie'
       fournisseur.update!(
         bio: 'Stéphane Gabbay met la musique et l\'intelligence collective au service des transitions (www.facilitationmusicale.com)',
         name: 'Stéphane Gabbay',
