@@ -4,16 +4,16 @@
   <div class="container">
     <!-- Premium Sponsors -->
     <div class="row g-4 justify-content-center align-items-center mb-5">
-      <div class="col-md-4 col-6">
+      <div class="col-lg-3 col-md-6 col-6">
         <%= image_tag "logo_officience.png", class: "rounded-3 img-fluid sponsor-img premium" %>
       </div>
-      <div class="col-md-4 col-6">
+      <div class="col-lg-3 col-md-6 col-6">
         <%= image_tag "logo_broster.png", class: "rounded-3 img-fluid sponsor-img premium" %>
       </div>
-      <div class="col-md-4 col-6">
+      <div class="col-lg-3 col-md-6 col-6">
         <%= image_tag "logo_element.png", class: "rounded-3 img-fluid sponsor-img premium" %>
       </div>
-      <div class="col-md-4 col-6">
+      <div class="col-lg-3 col-md-6 col-6">
         <%= image_tag "logo_etika.jpeg", class: "rounded-3 img-fluid sponsor-img premium" %>
       </div>
     </div>
@@ -27,7 +27,9 @@
         <%= image_tag "logo_ecumm.png", class: "rounded-3 img-fluid sponsor-img regular" %>
       </div>
       <div class="col-md-4 col-6">
-        <%= image_tag "logo_agence.png", class: "rounded-3 img-fluid sponsor-img regular" %>
+          <%= link_to "https://agencedesnouveauxvoyages.com/", target: :_blank do %>
+            <%= image_tag "logo_agence.png", class: "rounded-3 sponsor-img regular logo-agence" %>
+          <% end %>
       </div>
     </div>
   </div>

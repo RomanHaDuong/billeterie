@@ -207,3 +207,52 @@
     height: 120px;
   }
 }
+
+.sponsor-img.premium {
+  width: 200px;
+  height: 200px;
+}
+
+@media (max-width: 992px) {
+  .sponsor-img.premium {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sponsor-img.premium {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 576px) {
+  .sponsor-img.premium {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+
+.logo-agence {
+  width: 300px !important;
+  height: 300px !important;
+  object-fit: contain;
+  // Remove img-fluid class to prevent size restrictions
+}
+
+// If you need to adjust it for different screen sizes
+@media (max-width: 768px) {
+  .logo-agence {
+    width: 250px !important;
+    height: 250px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo-agence {
+    width: 200px !important;
+    height: 200px !important;
+  }
+}
