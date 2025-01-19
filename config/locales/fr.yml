@@ -15,8 +15,3 @@ fr:
       default: "%d %B %Y %H:%M:%S"
       short: "%d %b %H:%M"
       long: "%A %d %B %Y"
-  devise:
-    passwords:
-      send_instructions: "Vous recevrez un e-mail avec les instructions pour réinitialiser votre mot de passe dans quelques minutes."
-      user:
-        send_instructions: "Vous recevrez un e-mail avec les instructions pour réinitialiser votre mot de passe dans quelques minutes."
