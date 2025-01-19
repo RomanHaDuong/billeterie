@@ -36,7 +36,7 @@
         <div class="col-auto">
           <div class="date-badge text-center">
             <div class="month text-uppercase small nowrap-text">
-              <%= offre.date_prevue.strftime("%d/%m/%y") %>
+              <%= offre.date_prevue.strftime("%d/%m") %>
             </div>
             <div class="day fw-bold fs-6 nowrap-text">
               <%= l(offre.date_prevue, format: :time_only) %>
