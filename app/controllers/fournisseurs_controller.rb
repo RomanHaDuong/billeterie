@@ -24,8 +24,9 @@ class FournisseursController < ApplicationController
 
   def show
     @fournisseur = Fournisseur.find(params[:id])
-    @offres = Offre.where(fournisseur_id: @fournisseur.id)
-    @all_offres = @fournisseur.offres + @fournisseur.secondary_offres
+    @offres = Offre.where(fournisseur_id: @fournisseur.id).order(:date_prevue)
+
+    @all_offres = (@fournisseur.offres + @fournisseur.secondary_offres).sort_by(&:date_prevue)
   end
 
   def your_profile

@@ -12,7 +12,7 @@ CSV.parse(content, headers: true) do |row|
     next if row['descriptif'] == 'Obligatoire' || row['date'].nil? || row['heure'].nil?
     next if row['heure'] == 'Obligatoire'
     next unless row['statut'] == '3. Programmé'
-    next unless row['intervenant'] == 'Matthieu Dardaillon' || row['titre'] == 'Trouver sa place'
+    next unless row['intervenant'] == 'Roman Hà Dương Gautrand' || row['titre'] == 'AMA sur la culture Officience'
 
     fournisseur = if row['intervenant'].present?
       Fournisseur.all.find { |f| f.name.present? && row['intervenant'].include?(f.name) }
@@ -107,7 +107,3 @@ CSV.parse(content, headers: true) do |row|
     next
   end
 end
-
-
-
-puts "Added mathieu's offres"

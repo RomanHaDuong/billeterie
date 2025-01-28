@@ -56,15 +56,21 @@
         <span class="price-tag fs-2 me-4">
           <% number_to_currency(@offre.fournisseur_id, unit: "€") %>
         </span>
-        <% if current_user && @offre.favoris.exists?(user: current_user) %>
-          <%= link_to user_path(current_user), class: "btn btn-primary btn-lg" do %>
-            Voir mes likes <i class="fa-solid fa-heart text-danger ms-2"></i>
+        <% if @offre.fournisseur.name != "Roman Hà Dương Gautrand" %>
+          <% if current_user && @offre.favoris.exists?(user: current_user) %>
+            <%= link_to user_path(current_user), class: "btn btn-primary btn-lg" do %>
+              Voir mes likes <i class="fa-solid fa-heart text-danger ms-2"></i>
+            <% end %>
+          <% else %>
+            <%= button_to offre_favori_path(@offre), method: :post, class: "btn btn-primary btn-lg" do %>
+              Liker <i class="fa-solid fa-heart ms-2"></i>
+            <% end %>
           <% end %>
         <% else %>
-          <%= button_to offre_favori_path(@offre), method: :post, class: "btn btn-primary btn-lg" do %>
-            Liker <i class="fa-solid fa-heart ms-2"></i>
+          <%= link_to "https://forms.gle/xu4ES3cPEvAt2kS39", class: "btn btn-primary btn-lg", target: "_blank" do %>
+            Réserver mon repas <i class="fa-solid fa-external-link ms-2"></i>
           <% end %>
-        <% end %>
+        <% end%>
       </div>
 
       <%# Intervenant Info %>
