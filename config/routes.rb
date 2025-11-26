@@ -17,26 +17,21 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
-  # client chooses to remove booking feature
-  # resources :bookings, only: [:create, :show, :destroy, :index]
+  # Resources
   resources :offres do
     member do
       get 'book', to: 'bookings#new'
     end
+    post 'favori', to: 'favoris#create'
+    delete 'favori', to: 'favoris#destroy'
   end
+  
   resources :fournisseurs
   resources :users, only: [:show, :edit, :update, :new]
-  resources :favoris do
-    post 'favori', to: 'favoris#create'
-    delete 'favori', to: 'favoris#destroy'
-  end
-
-  resources :offres do
-    post 'favori', to: 'favoris#create'
-    delete 'favori', to: 'favoris#destroy'
-  end
-
+  resources :favoris, only: [:index, :destroy]
   resources :text_blocks, only: [:update]
+  
+  # CMS
   post 'toggle_edit_mode', to: 'application#toggle_edit_mode'
 
   get 'pages/lieu', to: 'pages#lieu', as: 'lieu'
