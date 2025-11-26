@@ -1,0 +1,20 @@
+[Unit]
+Description=Puma HTTP Server for billeterie (production)
+After=network.target
+
+[Service]
+Type=notify
+WorkingDirectory=/home/roman/apps/billeterie/current
+Environment=RAILS_ENV=production
+Environment=GEM_HOME=/home/roman/.rvm/gems/ruby-3.3.5
+Environment=GEM_PATH=/home/roman/.rvm/gems/ruby-3.3.5:/home/roman/.rvm/gems/ruby-3.3.5@global
+Environment=PATH=/home/roman/.rvm/gems/ruby-3.3.5/bin:/home/roman/.rvm/gems/ruby-3.3.5@global/bin:/home/roman/.rvm/rubies/ruby-3.3.5/bin:/home/roman/.rvm/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/home/roman/.rvm/bin/rvm 3.3.5 do bundle exec puma -C /home/roman/apps/billeterie/shared/config/puma.rb
+Restart=always
+RestartSec=10
+KillMode=mixed
+StandardOutput=append:/home/roman/apps/billeterie/shared/log/puma_access.log
+StandardError=append:/home/roman/apps/billeterie/shared/log/puma_error.log
+
+[Install]
+WantedBy=default.target

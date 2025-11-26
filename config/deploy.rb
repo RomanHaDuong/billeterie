@@ -15,7 +15,7 @@ set :rvm_type, :user
 set :rvm_ruby_version, '3.3.5'
 
 # Files that need to be symlinked to shared directory
-append :linked_files, "config/database.yml", "config/master.key", ".env"
+append :linked_files, "config/database.yml", "config/master.key", "config/puma.rb", ".env"
 
 # Directories that should be shared between releases
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
