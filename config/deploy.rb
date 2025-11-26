@@ -10,9 +10,9 @@ set :branch, 'master'
 # Deploy to directory on Raspberry Pi
 set :deploy_to, "/home/roman/apps/billeterie"
 
-# Rbenv settings
-set :rbenv_type, :user
-set :rbenv_ruby, '3.3.5'
+# RVM settings
+set :rvm_type, :user
+set :rvm_ruby_version, '3.3.5'
 
 # Files that need to be symlinked to shared directory
 append :linked_files, "config/database.yml", "config/master.key", ".env"

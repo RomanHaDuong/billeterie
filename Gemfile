@@ -89,7 +89,7 @@ group :development do
   gem 'capistrano', '~> 3.18'
   gem 'capistrano-rails', '~> 1.6'
   gem 'capistrano-bundler', '~> 2.1'
-  gem 'capistrano-rbenv', '~> 2.2'
+  gem 'capistrano-rvm'
   gem 'capistrano3-puma', '~> 6.0'
 end
 
