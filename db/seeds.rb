@@ -266,4 +266,11 @@ Offre.all.each do |offre|
   end
 end
 
+# Create admin user for CMS access
+User.find_or_create_by!(email: 'admin@gmail.com') do |user|
+  user.password = 'adminadmin'
+  user.password_confirmation = 'adminadmin'
+  user.admin = true
+end
+
 puts "Seed done"

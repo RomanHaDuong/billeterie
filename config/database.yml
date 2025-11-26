@@ -13,6 +13,10 @@ default: &default
 development:
   <<: *default
   database: billeterie_development
+  username: postgres
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  host: 127.0.0.1
+  port: 5432
 
 test:
   <<: *default

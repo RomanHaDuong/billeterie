@@ -2,6 +2,14 @@ class ApplicationController < ActionController::Base
   before_action :set_current_user_fournisseur
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def toggle_edit_mode
+    if current_user&.admin?
+      session[:edit_mode] = !session[:edit_mode]
+      render json: { edit_mode: session[:edit_mode] }
+    else
+      head :forbidden
+    end
+  end
 
   private
 

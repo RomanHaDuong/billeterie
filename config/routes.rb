@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'pages/home'
   get 'home/index'
   devise_for :users, controllers: {
@@ -34,6 +35,9 @@ Rails.application.routes.draw do
     post 'favori', to: 'favoris#create'
     delete 'favori', to: 'favoris#destroy'
   end
+
+  resources :text_blocks, only: [:update]
+  post 'toggle_edit_mode', to: 'application#toggle_edit_mode'
 
   get 'pages/lieu', to: 'pages#lieu', as: 'lieu'
   get 'pages/payment', to: 'pages#payment', as: 'payment'
