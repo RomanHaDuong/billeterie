@@ -110,9 +110,9 @@ GEM
     capistrano-rails (1.7.0)
       capistrano (~> 3.1)
       capistrano-bundler (>= 1.1, < 3)
-    capistrano-rbenv (2.2.0)
-      capistrano (~> 3.1)
-      sshkit (~> 1.3)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capistrano3-puma (6.2.0)
       capistrano (~> 3.7)
       capistrano-bundler
@@ -158,6 +158,7 @@ GEM
       logger
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
+    ffi (1.17.2-aarch64-linux-gnu)
     ffi (1.17.2-x64-mingw-ucrt)
     gems (1.3.0)
     globalid (1.3.0)
@@ -275,6 +276,8 @@ GEM
       net-protocol
     net-ssh (7.3.0)
     nio4r (2.7.5)
+    nokogiri (1.18.10-aarch64-linux-gnu)
+      racc (~> 1.4)
     nokogiri (1.18.10-x64-mingw-ucrt)
       racc (~> 1.4)
     oauth2 (2.0.18)
@@ -309,6 +312,7 @@ GEM
     parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
+    pg (1.6.2-aarch64-linux)
     pg (1.6.2-x64-mingw-ucrt)
     popper_js (2.11.8)
     pp (0.6.3)
@@ -525,6 +529,7 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
+  aarch64-linux
   x64-mingw-ucrt
 
 DEPENDENCIES
@@ -533,7 +538,7 @@ DEPENDENCIES
   capistrano (~> 3.18)
   capistrano-bundler (~> 2.1)
   capistrano-rails (~> 1.6)
-  capistrano-rbenv (~> 2.2)
+  capistrano-rvm
   capistrano3-puma (~> 6.0)
   capybara
   csv
