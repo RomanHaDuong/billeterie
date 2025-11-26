@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_040116) do
     t.string "categories"
     t.integer "place"
     t.bigint "secondary_fournisseur_id"
+    t.string "sous_titre"
     t.index ["fournisseur_id"], name: "index_offres_on_fournisseur_id"
     t.index ["secondary_fournisseur_id"], name: "index_offres_on_secondary_fournisseur_id"
   end

@@ -1,11 +1,11 @@
 # Raspberry Pi server configuration
-server "192.168.1.24", user: "pi", roles: %w{app db web}, primary: true
+server "192.168.1.24", user: "roman", roles: %w{app db web}, primary: true
 
 # SSH options
 set :ssh_options, {
   forward_agent: true,
   auth_methods: %w(publickey password),
-  # keys: %w(~/.ssh/id_rsa),  # Uncomment and adjust if using SSH keys
+  password: "2015"
 }
 
 

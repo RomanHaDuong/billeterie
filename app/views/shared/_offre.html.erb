@@ -28,17 +28,17 @@
       <h5 class="card-title"><%= offre.titre %></h5>
 
       <p class="card-text" style="-webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; display: -webkit-box;">
-        <%= offre.fournisseur.bio %>
+        <%= offre.sous_titre %>
       </p>
 
       <%# Footer %>
       <div class="mt-4 d-flex justify-content-between align-items-center">
         <div class="col-auto">
           <div class="date-badge text-center">
-            <div class="month text-uppercase small">
-              <i class="fa-regular fa-clock me-1"></i> <%= offre.duree %>
+            <div class="month text-uppercase small nowrap-text">
+              <%= offre.date_prevue.strftime("%d/%m") %>
             </div>
-            <div class="day fw-bold fs-6">
+            <div class="day fw-bold fs-6 nowrap-text">
               <%= l(offre.date_prevue, format: :time_only) %>
             </div>
           </div>
@@ -47,6 +47,7 @@
           Voir plus <i class="fa-solid fa-arrow-right ms-2"></i>
         <% end %>
       </div>
+
     </div>
   </div>
 </div>

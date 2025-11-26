@@ -8,3 +8,5 @@
 //= link rails_admin.css
 //= link rails_admin.js
 //= link text_block_inline_edit.js
+//= link video_corinne.mp4
+//= link video_raphael.mp4

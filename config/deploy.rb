@@ -8,7 +8,7 @@ set :repo_url, "git@github.com:RomanHaDuong/billeterie.git"
 set :branch, 'master'
 
 # Deploy to directory on Raspberry Pi
-set :deploy_to, "/home/pi/apps/billeterie"
+set :deploy_to, "/home/roman/apps/billeterie"
 
 # Rbenv settings
 set :rbenv_type, :user

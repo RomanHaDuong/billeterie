@@ -1,6 +1,11 @@
 class FournisseursController < ApplicationController
   def index
-    @fournisseurs = Fournisseur.all.order(:name)
+    @fournisseurs = Fournisseur.where.not(name: nil).order(:name)
+    no_render = Fournisseur.find_by(name: "Isabelle Forestier, Lucille Couturier, Prisca Elizabeth")
+    alex = Fournisseur.find_by(name: "Alexandra Gautrand Ha Duong")
+    @fournisseurs = @fournisseurs - [no_render]
+    @fournisseurs = @fournisseurs - [alex]
+
   end
 
 
@@ -19,8 +24,9 @@ class FournisseursController < ApplicationController
 
   def show
     @fournisseur = Fournisseur.find(params[:id])
-    @offres = Offre.where(fournisseur_id: @fournisseur.id)
-    @all_offres = @fournisseur.offres + @fournisseur.secondary_offres
+    @offres = Offre.where(fournisseur_id: @fournisseur.id).order(:date_prevue)
+
+    @all_offres = (@fournisseur.offres + @fournisseur.secondary_offres).sort_by(&:date_prevue)
   end
 
   def your_profile
