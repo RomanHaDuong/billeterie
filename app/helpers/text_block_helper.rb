@@ -4,11 +4,12 @@ module TextBlockHelper
       tb.content = default
     end
     
-    if current_user&.admin? && session[:edit_mode]
+    if current_user&.admin?
+      style = session[:edit_mode] ? 'cursor:pointer; border-bottom: 2px dashed #ffc107; padding: 2px 4px; display: inline-block;' : ''
       content_tag :span, block.content.html_safe, 
         data: { editable_text_block: true, text_block_id: block.id }, 
-        class: 'editable-text-block', 
-        style: 'cursor:pointer; border-bottom: 2px dashed #ffc107; padding: 2px 4px; display: inline-block;'
+        class: 'editable-text-block',
+        style: style
     else
       block.content.html_safe
     end

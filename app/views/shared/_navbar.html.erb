@@ -50,22 +50,10 @@
             <% end %>
 
             <% if current_user.admin? %>
-              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning active' : 'btn-outline-secondary' %> btn-sm ms-2" title="Toggle edit mode" type="button">
-                <i class="fa fa-pen"></i>
-                <span class="d-none d-md-inline ms-1">Éditer</span>
+              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning' : 'btn-outline-primary' %> btn-sm ms-2" title="Mode édition" type="button">
+                <i class="fa fa-<%= session[:edit_mode] ? 'check' : 'edit' %>"></i>
+                <span class="ms-1"><%= session[:edit_mode] ? 'Édition activée' : 'Éditer le site' %></span>
               </button>
-              <%= link_to rails_admin.index_path, class: 'btn btn-outline-secondary btn-sm ms-2', title: 'Admin CMS' do %>
-                <i class="fa fa-cogs"></i>
-              <% end %>
-            <% else %>
-              <%= link_to edit_user_path(current_user), class: 'btn btn-outline-secondary btn-sm ms-2', title: 'Edit profile' do %>
-                <i class="fa fa-pen"></i>
-              <% end %>
-            <% end %>
-
-            <%= button_to destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger btn-sm ms-2', title: 'Se déconnecter' do %>
-              <i class="fa fa-sign-out-alt"></i>
-              <span class="d-none d-md-inline ms-1">Déconnexion</span>
             <% end %>
           </div>
         <% else %>
