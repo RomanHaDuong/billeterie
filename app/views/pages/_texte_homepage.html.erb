@@ -4,23 +4,24 @@
       <div class="card border-0 shadow-sm p-5">
 
         <p>
-          5 jours pour nous rassembler, consolider nos liens, co-créer une expérience extraordinaire et faire découvrir notre univers à tous ceux qui rêvent de faire société autrement.
+          <%= editable_text('home.intro.paragraph1', '5 jours pour nous rassembler, consolider nos liens, co-créer une expérience extraordinaire et faire découvrir notre univers à tous ceux qui rêvent de faire société autrement.') %>
         </p>
 
         <p>
-        Le festival du 47 est la mise en lumière de notre collectif, de nos causes et de nos talents.
+          <%= editable_text('home.intro.paragraph2', 'Le festival du 47 est la mise en lumière de notre collectif, de nos causes et de nos talents.') %>
         </p>
 
         <p>
-          Plus qu'un simple festival, c'est une opportunité d'expérimenter le mouvement d'une communauté. Un moment pour être soi avec d'autres, apprendre, être inspiré et s'autoriser à rêver ou vivre un monde meilleur.
+          <%= editable_text('home.intro.paragraph3', 'Plus qu\'un simple festival, c\'est une opportunité d\'expérimenter le mouvement d\'une communauté. Un moment pour être soi avec d\'autres, apprendre, être inspiré et s\'autoriser à rêver ou vivre un monde meilleur.') %>
         </p>
 
         <p>
-          Nous ne savons pas exactement ce qui émergera de ces cinq jours. Mais notre souhait le plus cher serait que nous sortions renforcés, plus soudés, et mieux préparés pour continuer d'avancer ensemble.
+          <%= editable_text('home.intro.paragraph4', 'Nous ne savons pas exactement ce qui émergera de ces cinq jours. Mais notre souhait le plus cher serait que nous sortions renforcés, plus soudés, et mieux préparés pour continuer d\'avancer ensemble.') %>
         </p>
 
         <p>
-          Le 47, c'est l'espace d'une communauté de personnes qui partagent des causes communes, se soutiennent et s'inspirent.  Pour en savoir plus sur ce lieu précieux, c'est par <%= link_to "ici", lieu_path %>
+          <%= editable_text('home.intro.paragraph5', 'Le 47, c\'est l\'espace d\'une communauté de personnes qui partagent des causes communes, se soutiennent et s\'inspirent.') %>
+          Pour en savoir plus sur ce lieu précieux, c'est par <%= link_to "ici", lieu_path %>
         </p>
 
         <% image_tag "programme_hero.jpg", class:"card-img-top" %>
@@ -29,22 +30,22 @@
         <%# clickable to open %>
         <div class="mb-4">
           <h2 class="fw-bold clickable" data-bs-toggle="collapse" data-bs-target="#programmation">
-            Une programmation engagée et co-créée
+            <%= editable_text('home.section1.title', 'Une programmation engagée et co-créée') %>
             <i class="bi bi-chevron-down float-end"></i>
           </h2>
 
           <div id="programmation" class="collapse">
 
             <p>
-              Vous l'avez compris, la communauté du 47 se compose d'acteurs engagés. C'est donc tout naturellement que nous avons choisi de consacrer la 3e édition de notre festival aux causes que nous défendons.
+              <%= editable_text('home.section1.paragraph1', 'Vous l\'avez compris, la communauté du 47 se compose d\'acteurs engagés. C\'est donc tout naturellement que nous avons choisi de consacrer la 3e édition de notre festival aux causes que nous défendons.') %>
             </p>
 
             <p>
-              Tout aussi naturellement la majorité des activités du festival sont proposées et animées par des membres de la communauté, reflétant leurs causes, leurs passions et leur engagement.
+              <%= editable_text('home.section1.paragraph2', 'Tout aussi naturellement la majorité des activités du festival sont proposées et animées par des membres de la communauté, reflétant leurs causes, leurs passions et leur engagement.') %>
             </p>
 
             <p>
-              Pour faire rayonner nos causes et notre cher 47, nous construisons des passerelles entre notre Festival et le « Festival de l’Apprendre », déclinaison en France du Learning Planet Festival, qui orchestre chaque année des centaines d’événements à travers le monde.
+              <%= editable_text('home.section1.paragraph3', 'Pour faire rayonner nos causes et notre cher 47, nous construisons des passerelles entre notre Festival et le « Festival de l\'Apprendre », déclinaison en France du Learning Planet Festival, qui orchestre chaque année des centaines d\'événements à travers le monde.') %>
             </p>
 
           </div>
@@ -54,7 +55,7 @@
         <%# clickable to open %>
         <div class="mb-4">
           <h2 class="fw-bold clickable" data-bs-toggle="collapse" data-bs-target="#contribution">
-            La contribution en conscience : une manière unique d'engager les participants
+            <%= editable_text('home.section2.title', 'La contribution en conscience : une manière unique d\'engager les participants') %>
             <i class="bi bi-chevron-down float-end"></i>
           </h2>
           <div id="contribution" class="collapse">
@@ -77,7 +78,7 @@
         <%# clickable to open %>
         <div class="mb-4">
           <h2 class="fw-bold clickable" data-bs-toggle="collapse" data-bs-target="#billet">
-            Un billet unique, un accès libre aux ateliers
+            <%= editable_text('home.section3.title', 'Un billet unique, un accès libre aux ateliers') %>
             <i class="bi bi-chevron-down float-end"></i>
           </h2>
           <div id="billet" class="collapse">

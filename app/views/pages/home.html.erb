@@ -45,8 +45,8 @@
         <div class="card h-100 shadow-sm hover-card">
           <%= image_tag "programme_hero.jpg", class:"card-img-top", alt:"Card 1" %>
           <div class="card-body text-center">
-            <%= link_to 'Le programme', offres_path, class: 'btn btn-secondary stretched-link mb-3' %>
-            <p class="card-text">Ateliers, miniconférences, inspirations, découverte de soi et des autres, par la tête, le coeur, les tripes</p>
+            <%= link_to editable_text('home.card1.button', 'Le programme'), offres_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text"><%= editable_text('home.card1.text', 'Ateliers, miniconférences, inspirations, découverte de soi et des autres, par la tête, le coeur, les tripes') %></p>
           </div>
         </div>
       </div>
@@ -56,8 +56,8 @@
         <div class="card h-100 shadow-sm hover-card">
           <%= image_tag "intervenants_hero.jpg", class:"card-img-top", alt:"Card 2" %>
           <div class="card-body text-center">
-            <%= link_to 'Les intervenants', fournisseurs_path, class: 'btn btn-secondary stretched-link mb-3' %>
-            <p class="card-text">Qui connaissez-vous, qui souhaiteriez-vous connaître ? Et pourquoi n'êtes-vous pas dans cette liste, au juste ?</p>
+            <%= link_to editable_text('home.card2.button', 'Les intervenants'), fournisseurs_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text"><%= editable_text('home.card2.text', 'Qui connaissez-vous, qui souhaiteriez-vous connaître ? Et pourquoi n\'êtes-vous pas dans cette liste, au juste ?') %></p>
           </div>
         </div>
       </div>
@@ -67,8 +67,8 @@
         <div class="card h-100 shadow-sm hover-card">
           <%= image_tag "lieu_hero_.jpg", class:"card-img-top", alt:"Card 3" %>
           <div class="card-body text-center">
-            <%= link_to 'Le lieu', lieu_path, class: 'btn btn-secondary stretched-link mb-3' %>
-            <p class="card-text">Premier contact avec le 47 ? On vous en a parlé, vous voulez en avoir le coeur net ? Bonne découverte !</p>
+            <%= link_to editable_text('home.card3.button', 'Le lieu'), lieu_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text"><%= editable_text('home.card3.text', 'Premier contact avec le 47 ? On vous en a parlé, vous voulez en avoir le coeur net ? Bonne découverte !') %></p>
           </div>
         </div>
       </div>

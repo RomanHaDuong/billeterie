@@ -50,23 +50,28 @@
             <% end %>
 
             <% if current_user.admin? %>
-              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning active' : 'btn-outline-secondary' %> ms-2" title="Toggle edit mode" type="button">
+              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning active' : 'btn-outline-secondary' %> btn-sm ms-2" title="Toggle edit mode" type="button">
                 <i class="fa fa-pen"></i>
-                <span class="d-none d-md-inline">Éditer le site</span>
+                <span class="d-none d-md-inline ms-1">Éditer</span>
               </button>
-              <%= link_to rails_admin.index_path, class: 'nav-link ms-2', title: 'Admin CMS' do %>
+              <%= link_to rails_admin.index_path, class: 'btn btn-outline-secondary btn-sm ms-2', title: 'Admin CMS' do %>
                 <i class="fa fa-cogs"></i>
               <% end %>
             <% else %>
-              <%= link_to edit_user_path(current_user), class: 'nav-link ms-2', title: 'Edit profile' do %>
+              <%= link_to edit_user_path(current_user), class: 'btn btn-outline-secondary btn-sm ms-2', title: 'Edit profile' do %>
                 <i class="fa fa-pen"></i>
               <% end %>
+            <% end %>
+
+            <%= button_to destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger btn-sm ms-2', title: 'Se déconnecter' do %>
+              <i class="fa fa-sign-out-alt"></i>
+              <span class="d-none d-md-inline ms-1">Déconnexion</span>
             <% end %>
           </div>
         <% else %>
           <div class="d-flex gap-2">
-            <% link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary' %>
-            <% link_to "S'inscrire", new_user_registration_path, class: 'btn btn-primary' %>
+            <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary' %>
+            <%= link_to "S'inscrire", new_user_registration_path, class: 'btn btn-primary' %>
           </div>
         <% end %>
       </div>
