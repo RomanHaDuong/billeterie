@@ -19,7 +19,11 @@
   </head>
 
   <body>
-  <%= render 'shared/navbar' %>
+  <% if request.path.start_with?('/edition2025') %>
+    <%= render 'shared/navbar' %>
+  <% else %>
+    <%= render 'shared/navbar_main' %>
+  <% end %>
 
   <%# alerts and notices %>
   <% if notice || alert %>

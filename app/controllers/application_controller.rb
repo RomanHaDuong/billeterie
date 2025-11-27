@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Devise::Controllers::Helpers
   before_action :set_current_user_fournisseur
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current_user_fournisseur
-    @current_user_fournisseur = Fournisseur.find_by(user_id: current_user.id) if user_signed_in?
+    @current_user_fournisseur = Fournisseur.find_by(user_id: current_user.id) if current_user.present?
   end
 
   protected
