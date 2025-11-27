@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
   private
 
   def set_current_user_fournisseur
-    @current_user_fournisseur = Fournisseur.find_by(user_id: current_user.id) if current_user.present?
+    return unless current_user.present? && current_user.respond_to?(:id)
+    @current_user_fournisseur = Fournisseur.find_by(user_id: current_user.id)
   end
 
   protected
