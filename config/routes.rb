@@ -4,6 +4,11 @@ Rails.application.routes.draw do
   devise_for :users
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # User routes at root level (needed for navbar)
+  resources :users, only: [:show, :edit, :update]
+  resources :text_blocks, only: [:update]
+  post 'toggle_edit_mode', to: 'application#toggle_edit_mode'
+
   # New site root - placeholder for now
   root to: 'pages#home'
 
