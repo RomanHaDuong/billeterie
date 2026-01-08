@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
   <div class="container">
-    <%= link_to edition2025_home_path, class: "navbar-brand d-flex align-items-center" do %>
-      <%= image_tag "logo.png", class: "rounded-circle me-2", width: 40, height: 40, alt: "Festival logo" %>
-      <span class="fw-bold fs-4 text-primary">Festival 2025</span>
+    <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+      <%= image_tag "logo.png", class: "rounded-circle me-2", width: 45, height: 45, alt: "Festival logo" %>
+      <span class="fw-bold fs-3">Festival du 47</span>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,57 +12,55 @@
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to 'Accueil', edition2025_home_path, class: 'nav-link px-3 fw-medium' %>
+          <%= link_to 'Programme', offres_path, class: 'nav-link px-3' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Le Programme', edition2025_offres_path, class: 'nav-link px-3 fw-medium' %>
+          <%= link_to 'Intervenants', fournisseurs_path, class: 'nav-link px-3' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Animateurs', edition2025_fournisseurs_path, class: 'nav-link px-3 fw-medium' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Le 47', edition2025_lieu_path, class: 'nav-link px-3 fw-medium' %>
+          <%= link_to 'Le 47', lieu_path, class: 'nav-link px-3' %>
         </li>
       </ul>
 
-      <div class="d-flex flex-column flex-sm-row align-items-center gap-3">
-      <div class="d-flex gap-2 mb-2 mb-sm-0">
-        <%= link_to "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S", class: 'btn btn-secondary', target: :blank do %>
-          <i class="bi bi-whatsapp me-2"></i>Rejoins nous
+      <div class="d-flex flex-column flex-sm-row align-items-center gap-2">
+        <%= link_to "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S", class: 'btn btn-success btn-sm', target: :blank do %>
+          <i class="bi bi-whatsapp me-1"></i>WhatsApp
         <% end %>
-        <%= link_to "Je prends mon pass!", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
-      </div>
-
+        <%= link_to "Prendre mon Pass!", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-primary btn-sm', target: :blank %>
 
         <% if user_signed_in? %>
-          <div class="d-flex align-items-center">
-            <%= link_to user_path(current_user), class: 'nav-link' do %>
-              <span><%= editable_text('navbar.dashboard', 'Tableau de bord') %></span>
+          <div class="d-flex align-items-center gap-2">
+            <%= link_to dashboard_path, class: 'btn btn-outline-primary btn-sm' do %>
+              <i class="bi bi-speedometer2 me-1"></i>
+              <span><%= editable_text('navbar.dashboard', 'Dashboard') %></span>
             <% end %>
 
-            <% if current_user.image.attached? %>
-              <%= image_tag current_user.image,
-                  class: 'rounded-circle ms-2',
-                  size: '32x32',
-                  alt: 'Profile picture' %>
-            <% else %>
-              <%= image_tag "placeholder_person.png",
-                  class: 'rounded-circle ms-2',
-                  size: '32x32',
-                  alt: 'Placeholder picture' %>
+            <%= link_to dashboard_path, class: 'text-decoration-none' do %>
+              <% if current_user.image.attached? %>
+                <%= image_tag current_user.image,
+                    class: 'rounded-circle',
+                    size: '35x35',
+                    style: 'object-fit: cover; border: 2px solid var(--primary-color);',
+                    alt: 'Profile picture' %>
+              <% else %>
+                <%= image_tag "placeholder_person.png",
+                    class: 'rounded-circle',
+                    size: '35x35',
+                    style: 'border: 2px solid var(--primary-color);',
+                    alt: 'Placeholder picture' %>
+              <% end %>
             <% end %>
 
             <% if current_user.admin? %>
-              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning' : 'btn-outline-primary' %> btn-sm ms-2" title="Mode édition" type="button">
-                <i class="fa fa-<%= session[:edit_mode] ? 'check' : 'edit' %>"></i>
-                <span class="ms-1"><%= session[:edit_mode] ? 'Édition activée' : 'Éditer le site' %></span>
+              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning active' : 'btn-outline-secondary' %> btn-sm rounded-circle" title="Toggle edit mode" type="button" style="width: 35px; height: 35px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <i class="fa fa-pen"></i>
               </button>
             <% end %>
           </div>
         <% else %>
           <div class="d-flex gap-2">
-            <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary' %>
-            <%= link_to "S'inscrire", new_user_registration_path, class: 'btn btn-primary' %>
+            <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary btn-sm' %>
+            <%= link_to "S'inscrire", new_user_registration_path, class: 'btn btn-warning btn-sm' %>
           </div>
         <% end %>
       </div>

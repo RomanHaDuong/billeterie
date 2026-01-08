@@ -3,6 +3,18 @@ class User < ApplicationRecord
   has_many :favoris
   has_many :bookings
   has_many :favori_offres, through: :favoris, source: :offre
+  has_one :fournisseur
+
+  # Check if user is an intervenant (has a fournisseur profile)
+  def intervenant?
+    fournisseur.present?
+  end
+
+  # Get all offres where this user is the primary or secondary fournisseur
+  def my_offres
+    return Offre.none unless intervenant?
+    Offre.where(fournisseur_id: fournisseur.id).or(Offre.where(secondary_fournisseur_id: fournisseur.id))
+  end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

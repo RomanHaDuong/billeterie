@@ -1,0 +1,300 @@
+<div class="container py-5">
+  <%# User Profile Header %>
+  <div class="card border-0 shadow-sm p-4 mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <% if current_user.image.attached? %>
+          <%= image_tag current_user.image, class: "rounded-circle me-3", style: "width: 64px; height: 64px; object-fit: cover;" %>
+        <% else %>
+          <%= image_tag "placeholder_person.png", class: "rounded-circle me-3", style: "width: 64px; height: 64px; object-fit: cover;" %>
+        <% end %>
+        <div>
+          <h2 class="fw-bold mb-0"><%= current_user.name || current_user.email %></h2>
+          <p class="text-muted mb-0"><%= current_user.email %></p>
+        </div>
+      </div>
+      <div class="d-flex gap-2">
+        <%= link_to "Modifier le profil", edit_user_path(current_user), class: "btn btn-outline-primary" %>
+        <% if current_user.intervenant? %>
+          <%= link_to "Mes ateliers", "#mes-ateliers", class: "btn btn-primary" %>
+          <%= link_to fournisseur_path(current_user.fournisseur), class: "btn btn-outline-primary" do %>
+            <i class="fa-solid fa-eye me-2"></i>Voir ma page d'intervenant
+          <% end %>
+        <% else %>
+          <%= link_to new_fournisseur_path, class: "btn btn-primary" do %>
+            <i class="fa-solid fa-user-tie me-2"></i>Devenir intervenant
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1 class="fw-bold mb-2">Mes Inscriptions</h1>
+      <p class="text-muted">Gérez vos inscriptions aux ateliers</p>
+    </div>
+  </div>
+
+  <% if @registered_offres.empty? %>
+    <div class="alert alert-info">
+      <i class="fa-solid fa-info-circle me-2"></i>
+      Vous n'êtes inscrit à aucun atelier pour le moment. 
+      <%= link_to "Découvrir les ateliers", offres_path, class: "alert-link" %>
+    </div>
+  <% else %>
+    <%# Summary Cards %>
+    <div class="row mb-4">
+      <div class="col-md-4 mb-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <i class="fa-solid fa-calendar-check text-primary fs-1 mb-3"></i>
+            <h3 class="fw-bold mb-0"><%= @registered_offres.count %></h3>
+            <p class="text-muted mb-0">Ateliers inscrits</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <i class="fa-solid fa-clock text-success fs-1 mb-3"></i>
+            <h3 class="fw-bold mb-0"><%= @registered_offres.select { |o| o.date_prevue && o.date_prevue > Time.now }.count %></h3>
+            <p class="text-muted mb-0">À venir</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-3">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-body text-center">
+            <i class="fa-solid fa-check-circle text-info fs-1 mb-3"></i>
+            <h3 class="fw-bold mb-0"><%= @registered_offres.select { |o| o.date_prevue && o.date_prevue <= Time.now }.count %></h3>
+            <p class="text-muted mb-0">Passés</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%# Calendar/Agenda View %>
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-white border-bottom">
+        <h4 class="fw-bold mb-0">Mon Planning</h4>
+      </div>
+      <div class="card-body p-0">
+        <div class="list-group list-group-flush">
+          <% @registered_offres.group_by { |o| o.date_prevue&.to_date }.sort.each do |date, offres| %>
+            <%# Date Header %>
+            <div class="list-group-item bg-light border-0">
+              <div class="d-flex align-items-center">
+                <i class="fa-solid fa-calendar text-primary me-3"></i>
+                <div>
+                  <h5 class="fw-bold mb-0">
+                    <% if date %>
+                      <%= l(date, format: :long) %>
+                    <% else %>
+                      Date à confirmer
+                    <% end %>
+                  </h5>
+                  <small class="text-muted"><%= offres.count %> atelier<%= offres.count > 1 ? 's' : '' %></small>
+                </div>
+              </div>
+            </div>
+
+            <%# Workshops for this date %>
+            <% offres.each do |offre| %>
+              <div class="list-group-item border-0 py-4 <%= offre.date_prevue && offre.date_prevue < Time.now ? 'opacity-75' : '' %>">
+                <div class="row g-3">
+                  <%# Image and Main Content %>
+                  <div class="col-12 col-md">
+                    <div class="d-flex gap-3">
+                      <%# Image %>
+                      <div class="flex-shrink-0">
+                        <%= link_to offre_path(offre) do %>
+                          <% if offre.image.attached? %>
+                            <%= image_tag offre.image, class: "rounded-3 shadow-sm", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                          <% else %>
+                            <%= image_tag "placeholder_offre.png", class: "rounded-3 shadow-sm", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                          <% end %>
+                        <% end %>
+                      </div>
+
+                      <%# Details %>
+                      <div class="flex-grow-1">
+                        <div class="d-flex align-items-center gap-3 mb-2">
+                          <h5 class="fw-bold mb-0">
+                            <%= link_to offre.titre, offre_path(offre), class: "text-decoration-none text-dark hover-primary" %>
+                          </h5>
+                          <%# Time Badge %>
+                          <% if offre.date_prevue %>
+                            <div class="badge bg-primary fs-6 py-1 px-3 rounded-3">
+                              <%= offre.date_prevue.strftime('%H:%M') %>
+                            </div>
+                          <% else %>
+                            <div class="badge bg-secondary fs-6 py-1 px-3 rounded-3">
+                              TBD
+                            </div>
+                          <% end %>
+                        </div>
+                        <p class="text-muted mb-2"><%= offre.sous_titre %></p>
+                        <div class="d-flex flex-wrap gap-3 text-muted small">
+                          <span>
+                            <i class="fa-solid fa-location-dot text-primary me-1"></i>
+                            <%= offre.salle %>
+                          </span>
+                          <span>
+                            <i class="fa-solid fa-clock text-primary me-1"></i>
+                            <%= offre.duree %>
+                          </span>
+                          <span>
+                            <i class="fa-solid fa-users text-primary me-1"></i>
+                            <%= offre.bookings.count %>/<%= offre.place %>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <%# Actions - Stack on mobile, inline on desktop %>
+                  <div class="col-12 col-md-auto d-flex flex-column flex-md-row gap-2 align-items-stretch align-items-md-start">
+                    <%= link_to offre_path(offre), class: "btn btn-outline-primary" do %>
+                      <i class="fa-solid fa-eye me-2"></i>Voir l'atelier
+                    <% end %>
+                    <%= button_to unregister_offre_path(offre), method: :delete, class: "btn btn-outline-danger", data: { confirm: "Êtes-vous sûr de vouloir vous désinscrire ?" } do %>
+                      <i class="fa-solid fa-user-minus me-2"></i>Se désinscrire
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%# Quick Actions %>
+    <div class="mt-4 text-center">
+      <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-lg" %>
+    </div>
+  <% end %>
+
+  <%# My Offres Section (for intervenants) %>
+  <% if current_user.intervenant? %>
+    <div id="mes-ateliers" class="mt-5">
+      <div class="row mb-4">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+          <div>
+            <h2 class="fw-bold mb-2">Mes Ateliers (Intervenant)</h2>
+            <p class="text-muted mb-0">Les ateliers que j'anime</p>
+          </div>
+          <%= link_to new_offre_path, class: "btn btn-outline-success btn-lg" do %>
+            <i class="fa-solid fa-plus me-2"></i>Créer un atelier
+          <% end %>
+        </div>
+      </div>
+
+      <% if @my_offres.present? %>
+
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-bottom">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="fw-bold mb-0">Mes animations</h4>
+            <span class="badge bg-success"><%= @my_offres.count %> atelier<%= @my_offres.count > 1 ? 's' : '' %></span>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="list-group list-group-flush">
+            <% @my_offres.group_by { |o| o.date_prevue&.to_date }.sort.each do |date, offres| %>
+              <%# Date Header %>
+              <div class="list-group-item bg-light border-0">
+                <div class="d-flex align-items-center">
+                  <i class="fa-solid fa-calendar text-success me-3"></i>
+                  <div>
+                    <h5 class="fw-bold mb-0">
+                      <% if date %>
+                        <%= l(date, format: :long) %>
+                      <% else %>
+                        Date à confirmer
+                      <% end %>
+                    </h5>
+                    <small class="text-muted"><%= offres.count %> atelier<%= offres.count > 1 ? 's' : '' %></small>
+                  </div>
+                </div>
+              </div>
+
+              <%# My Workshops %>
+              <% offres.each do |offre| %>
+                <div class="list-group-item border-0 py-4">
+                  <div class="row g-3">
+                    <div class="col-12 col-md">
+                      <div class="d-flex gap-3">
+                        <%# Image %>
+                        <div class="flex-shrink-0">
+                          <%= link_to offre_path(offre) do %>
+                            <% if offre.image.attached? %>
+                              <%= image_tag offre.image, class: "rounded-3 shadow-sm", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                            <% else %>
+                              <%= image_tag "placeholder_offre.png", class: "rounded-3 shadow-sm", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                            <% end %>
+                          <% end %>
+                        </div>
+
+                        <%# Details %>
+                        <div class="flex-grow-1">
+                          <div class="d-flex align-items-center gap-3 mb-2">
+                            <h5 class="fw-bold mb-0">
+                              <%= link_to offre.titre, offre_path(offre), class: "text-decoration-none text-dark hover-primary" %>
+                            </h5>
+                            <% if offre.date_prevue %>
+                              <div class="badge bg-success fs-6 py-1 px-3 rounded-3">
+                                <%= offre.date_prevue.strftime('%H:%M') %>
+                              </div>
+                            <% else %>
+                              <div class="badge bg-secondary fs-6 py-1 px-3 rounded-3">
+                                TBD
+                              </div>
+                            <% end %>
+                          </div>
+                          <p class="text-muted mb-2"><%= offre.sous_titre %></p>
+                          <div class="d-flex flex-wrap gap-3 text-muted small">
+                            <span>
+                              <i class="fa-solid fa-location-dot text-success me-1"></i>
+                              <%= offre.salle %>
+                            </span>
+                            <span>
+                              <i class="fa-solid fa-clock text-success me-1"></i>
+                              <%= offre.duree %>
+                            </span>
+                            <span class="fw-bold text-success">
+                              <i class="fa-solid fa-users me-1"></i>
+                              <%= offre.bookings.count %>/<%= offre.place %> inscrits
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <%# Actions %>
+                    <div class="col-12 col-md-auto d-flex flex-column gap-2 align-items-stretch align-items-md-start">
+                      <%= link_to offre_path(offre), class: "btn btn-outline-success" do %>
+                        <i class="fa-solid fa-eye me-2"></i>Voir l'atelier
+                      <% end %>
+                      <%= link_to edit_offre_path(offre), class: "btn btn-outline-primary" do %>
+                        <i class="fa-solid fa-edit me-2"></i>Modifier
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% else %>
+        <div class="alert alert-info">
+          <i class="fa-solid fa-info-circle me-2"></i>
+          Vous n'avez pas encore créé d'atelier.
+          <%= link_to "Créer votre premier atelier", new_offre_path, class: "alert-link" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

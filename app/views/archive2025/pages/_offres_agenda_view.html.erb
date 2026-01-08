@@ -30,17 +30,7 @@
                     <p class="text-muted mb-0 small">
                       <i class="fa-regular fa-clock me-1"></i> <%= offre.duree %>
                       <i class="fa-solid fa-location-dot ms-3 me-1"></i> <%= offre.salle %>
-                      <% if offre.place %>
-                        <i class="fa-solid fa-users ms-3 me-1"></i> <%= offre.bookings.count %>/<%= offre.place %>
-                      <% end %>
                     </p>
-                    <% if current_user && offre.user_registered?(current_user) %>
-                      <span class="badge bg-success mt-1">
-                        <i class="fa-solid fa-check me-1"></i>Inscrit
-                      </span>
-                    <% elsif offre.full? %>
-                      <span class="badge bg-danger mt-1">Complet</span>
-                    <% end %>
                   </div>
                 </div>
               <% end %>

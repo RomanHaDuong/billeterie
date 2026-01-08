@@ -1,0 +1,124 @@
+<div class="container py-5 pt-0">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm p-5">
+
+        <p>
+          <%= editable_text('home.intro.paragraph1', '5 jours pour nous rassembler, consolider nos liens, co-créer une expérience extraordinaire et faire découvrir notre univers à tous ceux qui rêvent de faire société autrement.') %>
+        </p>
+
+        <p>
+          <%= editable_text('home.intro.paragraph2', 'Le festival du 47 est la mise en lumière de notre collectif, de nos causes et de nos talents.') %>
+        </p>
+
+        <p>
+          <%= editable_text('home.intro.paragraph3', 'Plus qu\'un simple festival, c\'est une opportunité d\'expérimenter le mouvement d\'une communauté. Un moment pour être soi avec d\'autres, apprendre, être inspiré et s\'autoriser à rêver ou vivre un monde meilleur.') %>
+        </p>
+
+        <p>
+          <%= editable_text('home.intro.paragraph4', 'Nous ne savons pas exactement ce qui émergera de ces cinq jours. Mais notre souhait le plus cher serait que nous sortions renforcés, plus soudés, et mieux préparés pour continuer d\'avancer ensemble.') %>
+        </p>
+
+        <p>
+          <%= editable_text('home.intro.paragraph5', 'Le 47, c\'est l\'espace d\'une communauté de personnes qui partagent des causes communes, se soutiennent et s\'inspirent.') %>
+          Pour en savoir plus sur ce lieu précieux, c'est par <%= link_to "ici", lieu_path %>
+        </p>
+
+        <% image_tag "programme_hero.jpg", class:"card-img-top" %>
+
+        <br>
+        <%# clickable to open %>
+        <div class="mb-4">
+          <h2 class="fw-bold clickable" data-bs-toggle="collapse" data-bs-target="#programmation">
+            <%= editable_text('home.section1.title', 'Une programmation engagée et co-créée') %>
+            <i class="bi bi-chevron-down float-end"></i>
+          </h2>
+
+          <div id="programmation" class="collapse">
+
+            <p>
+              <%= editable_text('home.section1.paragraph1', 'Vous l\'avez compris, la communauté du 47 se compose d\'acteurs engagés. C\'est donc tout naturellement que nous avons choisi de consacrer la 3e édition de notre festival aux causes que nous défendons.') %>
+            </p>
+
+            <p>
+              <%= editable_text('home.section1.paragraph2', 'Tout aussi naturellement la majorité des activités du festival sont proposées et animées par des membres de la communauté, reflétant leurs causes, leurs passions et leur engagement.') %>
+            </p>
+
+            <p>
+              <%= editable_text('home.section1.paragraph3', 'Pour faire rayonner nos causes et notre cher 47, nous construisons des passerelles entre notre Festival et le « Festival de l\'Apprendre », déclinaison en France du Learning Planet Festival, qui orchestre chaque année des centaines d\'événements à travers le monde.') %>
+            </p>
+
+          </div>
+        </div>
+
+        <br>
+        <%# clickable to open %>
+        <div class="mb-4">
+          <h2 class="fw-bold clickable" data-bs-toggle="collapse" data-bs-target="#contribution">
+            <%= editable_text('home.section2.title', 'La contribution en conscience : une manière unique d\'engager les participants') %>
+            <i class="bi bi-chevron-down float-end"></i>
+          </h2>
+          <div id="contribution" class="collapse">
+
+            <p>
+              Au 47 nous pratiquons ce que l'on appelle la libre contribution en conscience. Chacun est libre de déterminer sa façon de contribuer au collectif, selon ses propres critères, en n'en choisissant les modalités (contributions financières et non-financières).
+            </p>
+
+            <p>
+              Pour permettre aux participants d'expérimenter cette façon de donner et de recevoir, nous proposons une pratique unique en termes de billetterie : chaque participant est invité à choisir lui-même sa contribution en tenant compte de la valeur de l'événement qu'il perçoit, de ce qu'il pense recevoir et de ses moyens financiers (ou de tout autre motif qui lui semble juste). Des montants sont proposés avec des tranches et un mode par défaut, mais ils peuvent être modifiés selon le choix de chacun.
+            </p>
+
+            <p>
+              Au cours du festival, des rituels d'équilibrage du donner et du recevoir permettront à chacun de s'interroger sur la valeur reçue, et de réévaluer sa contribution à la hausse ou à la baisse, dans le moment présent ou post-festival.
+            </p>
+          </div>
+        </div>
+
+        <br>
+        <%# clickable to open %>
+        <div class="mb-4">
+          <h2 class="fw-bold clickable" data-bs-toggle="collapse" data-bs-target="#billet">
+            <%= editable_text('home.section3.title', 'Un billet unique, un accès libre aux ateliers') %>
+            <i class="bi bi-chevron-down float-end"></i>
+          </h2>
+          <div id="billet" class="collapse">
+
+            <p>
+              Pour venir à notre Festival, il vous suffit de prendre une place en cliquant sur le bouton “Prends ton pass!” : votre inscription vous garantit l’accès à tout le Festival.
+            </p>
+
+            <p>
+              Pour vous permettre d'être pleinement connecté à votre élan du moment nous vous proposons de venir librement aux journées qui vous intéressent et de participer aux ateliers qui vous appellent.
+            </p>
+
+            <p>
+              Si un atelier vous parle particulièrement nous vous proposons d'arriver un peu en avance pour vous donner le plus de chances d'y assister!
+            </p>
+
+            <p>
+              Pour encourager nos supers animateurs et nous permettre d'anticiper la fréquentation, nous vous proposons cependant de “liker” les ateliers que vous aimez et auxquels vous aimeriez participer!
+            </p>
+
+            <p>
+              Pendant ces cinq jours, vous pourrez :
+            </p>
+
+            <ul>
+              <li>Participer à des <strong>ateliers pratiques et ludiques</strong> pour apprendre de nouvelles choses.</li>
+              <li>Assister à des <strong>conférences inspirantes</strong> pour cultiver ses propres projets</li>
+              <li>Vibrer grâce à des <strong>performances artistiques</strong> partagées par nos nombreux talents.</li>
+              <li>Profiter de <strong>moments de connexion informelle</strong> pour échanger et tisser des liens.</li>
+            </ul>
+
+            <p>
+              Chaque activité est conçue pour vous inspirer et vous engager.
+              Ici, vous êtes bien plus qu’un simple participant : vous êtes un acteur du festival!
+            </p>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

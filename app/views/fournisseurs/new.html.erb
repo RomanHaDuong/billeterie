@@ -1,5 +1,99 @@
-<h1>
-  Create a fournisseur profile
-</h1>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-5">
+          <div class="text-center mb-4">
+            <i class="fa-solid fa-user-tie text-primary" style="font-size: 4rem;"></i>
+            <h1 class="fw-bold mt-3 mb-2">Devenir Intervenant</h1>
+            <p class="text-muted">Partagez votre expertise et animez des ateliers pour la communauté</p>
+          </div>
 
-<%= render 'shared/form_create_fournisseur' %>
+          <%= form_with(model: @fournisseur, local: true, class: "needs-validation") do |f| %>
+            <% if @fournisseur.errors.any? %>
+              <div class="alert alert-danger">
+                <h5><%= pluralize(@fournisseur.errors.count, "erreur") %></h5>
+                <ul class="mb-0">
+                  <% @fournisseur.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="mb-4">
+              <%= f.label :name, "Nom complet", class: "form-label fw-bold" %>
+              <%= f.text_field :name, class: "form-control form-control-lg", placeholder: "Votre nom et prénom", required: true, value: current_user.name %>
+              <small class="text-muted">Ce nom apparaîtra sur vos ateliers</small>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :bio, "Biographie", class: "form-label fw-bold" %>
+              <%= f.text_area :bio, class: "form-control", rows: 5, placeholder: "Présentez-vous en quelques lignes : votre parcours, vos compétences, votre passion...", required: true %>
+              <small class="text-muted">Cette description sera visible sur votre profil public</small>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :image, "Photo de profil", class: "form-label fw-bold" %>
+              <div class="text-center mb-3">
+                <% if current_user.image.attached? %>
+                  <%= image_tag current_user.image, class: "rounded-circle", style: "width: 150px; height: 150px; object-fit: cover;", id: "intervenantPreview" %>
+                  <p class="text-muted small mt-2">Votre photo de profil actuelle sera utilisée</p>
+                <% else %>
+                  <img id="intervenantPreview" src="https://via.placeholder.com/150" class="rounded-circle" style="width: 150px; height: 150px;">
+                <% end %>
+              </div>
+              <%= f.file_field :image, class: "form-control", accept: "image/*", 
+                  onchange: "document.getElementById('intervenantPreview').src = window.URL.createObjectURL(this.files[0])" %>
+              <small class="text-muted">
+                <% if current_user.image.attached? %>
+                  Vous pouvez garder votre photo actuelle ou en télécharger une nouvelle
+                <% else %>
+                  Téléchargez une photo professionnelle ou sympathique pour votre profil
+                <% end %>
+              </small>
+            </div>
+
+            <hr class="my-4">
+
+            <h5 class="fw-bold mb-3">Réseaux sociaux (optionnel)</h5>
+            
+            <div class="mb-3">
+              <%= f.label :instagram, class: "form-label" %>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa-brands fa-instagram"></i></span>
+                <%= f.text_field :instagram, class: "form-control", placeholder: "votre_compte" %>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :linkedin, class: "form-label" %>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa-brands fa-linkedin"></i></span>
+                <%= f.text_field :linkedin, class: "form-control", placeholder: "URL de votre profil LinkedIn" %>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <%= f.label :offinity, class: "form-label" %>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
+                <%= f.text_field :offinity, class: "form-control", placeholder: "Autre lien (site web, portfolio...)" %>
+              </div>
+            </div>
+
+            <div class="d-grid gap-3 mt-4">
+              <%= f.submit "Devenir intervenant", class: "btn btn-primary btn-lg" %>
+              <%= link_to "Annuler", dashboard_path, class: "btn btn-outline-secondary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="alert alert-info mt-4">
+        <h6 class="fw-bold"><i class="fa-solid fa-info-circle me-2"></i>Qu'est-ce qu'un intervenant ?</h6>
+        <p class="mb-0">En tant qu'intervenant, vous pourrez créer et animer vos propres ateliers. Vous aurez accès à un tableau de bord pour gérer vos ateliers, voir les inscriptions et interagir avec les participants.</p>
+      </div>
+    </div>
+  </div>
+</div>

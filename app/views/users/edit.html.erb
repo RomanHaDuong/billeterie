@@ -1,6 +1,6 @@
 <div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-lg-8">
       <div class="card shadow-sm border-0">
         <div class="card-body p-5">
           <h2 class="text-center mb-4 fw-bold">Modifier votre profil</h2>
@@ -12,42 +12,99 @@
               </div>
             <% end %>
 
+            <h5 class="fw-bold mb-3">Informations de base</h5>
+
             <%# Profile picture %>
             <div class="form-group mb-4 text-center">
               <div class="avatar-upload">
                 <div class="avatar-preview mb-3">
                   <% if current_user.image.attached? %>
-                    <%= image_tag current_user.image, class: "rounded-circle", width: 100, height: 100, id: "avatarPreview" %>
+                    <%= image_tag current_user.image, class: "rounded-circle", width: 150, height: 150, id: "avatarPreview", style: "object-fit: cover;" %>
                   <% else %>
-                    <img id="avatarPreview" src="https://via.placeholder.com/150" class="rounded-circle" width="100" height="100">
+                    <img id="avatarPreview" src="https://via.placeholder.com/150" class="rounded-circle" width="150" height="150">
                   <% end %>
                 </div>
-                <%= f.label :image, class: "btn btn-outline-primary btn-sm" do %>
-                  <i class="bi bi-camera me-2"></i>Changer la photo
+                <%= f.label :image, class: "btn btn-outline-primary" do %>
+                  <i class="bi bi-camera me-2"></i>Changer la photo de profil
                   <%= f.file_field :image, class: "d-none", accept: "image/*",
                       onchange: "document.getElementById('avatarPreview').src = window.URL.createObjectURL(this.files[0])" %>
+                <% end %>
+                <% if current_user.intervenant? %>
+                  <p class="text-muted small mt-2 mb-0">Cette photo sera utilisée pour votre profil utilisateur et votre profil d'intervenant</p>
                 <% end %>
               </div>
             </div>
 
-            <div class="form-group mb-3">
-              <%= f.label :name, "Nom", class: "form-label fw-medium" %>
-              <%= f.text_field :name, class: "form-control form-control-lg",
-                  placeholder: "Votre nom" %>
+            <div class="row">
+              <div class="col-md-6 form-group mb-3">
+                <%= f.label :name, "Nom", class: "form-label fw-medium" %>
+                <%= f.text_field :name, class: "form-control form-control-lg",
+                    placeholder: "Votre nom" %>
+              </div>
+
+              <div class="col-md-6 form-group mb-3">
+                <%= f.label :email, "Email", class: "form-label fw-medium" %>
+                <%= f.email_field :email, class: "form-control form-control-lg",
+                    placeholder: "Votre email" %>
+              </div>
             </div>
 
-            <div class="form-group mb-3">
-              <%= f.label :email, "Email", class: "form-label fw-medium" %>
-              <%= f.email_field :email, class: "form-control form-control-lg",
-                  placeholder: "Votre email" %>
-            </div>
+            <% if current_user.intervenant? %>
+              <hr class="my-4">
+              
+              <h5 class="fw-bold mb-3">
+                <i class="fa-solid fa-user-tie text-primary me-2"></i>
+                Informations d'intervenant
+              </h5>
 
-            <%= f.submit "Mettre à jour", class: "btn btn-primary w-100 btn-lg mb-4" %>
+              <%= fields_for :fournisseur, @fournisseur do |ff| %>
+                <div class="form-group mb-3">
+                  <%= ff.label :name, "Nom d'intervenant", class: "form-label fw-medium" %>
+                  <%= ff.text_field :name, class: "form-control form-control-lg",
+                      placeholder: "Nom affiché sur vos ateliers" %>
+                  <small class="text-muted">Ce nom apparaîtra sur tous vos ateliers</small>
+                </div>
+
+                <div class="form-group mb-3">
+                  <%= ff.label :bio, "Biographie", class: "form-label fw-medium" %>
+                  <%= ff.text_area :bio, class: "form-control", rows: 5,
+                      placeholder: "Présentez-vous en quelques lignes..." %>
+                  <small class="text-muted">Cette description est visible sur votre profil public d'intervenant</small>
+                </div>
+
+                <h6 class="fw-bold mb-3 mt-4">Réseaux sociaux</h6>
+                
+                <div class="form-group mb-3">
+                  <%= ff.label :instagram, class: "form-label" %>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fa-brands fa-instagram"></i></span>
+                    <%= ff.text_field :instagram, class: "form-control", placeholder: "votre_compte" %>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <%= ff.label :linkedin, class: "form-label" %>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fa-brands fa-linkedin"></i></span>
+                    <%= ff.text_field :linkedin, class: "form-control", placeholder: "URL de votre profil LinkedIn" %>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <%= ff.label :offinity, "Autre lien", class: "form-label" %>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-link"></i></span>
+                    <%= ff.text_field :offinity, class: "form-control", placeholder: "Site web, portfolio..." %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+
+            <div class="d-grid gap-2 mt-4">
+              <%= f.submit "Mettre à jour", class: "btn btn-primary btn-lg" %>
+              <%= link_to "Annuler", dashboard_path, class: "btn btn-outline-secondary btn-lg" %>
+            </div>
           <% end %>
-
-          <div class="text-center">
-            <%= link_to "Retour", :back, class: "text-decoration-none" %>
-          </div>
         </div>
       </div>
     </div>

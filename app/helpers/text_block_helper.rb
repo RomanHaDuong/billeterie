@@ -5,10 +5,11 @@ module TextBlockHelper
     end
     
     if current_user&.admin?
-      css_class = session[:edit_mode] ? 'editable-text-block cms-editable-active' : 'editable-text-block'
+      style = session[:edit_mode] ? 'cursor:pointer; border-bottom: 2px dashed #ffc107; padding: 2px 4px; display: inline-block;' : ''
       content_tag :span, block.content.html_safe, 
         data: { editable_text_block: true, text_block_id: block.id }, 
-        class: css_class
+        class: 'editable-text-block',
+        style: style
     else
       block.content.html_safe
     end

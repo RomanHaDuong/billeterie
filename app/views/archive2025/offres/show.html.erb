@@ -9,75 +9,69 @@
           <%= image_tag "placeholder_offre.png", class: "workshop-show-img" %>
         <% end %>
       </div>
+
+      <%# Likes Section %>
+      <div class="d-flex align-items-center gap-2 mt-3">
+        <%# <h6 class="fw-bold mb-0">Likes</h6> %>
+        <span class="badge bg-primary"><%= @offre.favoris.count >= 1 ? "#{@offre.favoris.count} like" : "#{@offre.favoris.count} likes" %></span>
+        <div class="attendees-grid d-flex gap-1 ms-2">
+          <% @offre.favoris.includes(:user).each do |like| %>
+            <div class="attendee-avatar" data-bs-toggle="tooltip" title="<%= like.user.name %>">
+              <% if like.user.image.attached? %>
+                <%= image_tag like.user.image, class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>
+              <% else %>
+                <%= image_tag "placeholder_person.png", class: "rounded-circle", style: "width: 42px; height: 42px; object-fit: cover;" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <%# Right Column - Content %>
     <div class="col-lg-6">
-      <div class="d-flex justify-content-between align-items-start mb-3">
+      <div class="d-flex justify-content-between align-items-start mb-2">
         <div>
           <h1 class="fw-bold mb-0"><%= @offre.titre %></h1>
           <p class="text-muted mt-2 mb-0"><%= @offre.sous_titre %></p>
         </div>
-        
-        <%# Edit button for owner %>
-        <% if @is_owner %>
-          <%= link_to edit_offre_path(@offre), class: "btn btn-outline-primary" do %>
-            <i class="fa-solid fa-edit me-2"></i>Modifier
-          <% end %>
+
+        <% if current_user %>
+          <div class="favorite-btn-lg">
+            <% if current_user.favori_offres.include?(@offre) %>
+              <%= button_to offre_favori_path(@offre), method: :delete, class: 'btn btn-light rounded-circle p-2 shadow-sm' do %>
+                <i class="fa-solid fa-heart text-danger fs-4"></i>
+              <% end %>
+            <% else %>
+              <%= button_to offre_favori_path(@offre), method: :post, class: 'btn btn-light rounded-circle p-2 shadow-sm' do %>
+                <i class="fa-regular fa-heart text-secondary fs-4"></i>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
       </div>
 
-      <%# Registration Section %>
-      <% if current_user %>
-        <div class="card border-0 shadow-sm p-4 mb-4">
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <h5 class="fw-bold mb-2">Inscription à l'atelier</h5>
-              <% if @offre.place %>
-                <p class="mb-0 text-muted">
-                  <i class="fa-solid fa-users me-2"></i>
-                  <%= @offre.bookings.count %> / <%= @offre.place %> places occupées
-                  <% if @offre.available_spots && @offre.available_spots > 0 %>
-                    <span class="badge <%= @offre.available_spots > 5 ? 'bg-success' : 'bg-warning' %> ms-2">
-                      <%= @offre.available_spots %> place<%= @offre.available_spots > 1 ? 's' : '' %> restante<%= @offre.available_spots > 1 ? 's' : '' %>
-                    </span>
-                  <% elsif @offre.full? %>
-                    <span class="badge bg-danger ms-2">
-                      Complet - Plus de places
-                    </span>
-                  <% end %>
-                </p>
-              <% end %>
-            </div>
-            <div>
-              <% if @offre.user_registered?(current_user) %>
-                <%= button_to "Se désinscrire", unregister_offre_path(@offre), method: :delete, class: "btn btn-outline-danger", data: { confirm: "Êtes-vous sûr de vouloir vous désinscrire ?" } %>
-              <% elsif @offre.full? %>
-                <button class="btn btn-secondary" disabled>Complet</button>
-              <% else %>
-                <%= button_to "S'inscrire", register_offre_path(@offre), method: :post, class: "btn btn-primary" %>
-              <% end %>
-            </div>
-          </div>
-
-          <%# Show registered users %>
-          <% if @offre.bookings.any? %>
-            <hr class="my-3">
-            <h6 class="fw-bold mb-3">Participants inscrits</h6>
-            <div class="d-flex flex-wrap gap-2">
-              <% @offre.registered_users.includes(:image_attachment).each do |user| %>
-                <div class="position-relative" data-bs-toggle="tooltip" title="<%= user.name || user.email %>">
-                  <% if user.image.attached? %>
-                    <%= image_tag user.image, class: "rounded-circle border border-2 border-white shadow-sm", style: "width: 40px; height: 40px; object-fit: cover;" %>
-                  <% else %>
-                    <%= image_tag "placeholder_person.png", class: "rounded-circle border border-2 border-white shadow-sm", style: "width: 40px; height: 40px; object-fit: cover;" %>
-                  <% end %>
-                </div>
-              <% end %>
-            </div>
+      <%# Price and Booking Button %>
+      <div class="d-flex align-items-center mb-4">
+        <span class="price-tag fs-2 me-4">
+          <% number_to_currency(@offre.fournisseur_id, unit: "€") %>
+        </span>
+        <% if @offre.fournisseur.name != "Roman Hà Dương Gautrand" %>
+          <% if current_user && @offre.favoris.exists?(user: current_user) %>
+            <%= link_to user_path(current_user), class: "btn btn-primary btn-lg" do %>
+              Voir mes likes <i class="fa-solid fa-heart text-danger ms-2"></i>
+            <% end %>
+          <% else %>
+            <%= button_to offre_favori_path(@offre), method: :post, class: "btn btn-primary btn-lg" do %>
+              Liker <i class="fa-solid fa-heart ms-2"></i>
+            <% end %>
           <% end %>
-        </div>
-      <% end %>
+        <% else %>
+          <%= link_to "https://forms.gle/xu4ES3cPEvAt2kS39", class: "btn btn-primary btn-lg", target: "_blank" do %>
+            Réserver mon repas <i class="fa-solid fa-external-link ms-2"></i>
+          <% end %>
+        <% end%>
+      </div>
 
       <%# Intervenant Info %>
       <%= link_to fournisseur_path(@offre.fournisseur), class: "text-decoration-none" do %>

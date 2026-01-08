@@ -1,16 +1,19 @@
 class PagesController < ApplicationController
   def home
-    # New homepage for the Festival du 47
-    render 'new_home'
+    # Homepage for the Festival du 47 (current edition)
   end
 
-  def old_home
-    # Old edition 2025 homepage
+  def home_2025
+    # 2025 edition homepage
     @offres = Offre.all.order(date_prevue: :asc)
-    render 'home'
+    render 'home_2025'
   end
 
   def lieu
+  end
+
+  def lieu_2025
+    render 'lieu_2025'
   end
 
   def payment

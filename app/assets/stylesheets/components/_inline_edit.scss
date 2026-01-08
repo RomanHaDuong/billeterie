@@ -2,55 +2,22 @@
 
 .editable-text-block {
   position: relative;
-  transition: all 0.2s ease;
   
-  input,
-  textarea {
-    font-family: inherit !important;
-    font-size: inherit !important;
-    line-height: inherit !important;
-    color: inherit !important;
+  input.form-control,
+  textarea.form-control {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
   }
   
-  &.cms-editable-active {
-    cursor: pointer;
-    background: linear-gradient(120deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%);
-    border-radius: 4px;
-    padding: 4px 8px;
-    margin: -4px -8px;
-    box-shadow: 0 0 0 1px rgba(255, 193, 7, 0.3);
-    
-    &:hover {
-      background: linear-gradient(120deg, rgba(255, 193, 7, 0.2) 0%, rgba(255, 193, 7, 0.1) 100%);
-      box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.5);
-      transform: translateY(-1px);
-    }
-    
-    &:active {
-      transform: translateY(0);
-    }
+  &[style*="cursor:pointer"]:hover {
+    background-color: rgba(255, 193, 7, 0.1);
+    box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.3);
+    transition: all 0.2s ease;
   }
 }
 
 #cms-edit-toggle {
   transition: all 0.3s ease;
-  font-weight: 500;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  &.btn-warning {
-    animation: glow 2s ease-in-out infinite;
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(255, 193, 7, 0.8);
-  }
 }

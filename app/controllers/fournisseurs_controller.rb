@@ -1,4 +1,6 @@
 class FournisseursController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+  
   def index
     @fournisseurs = Fournisseur.where.not(name: nil).order(:name)
     no_render = Fournisseur.find_by(name: "Isabelle Forestier, Lucille Couturier, Prisca Elizabeth")
@@ -10,15 +12,31 @@ class FournisseursController < ApplicationController
 
 
   def new
-    @fournisseur = Fournisseur.new(user_id: current_user.id)
+    if current_user&.intervenant?
+      redirect_to dashboard_path, alert: "Vous êtes déjà intervenant."
+      return
+    end
+    @fournisseur = Fournisseur.new
   end
 
   def create
+    if current_user&.intervenant?
+      redirect_to dashboard_path, alert: "Vous êtes déjà intervenant."
+      return
+    end
+    
     @fournisseur = Fournisseur.new(fournisseur_params)
+    @fournisseur.user = current_user
+    
+    # Use user's profile image if no image is provided for fournisseur
+    if !params[:fournisseur][:image].present? && current_user.image.attached?
+      @fournisseur.image.attach(current_user.image.blob)
+    end
+    
     if @fournisseur.save
-      redirect_to fournisseur_path(@fournisseur)
+      redirect_to dashboard_path, notice: "Félicitations ! Vous êtes maintenant intervenant. Vous pouvez créer vos ateliers."
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -37,6 +55,6 @@ class FournisseursController < ApplicationController
   private
 
   def fournisseur_params
-    params.require(:fournisseur).permit(:bio, :user_id, :name)
+    params.require(:fournisseur).permit(:bio, :name, :instagram, :linkedin, :offinity, :image)
   end
 end

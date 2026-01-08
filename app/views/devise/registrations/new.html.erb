@@ -38,9 +38,9 @@
                 <div class="avatar-preview mb-3">
                   <img id="avatarPreview" src="https://via.placeholder.com/150" class="rounded-circle" width="100" height="100">
                 </div>
-                <%= f.label :avatar, class: "btn btn-outline-primary btn-sm" do %>
+                <%= f.label :image, class: "btn btn-outline-primary btn-sm" do %>
                   <i class="bi bi-camera me-2"></i>Upload Photo
-                  <%= f.file_field :avatar, class: "d-none", accept: "image/*",
+                  <%= f.file_field :image, class: "d-none", accept: "image/*",
                       onchange: "document.getElementById('avatarPreview').src = window.URL.createObjectURL(this.files[0])" %>
                 <% end %>
               </div>

@@ -1,0 +1,121 @@
+<div class="container py-5">
+  <div class="card border-0 shadow-sm">
+    <div class="card-body p-4">
+      <%= form_with(model: @offre, local: true, class: "needs-validation") do |f| %>
+        <% if @offre.errors.any? %>
+          <div class="alert alert-danger">
+            <h4><%= pluralize(@offre.errors.count, "erreur") %> ont empêché la sauvegarde:</h4>
+            <ul>
+              <% @offre.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="row g-4">
+          <%# Titre %>
+          <div class="col-md-8">
+            <%= f.label :titre, "Titre de l'atelier", class: "form-label fw-bold" %>
+            <%= f.text_field :titre, class: "form-control form-control-lg", placeholder: "Ex: Atelier de méditation", required: true %>
+          </div>
+
+          <%# Date %>
+          <div class="col-md-4">
+            <%= f.label :date_prevue, "Date et heure", class: "form-label fw-bold" %>
+            <%= f.datetime_local_field :date_prevue, class: "form-control", required: true %>
+          </div>
+
+          <%# Sous-titre %>
+          <div class="col-12">
+            <%= f.label :sous_titre, "Sous-titre", class: "form-label fw-bold" %>
+            <%= f.text_field :sous_titre, class: "form-control", placeholder: "Courte description accrocheuse" %>
+          </div>
+
+          <%# Description %>
+          <div class="col-12">
+            <%= f.label :descriptif, "Description complète", class: "form-label fw-bold" %>
+            <%= f.text_area :descriptif, class: "form-control", rows: 5, placeholder: "Décrivez votre atelier en détail...", required: true %>
+          </div>
+
+          <%# Image %>
+          <div class="col-12">
+            <%= f.label :image, "Image de l'atelier", class: "form-label fw-bold" %>
+            <%= f.file_field :image, class: "form-control", accept: "image/*" %>
+            <% if @offre.image.attached? %>
+              <div class="mt-2">
+                <%= image_tag @offre.image, class: "img-thumbnail", style: "max-width: 200px;" %>
+              </div>
+            <% end %>
+          </div>
+
+          <%# Durée et Places %>
+          <div class="col-md-6">
+            <%= f.label :duree, "Durée", class: "form-label fw-bold" %>
+            <%= f.text_field :duree, class: "form-control", placeholder: "Ex: 1h30", required: true %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :place, "Nombre de places", class: "form-label fw-bold" %>
+            <%= f.number_field :place, class: "form-control", min: 1, placeholder: "Ex: 20", required: true %>
+          </div>
+
+          <%# Salle et Catégories %>
+          <div class="col-md-6">
+            <%= f.label :salle, "Salle/Lieu", class: "form-label fw-bold" %>
+            <%= f.text_field :salle, class: "form-control", placeholder: "Ex: Salle A, Rez-de-chaussée" %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :categories, "Catégories", class: "form-label fw-bold" %>
+            <%= f.text_field :categories, class: "form-control", placeholder: "Ex: Bien-être, Créativité" %>
+          </div>
+
+          <%# Causes et Valeur apportée %>
+          <div class="col-md-6">
+            <%= f.label :causes, "Causes/Thèmes abordés", class: "form-label fw-bold" %>
+            <%= f.text_area :causes, class: "form-control", rows: 3, placeholder: "Quelles causes ou thèmes votre atelier aborde-t-il ?" %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :valeur_apportee, "Valeur apportée", class: "form-label fw-bold" %>
+            <%= f.text_area :valeur_apportee, class: "form-control", rows: 3, placeholder: "Qu'est-ce que les participants vont apprendre ou gagner ?" %>
+          </div>
+
+          <%# Besoins %>
+          <div class="col-md-6">
+            <%= f.label :besoin_espace, "Besoins d'espace", class: "form-label fw-bold" %>
+            <%= f.text_area :besoin_espace, class: "form-control", rows: 3, placeholder: "Quel type d'espace nécessitez-vous ?" %>
+          </div>
+
+          <div class="col-md-6">
+            <%= f.label :besoin_logistique, "Besoins logistiques", class: "form-label fw-bold" %>
+            <%= f.text_area :besoin_logistique, class: "form-control", rows: 3, placeholder: "Matériel, équipement nécessaire..." %>
+          </div>
+
+          <%# Deuxième intervenant (optionnel) %>
+          <div class="col-12">
+            <%= f.label :secondary_fournisseur_id, "Co-intervenant (optionnel)", class: "form-label fw-bold" %>
+            <%= f.collection_select :secondary_fournisseur_id, Fournisseur.all, :id, :name, 
+                { prompt: "Sélectionner un co-intervenant (optionnel)" }, 
+                { class: "form-select" } %>
+          </div>
+
+          <%# Autres commentaires %>
+          <div class="col-12">
+            <%= f.label :autre_commentaire, "Autres commentaires", class: "form-label fw-bold" %>
+            <%= f.text_area :autre_commentaire, class: "form-control", rows: 3, placeholder: "Informations complémentaires..." %>
+          </div>
+
+          <%# Submit buttons %>
+          <div class="col-12">
+            <div class="d-flex gap-3 justify-content-end">
+              <%= link_to "Annuler", @offre.persisted? ? offre_path(@offre) : dashboard_path, class: "btn btn-outline-secondary" %>
+              <%= f.submit @offre.persisted? ? "Mettre à jour l'atelier" : "Créer l'atelier", class: "btn btn-primary btn-lg" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -22,7 +22,6 @@ class BookingsController < ApplicationController
     current_user.save
 
     if @booking.save
-      EventMailer.calendar_invitation(@booking).deliver_now
       redirect_to @booking, notice: 'Réservation confirmée!'
     else
       render :new, status: :unprocessable_entity

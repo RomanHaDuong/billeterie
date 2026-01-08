@@ -7,14 +7,21 @@ class UsersController < ApplicationController
 
   def edit
     @user = current_user
+    @fournisseur = current_user.fournisseur if current_user.intervenant?
   end
 
   def update
     @user = current_user
+    @fournisseur = current_user.fournisseur if current_user.intervenant?
+    
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: 'Profile updated successfully'
+      # Also update fournisseur if user is an intervenant
+      if @fournisseur && params[:fournisseur]
+        @fournisseur.update(fournisseur_params)
+      end
+      redirect_to dashboard_path, notice: 'Profil mis à jour avec succès'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -22,5 +29,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :image)
+  end
+
+  def fournisseur_params
+    params.require(:fournisseur).permit(:name, :bio, :instagram, :linkedin, :offinity, :image)
   end
 end

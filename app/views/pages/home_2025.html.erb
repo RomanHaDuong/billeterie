@@ -1,0 +1,85 @@
+<%# banner with screen wide image %>
+<div class="container-fluid p-0">
+  <div class="hero-banner position-relative">
+    <%= image_tag "final_long_banner.jpg", class: "w-100", alt: "Banner" %>
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white">
+      <div class="text-bold text-primary">
+        <h1>
+          <%# 3ème festival du 47 <br> %>
+          <%# du 21 au 25 janvier 2025 <br> %>
+          <%# Ramène tes causes ! %>
+        </h1>
+      </div>
+    </div>
+  </div>
+
+  <%# CTA %>
+  <div class="container text-center my-5">
+    <%= link_to "Je prends mon pass!", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger btn-lg px-4 py-2 fs-3', target: :blank %>
+  </div>
+
+  <%# videos %>
+<div class="container text-center my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="row">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <%= video_tag "video_corinne.mp4", controls: true, autobuffer: true, class: "img-fluid w-50", style: "height: auto;" %>
+        </div>
+        <div class="col-md-6">
+          <%= video_tag "video_raphael.mp4", controls: true, autobuffer: true, class: "img-fluid w-50", style: "height: auto;" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  <%= render 'texte_homepage' %>
+
+  <%# card 1 %>
+  <div class="container my-5">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+          <%= image_tag "programme_hero.jpg", class:"card-img-top", alt:"Card 1" %>
+          <div class="card-body text-center">
+            <%= link_to editable_text('home.card1.button', 'Le programme'), offres_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text"><%= editable_text('home.card1.text', 'Ateliers, miniconférences, inspirations, découverte de soi et des autres, par la tête, le coeur, les tripes') %></p>
+          </div>
+        </div>
+      </div>
+
+  <%# card 2 %>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+          <%= image_tag "intervenants_hero.jpg", class:"card-img-top", alt:"Card 2" %>
+          <div class="card-body text-center">
+            <%= link_to editable_text('home.card2.button', 'Les intervenants'), fournisseurs_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text"><%= editable_text('home.card2.text', 'Qui connaissez-vous, qui souhaiteriez-vous connaître ? Et pourquoi n\'êtes-vous pas dans cette liste, au juste ?') %></p>
+          </div>
+        </div>
+      </div>
+
+  <%# card 3 %>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm hover-card">
+          <%= image_tag "lieu_hero_.jpg", class:"card-img-top", alt:"Card 3" %>
+          <div class="card-body text-center">
+            <%= link_to editable_text('home.card3.button', 'Le lieu'), lieu_path, class: 'btn btn-secondary stretched-link mb-3' %>
+            <p class="card-text"><%= editable_text('home.card3.text', 'Premier contact avec le 47 ? On vous en a parlé, vous voulez en avoir le coeur net ? Bonne découverte !') %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container py-5">
+    <% render 'shared/offres_agenda_view' %>
+  </div>
+
+  <%= render 'shared/sponsors' %>
+
+</div>
