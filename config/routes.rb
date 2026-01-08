@@ -27,6 +27,14 @@ Rails.application.routes.draw do
         delete :remove_admin
       end
     end
+    resources :pre_registrations, only: [] do
+      collection do
+        post :create, to: 'users#create_pre_registration'
+      end
+      member do
+        delete :destroy, to: 'users#destroy_pre_registration'
+      end
+    end
   end
 
   # 2025 edition routes (archived version)

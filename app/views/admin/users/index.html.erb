@@ -4,7 +4,65 @@
     <%= link_to "Retour au dashboard", dashboard_path, class: "btn btn-outline-secondary" %>
   </div>
 
+  <%# Pre-Registration Section %>
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0"><i class="bi bi-person-plus me-2"></i>Pré-inscription des Rôles</h5>
+    </div>
+    <div class="card-body">
+      <p class="text-muted mb-3">Définissez le rôle d'un utilisateur avant qu'il ne crée son compte</p>
+      
+      <%= form_with model: @pre_registration, url: admin_pre_registrations_path, class: "row g-3 mb-4" do |f| %>
+        <div class="col-md-5">
+          <%= f.text_field :email, class: "form-control", placeholder: "email@exemple.com", required: true %>
+        </div>
+        <div class="col-md-4">
+          <%= f.select :role, [['Intervenant', 'intervenant'], ['Admin', 'admin']], {}, class: "form-select", required: true %>
+        </div>
+        <div class="col-md-3">
+          <%= f.submit "Ajouter", class: "btn btn-primary w-100" %>
+        </div>
+      <% end %>
+
+      <% if @pre_registrations.any? %>
+        <h6 class="mt-4 mb-3">Pré-inscriptions en attente</h6>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @pre_registrations.each do |pre_reg| %>
+                <tr>
+                  <td><%= pre_reg.email %></td>
+                  <td>
+                    <% if pre_reg.role == 'admin' %>
+                      <span class="badge bg-danger">Admin</span>
+                    <% else %>
+                      <span class="badge bg-success">Intervenant</span>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= button_to "Supprimer", admin_pre_registration_path(pre_reg), method: :delete, class: "btn btn-sm btn-outline-danger", data: { confirm: "Êtes-vous sûr ?", turbo: false } %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Existing Users Section %>
   <div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-bottom">
+      <h5 class="mb-0"><i class="bi bi-people me-2"></i>Utilisateurs Existants</h5>
+    </div>
     <div class="card-body">
       <div class="table-responsive">
         <table class="table table-hover">

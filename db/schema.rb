@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_25_040116) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_08_115753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -97,6 +97,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_25_040116) do
     t.string "sous_titre"
     t.index ["fournisseur_id"], name: "index_offres_on_fournisseur_id"
     t.index ["secondary_fournisseur_id"], name: "index_offres_on_secondary_fournisseur_id"
+  end
+
+  create_table "pre_registrations", force: :cascade do |t|
+    t.string "email"
+    t.string "role"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "text_blocks", force: :cascade do |t|

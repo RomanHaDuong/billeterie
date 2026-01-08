@@ -5,6 +5,8 @@ class User < ApplicationRecord
   has_many :favori_offres, through: :favoris, source: :offre
   has_one :fournisseur
 
+  after_create :apply_pre_registration
+
   # Check if user is an intervenant (has a fournisseur profile)
   def intervenant?
     fournisseur.present?
@@ -38,4 +40,10 @@ class User < ApplicationRecord
   #     user.google_refresh_token = auth.credentials.refresh_token
   #   end
   # end
+
+  private
+
+  def apply_pre_registration
+    PreRegistration.find_and_apply(self)
+  end
 end

@@ -5,6 +5,8 @@ class Admin::UsersController < ApplicationController
 
   def index
     @users = User.all.order(created_at: :desc)
+    @pre_registrations = PreRegistration.all.order(created_at: :desc)
+    @pre_registration = PreRegistration.new
   end
 
   def make_intervenant
@@ -37,11 +39,32 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def create_pre_registration
+    @pre_registration = PreRegistration.new(pre_registration_params)
+    if @pre_registration.save
+      redirect_to admin_users_path, notice: "Pré-inscription créée pour #{@pre_registration.email}"
+    else
+      @users = User.all.order(created_at: :desc)
+      @pre_registrations = PreRegistration.all.order(created_at: :desc)
+      render :index
+    end
+  end
+
+  def destroy_pre_registration
+    @pre_registration = PreRegistration.find(params[:id])
+    @pre_registration.destroy
+    redirect_to admin_users_path, notice: "Pré-inscription supprimée"
+  end
+
   private
 
   def require_admin
     unless current_user.admin?
       redirect_to root_path, alert: "Accès refusé"
     end
+  end
+
+  def pre_registration_params
+    params.require(:pre_registration).permit(:email, :role)
   end
 end
