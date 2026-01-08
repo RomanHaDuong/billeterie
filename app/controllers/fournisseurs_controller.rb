@@ -55,6 +55,27 @@ class FournisseursController < ApplicationController
     @offres = Offre.where(fournisseur_id: @fournisseur.id)
   end
 
+  def edit
+    @fournisseur = Fournisseur.find(params[:id])
+    unless current_user.intervenant? && current_user.fournisseur.id == @fournisseur.id
+      redirect_to dashboard_path, alert: "Vous n'avez pas la permission de modifier ce profil."
+    end
+  end
+
+  def update
+    @fournisseur = Fournisseur.find(params[:id])
+    unless current_user.intervenant? && current_user.fournisseur.id == @fournisseur.id
+      redirect_to dashboard_path, alert: "Vous n'avez pas la permission de modifier ce profil."
+      return
+    end
+
+    if @fournisseur.update(fournisseur_params)
+      redirect_to edit_fournisseur_path(@fournisseur), notice: "Profil intervenant mis à jour avec succès!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def fournisseur_params

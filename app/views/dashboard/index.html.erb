@@ -16,9 +16,8 @@
       <div class="d-flex gap-2">
         <%= link_to "Modifier le profil", edit_user_path(current_user), class: "btn btn-outline-primary" %>
         <% if current_user.intervenant? %>
-          <%= link_to "Mes ateliers", "#mes-ateliers", class: "btn btn-primary" %>
-          <%= link_to fournisseur_path(current_user.fournisseur), class: "btn btn-outline-primary" do %>
-            <i class="fa-solid fa-eye me-2"></i>Voir ma page d'intervenant
+          <%= link_to edit_fournisseur_path(current_user.fournisseur), class: "btn btn-primary" do %>
+            <i class="fa-solid fa-pen-to-square me-2"></i>Voir/modifier ma page intervenant
           <% end %>
         <% end %>
         <% if current_user.admin? %>

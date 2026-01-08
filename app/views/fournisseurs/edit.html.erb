@@ -1,0 +1,153 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <%# Page Header %>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h1 class="fw-bold mb-2">Ma page intervenant</h1>
+          <p class="text-muted mb-0">Modifiez votre profil et visualisez votre page publique</p>
+        </div>
+        <%= link_to "Retour au dashboard", dashboard_path, class: "btn btn-outline-secondary" %>
+      </div>
+
+      <%# Preview and Edit Section %>
+      <div class="row g-4">
+        <%# Edit Form (Left Side) %>
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="fa-solid fa-pen-to-square me-2"></i>Modifier mon profil</h5>
+            </div>
+            <div class="card-body">
+              <%= form_with(model: @fournisseur, local: true) do |f| %>
+                <% if @fournisseur.errors.any? %>
+                  <div class="alert alert-danger">
+                    <h6><%= pluralize(@fournisseur.errors.count, "erreur") %> :</h6>
+                    <ul class="mb-0">
+                      <% @fournisseur.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+
+                <div class="mb-3">
+                  <%= f.label :name, "Nom complet", class: "form-label fw-bold" %>
+                  <%= f.text_field :name, class: "form-control", placeholder: "Votre nom complet" %>
+                </div>
+
+                <div class="mb-3">
+                  <%= f.label :bio, "Biographie", class: "form-label fw-bold" %>
+                  <%= f.text_area :bio, class: "form-control", rows: 5, placeholder: "Parlez-nous de vous, votre expérience, vos passions..." %>
+                </div>
+
+                <div class="mb-3">
+                  <%= f.label :image, "Photo de profil", class: "form-label fw-bold" %>
+                  <% if @fournisseur.image.attached? %>
+                    <div class="mb-2">
+                      <%= image_tag @fournisseur.image, class: "rounded-3", style: "width: 150px; height: 150px; object-fit: cover;" %>
+                    </div>
+                  <% end %>
+                  <%= f.file_field :image, class: "form-control", accept: "image/*" %>
+                  <small class="text-muted">Format recommandé : JPG ou PNG, max 5MB</small>
+                </div>
+
+                <hr class="my-4">
+
+                <h6 class="fw-bold mb-3">Réseaux sociaux</h6>
+
+                <div class="mb-3">
+                  <%= f.label :linkedin, "LinkedIn", class: "form-label" %>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-linkedin"></i></span>
+                    <%= f.url_field :linkedin, class: "form-control", placeholder: "https://linkedin.com/in/..." %>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <%= f.label :instagram, "Instagram", class: "form-label" %>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-instagram"></i></span>
+                    <%= f.url_field :instagram, class: "form-control", placeholder: "https://instagram.com/..." %>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <%= f.label :offinity, "Offinity", class: "form-label" %>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-link-45deg"></i></span>
+                    <%= f.url_field :offinity, class: "form-control", placeholder: "https://..." %>
+                  </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                  <%= f.submit "Enregistrer les modifications", class: "btn btn-primary btn-lg" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <%# Preview (Right Side) %>
+        <div class="col-lg-6">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-secondary text-white">
+              <h5 class="mb-0"><i class="fa-solid fa-eye me-2"></i>Aperçu de ma page publique</h5>
+            </div>
+            <div class="card-body">
+              <div class="text-center mb-4">
+                <% if @fournisseur.image.attached? %>
+                  <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm mb-3", style: "width: 100%; max-width: 300px; height: 300px; object-fit: cover;" %>
+                <% else %>
+                  <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm mb-3", style: "width: 100%; max-width: 300px; height: 300px; object-fit: cover;" %>
+                <% end %>
+                <h3 class="fw-bold mb-2"><%= @fournisseur.name %></h3>
+              </div>
+
+              <div class="mb-4">
+                <h6 class="fw-bold mb-2">À propos</h6>
+                <% if @fournisseur.bio.present? %>
+                  <p class="text-muted"><%= @fournisseur.bio %></p>
+                <% else %>
+                  <p class="text-muted fst-italic">Aucune biographie</p>
+                <% end %>
+              </div>
+
+              <div class="mb-4">
+                <h6 class="fw-bold mb-2">Animations</h6>
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge bg-primary fs-6"><%= @fournisseur.offres.count %></span>
+                  <span class="text-muted"><%= @fournisseur.offres.count > 1 ? 'ateliers' : 'atelier' %></span>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <h6 class="fw-bold mb-2">Réseaux sociaux</h6>
+                <div class="d-flex flex-wrap gap-2">
+                  <% if @fournisseur.linkedin.present? %>
+                    <span class="badge bg-primary"><i class="bi bi-linkedin me-1"></i>LinkedIn</span>
+                  <% end %>
+                  <% if @fournisseur.instagram.present? %>
+                    <span class="badge bg-dark"><i class="bi bi-instagram me-1"></i>Instagram</span>
+                  <% end %>
+                  <% if @fournisseur.offinity.present? %>
+                    <span class="badge bg-secondary"><i class="bi bi-link-45deg me-1"></i>Offinity</span>
+                  <% end %>
+                  <% if @fournisseur.linkedin.blank? && @fournisseur.instagram.blank? && @fournisseur.offinity.blank? %>
+                    <span class="text-muted fst-italic">Aucun lien</span>
+                  <% end %>
+                </div>
+              </div>
+
+              <hr class="my-3">
+
+              <%= link_to fournisseur_path(@fournisseur), class: "btn btn-outline-secondary w-100", target: "_blank" do %>
+                <i class="fa-solid fa-external-link me-2"></i>Voir ma page publique
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
