@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   root "pages#home"
-  get 'lieu', to: 'pages#lieu', as: 'lieu'
 
   # Dashboard for users to see their registered workshops
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
