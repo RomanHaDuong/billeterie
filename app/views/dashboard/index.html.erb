@@ -20,9 +20,10 @@
           <%= link_to fournisseur_path(current_user.fournisseur), class: "btn btn-outline-primary" do %>
             <i class="fa-solid fa-eye me-2"></i>Voir ma page d'intervenant
           <% end %>
-        <% else %>
-          <%= link_to new_fournisseur_path, class: "btn btn-primary" do %>
-            <i class="fa-solid fa-user-tie me-2"></i>Devenir intervenant
+        <% end %>
+        <% if current_user.admin? %>
+          <%= link_to admin_users_path, class: "btn btn-danger" do %>
+            <i class="fa-solid fa-users-gear me-2"></i>Gestion utilisateurs
           <% end %>
         <% end %>
       </div>

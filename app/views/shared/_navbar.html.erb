@@ -24,42 +24,40 @@
 
       <div class="d-flex flex-column flex-sm-row align-items-center gap-3">
       <div class="d-flex gap-2 mb-2 mb-sm-0">
-        <%= link_to "https://chat.whatsapp.com/GUR9QDnolAaFn3vJBAGZ1S", class: 'btn btn-secondary', target: :blank do %>
-          <i class="bi bi-whatsapp me-2"></i>Rejoins nous
-        <% end %>
-        <%= link_to "Je prends mon pass!", "https://opencollective.com/le-47/events/festival-du-47-3eme-edition-0cfc8c1c/order/83209?interval=oneTime&amount=47&name=&legalName=&email=", class: 'btn btn-danger', target: :blank %>
+        <%= link_to "Soutenir le 47", "https://share.google/H3UopWvTJuYwvS4v1", class: 'btn btn-secondary', target: :blank %>
+        <%= link_to "Je prends mon pass!", "https://opencollective.com/le-47/events/lheure-du-mouvement-111636a3/contribute/je-viens-au-festival-97285", class: 'btn btn-danger', target: :blank %>
       </div>
 
-
         <% if user_signed_in? %>
-          <div class="d-flex align-items-center">
-            <%= link_to dashboard_path, class: 'nav-link' do %>
-              <span><%= editable_text('navbar.dashboard', 'Tableau de bord') %></span>
+          <div class="d-flex align-items-center gap-2">
+            <%= link_to dashboard_path, class: 'btn btn-primary' do %>
+              <i class="bi bi-person-circle me-2"></i>
+              <span>Mon compte festivalier</span>
             <% end %>
 
             <% if current_user.image.attached? %>
               <%= image_tag current_user.image,
-                  class: 'rounded-circle ms-2',
+                  class: 'rounded-circle',
                   size: '32x32',
                   alt: 'Profile picture' %>
             <% else %>
               <%= image_tag "placeholder_person.png",
-                  class: 'rounded-circle ms-2',
+                  class: 'rounded-circle',
                   size: '32x32',
                   alt: 'Placeholder picture' %>
             <% end %>
 
             <% if current_user.admin? %>
-              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning active' : 'btn-outline-secondary' %> btn-sm rounded-circle ms-2" title="Toggle edit mode" type="button" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning active' : 'btn-outline-secondary' %> btn-sm rounded-circle" title="Toggle edit mode" type="button" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
                 <i class="fa fa-pen"></i>
               </button>
             <% end %>
           </div>
         <% else %>
-          <div class="d-flex gap-2">
-            <%= link_to 'Connexion', new_user_session_path, class: 'btn btn-outline-primary' %>
-            <%= link_to "S'inscrire", new_user_registration_path, class: 'btn btn-primary' %>
-          </div>
+          <%= link_to new_user_registration_path, class: 'btn btn-primary' do %>
+            <i class="bi bi-person-circle me-2"></i>
+            <span>Mon compte festivalier</span>
+          <% end %>
         <% end %>
       </div>
     </div>

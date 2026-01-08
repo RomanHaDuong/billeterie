@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount RailsAdmin::Engine => '/rails_admin', as: 'rails_admin'
   get 'pages/home'
   get 'home/index'
   devise_for :users
@@ -17,6 +17,17 @@ Rails.application.routes.draw do
 
   # Dashboard for users to see their registered workshops
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
+
+  # Admin routes
+  namespace :admin do
+    resources :users, only: [:index] do
+      member do
+        post :make_intervenant
+        post :make_admin
+        delete :remove_admin
+      end
+    end
+  end
 
   # 2025 edition routes (archived version)
   namespace :archive_2025, path: '2025' do
