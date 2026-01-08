@@ -93,7 +93,8 @@ Rails.application.configure do
     "les-ecoworkers.fr",
     "www.les-ecoworkers.fr",
     "192.168.1.24",
-    /.*\.les-ecoworkers\.fr/
+    /.*\.les-ecoworkers\.fr/,
+    /.*\.herokuapp\.com/
   ]
 
   # manually added lines
