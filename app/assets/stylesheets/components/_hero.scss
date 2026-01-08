@@ -1,113 +1,8 @@
 .hero-banner {
-  position: relative;
-  overflow: hidden;
-  
   img {
-    height: 450px;
+    height: 300px;
     object-fit: cover;
-    object-position: center;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
-  }
-  
-  .hero-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    text-align: center;
-    color: white;
-    width: 90%;
-    max-width: 800px;
-    
-    h1 {
-      font-size: clamp(2rem, 5vw, 4rem);
-      font-weight: 800;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
-    
-    p {
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-    }
-  }
-}
-
-.feature-section {
-  background: linear-gradient(135deg, #4A7C59 0%, #7CB342 100%);
-  color: white;
-  padding: 4rem 0;
-  
-  .feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #FFA726;
-  }
-  
-  h3 {
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-}
-
-.cta-section {
-  background: var(--accent-gradient);
-  color: white;
-  padding: 5rem 0;
-  
-  h2 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 1.5rem;
-  }
-  
-  .btn-light {
-    padding: 1rem 2.5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    }
-  }
-}
-
-.info-card {
-  border: none;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-  }
-  
-  .card-header {
-    background: var(--green-gradient);
-    color: white;
-    padding: 1.5rem;
-    font-weight: 700;
-    font-size: 1.3rem;
-  }
-  
-  .card-body {
-    padding: 2rem;
+    object-position: bottom;
   }
 }
 
@@ -119,10 +14,8 @@
 
 .clickable {
   cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .clickable:hover {
-  color: var(--primary-color);
-  transform: scale(1.02);
+  color: #007bff;
 }

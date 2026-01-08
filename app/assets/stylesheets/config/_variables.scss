@@ -1,34 +1,17 @@
-// bootstrap overriding and setting brand colors - Eco-Worker Theme
-$primary: #E86B3C; // Vibrant coral orange
-$secondary: #4A7C59; // Deep forest green
-$success: #7CB342; // Fresh lime green
-$info: #29B6F6; // Bright sky blue
-$warning: #FFA726; // Warm amber
-$danger: #EF5350; // Bold red
-$light: #F5F5DC; // Warm beige
-$dark: #2C3E50; // Deep charcoal
+// bootstrap overriding and setting brand colors
+$primary: #506b64;
+$secondary: #94c4ad;
+$danger: #EE8081;
 
 $theme-colors: (
   "primary": $primary,
   "secondary": $secondary,
-  "success": $success,
-  "info": $info,
-  "warning": $warning,
-  "danger": $danger,
-  "light": $light,
-  "dark": $dark
-);
+  "danger": $danger
+  );
 
 // saving brand colors
 :root {
   --primary-color: #{$primary};
   --secondary-color: #{$secondary};
-  --success-color: #{$success};
-  --info-color: #{$info};
-  --warning-color: #{$warning};
   --danger-color: #{$danger};
-  --light-color: #{$light};
-  --dark-color: #{$dark};
-  --accent-gradient: linear-gradient(135deg, #{$primary} 0%, #{$warning} 100%);
-  --green-gradient: linear-gradient(135deg, #{$secondary} 0%, #{$success} 100%);
 }

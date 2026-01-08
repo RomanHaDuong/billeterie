@@ -1,42 +1,22 @@
-.navbar {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
-  
-  .navbar-brand {
-    font-weight: 800;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-}
-
 .navbar .nav-link {
-  color: #2C3E50;
-  transition: all 0.3s ease;
+  color: #4a5568;
+  transition: color 0.2s ease;
   position: relative;
-  font-weight: 600;
 
   &:after {
     content: '';
     position: absolute;
     width: 0;
-    height: 3px;
+    height: 2px;
     bottom: 0;
     left: 50%;
-    background: var(--accent-gradient);
+    background-color: var(--bs-secondary);
     transition: all 0.3s ease;
     transform: translateX(-50%);
-    border-radius: 2px;
   }
 
-  &:hover {
-    color: var(--primary-color);
-    
-    &:after {
-      width: 80%;
-    }
+  &:hover:after {
+    width: 100%;
   }
 }
 // footer hover effect
@@ -77,14 +57,7 @@
 
 .btn {
   padding: 0.5rem 1.25rem;
-  font-weight: 600;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
+  font-weight: 500;
 }
 
 .navbar-toggler {
