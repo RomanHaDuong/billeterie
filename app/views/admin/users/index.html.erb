@@ -43,7 +43,7 @@
                     <% if pre_reg.role == 'admin' %>
                       <span class="badge bg-danger">Admin</span>
                     <% else %>
-                      <span class="badge bg-success">Intervenant</span>
+                      <span class="badge bg-primary">Intervenant</span>
                     <% end %>
                   </td>
                   <td>
@@ -86,7 +86,7 @@
                     <span class="badge bg-danger">Admin</span>
                   <% end %>
                   <% if user.intervenant? %>
-                    <span class="badge bg-success">Intervenant</span>
+                    <span class="badge bg-primary">Intervenant</span>
                   <% end %>
                   <% unless user.admin? || user.intervenant? %>
                     <span class="badge bg-secondary">Festivalier</span>
@@ -94,8 +94,12 @@
                 </td>
                 <td>
                   <div class="btn-group btn-group-sm">
-                    <% unless user.intervenant? %>
-                      <%= button_to "Faire intervenant", make_intervenant_admin_user_path(user), method: :post, class: "btn btn-outline-success", data: { turbo: false } %>
+                    <% if user.intervenant? %>
+                      <% if user.my_offres.empty? %>
+                        <%= button_to "Retirer intervenant", remove_intervenant_admin_user_path(user), method: :delete, class: "btn btn-outline-warning me-2", form: { data: { turbo_confirm: "ATTENTION : Voulez-vous vraiment retirer le statut d'intervenant ? Le profil de #{user.name || user.email} sera supprimé." } } %>
+                      <% end %>
+                    <% else %>
+                      <%= button_to "Faire intervenant", make_intervenant_admin_user_path(user), method: :post, class: "btn btn-outline-primary me-2", data: { turbo: false } %>
                     <% end %>
                     
                     <% if user.admin? %>

@@ -2,7 +2,10 @@ class FournisseursController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   
   def index
-    @fournisseurs = Fournisseur.where.not(name: nil).order(:name)
+    @fournisseurs = Fournisseur.where.not(name: nil)
+      .joins(:offres)
+      .distinct
+      .order(:name)
     no_render = Fournisseur.find_by(name: "Isabelle Forestier, Lucille Couturier, Prisca Elizabeth")
     alex = Fournisseur.find_by(name: "Alexandra Gautrand Ha Duong")
     @fournisseurs = @fournisseurs - [no_render]

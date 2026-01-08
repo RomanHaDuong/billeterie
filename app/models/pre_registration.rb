@@ -1,4 +1,6 @@
 class PreRegistration < ApplicationRecord
+  before_validation :normalize_email
+  
   validates :email, presence: true, uniqueness: true
   validates :role, presence: true, inclusion: { in: %w[admin intervenant] }
 
@@ -18,5 +20,11 @@ class PreRegistration < ApplicationRecord
     end
 
     pre_reg.destroy # Remove after applying
+  end
+
+  private
+
+  def normalize_email
+    self.email = email.downcase.strip if email.present?
   end
 end

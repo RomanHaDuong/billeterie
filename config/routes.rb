@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index] do
       member do
         post :make_intervenant
+        delete :remove_intervenant
         post :make_admin
         delete :remove_admin
       end

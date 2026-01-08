@@ -39,6 +39,18 @@ class Admin::UsersController < ApplicationController
     end
   end
 
+  def remove_intervenant
+    @user = User.find(params[:id])
+    if @user.fournisseur.blank?
+      redirect_to admin_users_path, alert: "Cet utilisateur n'est pas intervenant"
+    elsif @user.my_offres.any?
+      redirect_to admin_users_path, alert: "Impossible de retirer le statut intervenant : cet utilisateur a des ateliers"
+    else
+      @user.fournisseur.destroy
+      redirect_to admin_users_path, notice: "Statut intervenant retiré pour #{@user.email}"
+    end
+  end
+
   def create_pre_registration
     @pre_registration = PreRegistration.new(pre_registration_params)
     if @pre_registration.save

@@ -173,7 +173,6 @@
 
     <%# Quick Actions %>
     <div class="mt-4 text-center">
-      <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-lg" %>
     </div>
   <% end %>
 
@@ -186,7 +185,7 @@
             <h2 class="fw-bold mb-2">Mes Ateliers (Intervenant)</h2>
             <p class="text-muted mb-0">Les ateliers que j'anime</p>
           </div>
-          <%= link_to new_offre_path, class: "btn btn-outline-success btn-lg" do %>
+          <%= link_to new_offre_path, class: "btn btn-primary btn-lg" do %>
             <i class="fa-solid fa-plus me-2"></i>Créer un atelier
           <% end %>
         </div>
@@ -275,11 +274,14 @@
 
                     <%# Actions %>
                     <div class="col-12 col-md-auto d-flex flex-column gap-2 align-items-stretch align-items-md-start">
-                      <%= link_to offre_path(offre), class: "btn btn-outline-success" do %>
+                      <%= link_to offre_path(offre), class: "btn btn-outline-secondary" do %>
                         <i class="fa-solid fa-eye me-2"></i>Voir l'atelier
                       <% end %>
                       <%= link_to edit_offre_path(offre), class: "btn btn-outline-primary" do %>
                         <i class="fa-solid fa-edit me-2"></i>Modifier
+                      <% end %>
+                      <%= button_to offre_path(offre), method: :delete, class: "btn btn-outline-danger", form: { data: { turbo_confirm: "ATTENTION : Voulez-vous vraiment supprimer cet atelier ? Cette action est irréversible et toutes les inscriptions seront également supprimées." } } do %>
+                        <i class="fa-solid fa-trash me-2"></i>Supprimer
                       <% end %>
                     </div>
                   </div>
@@ -298,4 +300,9 @@
       <% end %>
     </div>
   <% end %>
+
+  <%# Sign Out Button %>
+  <div class="mt-5 text-center pb-4">
+    <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-lg" %>
+  </div>
 </div>
