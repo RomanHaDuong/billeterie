@@ -1,4 +1,9 @@
 <div class="container-fluid p-0">
+  <%# Hero Banner %>
+  <div class="position-relative mb-5">
+    <%= image_tag "festival_banner.png", class: "w-100", style: "max-height: 500px; object-fit: cover;", alt: "L'Heure du Mouvement - Festival des Éco Workers du 47" %>
+  </div>
+
   <%# Main content %>
   <div class="container text-center my-5 py-5">
     <h2 class="display-4 mb-4"><%= editable_text('home.title', 'Bienvenue au Festival du 47') %></h2>
