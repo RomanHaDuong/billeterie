@@ -8,6 +8,11 @@ class Offre < ApplicationRecord
   has_many :registered_users, through: :bookings, source: :user
   has_one_attached :image
 
+  validates :titre, presence: true
+  validates :descriptif, presence: true
+  validates :place, presence: true, numericality: { greater_than: 0 }
+  validates :date_prevue, presence: true
+
   # Check if there are available spots
   def available_spots
     return nil if place.nil?

@@ -16,13 +16,17 @@
         <div class="row g-4">
           <%# Titre %>
           <div class="col-md-8">
-            <%= f.label :titre, "Titre de l'atelier", class: "form-label fw-bold" %>
+            <%= f.label :titre, class: "form-label fw-bold" do %>
+              Titre de l'atelier <span class="text-danger">*</span>
+            <% end %>
             <%= f.text_field :titre, class: "form-control form-control-lg", placeholder: "Ex: Atelier de méditation", required: true %>
           </div>
 
           <%# Date %>
           <div class="col-md-4">
-            <%= f.label :date_prevue, "Date et heure", class: "form-label fw-bold" %>
+            <%= f.label :date_prevue, class: "form-label fw-bold" do %>
+              Date et heure <span class="text-danger">*</span>
+            <% end %>
             <%= f.datetime_local_field :date_prevue, class: "form-control", required: true %>
           </div>
 
@@ -34,7 +38,9 @@
 
           <%# Description %>
           <div class="col-12">
-            <%= f.label :descriptif, "Description complète", class: "form-label fw-bold" %>
+            <%= f.label :descriptif, class: "form-label fw-bold" do %>
+              Description complète <span class="text-danger">*</span>
+            <% end %>
             <%= f.text_area :descriptif, class: "form-control", rows: 5, placeholder: "Décrivez votre atelier en détail...", required: true %>
           </div>
 
@@ -52,11 +58,13 @@
           <%# Durée et Places %>
           <div class="col-md-6">
             <%= f.label :duree, "Durée", class: "form-label fw-bold" %>
-            <%= f.text_field :duree, class: "form-control", placeholder: "Ex: 1h30", required: true %>
+            <%= f.text_field :duree, class: "form-control", placeholder: "Ex: 1h30" %>
           </div>
 
           <div class="col-md-6">
-            <%= f.label :place, "Nombre de places", class: "form-label fw-bold" %>
+            <%= f.label :place, class: "form-label fw-bold" do %>
+              Nombre de places <span class="text-danger">*</span>
+            <% end %>
             <%= f.number_field :place, class: "form-control", min: 1, placeholder: "Ex: 20", required: true %>
           </div>
 
