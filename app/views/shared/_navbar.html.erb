@@ -1,16 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white py-3 shadow-sm">
+<nav class="navbar navbar-light bg-white py-3 shadow-sm">
   <div class="container">
     <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
       <%= image_tag "logo.png", class: "rounded-circle me-2", width: 40, height: 40, alt: "Festival logo" %>
       <span class="fw-bold fs-4 text-primary">Festival</span>
     <% end %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+    <%# Desktop Navigation %>
+    <div class="d-none d-lg-flex align-items-center flex-grow-1">
+      <ul class="navbar-nav mx-auto mb-0 d-flex flex-row">
         <li class="nav-item">
           <%= link_to 'Le Programme', offres_path, class: 'nav-link px-3 fw-medium', style: 'color: #595E47;' %>
         </li>
@@ -22,41 +19,86 @@
         </li>
       </ul>
 
-      <div class="d-flex flex-column flex-lg-row align-items-center gap-3">
-      <div class="d-flex flex-column flex-md-row align-items-center gap-2 mb-2 mb-lg-0">
-        <%= link_to "Je viens", participation_path, class: 'btn', style: 'background-color: #7B8467; color: white; border: none;' %>
-        <small class="text-center text-md-start">
-          <%= link_to "Je ne peux pas venir mais je soutiens!", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=50&contributeAs=me", class: 'text-decoration-none', style: 'font-size: 0.75rem; color: #595E47;', target: :blank %>
-        </small>
-      </div>
+      <div class="d-flex align-items-center gap-2">
+        <div class="text-center">
+          <%= link_to "Je viens", participation_path, class: 'btn btn-sm', style: 'background-color: #7B8467; color: white; border: none;' %>
+          <div class="mt-1">
+            <%= link_to "Je ne peux pas venir mais je soutiens!", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=50&contributeAs=me", class: 'text-decoration-none d-block', style: 'font-size: 0.7rem; color: #595E47;', target: :blank %>
+          </div>
+        </div>
 
         <% if user_signed_in? %>
-          <div class="d-flex align-items-center gap-2">
-            <%= link_to dashboard_path, class: 'btn btn-primary' do %>
-              <i class="bi bi-person-circle me-2"></i>
-              <span>Mon compte festivalier</span>
+          <div class="d-flex align-items-center gap-2 ms-3">
+            <%= link_to dashboard_path, class: 'btn btn-primary btn-sm' do %>
+              <i class="bi bi-person-circle me-1"></i>
+              <span>Mon compte</span>
             <% end %>
 
             <% if current_user.image.attached? %>
-              <%= image_tag current_user.image,
-                  class: 'rounded-circle',
-                  size: '32x32',
-                  alt: 'Profile picture' %>
+              <%= image_tag current_user.image, class: 'rounded-circle', style: 'width: 32px; height: 32px; object-fit: cover;', alt: 'Profile picture' %>
             <% else %>
-              <%= image_tag "placeholder_person.png",
-                  class: 'rounded-circle',
-                  size: '32x32',
-                  alt: 'Placeholder picture' %>
+              <%= image_tag "placeholder_person.png", class: 'rounded-circle', style: 'width: 32px; height: 32px; object-fit: cover;', alt: 'Placeholder picture' %>
             <% end %>
 
             <% if current_user.admin? %>
-              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning active' : 'btn-outline-secondary' %> btn-sm rounded-circle" title="Toggle edit mode" type="button" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
-                <i class="fa fa-pen"></i>
+              <button id="cms-edit-toggle" class="btn <%= session[:edit_mode] ? 'btn-warning active' : 'btn-outline-secondary' %> btn-sm rounded-circle" title="Toggle edit mode" type="button" style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <i class="fa fa-pen" style="font-size: 0.75rem;"></i>
               </button>
             <% end %>
           </div>
         <% end %>
       </div>
     </div>
+
+    <%# Mobile Menu Button %>
+    <button class="d-lg-none" id="mobileMenuBtn" style="background: none; border: none; padding: 10px; cursor: pointer; position: relative; width: 40px; height: 40px;">
+      <span id="menuLine1" style="display: block; width: 28px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); position: absolute; top: 12px; left: 6px;"></span>
+      <span id="menuLine2" style="display: block; width: 28px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); position: absolute; top: 19px; left: 6px;"></span>
+      <span id="menuLine3" style="display: block; width: 28px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); position: absolute; top: 26px; left: 6px;"></span>
+    </button>
   </div>
 </nav>
+
+<%# Mobile Fullscreen Menu %>
+<div id="mobileMenuOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: white; z-index: 9999; overflow-y: auto; opacity: 0; transition: opacity 0.4s ease-in-out;">
+  <div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+      <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+        <%= image_tag "logo.png", class: "rounded-circle me-2", width: 40, height: 40, alt: "Festival logo" %>
+        <span class="fw-bold fs-4 text-primary">Festival</span>
+      <% end %>
+      
+      <button id="mobileMenuClose" style="background: none; border: none; font-size: 2.5rem; padding: 0; cursor: pointer; color: #595E47; line-height: 1; transition: transform 0.3s ease, opacity 0.3s ease;" onmouseover="this.style.transform='rotate(90deg)'" onmouseout="this.style.transform='rotate(0deg)'">&times;</button>
+    </div>
+
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 60vh;">
+      <ul class="list-unstyled text-center mb-5" id="menuItems">
+        <li class="mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;">
+          <%= link_to 'Le Programme', offres_path, class: 'text-decoration-none fs-3 fw-medium', style: 'color: #595E47; transition: color 0.3s ease;' %>
+        </li>
+        <li class="mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;">
+          <%= link_to 'Animateurs', fournisseurs_path, class: 'text-decoration-none fs-3 fw-medium', style: 'color: #595E47; transition: color 0.3s ease;' %>
+        </li>
+        <li class="mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;">
+          <%= link_to 'Le 47', lieu_path, class: 'text-decoration-none fs-3 fw-medium', style: 'color: #595E47; transition: color 0.3s ease;' %>
+        </li>
+      </ul>
+
+      <div class="text-center mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;" id="menuCTA">
+        <%= link_to "Je viens", participation_path, class: 'btn btn-lg mb-3', style: 'background-color: #7B8467; color: white; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;' %>
+        <div>
+          <%= link_to "Je ne peux pas venir mais je soutiens!", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=50&contributeAs=me", class: 'text-decoration-none d-block', style: 'font-size: 0.9rem; color: #595E47; transition: color 0.3s ease;', target: :blank %>
+        </div>
+      </div>
+
+      <% if user_signed_in? %>
+        <div class="text-center mt-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;" id="menuAccount">
+          <%= link_to dashboard_path, class: 'btn btn-primary btn-lg mb-3', style: 'transition: transform 0.3s ease, box-shadow 0.3s ease;' do %>
+            <i class="bi bi-person-circle me-2"></i>
+            <span>Mon compte festivalier</span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
