@@ -1,14 +1,14 @@
 <% offres_collection = @offres || [] %>
 
 <% if offres_collection.empty? %>
-  <div class="card border-0 shadow-sm mb-4">
+  <div class="card border-0 mb-4" style="box-shadow: 0 4px 6px rgba(146, 130, 105, 0.3);">
     <div class="card-body text-center py-5">
       <p class="text-muted mb-0">Aucun atelier disponible pour le moment.</p>
     </div>
   </div>
 <% else %>
   <% offres_collection.group_by { |o| o.date_prevue&.beginning_of_day }.sort_by { |day, _| day || Date.new(9999) }.each do |day, offres| %>
-    <div class="card border-0 shadow-sm mb-4">
+    <div class="card border-0 mb-4" style="box-shadow: 0 4px 6px rgba(146, 130, 105, 0.3);">
       <div class="card-header bg-white border-0 py-3">
         <h5 class="fw-bold mb-0"><%= l(day, format: :long) %></h5>
       </div>
