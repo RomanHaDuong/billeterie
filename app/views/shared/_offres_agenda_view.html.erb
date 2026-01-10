@@ -18,21 +18,26 @@
         <div class="list-group-item p-4 border-0">
           <div class="row align-items-center">
             <div class="col-auto">
-              <div class="date-badge text-center">
-                <div class="month text-uppercase small">
-                  <% offre.duree %>
-                </div>
-                <div class="day fw-bold fs-7">
-                  <%= l(offre.date_prevue, format: :time_only) %>
+              <div class="text-center" style="min-width: 60px;">
+                <div class="fw-bold" style="font-size: 0.85rem; line-height: 1.2;">
+                  <%= l(offre.date_prevue, format: :time_only) %>h
                 </div>
               </div>
+            </div>
+
+            <div class="col-auto d-none d-md-block">
+              <% if offre.image.attached? %>
+                <%= image_tag offre.image, class: "rounded", style: "width: 60px; height: 60px; object-fit: cover;" %>
+              <% else %>
+                <%= image_tag "placeholder_offre.png", class: "rounded", style: "width: 60px; height: 60px; object-fit: cover;" %>
+              <% end %>
             </div>
 
             <div class="col">
               <%= link_to offre_path(offre), class: "text-decoration-none text-reset" do %>
                 <div class="d-flex align-items-center">
                   <% if offre.fournisseur.image.attached? %>
-                    <%= image_tag offre.fournisseur.image, class: "rounded me-3 d-md-block", style: "width: 48px; height: 48px; object-fit: cover;" %>
+                    <%= image_tag offre.fournisseur.image, class: "rounded me-3 d-none d-lg-block", style: "width: 48px; height: 48px; object-fit: cover;" %>
                   <% end %>
                   <div>
                     <h6 class="mb-0 fw-bold"><%= offre.titre %></h6>
@@ -56,6 +61,20 @@
                     <% end %>
                   </div>
                 </div>
+              <% end %>
+            </div>
+
+            <div class="col-auto">
+              <% if current_user %>
+                <% if offre.user_registered?(current_user) %>
+                  <%= button_to "Se désinscrire", unregister_offre_path(offre), method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: "Êtes-vous sûr ?" } %>
+                <% elsif offre.full? %>
+                  <button class="btn btn-secondary btn-sm" disabled>Complet</button>
+                <% else %>
+                  <%= button_to "S'inscrire", register_offre_path(offre), method: :post, class: "btn btn-primary btn-sm" %>
+                <% end %>
+              <% else %>
+                <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-primary btn-sm" %>
               <% end %>
             </div>
           </div>

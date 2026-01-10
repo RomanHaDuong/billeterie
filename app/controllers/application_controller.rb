@@ -11,6 +11,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Redirect to homepage after sign in
+  def after_sign_in_path_for(resource)
+    root_path
+  end
+
+  # Redirect to homepage after sign up
+  def after_sign_up_path_for(resource)
+    root_path
+  end
+
   private
 
   def set_current_user_fournisseur
