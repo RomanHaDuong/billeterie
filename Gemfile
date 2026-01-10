@@ -84,7 +84,7 @@ gem 'google-api-client', require: 'google/apis/calendar_v3'
 gem 'omniauth-rails_csrf_protection'
 gem 'icalendar'
 gem 'rails-i18n'
-
+gem 'fiddle'
 
 group :development do
   gem 'solargraph', require: false
