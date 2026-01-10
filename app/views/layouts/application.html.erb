@@ -49,36 +49,24 @@
   
   <%# Close navbar on mobile when clicking links %>
   <script>
-    document.addEventListener('turbo:load', function() {
-      const navbarToggler = document.querySelector('.navbar-toggler');
+    function setupNavbarCollapse() {
       const navbarCollapse = document.getElementById('navbarContent');
       const navLinks = document.querySelectorAll('.navbar-nav .nav-link, .navbar-collapse .btn, .navbar-collapse a');
       
-      if (navbarToggler && navbarCollapse) {
+      if (navbarCollapse && typeof bootstrap !== 'undefined') {
+        const bsCollapse = new bootstrap.Collapse(navbarCollapse, { toggle: false });
+        
         navLinks.forEach(function(link) {
           link.addEventListener('click', function() {
             if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
-              navbarToggler.click();
+              bsCollapse.hide();
             }
           });
         });
       }
-    });
+    }
     
-    document.addEventListener('DOMContentLoaded', function() {
-      const navbarToggler = document.querySelector('.navbar-toggler');
-      const navbarCollapse = document.getElementById('navbarContent');
-      const navLinks = document.querySelectorAll('.navbar-nav .nav-link, .navbar-collapse .btn, .navbar-collapse a');
-      
-      if (navbarToggler && navbarCollapse) {
-        navLinks.forEach(function(link) {
-          link.addEventListener('click', function() {
-            if (window.innerWidth < 992 && navbarCollapse.classList.contains('show')) {
-              navbarToggler.click();
-            }
-          });
-        });
-      }
-    });
+    document.addEventListener('turbo:load', setupNavbarCollapse);
+    document.addEventListener('DOMContentLoaded', setupNavbarCollapse);
   </script>
 </body>
