@@ -11,14 +11,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Redirect to homepage after sign in
+  # Redirect to stored location or homepage after sign in
   def after_sign_in_path_for(resource)
-    root_path
+    stored_location_for(resource) || root_path
   end
 
-  # Redirect to homepage after sign up
+  # Redirect to stored location or homepage after sign up
   def after_sign_up_path_for(resource)
-    root_path
+    stored_location_for(resource) || root_path
   end
 
   private
