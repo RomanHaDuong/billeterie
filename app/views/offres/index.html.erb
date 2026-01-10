@@ -9,10 +9,10 @@
       <h2 class="fw-bold mb-0"></h2>
       <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link" data-bs-toggle="tab" href="#list-view" style="background-color: #6B7459; color: white;" onmouseover="this.style.backgroundColor='#5A6248'" onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#6B7459'">Liste</a>
+          <a id="listeTab" class="nav-link" data-bs-toggle="tab" href="#list-view" style="background-color: transparent; color: #595E47; border: 2px solid #6B7459;">Liste</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" data-bs-toggle="tab" href="#agenda-view" style="background-color: #6B7459; color: white;" onmouseover="this.style.backgroundColor='#5A6248'" onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#6B7459'">Agenda</a>
+          <a id="agendaTab" class="nav-link active" data-bs-toggle="tab" href="#agenda-view" style="background-color: #6B7459; color: white; border: 2px solid #6B7459;">Agenda</a>
         </li>
       </ul>
     </div>
@@ -102,3 +102,36 @@
 
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const listeTab = document.getElementById('listeTab');
+    const agendaTab = document.getElementById('agendaTab');
+    
+    listeTab.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Update styles
+      listeTab.style.setProperty('background-color', '#6B7459', 'important');
+      listeTab.style.setProperty('color', 'white', 'important');
+      agendaTab.style.setProperty('background-color', 'transparent', 'important');
+      agendaTab.style.setProperty('color', '#595E47', 'important');
+      
+      // Trigger Bootstrap tab
+      const tab = new bootstrap.Tab(listeTab);
+      tab.show();
+    });
+    
+    agendaTab.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Update styles
+      agendaTab.style.setProperty('background-color', '#6B7459', 'important');
+      agendaTab.style.setProperty('color', 'white', 'important');
+      listeTab.style.setProperty('background-color', 'transparent', 'important');
+      listeTab.style.setProperty('color', '#595E47', 'important');
+      
+      // Trigger Bootstrap tab
+      const tab = new bootstrap.Tab(agendaTab);
+      tab.show();
+    });
+  });
+</script>
