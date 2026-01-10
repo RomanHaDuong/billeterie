@@ -74,7 +74,7 @@
                   <%= button_to "S'inscrire", register_offre_path(offre), method: :post, class: "btn btn-sm", style: "background-color: #7B8467; color: white; border: none;" %>
                 <% end %>
               <% else %>
-                <%= link_to "S'inscrire", new_user_registration_path, class: "btn btn-sm", style: "background-color: #7B8467; color: white; border: none; white-space: nowrap;" %>
+                <%= link_to "S'inscrire", new_user_registration_path(return_to: request.fullpath), class: "btn btn-sm", style: "background-color: #7B8467; color: white; border: none; white-space: nowrap;" %>
               <% end %>
             </div>
           </div>

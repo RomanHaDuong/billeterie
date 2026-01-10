@@ -23,18 +23,28 @@
 
   <%# Flash messages %>
   <% if notice || alert %>
-    <div class="container mt-3">
+    <div class="container mt-4">
       <% if notice %>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%= notice %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="alert alert-dismissible fade show shadow-sm" role="alert" style="background-color: #d4edda; border: none; border-left: 4px solid #28a745; border-radius: 8px; padding: 1rem 1.5rem;">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-check-circle-fill text-success me-3" style="font-size: 1.5rem;"></i>
+            <div class="flex-grow-1" style="color: #155724; font-weight: 500;">
+              <%= notice %>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         </div>
       <% end %>
 
       <% if alert %>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <%= alert %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="alert alert-dismissible fade show shadow-sm" role="alert" style="background-color: #f8d7da; border: none; border-left: 4px solid #dc3545; border-radius: 8px; padding: 1rem 1.5rem;">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-triangle-fill text-danger me-3" style="font-size: 1.5rem;"></i>
+            <div class="flex-grow-1" style="color: #721c24; font-weight: 500;">
+              <%= alert %>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
         </div>
       <% end %>
     </div>

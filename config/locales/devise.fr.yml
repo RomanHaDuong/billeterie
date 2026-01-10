@@ -38,7 +38,7 @@ fr:
       updated_not_active: "Votre mot de passe a été modifié avec succès."
     registrations:
       destroyed: "Au revoir ! Votre compte a été supprimé avec succès. Nous espérons vous revoir bientôt."
-      signed_up: "Bienvenue ! Vous vous êtes inscrit avec succès."
+      signed_up: "Votre compte a été créé avec succès."
       signed_up_but_inactive: "Vous vous êtes inscrit avec succès. Cependant, votre compte n'est pas encore activé."
       signed_up_but_locked: "Vous vous êtes inscrit avec succès. Cependant, votre compte est bloqué."
       signed_up_but_unconfirmed: "Un message avec un lien de confirmation a été envoyé à votre adresse email. Veuillez suivre le lien pour activer votre compte."

@@ -1,7 +1,7 @@
 <div class="container py-5">
   <%# User Profile Header %>
   <div class="card border-0 shadow-sm p-4 mb-4">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
       <div class="d-flex align-items-center">
         <% if current_user.image.attached? %>
           <%= image_tag current_user.image, class: "rounded-circle me-3", style: "width: 64px; height: 64px; object-fit: cover;" %>
@@ -13,16 +13,16 @@
           <p class="text-muted mb-0"><%= current_user.email %></p>
         </div>
       </div>
-      <div class="d-flex gap-2">
-        <%= link_to "Modifier le profil", edit_user_path(current_user), class: "btn btn-outline-primary" %>
+      <div class="d-flex flex-wrap gap-2">
+        <%= link_to "Modifier le profil", edit_user_path(current_user), class: "btn btn-outline-primary btn-sm" %>
         <% if current_user.intervenant? %>
-          <%= link_to edit_fournisseur_path(current_user.fournisseur), class: "btn btn-primary" do %>
-            <i class="fa-solid fa-pen-to-square me-2"></i>Voir/modifier ma page intervenant
+          <%= link_to edit_fournisseur_path(current_user.fournisseur), class: "btn btn-primary btn-sm" do %>
+            <i class="fa-solid fa-pen-to-square me-2"></i><span class="d-none d-sm-inline">Voir/modifier ma page intervenant</span><span class="d-inline d-sm-none">Intervenant</span>
           <% end %>
         <% end %>
         <% if current_user.admin? %>
-          <%= link_to admin_users_path, class: "btn btn-danger" do %>
-            <i class="fa-solid fa-users-gear me-2"></i>Gestion utilisateurs
+          <%= link_to admin_users_path, class: "btn btn-danger btn-sm" do %>
+            <i class="fa-solid fa-users-gear me-2"></i><span class="d-none d-sm-inline">Gestion utilisateurs</span><span class="d-inline d-sm-none">Admin</span>
           <% end %>
         <% end %>
       </div>
@@ -101,41 +101,43 @@
 
             <%# Workshops for this date %>
             <% offres.each do |offre| %>
-              <div class="list-group-item border-0 py-4 <%= offre.date_prevue && offre.date_prevue < Time.now ? 'opacity-75' : '' %>">
-                <div class="row g-3">
+              <div class="list-group-item border-0 py-3 py-md-4 <%= offre.date_prevue && offre.date_prevue < Time.now ? 'opacity-75' : '' %>">
+                <div class="row g-2 g-md-3">
                   <%# Image and Main Content %>
                   <div class="col-12 col-md">
-                    <div class="d-flex gap-3">
+                    <div class="d-flex gap-2 gap-md-3">
                       <%# Image %>
                       <div class="flex-shrink-0">
                         <%= link_to offre_path(offre) do %>
                           <% if offre.image.attached? %>
-                            <%= image_tag offre.image, class: "rounded-3 shadow-sm", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                            <%= image_tag offre.image, class: "rounded-3 shadow-sm d-none d-sm-block", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                            <%= image_tag offre.image, class: "rounded-3 shadow-sm d-block d-sm-none", style: "width: 60px; height: 60px; object-fit: cover;" %>
                           <% else %>
-                            <%= image_tag "placeholder_offre.png", class: "rounded-3 shadow-sm", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                            <%= image_tag "placeholder_offre.png", class: "rounded-3 shadow-sm d-none d-sm-block", style: "width: 100px; height: 100px; object-fit: cover;" %>
+                            <%= image_tag "placeholder_offre.png", class: "rounded-3 shadow-sm d-block d-sm-none", style: "width: 60px; height: 60px; object-fit: cover;" %>
                           <% end %>
                         <% end %>
                       </div>
 
                       <%# Details %>
                       <div class="flex-grow-1">
-                        <div class="d-flex align-items-center gap-3 mb-2">
+                        <div class="d-flex flex-column flex-sm-row align-items-start align-items-sm-center gap-2 gap-sm-3 mb-2">
                           <h5 class="fw-bold mb-0">
                             <%= link_to offre.titre, offre_path(offre), class: "text-decoration-none text-dark hover-primary" %>
                           </h5>
                           <%# Time Badge %>
                           <% if offre.date_prevue %>
-                            <div class="badge bg-primary fs-6 py-1 px-3 rounded-3">
+                            <div class="badge bg-primary fs-6 py-1 px-2 px-sm-3 rounded-3">
                               <%= offre.date_prevue.strftime('%H:%M') %>
                             </div>
                           <% else %>
-                            <div class="badge bg-secondary fs-6 py-1 px-3 rounded-3">
+                            <div class="badge bg-secondary fs-6 py-1 px-2 px-sm-3 rounded-3">
                               TBD
                             </div>
                           <% end %>
                         </div>
-                        <p class="text-muted mb-2"><%= offre.sous_titre %></p>
-                        <div class="d-flex flex-wrap gap-3 text-muted small">
+                        <p class="text-muted mb-2 small d-none d-sm-block"><%= offre.sous_titre %></p>
+                        <div class="d-flex flex-wrap gap-2 gap-sm-3 text-muted small">
                           <span>
                             <i class="fa-solid fa-location-dot text-primary me-1"></i>
                             <%= offre.salle %>
@@ -154,11 +156,11 @@
                   </div>
 
                   <%# Actions - Stack on mobile, inline on desktop %>
-                  <div class="col-12 col-md-auto d-flex flex-column flex-md-row gap-2 align-items-stretch align-items-md-start">
-                    <%= link_to offre_path(offre), class: "btn btn-outline-primary" do %>
+                  <div class="col-12 col-md-auto d-flex flex-column flex-sm-row gap-2 align-items-stretch align-items-md-start mt-2 mt-md-0">
+                    <%= link_to offre_path(offre), class: "btn btn-outline-primary btn-sm" do %>
                       <i class="fa-solid fa-eye me-2"></i>Voir l'atelier
                     <% end %>
-                    <%= button_to unregister_offre_path(offre), method: :delete, class: "btn btn-outline-danger", data: { confirm: "Êtes-vous sûr de vouloir vous désinscrire ?" } do %>
+                    <%= button_to unregister_offre_path(offre), method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: "Êtes-vous sûr de vouloir vous désinscrire ?" } do %>
                       <i class="fa-solid fa-user-minus me-2"></i>Se désinscrire
                     <% end %>
                   </div>
