@@ -59,109 +59,94 @@
   
   <%# Mobile menu toggle %>
   <script>
-    (function() {
-      let menuOpen = false;
+    function initMobileMenu() {
+      const btn = document.getElementById('mobileMenuBtn');
+      const closeBtn = document.getElementById('mobileMenuClose');
+      const overlay = document.getElementById('mobileMenuOverlay');
+      const line1 = document.getElementById('menuLine1');
+      const line2 = document.getElementById('menuLine2');
+      const line3 = document.getElementById('menuLine3');
       
-      function openMenu() {
-        const overlay = document.getElementById('mobileMenuOverlay');
-        const line1 = document.getElementById('menuLine1');
-        const line2 = document.getElementById('menuLine2');
-        const line3 = document.getElementById('menuLine3');
-        const items = document.querySelectorAll('#menuItems li');
-        const cta = document.getElementById('menuCTA');
-        const account = document.getElementById('menuAccount');
-        
-        menuOpen = true;
+      if (!btn || !overlay || !closeBtn || !line1 || !line2 || !line3) return;
+      
+      // Remove existing handlers to prevent duplicates
+      const newBtn = btn.cloneNode(true);
+      btn.parentNode.replaceChild(newBtn, btn);
+      const newCloseBtn = closeBtn.cloneNode(true);
+      closeBtn.parentNode.replaceChild(newCloseBtn, closeBtn);
+      
+      function showMenu() {
         overlay.style.display = 'block';
         document.body.style.overflow = 'hidden';
         
-        requestAnimationFrame(() => {
+        setTimeout(() => {
           overlay.style.opacity = '1';
-          line1.style.transform = 'rotate(45deg) translateY(7px)';
-          line2.style.opacity = '0';
-          line3.style.transform = 'rotate(-45deg) translateY(-7px)';
           
+          const newLine1 = document.getElementById('menuLine1');
+          const newLine2 = document.getElementById('menuLine2');
+          const newLine3 = document.getElementById('menuLine3');
+          
+          newLine1.style.transform = 'rotate(45deg) translateY(7px)';
+          newLine2.style.opacity = '0';
+          newLine3.style.transform = 'rotate(-45deg) translateY(-7px)';
+          
+          const items = overlay.querySelectorAll('#menuItems li, #menuCTA, #menuAccount');
           items.forEach((item, i) => {
             setTimeout(() => {
               item.style.opacity = '1';
               item.style.transform = 'translateY(0)';
-            }, 100 + (i * 100));
+            }, 50 + (i * 80));
           });
-          
-          if (cta) setTimeout(() => { cta.style.opacity = '1'; cta.style.transform = 'translateY(0)'; }, 400);
-          if (account) setTimeout(() => { account.style.opacity = '1'; account.style.transform = 'translateY(0)'; }, 500);
-        });
+        }, 50);
       }
       
-      function closeMenu() {
-        const overlay = document.getElementById('mobileMenuOverlay');
-        const line1 = document.getElementById('menuLine1');
-        const line2 = document.getElementById('menuLine2');
-        const line3 = document.getElementById('menuLine3');
-        const items = document.querySelectorAll('#menuItems li');
-        const cta = document.getElementById('menuCTA');
-        const account = document.getElementById('menuAccount');
+      function hideMenu() {
+        const newOverlay = document.getElementById('mobileMenuOverlay');
+        const newLine1 = document.getElementById('menuLine1');
+        const newLine2 = document.getElementById('menuLine2');
+        const newLine3 = document.getElementById('menuLine3');
         
-        overlay.style.opacity = '0';
-        line1.style.transform = '';
-        line2.style.opacity = '1';
-        line3.style.transform = '';
+        newOverlay.style.opacity = '0';
+        newLine1.style.transform = '';
+        newLine2.style.opacity = '1';
+        newLine3.style.transform = '';
         document.body.style.overflow = '';
         
         setTimeout(() => {
-          overlay.style.display = 'none';
+          newOverlay.style.display = 'none';
+          const items = newOverlay.querySelectorAll('#menuItems li, #menuCTA, #menuAccount');
           items.forEach(item => {
             item.style.opacity = '0';
             item.style.transform = 'translateY(20px)';
           });
-          if (cta) { cta.style.opacity = '0'; cta.style.transform = 'translateY(20px)'; }
-          if (account) { account.style.opacity = '0'; account.style.transform = 'translateY(20px)'; }
-          menuOpen = false;
         }, 400);
       }
       
-      document.addEventListener('DOMContentLoaded', function() {
-        const btn = document.getElementById('mobileMenuBtn');
-        const close = document.getElementById('mobileMenuClose');
-        const links = document.querySelectorAll('#mobileMenuOverlay a');
-        
-        if (btn) {
-          btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (!menuOpen) openMenu();
-          });
-        }
-        
-        if (close) {
-          close.addEventListener('click', function(e) {
-            e.preventDefault();
-            if (menuOpen) closeMenu();
-          });
-        }
-        
-        links.forEach(link => {
-          link.addEventListener('click', function() {
-            if (menuOpen) closeMenu();
-          });
+      document.getElementById('mobileMenuBtn').addEventListener('click', showMenu);
+      document.getElementById('mobileMenuClose').addEventListener('click', hideMenu);
+      
+      // Hover effects
+      overlay.querySelectorAll('.btn').forEach(b => {
+        b.addEventListener('mouseenter', function() {
+          this.style.transform = 'scale(1.05)';
+          this.style.boxShadow = '0 8px 16px rgba(0,0,0,0.15)';
         });
-        
-        // Hover effects
-        document.querySelectorAll('#mobileMenuOverlay .btn').forEach(btn => {
-          btn.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.05)';
-            this.style.boxShadow = '0 8px 16px rgba(0,0,0,0.15)';
-          });
-          btn.addEventListener('mouseleave', function() {
-            this.style.transform = 'scale(1)';
-            this.style.boxShadow = '';
-          });
-        });
-        
-        document.querySelectorAll('#menuItems a').forEach(link => {
-          link.addEventListener('mouseenter', function() { this.style.color = '#7B8467'; });
-          link.addEventListener('mouseleave', function() { this.style.color = '#595E47'; });
+        b.addEventListener('mouseleave', function() {
+          this.style.transform = 'scale(1)';
+          this.style.boxShadow = '';
         });
       });
-    })();
+      
+      overlay.querySelectorAll('#menuItems a').forEach(link => {
+        link.addEventListener('mouseenter', function() { this.style.color = '#7B8467'; });
+        link.addEventListener('mouseleave', function() { this.style.color = '#595E47'; });
+      });
+    }
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+    
+    // Re-initialize on Turbo navigation
+    document.addEventListener('turbo:load', initMobileMenu);
   </script>
 </body>
