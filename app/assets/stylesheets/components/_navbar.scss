@@ -19,6 +19,17 @@
     width: 100%;
   }
 }
+
+// Login icon hover effect
+.btn-outline-primary.rounded-circle {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background-color: #7B8467 !important;
+    border-color: #7B8467 !important;
+    color: white !important;
+  }
+}
 // footer hover effect
 .footer-link {
   position: relative;

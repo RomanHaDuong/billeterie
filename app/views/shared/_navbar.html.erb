@@ -12,13 +12,13 @@
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <%= link_to 'Le Programme', offres_path, class: 'nav-link px-3 fw-medium' %>
+          <%= link_to 'Le Programme', offres_path, class: 'nav-link px-3 fw-medium', style: 'color: #595E47;' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Animateurs', fournisseurs_path, class: 'nav-link px-3 fw-medium' %>
+          <%= link_to 'Animateurs', fournisseurs_path, class: 'nav-link px-3 fw-medium', style: 'color: #595E47;' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Le 47', lieu_path, class: 'nav-link px-3 fw-medium' %>
+          <%= link_to 'Le 47', lieu_path, class: 'nav-link px-3 fw-medium', style: 'color: #595E47;' %>
         </li>
       </ul>
 
@@ -26,7 +26,7 @@
       <div class="d-flex flex-column align-items-center mb-2 mb-sm-0">
         <%= link_to "Je viens", participation_path, class: 'btn mb-2', style: 'background-color: #7B8467; color: white; border: none;' %>
         <small class="text-center">
-          <%= link_to "Je ne peux pas venir mais je soutiens!", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=50&contributeAs=me", class: 'text-decoration-none text-muted', style: 'font-size: 0.75rem;', target: :blank %>
+          <%= link_to "Je ne peux pas venir mais je soutiens!", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=50&contributeAs=me", class: 'text-decoration-none', style: 'font-size: 0.75rem; color: #595E47;', target: :blank %>
         </small>
       </div>
 
@@ -55,10 +55,6 @@
               </button>
             <% end %>
           </div>
-        <% else %>
-          <%= link_to new_user_registration_path, class: 'btn btn-outline-primary rounded-circle', style: 'width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;', title: 'Créer un compte' do %>
-            <i class="bi bi-person-plus" style="font-size: 1.2rem;"></i>
-          <% end %>
         <% end %>
       </div>
     </div>
