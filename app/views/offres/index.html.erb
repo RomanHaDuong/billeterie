@@ -35,20 +35,6 @@
                     <% else %>
                       <%= image_tag "placeholder_offre.png", class: "workshop-card-img" %>
                     <% end %>
-                    <%# Favorite button %>
-                    <% if current_user %>
-                      <div class="favorite-btn">
-                        <% if current_user.favori_offres.include?(offre) %>
-                          <%= button_to offre_favori_path(offre), method: :delete, class: 'btn p-0' do %>
-                            <i class="fa-solid fa-heart text-danger"></i>
-                          <% end %>
-                        <% else %>
-                          <%= button_to offre_favori_path(offre), method: :post, class: 'btn p-0' do %>
-                            <i class="fa-regular fa-heart text-secondary"></i>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    <% end %>
                   </div>
 
                   <div class="card-body position-relative">

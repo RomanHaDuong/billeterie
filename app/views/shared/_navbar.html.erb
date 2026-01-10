@@ -23,8 +23,11 @@
       </ul>
 
       <div class="d-flex flex-column flex-sm-row align-items-center gap-3">
-      <div class="d-flex gap-2 mb-2 mb-sm-0">
-        <%= link_to "Je viens", "https://opencollective.com/le-47/events/lheure-du-mouvement-111636a3/contribute/je-viens-au-festival-97285", class: 'btn btn-secondary', target: :blank %>
+      <div class="d-flex align-items-center gap-2 mb-2 mb-sm-0">
+        <%= link_to "Je viens", participation_path, class: 'btn btn-secondary' %>
+        <small>
+          <%= link_to "Je ne peux pas venir mais je soutiens!", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=50&contributeAs=me", class: 'text-decoration-none text-muted', style: 'font-size: 0.75rem;', target: :blank %>
+        </small>
       </div>
 
         <% if user_signed_in? %>
@@ -53,9 +56,8 @@
             <% end %>
           </div>
         <% else %>
-          <%= link_to new_user_registration_path, class: 'btn btn-primary' do %>
-            <i class="bi bi-person-circle me-2"></i>
-            <span>Mon compte festivalier</span>
+          <%= link_to new_user_registration_path, class: 'btn btn-outline-primary rounded-circle', style: 'width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;', title: 'Créer un compte' do %>
+            <i class="bi bi-person-plus" style="font-size: 1.2rem;"></i>
           <% end %>
         <% end %>
       </div>

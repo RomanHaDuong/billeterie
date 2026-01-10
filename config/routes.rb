@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
+  # Participation consciente page
+  get 'participation', to: 'pages#participation', as: 'participation'
+
   # Dashboard for users to see their registered workshops
   get 'dashboard', to: 'dashboard#index', as: 'dashboard'
 
