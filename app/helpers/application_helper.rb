@@ -3,9 +3,9 @@ module ApplicationHelper
     return '' unless datetime
     
     if datetime.min.zero?
-      datetime.strftime("%H:00")
+      datetime.strftime("%Hh")
     else
-      datetime.strftime("%H:%M")
+      datetime.strftime("%Hh%M")
     end
   end
 end

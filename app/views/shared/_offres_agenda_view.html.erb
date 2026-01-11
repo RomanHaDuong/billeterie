@@ -43,13 +43,10 @@
                     <h6 class="mb-0 fw-bold"><%= offre.titre %></h6>
                     <p class="text-muted mb-0 small">
                       <% if offre.duree.present? %>
-                        <i class="fa-regular fa-clock me-1"></i> <%= offre.duree.to_s.chomp('h') %>
+                        <i class="fa-regular fa-clock me-1"></i> <%= offre.duree %>
                       <% end %>
                       <% if offre.salle.present? %>
                         <i class="fa-solid fa-location-dot ms-3 me-1"></i> <%= offre.salle %>
-                      <% end %>
-                      <% if offre.place %>
-                        <i class="fa-solid fa-users ms-3 me-1"></i> <%= offre.bookings.count %>/<%= offre.place %>
                       <% end %>
                     </p>
                     <% if current_user && offre.user_registered?(current_user) %>

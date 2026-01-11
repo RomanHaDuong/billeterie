@@ -91,6 +91,8 @@ class OffresController < ApplicationController
   end
 
   def check_ownership
+    return if current_user&.admin?
+    
     unless current_user.intervenant? && 
            (current_user.fournisseur.id == @offre.fournisseur_id || 
             current_user.fournisseur.id == @offre.secondary_fournisseur_id)
