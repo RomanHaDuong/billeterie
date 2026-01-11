@@ -1,7 +1,10 @@
 <div class="container-fluid p-0">
   <%# Hero Banner %>
   <div class="position-relative mb-5">
-    <%= image_tag "festival_banner.png", class: "w-100", alt: "L'Heure du Mouvement - Festival des Éco Workers du 47" %>
+    <picture>
+      <source media="(min-width: 768px)" srcset="<%= asset_path('festival_banner_desktop.png') %>">
+      <%= image_tag "festival_banner.png", class: "w-100", alt: "L'Heure du Mouvement - Festival des Éco Workers du 47" %>
+    </picture>
   </div>
 
   <%# Main content %>
