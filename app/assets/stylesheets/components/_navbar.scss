@@ -129,3 +129,27 @@
     }
   }
 }
+
+// Responsive logo sizing - bigger on desktop
+.logo-responsive {
+  @media (min-width: 768px) {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+
+// Responsive hamburger menu - bigger on desktop
+.hamburger-responsive {
+  @media (min-width: 768px) {
+    width: 70px !important;
+    height: 70px !important;
+    padding: 16px !important;
+  }
+}
+
+.hamburger-line {
+  @media (min-width: 768px) {
+    width: 32px !important;
+    height: 3px !important;
+  }
+}

@@ -39,7 +39,7 @@
               <%= offre.date_prevue.strftime("%d/%m") %>
             </div>
             <div class="day fw-bold fs-6 nowrap-text">
-              <%= l(offre.date_prevue, format: :time_only) %>
+              <%= format_time_french(offre.date_prevue) %>
             </div>
           </div>
         </div>

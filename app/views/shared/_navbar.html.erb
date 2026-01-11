@@ -1,15 +1,15 @@
 <nav id="mainNavbar" class="navbar navbar-light py-3" style="background-color: transparent; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; transition: transform 0.3s ease;">
   <div class="container-fluid px-4">
     <%= link_to root_path, class: "navbar-brand d-flex align-items-center gap-2" do %>
-      <%= image_tag "logo.png", class: "rounded-circle", width: 40, height: 40, alt: "Festival logo" %>
+      <%= image_tag "logo.png", class: "rounded-circle logo-responsive", width: 40, height: 40, alt: "Festival logo" %>
       <span id="festivalText" class="fw-bold fs-4 text-primary" style="<%= 'display: none;' if current_page?(root_path) %> transition: opacity 0.3s ease, transform 0.3s ease, width 0.3s ease; overflow: hidden; white-space: nowrap;">Festival</span>
     <% end %>
 
     <%# Hamburger Menu Button - Always visible on the right %>
-    <button id="mobileMenuBtn" style="background-color: #ede4de; border: none; padding: 12px; cursor: pointer; width: 50px; height: 50px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; position: fixed; right: 20px; top: 20px; z-index: 1001; transition: transform 0.3s ease;">
-      <span id="menuLine1" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
-      <span id="menuLine2" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
-      <span id="menuLine3" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
+    <button id="mobileMenuBtn" class="hamburger-responsive" style="background-color: #ede4de; border: none; padding: 12px; cursor: pointer; width: 50px; height: 50px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; position: fixed; right: 20px; top: 20px; z-index: 1001; transition: transform 0.3s ease;">
+      <span id="menuLine1" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
+      <span id="menuLine2" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
+      <span id="menuLine3" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
     </button>
   </div>
 </nav>
@@ -40,7 +40,7 @@
       </ul>
 
       <div class="text-center mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;" id="menuCTA">
-        <%= link_to "Je viens", participation_path, class: 'btn btn-lg mb-3', style: 'background-color: #7B8467; color: white; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;' %>
+        <%= link_to "Je viens !", participation_path, class: 'btn btn-lg mb-3', style: 'background-color: #7B8467; color: white; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;' %>
         <div>
           <%= link_to "Je ne peux pas venir mais je soutiens!", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=50&contributeAs=me", class: 'text-decoration-none d-block', style: 'font-size: 0.9rem; color: #595E47; transition: color 0.3s ease;', target: :blank %>
         </div>

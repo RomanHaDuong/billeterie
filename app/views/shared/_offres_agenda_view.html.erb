@@ -20,7 +20,7 @@
             <div class="col-auto">
               <div class="text-center" style="min-width: 60px;">
                 <div class="fw-bold" style="font-size: 0.85rem; line-height: 1.2;">
-                  <%= l(offre.date_prevue, format: :time_only) %>h
+                  <%= format_time_french(offre.date_prevue) %>
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@
                     <h6 class="mb-0 fw-bold"><%= offre.titre %></h6>
                     <p class="text-muted mb-0 small">
                       <% if offre.duree.present? %>
-                        <i class="fa-regular fa-clock me-1"></i> <%= offre.duree %>
+                        <i class="fa-regular fa-clock me-1"></i> <%= offre.duree.to_s.chomp('h') %>
                       <% end %>
                       <% if offre.salle.present? %>
                         <i class="fa-solid fa-location-dot ms-3 me-1"></i> <%= offre.salle %>
@@ -61,20 +61,6 @@
                     <% end %>
                   </div>
                 </div>
-              <% end %>
-            </div>
-
-            <div class="col-auto d-flex align-items-center">
-              <% if current_user %>
-                <% if offre.user_registered?(current_user) %>
-                  <%= button_to "Se désinscrire", unregister_offre_path(offre), method: :delete, class: "btn btn-outline-danger btn-sm", data: { confirm: "Êtes-vous sûr ?" } %>
-                <% elsif offre.full? %>
-                  <button class="btn btn-secondary btn-sm" disabled>Complet</button>
-                <% else %>
-                  <%= button_to "S'inscrire", register_offre_path(offre), method: :post, class: "btn btn-sm", style: "background-color: #7B8467; color: white; border: none;" %>
-                <% end %>
-              <% else %>
-                <%= link_to "S'inscrire", new_user_registration_path(return_to: request.fullpath), class: "btn btn-sm", style: "background-color: #7B8467; color: white; border: none; white-space: nowrap;" %>
               <% end %>
             </div>
           </div>

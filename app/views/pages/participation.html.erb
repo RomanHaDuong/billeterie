@@ -11,10 +11,10 @@
         Bienvenue au Festival des éco-workers du 47, un festival pas comme les autres, qui vous invite à entrer dans un mouvement plutôt que dans un simple festival…
       </p>
       
-      <p class="mb-3">
+      <p class="mb-3 text-center">
         Ce Festival, nous le voulons à l'image de notre communauté : <strong>engagé, ouvert, inspirant</strong>.
       </p>
-      <p class="mb-4">
+      <p class="mb-4 text-center">
         Fondé sur la confiance, la coopération et la libre circulation de la valeur.
       </p>
     </div>
@@ -23,7 +23,7 @@
   <%# Participation Consciente Section %>
   <div class="row justify-content-center mb-5">
     <div class="col-lg-8">
-      <div class="bg-light p-4 rounded-3 mb-4">
+      <div class="bg-light p-4 rounded-3 mb-4 text-center">
         <p class="mb-3">
           <strong>L'inscription au Festival ne se fait pas à travers l'achat d'un billet à tarif fixe.</strong>
         </p>
@@ -95,16 +95,18 @@
         <%# Card 1 - Curieux %>
         <div class="col-lg-6">
           <div class="card h-100 shadow-sm">
-            <div class="card-body p-4">
-              <h3 class="h4 mb-3" style="color: #56534E;">👉 Vous êtes curieux</h3>
-              <p class="fw-bold mb-3" style="color: #56534E;">Inscrivez-vous avec une contribution consciente!</p>
-              <p class="mb-3" style="color: #56534E;">Vous pouvez :</p>
-              <ul class="mb-4" style="color: #56534E;">
-                <li>verser une contribution consciente dès maintenant</li>
-                <li>et/ou choisir de le faire pendant le Festival</li>
-              </ul>
-              <div class="d-grid">
-                <%= link_to "S'inscrire", "https://opencollective.com/le-47/events/lheure-du-mouvement-111636a3/contribute/je-viens-au-festival-97285", class: 'btn btn-primary btn-lg', target: :blank %>
+            <div class="card-body p-4 d-flex flex-column justify-content-between align-items-center text-center">
+              <div>
+                <h3 class="h4 mb-3" style="color: #56534E;">👉 Vous êtes curieux</h3>
+                <p class="fw-bold mb-3" style="color: #56534E;">Inscrivez-vous avec une contribution consciente!</p>
+                <p class="mb-3" style="color: #56534E;">Vous pouvez :</p>
+                <ul class="mb-4 text-start" style="color: #56534E;">
+                  <li>verser une contribution consciente dès maintenant</li>
+                  <li>et/ou choisir de le faire pendant le Festival</li>
+                </ul>
+              </div>
+              <div class="d-grid w-100">
+                <%= link_to "S'inscrire", "https://opencollective.com/le-47/events/lheure-du-mouvement-111636a3/order/97285?interval=oneTime&amount=10&contributeAs=me", class: 'btn btn-primary btn-lg', target: :blank %>
               </div>
             </div>
           </div>
@@ -113,11 +115,13 @@
         <%# Card 2 - Convaincus %>
         <div class="col-lg-6">
           <div class="card h-100 shadow-sm">
-            <div class="card-body p-4">
-              <h3 class="h4 mb-3" style="color: #56534E;">👉 Vous êtes déjà convaincus</h3>
-              <p class="fw-bold mb-3" style="color: #56534E;">Inscrivez-vous avec une contribution consciente mensuelle, pour soutenir le projet du 47 dans la durée !</p>
-              <div class="d-grid mt-auto">
-                <%= link_to "S'inscrire", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=50&contributeAs=me", class: 'btn btn-secondary btn-lg', target: :blank %>
+            <div class="card-body p-4 d-flex flex-column justify-content-between align-items-center text-center">
+              <div class="d-flex flex-column justify-content-center flex-grow-1">
+                <h3 class="h4 mb-3" style="color: #56534E;">👉 Vous êtes déjà convaincus</h3>
+                <p class="fw-bold mb-3" style="color: #56534E;">Inscrivez-vous avec une contribution consciente mensuelle, pour soutenir le projet du 47 dans la durée !</p>
+              </div>
+              <div class="d-grid w-100">
+                <%= link_to "S'inscrire", "https://opencollective.com/le-47/contribute/contribution-financiere-77696/checkout?interval=month&amount=20&contributeAs=me", class: 'btn btn-secondary btn-lg', target: :blank %>
               </div>
             </div>
           </div>

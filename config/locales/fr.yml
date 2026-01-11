@@ -2,7 +2,7 @@ fr:
   date:
     formats:
       long: "%A %d %B %Y"
-      time_only: "%H:%M"
+      time_only: "%Hh%M"
       day_only: "%d"
       default: "%d/%m/%Y"
       short: "%e %b"
@@ -10,7 +10,7 @@ fr:
     month_names: [~, Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Août, Septembre, Octobre, Novembre, Décembre]
   time:
     formats:
-      time_only: "%H:%M"
+      time_only: "%Hh%M"
       day_only: "%d"
       default: "%d %B %Y %H:%M:%S"
       short: "%d %b %H:%M"
