@@ -68,7 +68,7 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  function initNavbar() {
     const menuBtn = document.getElementById('mobileMenuBtn');
     const menuOverlay = document.getElementById('mobileMenuOverlay');
     const menuClose = document.getElementById('mobileMenuClose');
@@ -199,5 +199,9 @@
     document.querySelectorAll('#mobileMenuOverlay a').forEach(link => {
       link.addEventListener('click', closeMenu);
     });
-  });
+  }
+
+  // Initialize on both regular page load and Turbo navigation
+  document.addEventListener('DOMContentLoaded', initNavbar);
+  document.addEventListener('turbo:load', initNavbar);
 </script>

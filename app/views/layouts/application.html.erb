@@ -23,10 +23,34 @@
         max-width: 100vw;
         background-color: #E9D7C3;
       }
+      
+      /* Add top padding for non-homepage pages so navbar doesn't hide content */
+      body:not(.homepage) {
+        padding-top: 80px;
+      }
+      
+      /* Larger logo on homepage desktop */
+      @media (min-width: 768px) {
+        body.homepage .logo-responsive {
+          width: 120px !important;
+          height: 120px !important;
+        }
+        
+        body.homepage .hamburger-responsive {
+          width: 90px !important;
+          height: 90px !important;
+          padding: 20px !important;
+        }
+        
+        body.homepage .hamburger-line {
+          width: 40px !important;
+          height: 4px !important;
+        }
+      }
     </style>
   </head>
 
-  <body style="background-color: #E9D7C3;">
+  <body style="background-color: #E9D7C3;" class="<%= 'homepage' if current_page?(root_path) %>">
   <%= render 'shared/navbar' %>
 
   <%# Flash messages - Bottom right position %>

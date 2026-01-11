@@ -1,4 +1,4 @@
-<div class="container p-2 p-sm-3 p-md-5 rounded-3" style="background-color: #E9D7C3; margin-top: 80px !important;">
+<div class="container p-2 p-sm-3 p-md-5 rounded-3" style="background-color: #E9D7C3;">
   <h1 class="text-center text-primary mb-3 mb-md-5">
     Programme
   </h1>
@@ -93,7 +93,7 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  function initOffresIndex() {
     const listeTab = document.getElementById('listeTab');
     const agendaTab = document.getElementById('agendaTab');
     
@@ -122,5 +122,9 @@
       const tab = new bootstrap.Tab(agendaTab);
       tab.show();
     });
-  });
+  }
+
+  // Initialize on both regular page load and Turbo navigation
+  document.addEventListener('DOMContentLoaded', initOffresIndex);
+  document.addEventListener('turbo:load', initOffresIndex);
 </script>
