@@ -119,10 +119,13 @@
           <div class="col-12">
             <div class="d-flex gap-3 justify-content-between align-items-center">
               <% if @offre.persisted? %>
-                <%= button_to "Supprimer", offre_path(@offre), 
+                <%= link_to "Supprimer", offre_path(@offre), 
                     method: :delete, 
                     class: "btn btn-danger", 
-                    data: { confirm: "Êtes-vous sûr de vouloir supprimer cet atelier ? Cette action est irréversible." } %>
+                    data: { 
+                      turbo_method: :delete,
+                      turbo_confirm: "Êtes-vous sûr de vouloir supprimer cet atelier ? Cette action est irréversible." 
+                    } %>
               <% end %>
               <div class="d-flex gap-3">
                 <%= link_to "Annuler", @offre.persisted? ? offre_path(@offre) : dashboard_path, class: "btn btn-outline-secondary" %>

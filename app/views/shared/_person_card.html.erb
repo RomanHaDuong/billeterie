@@ -1,5 +1,5 @@
 <div class="col-md-4 mb-4">
-  <div class="card person-card h-100" style="box-shadow: 0 4px 6px rgba(146, 130, 105, 0.3);">
+  <div class="card person-card h-100 d-flex flex-column" style="box-shadow: 0 4px 6px rgba(146, 130, 105, 0.3);">
     <%# Image %>
     <div class="person-card-img-wrapper">
       <% if fournisseur.user&.image&.attached? %>
@@ -11,21 +11,18 @@
       <% end %>
     </div>
 
-    <div class="card-body">
+    <div class="card-body d-flex flex-column">
       <%# Card content %>
       <h5 class="card-title"><%= fournisseur.name %></h5>
 
       <%# Description with line clamp moved to CSS %>
-      <p class="card-text line-clamp">
+      <p class="card-text line-clamp flex-grow-1">
         <%= truncate(fournisseur.bio, length: 150, separator: ' ', omission: '...') %>
       </p>
 
       <%# Footer %>
-      <div class="mt-4 d-flex justify-content-between align-items-center">
-        <span class="price-tag">
-          <%# <%= number_to_currency(fournisseur.id, unit: "€") %>
-        </span>
-        <%= link_to fournisseur_path(fournisseur), class: 'btn btn-outline-primary' do %>
+      <div class="d-flex justify-content-end align-items-center mt-auto">
+        <%= link_to fournisseur_path(fournisseur), class: 'btn btn-outline-primary btn-sm' do %>
           Voir plus <i class="fa-solid fa-arrow-right ms-2"></i>
         <% end %>
       </div>

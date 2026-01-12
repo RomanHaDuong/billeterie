@@ -15,11 +15,6 @@
       </div>
       <div class="d-flex flex-wrap gap-2">
         <%= link_to "Modifier le profil", edit_user_path(current_user), class: "btn btn-outline-primary btn-sm" %>
-        <% if current_user.intervenant? %>
-          <%= link_to edit_fournisseur_path(current_user.fournisseur), class: "btn btn-primary btn-sm" do %>
-            <i class="fa-solid fa-pen-to-square me-2"></i><span class="d-none d-sm-inline">Voir/modifier ma page intervenant</span><span class="d-inline d-sm-none">Intervenant</span>
-          <% end %>
-        <% end %>
         <% if current_user.admin? %>
           <%= link_to admin_users_path, class: "btn btn-danger btn-sm" do %>
             <i class="fa-solid fa-users-gear me-2"></i><span class="d-none d-sm-inline">Gestion utilisateurs</span><span class="d-inline d-sm-none">Admin</span>

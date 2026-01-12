@@ -4,11 +4,11 @@
     <div class="col-lg-4">
       <div class="position-relative mb-4">
         <% if @fournisseur.user&.image&.attached? %>
-          <%= image_tag @fournisseur.user.image, class: "rounded-3 shadow-sm w-100", style: "height: 380px; object-fit: cover;" %>
+          <%= image_tag @fournisseur.user.image, class: "rounded-3 shadow-sm w-100", style: "object-fit: contain;" %>
         <% elsif @fournisseur.image.attached? %>
-          <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm w-100", style: "height: 380px; object-fit: cover;" %>
+          <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm w-100", style: "object-fit: contain;" %>
         <% else %>
-          <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm w-100", style: "height: 380px; object-fit: cover;" %>
+          <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm w-100", style: "object-fit: contain;" %>
         <% end %>
       </div>
 
@@ -23,19 +23,22 @@
       <%# Contact/Social %>
       <div class="d-flex flex-column gap-2">
         <% if @fournisseur.linkedin.present? %>
-          <a href="<%= @fournisseur.linkedin %>" target="_blank" class="btn btn-outline-primary">
+          <% linkedin_url = @fournisseur.linkedin.start_with?('http') ? @fournisseur.linkedin : "https://#{@fournisseur.linkedin}" %>
+          <a href="<%= linkedin_url %>" target="_blank" class="btn btn-outline-primary">
             <i class="bi bi-linkedin me-2"></i>Linkedin
           </a>
         <% end %>
 
         <% if @fournisseur.instagram.present? %>
-          <a href="<%= @fournisseur.instagram %>" target="_blank" class="btn btn-outline-dark">
+          <% instagram_url = @fournisseur.instagram.start_with?('http') ? @fournisseur.instagram : "https://#{@fournisseur.instagram}" %>
+          <a href="<%= instagram_url %>" target="_blank" class="btn btn-outline-dark">
             <i class="bi bi-instagram me-2"></i>Instagram
           </a>
         <% end %>
 
         <% if @fournisseur.offinity.present? %>
-          <a href="<%= @fournisseur.offinity %>" target="_blank" class="btn btn-outline-dark">
+          <% offinity_url = @fournisseur.offinity.start_with?('http') ? @fournisseur.offinity : "https://#{@fournisseur.offinity}" %>
+          <a href="<%= offinity_url %>" target="_blank" class="btn btn-outline-dark">
             <i class="bi bi-link-45deg me-2"></i>Offinity
           </a>
         <% end %>

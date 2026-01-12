@@ -54,29 +54,46 @@
   <% if notice || alert %>
     <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; max-width: 400px;">
       <% if notice %>
-        <div class="alert alert-dismissible fade show shadow-lg mb-3" role="alert" style="background-color: #d4edda; border: none; border-left: 4px solid #28a745; border-radius: 8px; padding: 1rem 1.5rem;">
+        <div class="alert fade show shadow-lg mb-3 auto-dismiss-alert" role="alert" style="background-color: #d4edda; border: none; border-left: 4px solid #28a745; border-radius: 8px; padding: 1rem 1.5rem;">
           <div class="d-flex align-items-center">
             <i class="bi bi-check-circle-fill text-success me-3" style="font-size: 1.5rem;"></i>
             <div class="flex-grow-1" style="color: #155724; font-weight: 500;">
               <%= notice %>
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         </div>
       <% end %>
 
       <% if alert %>
-        <div class="alert alert-dismissible fade show shadow-lg mb-3" role="alert" style="background-color: #f8d7da; border: none; border-left: 4px solid #dc3545; border-radius: 8px; padding: 1rem 1.5rem;">
+        <div class="alert fade show shadow-lg mb-3 auto-dismiss-alert" role="alert" style="background-color: #f8d7da; border: none; border-left: 4px solid #dc3545; border-radius: 8px; padding: 1rem 1.5rem;">
           <div class="d-flex align-items-center">
             <i class="bi bi-exclamation-triangle-fill text-danger me-3" style="font-size: 1.5rem;"></i>
             <div class="flex-grow-1" style="color: #721c24; font-weight: 500;">
               <%= alert %>
             </div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         </div>
       <% end %>
     </div>
+    
+    <script>
+      function autoDismissAlerts() {
+        const alerts = document.querySelectorAll('.auto-dismiss-alert');
+        alerts.forEach(function(alert) {
+          setTimeout(function() {
+            alert.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            alert.style.opacity = '0';
+            alert.style.transform = 'translateX(100%)';
+            setTimeout(function() {
+              alert.remove();
+            }, 500);
+          }, 5000);
+        });
+      }
+      
+      document.addEventListener('DOMContentLoaded', autoDismissAlerts);
+      document.addEventListener('turbo:load', autoDismissAlerts);
+    </script>
   <% end %>
 
   <%= yield %>
