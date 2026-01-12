@@ -14,7 +14,7 @@
 
   <div class="row">
     <%# Left Column - Image and Details %>
-    <div class="col-lg-6 mb-4">
+    <div class="col-lg-6 mb-4 order-2 order-lg-1">
       <div class="workshop-show-img-wrapper rounded-3 overflow-hidden shadow-sm mb-4">
         <% if @offre.image.attached? %>
           <%= image_tag @offre.image, class: "workshop-show-img" %>
@@ -56,7 +56,7 @@
     </div>
 
     <%# Right Column - Description, Registration, and Intervenants %>
-    <div class="col-lg-6">
+    <div class="col-lg-6 order-1 order-lg-2">
       <%# Description %>
       <div class="card border-0 shadow-sm p-4 mb-4">
         <h5 class="fw-bold mb-3">Description de l'animation</h5>
