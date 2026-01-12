@@ -1,69 +1,70 @@
 <div class="container py-5">
+  <%# Title and Edit Button %>
+  <div class="d-flex justify-content-between align-items-start mb-4">
+    <div>
+      <h1 class="fw-bold mb-2"><%= @offre.titre %></h1>
+      <p class="text-muted mb-0"><%= @offre.sous_titre %></p>
+    </div>
+    <% if @is_owner || current_user&.admin? %>
+      <%= link_to edit_offre_path(@offre), class: "btn btn-outline-primary" do %>
+        <i class="fa-solid fa-edit me-2"></i>Modifier
+      <% end %>
+    <% end %>
+  </div>
+
   <div class="row">
-    <%# Left Column - Image %>
-    <div class="col-lg-6 mb-4 mb-lg-0">
-      <div class="workshop-show-img-wrapper rounded-3 overflow-hidden shadow-sm">
+    <%# Left Column - Image and Details %>
+    <div class="col-lg-6 mb-4">
+      <div class="workshop-show-img-wrapper rounded-3 overflow-hidden shadow-sm mb-4">
         <% if @offre.image.attached? %>
           <%= image_tag @offre.image, class: "workshop-show-img" %>
         <% else %>
           <%= image_tag "placeholder_offre.png", class: "workshop-show-img" %>
         <% end %>
       </div>
-    </div>
 
-    <%# Right Column - Content %>
-    <div class="col-lg-6 d-flex flex-column">
-      <div class="d-flex justify-content-between align-items-start mb-3 order-0">
-        <div>
-          <h1 class="fw-bold mb-0"><%= @offre.titre %></h1>
-          <p class="text-muted mt-2 mb-0"><%= @offre.sous_titre %></p>
-        </div>
-        
-        <%# Edit button for owner %>
-        <% if @is_owner || current_user&.admin? %>
-          <%= link_to edit_offre_path(@offre), class: "btn btn-outline-primary" do %>
-            <i class="fa-solid fa-edit me-2"></i>Modifier
-          <% end %>
-        <% end %>
-      </div>
-
-      <%# Description - order-1 on mobile and desktop %>
-      <div class="card border-0 shadow-sm p-4 mb-4 order-1">
-        <h5 class="fw-bold mb-3">Description de l'animation</h5>
-        <p class="mb-4"><%= @offre.descriptif %></p>
-
-        <%# Details %>
-        <div class="row g-4">
-          <div class="col-6">
-            <div class="d-flex align-items-center">
-              <i class="fa-regular fa-clock text-primary me-2"></i>
-              <span><%= @offre.duree %></span>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="d-flex align-items-center">
-              <i class="fa-solid fa-users text-primary me-2"></i>
-              <span><%= @offre.place %> places</span>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="d-flex align-items-center">
-              <i class="fa-solid fa-location-dot text-primary me-2"></i>
-              <span><%= @offre.salle %></span>
-            </div>
-          </div>
-          <div class="col-6">
+      <%# Workshop Details %>
+      <div class="card border-0 shadow-sm p-4">
+        <h5 class="fw-bold mb-3">Informations pratiques</h5>
+        <div class="row g-3">
+          <div class="col-12">
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-calendar text-primary me-2"></i>
               <span><%= l(@offre.date_prevue.beginning_of_day, format: :long) %>, <%= format_time_french(@offre.date_prevue) %></span>
             </div>
           </div>
-
+          <div class="col-12">
+            <div class="d-flex align-items-center">
+              <i class="fa-regular fa-clock text-primary me-2"></i>
+              <span><%= @offre.duree %></span>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-location-dot text-primary me-2"></i>
+              <span><%= @offre.salle %></span>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="d-flex align-items-center">
+              <i class="fa-solid fa-users text-primary me-2"></i>
+              <span><%= @offre.place %> places</span>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
-      <%# Registration Section - order-2 on mobile and desktop %>
-      <div class="card border-0 shadow-sm p-4 mb-4 order-2">
+    <%# Right Column - Description, Registration, and Intervenants %>
+    <div class="col-lg-6">
+      <%# Description %>
+      <div class="card border-0 shadow-sm p-4 mb-4">
+        <h5 class="fw-bold mb-3">Description de l'animation</h5>
+        <p class="mb-0"><%= @offre.descriptif %></p>
+      </div>
+
+      <%# Registration Section %>
+      <div class="card border-0 shadow-sm p-4 mb-4">
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <h5 class="fw-bold mb-2">Inscription à l'atelier</h5>
@@ -116,9 +117,9 @@
         <% end %>
       </div>
 
-      <%# Intervenant Info - order-3 on mobile and desktop %>
+      <%# Intervenant Info %>
       <%= link_to fournisseur_path(@offre.fournisseur), class: "text-decoration-none" do %>
-        <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card order-3">
+        <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card">
           <div class="d-flex align-items-center mb-3">
             <% if @offre.fournisseur.image.attached? %>
               <%= image_tag @offre.fournisseur.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
@@ -134,10 +135,10 @@
         </div>
       <% end %>
 
-      <%# 2nd intervenant info - order-3 on mobile and desktop %>
+      <%# 2nd intervenant info %>
       <% if @offre.secondary_fournisseur %>
         <%= link_to fournisseur_path(@offre.secondary_fournisseur), class: "text-decoration-none" do %>
-          <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card order-3">
+          <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card">
             <div class="d-flex align-items-center mb-3">
               <% if @offre.secondary_fournisseur.image.attached? %>
                 <%= image_tag @offre.secondary_fournisseur.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>

@@ -1,40 +1,27 @@
 <div class="container py-5">
   <%# Header Section %>
   <div class="row mb-5">
-    <div class="col-lg-4 text-center text-lg-start">
+    <div class="col-lg-4">
       <div class="position-relative mb-4">
-        <% if @fournisseur.image.attached? %>
-          <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm", style: "width: 100%; height: 380px; object-fit: cover;" %>
+        <% if @fournisseur.user&.image&.attached? %>
+          <%= image_tag @fournisseur.user.image, class: "rounded-3 shadow-sm w-100", style: "height: 380px; object-fit: cover;" %>
+        <% elsif @fournisseur.image.attached? %>
+          <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm w-100", style: "height: 380px; object-fit: cover;" %>
         <% else %>
-          <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm", style: "width: 100%; height: 380px; object-fit: cover;" %>
+          <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm w-100", style: "height: 380px; object-fit: cover;" %>
         <% end %>
       </div>
-    </div>
-
-    <div class="col-lg-8">
-      <h1 class="fw-bold mb-3"><%= @fournisseur.name %></h1>
 
       <%# Quick Stats %>
-      <div class="row g-3 mb-4">
-        <div class="col-sm-4">
-          <div class="card border-0 bg-light">
-            <div class="card-body text-center">
-              <h3 class="mb-1"><%= @fournisseur.offres.count %></h3>
-              <p class="text-muted mb-0"><%= @fournisseur.offres.count > 1 ? 'Animations' : 'Animation' %></p>
-            </div>
-          </div>
+      <div class="card border-0 shadow-sm mb-3">
+        <div class="card-body text-center">
+          <h3 class="mb-1 fw-bold"><%= @fournisseur.offres.count %></h3>
+          <p class="text-muted mb-0"><%= @fournisseur.offres.count > 1 ? 'Animations' : 'Animation' %></p>
         </div>
       </div>
 
-      <%# Bio %>
-      <div class="mb-4">
-        <h5 class="fw-bold mb-3">À propos</h5>
-        <p class="text-muted"><%= @fournisseur.bio %></p>
-      </div>
-
       <%# Contact/Social %>
-
-      <div class="d-flex gap-2">
+      <div class="d-flex flex-column gap-2">
         <% if @fournisseur.linkedin.present? %>
           <a href="<%= @fournisseur.linkedin %>" target="_blank" class="btn btn-outline-primary">
             <i class="bi bi-linkedin me-2"></i>Linkedin
@@ -54,27 +41,23 @@
         <% end %>
       </div>
     </div>
-  </div>
 
-  <%# Tabs Section %>
-  <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#ateliers">
-        Animations (<%= @all_offres.count %>)
-      </button>
-    </li>
-  </ul>
+    <div class="col-lg-8">
+      <h1 class="fw-bold mb-3"><%= @fournisseur.name %></h1>
 
-  <%# Tab Contents %>
-  <div class="tab-content">
-    <%# Ateliers Tab %>
-    <div class="tab-pane fade show active" id="ateliers">
+      <%# Bio %>
+      <div class="card border-0 shadow-sm p-4 mb-4">
+        <h5 class="fw-bold mb-3">À propos</h5>
+        <p class="mb-0"><%= @fournisseur.bio %></p>
+      </div>
+
+      <%# Animations Section %>
+      <h3 class="fw-bold mb-3">Animations (<%= @all_offres.count %>)</h3>
       <div class="row g-4">
         <% @all_offres.each do |offre| %>
           <%= render partial: 'shared/offre', locals: { offre: offre } %>
         <% end %>
       </div>
     </div>
-
   </div>
 </div>
