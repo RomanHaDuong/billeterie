@@ -12,29 +12,29 @@
     <% end %>
   </div>
 
-  <div class="row">
-    <%# Image - Shows first on mobile %>
-    <div class="col-lg-6 mb-4 order-1 order-lg-1">
-      <div class="workshop-show-img-wrapper rounded-3 overflow-hidden shadow-sm mb-4 mb-lg-0">
-        <% if @offre.image.attached? %>
-          <%= image_tag @offre.image, class: "workshop-show-img" %>
-        <% else %>
-          <%= image_tag "placeholder_offre.png", class: "workshop-show-img" %>
-        <% end %>
-      </div>
+  <%# Image - Mobile only (below title) %>
+  <div class="d-lg-none mb-4">
+    <div class="workshop-show-img-wrapper rounded-3 overflow-hidden shadow-sm">
+      <% if @offre.image.attached? %>
+        <%= image_tag @offre.image, class: "w-100", style: "aspect-ratio: 1; object-fit: cover;" %>
+      <% else %>
+        <%= image_tag "placeholder_offre.png", class: "w-100", style: "aspect-ratio: 1; object-fit: cover;" %>
+      <% end %>
     </div>
+  </div>
 
-    <%# Right Column - Description, Registration, and Intervenants %>
-    <div class="col-lg-6 order-2 order-lg-2">
-      <%# Description %>
+  <div class="row">
+    <%# Left Column on Desktop %>
+    <div class="col-lg-8 mb-4">
+      <%# Description - Order 2 on mobile %>
       <div class="card border-0 shadow-sm p-4 mb-4">
         <h5 class="fw-bold mb-3">Description de l'animation</h5>
         <p class="mb-0"><%= @offre.descriptif %></p>
       </div>
 
-      <%# Registration Section %>
+      <%# Registration Section - Order 3 on mobile %>
       <div class="card border-0 shadow-sm p-4 mb-4">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
           <div>
             <h5 class="fw-bold mb-2">Inscription à l'atelier</h5>
             <% if @offre.place %>
@@ -86,7 +86,7 @@
         <% end %>
       </div>
 
-      <%# Intervenant Info %>
+      <%# Intervenant Info - Order 4 on mobile %>
       <%= link_to fournisseur_path(@offre.fournisseur), class: "text-decoration-none" do %>
         <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card">
           <div class="d-flex align-items-center mb-3">
@@ -129,8 +129,26 @@
       <% end %>
     </div>
 
-    <%# Informations pratiques - Shows last on mobile, first column on desktop %>
-    <div class="col-lg-6 mb-4 order-3 order-lg-1">
+    <%# Right Column on Desktop - Shows image then info pratiques %>
+    <div class="col-lg-4">
+      <%# Image - Desktop only (above informations pratiques) %>
+      <div class="workshop-show-img-wrapper rounded-3 overflow-hidden shadow-sm mb-4" style="display: none;">
+        <% if @offre.image.attached? %>
+          <%= image_tag @offre.image, class: "w-100", style: "aspect-ratio: 1; object-fit: cover;" %>
+        <% else %>
+          <%= image_tag "placeholder_offre.png", class: "w-100", style: "aspect-ratio: 1; object-fit: cover;" %>
+        <% end %>
+      </div>
+
+      <style>
+        @media (min-width: 992px) {
+          .col-lg-4 .workshop-show-img-wrapper {
+            display: block !important;
+          }
+        }
+      </style>
+      
+      <%# Informations pratiques - Order 5 on mobile %>
       <div class="card border-0 shadow-sm p-4">
         <h5 class="fw-bold mb-3">Informations pratiques</h5>
         <div class="row g-3">
@@ -160,6 +178,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </div>
