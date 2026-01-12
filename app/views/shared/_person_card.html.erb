@@ -2,7 +2,9 @@
   <div class="card person-card h-100" style="box-shadow: 0 4px 6px rgba(146, 130, 105, 0.3);">
     <%# Image %>
     <div class="person-card-img-wrapper">
-      <% if fournisseur.image.attached? %>
+      <% if fournisseur.user&.image&.attached? %>
+        <%= image_tag fournisseur.user.image, class: "person-card-img" %>
+      <% elsif fournisseur.image.attached? %>
         <%= image_tag fournisseur.image, class: "person-card-img" %>
       <% else %>
         <%= image_tag "placeholder_person.png", class: "person-card-img" %>

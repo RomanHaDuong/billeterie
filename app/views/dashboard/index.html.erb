@@ -186,9 +186,14 @@
             <h2 class="fw-bold mb-2">Mes Ateliers (Intervenant)</h2>
             <p class="text-muted mb-0">Les ateliers que j'anime</p>
           </div>
-          <%= link_to new_offre_path, class: "btn btn-primary btn-lg" do %>
-            <i class="fa-solid fa-plus me-2"></i>Créer un atelier
-          <% end %>
+          <div class="d-flex gap-2">
+            <%= link_to edit_fournisseur_path(current_user.fournisseur), class: "btn btn-outline-primary btn-lg" do %>
+              <i class="fa-solid fa-pen-to-square me-2"></i>Modifier ma page
+            <% end %>
+            <%= link_to new_offre_path, class: "btn btn-primary btn-lg" do %>
+              <i class="fa-solid fa-plus me-2"></i>Créer un atelier
+            <% end %>
+          </div>
         </div>
       </div>
 
