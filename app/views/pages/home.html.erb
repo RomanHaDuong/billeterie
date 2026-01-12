@@ -9,14 +9,14 @@
 
   <%# Main content %>
   <div class="container text-center my-4 py-4">
-    <h2 class="display-4 fw-bold mb-4" style="color: #183537;"><%= editable_text('home.title', 'Bienvenue au Festival du 47') %></h2>
+    <h2 class="h1 fw-bold mb-4" style="color: #183537;"><%= editable_text('home.title', 'Bienvenue au Festival du 47') %></h2>
   </div>
 
   <%# Notre Manifeste Section %>
   <div class="container my-4 py-3">
     <div class="row justify-content-center">
       <div class="col-lg-8">
-        <h2 class="display-5 fw-bold text-center mb-4" style="color: #183537;">Notre manifeste</h2>
+        <h2 class="h3 fw-bold text-center mb-4" style="color: #183537;">Notre manifeste</h2>
         <div class="text-center" style="color: #56534E; font-size: 1.1rem; line-height: 1.8;">
           <p class="mb-3">Face à un monde qui se fragmente nous choisissons de faire corps.</p>
           <p class="mb-3">Face au repli, nous ouvrons un espace pour nous retrouver, réparer nos liens et nous relier au vivant.</p>
@@ -35,8 +35,8 @@
       <%# DONNER Card %>
       <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100 p-5" style="background-color: white;">
-          <h3 class="fw-bold mb-3" style="color: #7B8467;">DONNER!</h3>
-          <h5 class="mb-4" style="color: #183537;">Le courage de la générosité</h5>
+          <h3 class="fw-bold mb-3 text-center" style="color: #7B8467;">DONNER!</h3>
+          <h5 class="mb-4 text-center" style="color: #183537;">Le courage de la générosité</h5>
           <p style="color: #56534E; line-height: 1.7;">Libérer les énergies et réinventer la valeur. Nous explorons une économie du don, de la confiance et de la contribution juste, où chaque flux de compétences, de temps, d'attention est une richesse qui fait grandir le collectif.</p>
         </div>
       </div>
@@ -44,41 +44,33 @@
       <%# DIRE Card %>
       <div class="col-md-6">
         <div class="card border-0 shadow-sm h-100 p-5" style="background-color: white;">
-          <h3 class="fw-bold mb-3" style="color: #7B8467;">DIRE!</h3>
-          <h5 class="mb-4" style="color: #183537;">La force de la parole vraie</h5>
+          <h3 class="fw-bold mb-3 text-center" style="color: #7B8467;">DIRE!</h3>
+          <h5 class="mb-4 text-center" style="color: #183537;">La force de la parole vraie</h5>
           <p style="color: #56534E; line-height: 1.7;">Oser l'authenticité et la parole sans peur. Nous créons des espaces pour aborder la diversité, la santé mentale et le conflit comme source de croissance. Un entraînement à la démocratie sensible, pour agir et décider ensemble.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <%# Quatre Appels Section - Second Two Cards with Divider %>
+  <%# Quatre Appels Section - Second Two Cards %>
   <div class="container my-4 py-3">
-    <div class="row g-4 align-items-stretch">
+    <div class="row g-4">
       <%# RESSENTIR Card %>
-      <div class="col-lg-6">
-        <div class="p-5" style="color: #56534E;">
-          <h3 class="fw-bold mb-3" style="color: #7B8467;">RESSENTIR!</h3>
-          <h5 class="mb-4" style="color: #183537;">L'écoute des mouvements intérieurs</h5>
-          <p style="line-height: 1.7;">Revenir au corps, aux émotions, à l'intuition. Nous cultivons notre écologie intérieure comme socle de notre action.</p>
-          <p style="line-height: 1.7;">Des expériences sensibles pour se relier à soi, aux autres et à la planète avec plus de justesse et de présence.</p>
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100 p-5" style="background-color: white;">
+          <h3 class="fw-bold mb-3 text-center" style="color: #7B8467;">RESSENTIR!</h3>
+          <h5 class="mb-4 text-center" style="color: #183537;">L'écoute des mouvements intérieurs</h5>
+          <p style="color: #56534E; line-height: 1.7;">Revenir au corps, aux émotions, à l'intuition. Nous cultivons notre écologie intérieure comme socle de notre action.</p>
+          <p style="color: #56534E; line-height: 1.7;">Des expériences sensibles pour se relier à soi, aux autres et à la planète avec plus de justesse et de présence.</p>
         </div>
       </div>
       
-      <%# Vertical/Horizontal Divider %>
-      <div class="col-lg-auto d-none d-lg-block px-0">
-        <div style="width: 2px; height: 100%; background-color: #7B8467; opacity: 0.3;"></div>
-      </div>
-      <div class="d-lg-none">
-        <hr style="border-top: 2px solid #7B8467; opacity: 0.3; margin: 2rem 0;">
-      </div>
-      
       <%# S'ELANCER Card %>
-      <div class="col-lg-6">
-        <div class="p-5" style="color: #56534E;">
-          <h3 class="fw-bold mb-3" style="color: #7B8467;">S'ÉLANCER!</h3>
-          <h5 class="mb-4" style="color: #183537;">La puissance de futurs désirables</h5>
-          <p style="line-height: 1.7;">Canaliser notre élan collectif pour oser construire les futurs que nous désirons. Nous explorons de nouveaux récits et affirmons notre puissance d'agir, même au cœur du chaos.</p>
+      <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100 p-5" style="background-color: white;">
+          <h3 class="fw-bold mb-3 text-center" style="color: #7B8467;">S'ÉLANCER!</h3>
+          <h5 class="mb-4 text-center" style="color: #183537;">La puissance de futurs désirables</h5>
+          <p style="color: #56534E; line-height: 1.7;">Canaliser notre élan collectif pour oser construire les futurs que nous désirons. Nous explorons de nouveaux récits et affirmons notre puissance d'agir, même au cœur du chaos.</p>
         </div>
       </div>
     </div>
