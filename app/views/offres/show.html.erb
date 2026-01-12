@@ -132,17 +132,17 @@
     <%# Right Column on Desktop - Shows image then info pratiques %>
     <div class="col-lg-4">
       <%# Image - Desktop only (above informations pratiques) %>
-      <div class="workshop-show-img-wrapper rounded-3 overflow-hidden shadow-sm mb-4" style="display: none;">
+      <div class="rounded-3 shadow-sm mb-4" style="display: none;">
         <% if @offre.image.attached? %>
-          <%= image_tag @offre.image, class: "w-100", style: "aspect-ratio: 1; object-fit: cover;" %>
+          <%= image_tag @offre.image, class: "img-fluid rounded-3", style: "width: 100%; height: auto; display: block;" %>
         <% else %>
-          <%= image_tag "placeholder_offre.png", class: "w-100", style: "aspect-ratio: 1; object-fit: cover;" %>
+          <%= image_tag "placeholder_offre.png", class: "img-fluid rounded-3", style: "width: 100%; height: auto; display: block;" %>
         <% end %>
       </div>
 
       <style>
         @media (min-width: 992px) {
-          .col-lg-4 .workshop-show-img-wrapper {
+          .col-lg-4 > div:first-child {
             display: block !important;
           }
         }
@@ -168,12 +168,6 @@
             <div class="d-flex align-items-center">
               <i class="fa-solid fa-location-dot text-primary me-2"></i>
               <span><%= @offre.salle %></span>
-            </div>
-          </div>
-          <div class="col-12">
-            <div class="d-flex align-items-center">
-              <i class="fa-solid fa-users text-primary me-2"></i>
-              <span><%= @offre.place %> places</span>
             </div>
           </div>
         </div>
