@@ -176,12 +176,12 @@
   <% if current_user.intervenant? %>
     <div id="mes-ateliers" class="mt-5">
       <div class="row mb-4">
-        <div class="col-12 d-flex justify-content-between align-items-center">
-          <div>
+        <div class="col-12">
+          <div class="mb-3">
             <h2 class="fw-bold mb-2">Mes Ateliers (Intervenant)</h2>
             <p class="text-muted mb-0">Les ateliers que j'anime</p>
           </div>
-          <div class="d-flex gap-2">
+          <div class="d-flex flex-column flex-md-row gap-2">
             <%= link_to edit_fournisseur_path(current_user.fournisseur), class: "btn btn-outline-primary btn-lg" do %>
               <i class="fa-solid fa-pen-to-square me-2"></i>Modifier ma page
             <% end %>
