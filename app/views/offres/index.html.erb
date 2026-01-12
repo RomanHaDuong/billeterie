@@ -61,6 +61,14 @@
                     <div class="mt-4 d-flex justify-content-between align-items-center">
                       <div class="col-auto">
                         <div class="date-badge text-center">
+                          <%# Square Image %>
+                          <div class="mb-2">
+                            <% if offre.image.attached? %>
+                              <%= image_tag offre.image, class: "rounded", style: "width: 60px; height: 60px; object-fit: cover;" %>
+                            <% else %>
+                              <%= image_tag "placeholder_offre.png", class: "rounded", style: "width: 60px; height: 60px; object-fit: cover;" %>
+                            <% end %>
+                          </div>
                           <div class="month text-uppercase small text-nowrap">
                             <%= offre.date_prevue.strftime("%d/%m") %>
                           </div>
