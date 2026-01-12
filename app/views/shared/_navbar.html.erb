@@ -40,11 +40,6 @@
         <li class="mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;">
           <%= link_to 'Le 47', lieu_path, class: 'text-decoration-none fs-3 fw-medium', style: 'color: #595E47; transition: color 0.3s ease;' %>
         </li>
-        <% unless user_signed_in? %>
-          <li class="mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;">
-            <%= link_to 'Se connecter', new_user_session_path, class: 'text-decoration-none fs-3 fw-medium', style: 'color: #595E47; transition: color 0.3s ease;' %>
-          </li>
-        <% end %>
       </ul>
 
       <div class="text-center mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;" id="menuCTA">
@@ -69,6 +64,10 @@
               </button>
             </div>
           <% end %>
+        </div>
+      <% else %>
+        <div class="text-center mt-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;" id="menuAccount">
+          <%= link_to "Se connecter", new_user_session_path, class: 'btn btn-lg', style: 'background-color: #7B8467; color: white; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease;' %>
         </div>
       <% end %>
     </div>
