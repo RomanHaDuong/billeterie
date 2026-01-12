@@ -19,6 +19,13 @@
           <div class="row align-items-center">
             <div class="col-auto">
               <div class="text-center" style="min-width: 60px;">
+                <div class="mb-2">
+                  <% if offre.image.attached? %>
+                    <%= image_tag offre.image, class: "rounded", style: "width: 60px; height: 60px; object-fit: cover;" %>
+                  <% else %>
+                    <%= image_tag "placeholder_offre.png", class: "rounded", style: "width: 60px; height: 60px; object-fit: cover;" %>
+                  <% end %>
+                </div>
                 <div class="fw-bold" style="font-size: 0.85rem; line-height: 1.2;">
                   <%= format_time_french(offre.date_prevue) %>
                 </div>

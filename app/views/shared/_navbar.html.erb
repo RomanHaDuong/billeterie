@@ -40,6 +40,11 @@
         <li class="mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;">
           <%= link_to 'Le 47', lieu_path, class: 'text-decoration-none fs-3 fw-medium', style: 'color: #595E47; transition: color 0.3s ease;' %>
         </li>
+        <% unless user_signed_in? %>
+          <li class="mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;">
+            <%= link_to 'Se connecter', new_user_session_path, class: 'text-decoration-none fs-3 fw-medium', style: 'color: #595E47; transition: color 0.3s ease;' %>
+          </li>
+        <% end %>
       </ul>
 
       <div class="text-center mb-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;" id="menuCTA">
@@ -65,13 +70,6 @@
             </div>
           <% end %>
         </div>
-      <% else %>
-        <div class="text-center mt-4" style="opacity: 0; transform: translateY(20px); transition: all 0.5s ease;" id="menuLogin">
-          <%= link_to new_user_session_path, class: 'btn btn-outline-primary btn-lg', style: 'transition: transform 0.3s ease, box-shadow 0.3s ease;' do %>
-            <i class="bi bi-box-arrow-in-right me-2"></i>
-            <span>Se connecter</span>
-          <% end %>
-        </div>
       <% end %>
     </div>
   </div>
@@ -82,7 +80,7 @@
     const menuBtn = document.getElementById('mobileMenuBtn');
     const menuOverlay = document.getElementById('mobileMenuOverlay');
     const menuClose = document.getElementById('mobileMenuClose');
-    const menuItems = document.querySelectorAll('#menuItems li, #menuCTA, #menuAccount, #menuLogin');
+    const menuItems = document.querySelectorAll('#menuItems li, #menuCTA, #menuAccount');
     const line1 = document.getElementById('menuLine1');
     const line2 = document.getElementById('menuLine2');
     const line3 = document.getElementById('menuLine3');
