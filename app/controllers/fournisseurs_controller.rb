@@ -57,14 +57,14 @@ class FournisseursController < ApplicationController
 
   def edit
     @fournisseur = Fournisseur.find(params[:id])
-    unless current_user.intervenant? && current_user.fournisseur.id == @fournisseur.id
+    unless current_user&.admin? || (current_user.intervenant? && current_user.fournisseur.id == @fournisseur.id)
       redirect_to dashboard_path, alert: "Vous n'avez pas la permission de modifier ce profil."
     end
   end
 
   def update
     @fournisseur = Fournisseur.find(params[:id])
-    unless current_user.intervenant? && current_user.fournisseur.id == @fournisseur.id
+    unless current_user&.admin? || (current_user.intervenant? && current_user.fournisseur.id == @fournisseur.id)
       redirect_to dashboard_path, alert: "Vous n'avez pas la permission de modifier ce profil."
       return
     end

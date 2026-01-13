@@ -127,6 +127,28 @@
           </div>
         <% end %>
       <% end %>
+
+      <%# Additional intervenants (3-5) %>
+      <% @offre.additional_fournisseurs.each do |fournisseur| %>
+        <%= link_to fournisseur_path(fournisseur), class: "text-decoration-none" do %>
+          <div class="card border-0 shadow-sm p-4 mb-4 intervenant-card">
+            <div class="d-flex align-items-center mb-3">
+              <% if fournisseur.user&.image&.attached? %>
+                <%= image_tag fournisseur.user.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+              <% elsif fournisseur.image.attached? %>
+                <%= image_tag fournisseur.image, class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+              <% else %>
+                <%= image_tag "placeholder_person.png", class: "rounded-circle me-3", style: "width: 48px; height: 48px; object-fit: cover;" %>
+              <% end %>
+              <div>
+                <h5 class="mb-0 fw-bold text-dark"><%= fournisseur.name %></h5>
+                <p class="mb-0 text-muted">Animateur-ice</p>
+              </div>
+            </div>
+            <p class="mb-0 text-dark"><%= fournisseur.bio %></p>
+          </div>
+        <% end %>
+      <% end %>
     </div>
 
     <%# Right Column on Desktop - Shows image then info pratiques %>

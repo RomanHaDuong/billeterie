@@ -11,7 +11,8 @@ class OffresController < ApplicationController
     @booking = Booking.new
     @is_owner = current_user && current_user.intervenant? && 
                 (current_user.fournisseur.id == @offre.fournisseur_id || 
-                 current_user.fournisseur.id == @offre.secondary_fournisseur_id)
+                 current_user.fournisseur.id == @offre.secondary_fournisseur_id ||
+                 @offre.additional_fournisseurs.pluck(:id).include?(current_user.fournisseur.id))
   end
 
   def new
@@ -95,7 +96,8 @@ class OffresController < ApplicationController
     
     unless current_user.intervenant? && 
            (current_user.fournisseur.id == @offre.fournisseur_id || 
-            current_user.fournisseur.id == @offre.secondary_fournisseur_id)
+            current_user.fournisseur.id == @offre.secondary_fournisseur_id ||
+            @offre.additional_fournisseurs.pluck(:id).include?(current_user.fournisseur.id))
       redirect_to @offre, alert: "Vous n'avez pas la permission de modifier cet atelier."
     end
   end
@@ -104,6 +106,7 @@ class OffresController < ApplicationController
     params.require(:offre).permit(:titre, :sous_titre, :descriptif, :duree, :place, 
                                   :date_prevue, :salle, :categories, :causes, 
                                   :valeur_apportee, :besoin_espace, :besoin_logistique, 
-                                  :autre_commentaire, :secondary_fournisseur_id, :image)
+                                  :autre_commentaire, :secondary_fournisseur_id, :image,
+                                  additional_fournisseur_ids: [])
   end
 end

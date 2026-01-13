@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_08_115753) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_13_183902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,6 +76,16 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_08_115753) do
     t.index ["user_id"], name: "index_fournisseurs_on_user_id"
   end
 
+  create_table "offre_fournisseurs", force: :cascade do |t|
+    t.bigint "offre_id", null: false
+    t.bigint "fournisseur_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fournisseur_id"], name: "index_offre_fournisseurs_on_fournisseur_id"
+    t.index ["offre_id", "fournisseur_id"], name: "index_offre_fournisseurs_on_offre_id_and_fournisseur_id", unique: true
+    t.index ["offre_id"], name: "index_offre_fournisseurs_on_offre_id"
+  end
+
   create_table "offres", force: :cascade do |t|
     t.bigint "fournisseur_id", null: false
     t.datetime "created_at", null: false
@@ -139,6 +149,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_08_115753) do
   add_foreign_key "favoris", "offres"
   add_foreign_key "favoris", "users"
   add_foreign_key "fournisseurs", "users"
+  add_foreign_key "offre_fournisseurs", "fournisseurs"
+  add_foreign_key "offre_fournisseurs", "offres"
   add_foreign_key "offres", "fournisseurs"
   add_foreign_key "offres", "fournisseurs", column: "secondary_fournisseur_id"
 end

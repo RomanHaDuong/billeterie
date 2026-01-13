@@ -4,24 +4,23 @@
       <div class="card shadow-sm border-0">
         <div class="card-body p-5">
           <h2 class="text-center mb-4 fw-bold">Mot de passe oublié ?</h2>
-          <p class="text-muted text-center mb-4">Entrez votre email pour recevoir les instructions de réinitialisation</p>
-
-          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-            <%= render "devise/shared/error_messages", resource: resource %>
-
-            <div class="form-group mb-4">
-              <%= f.label :email, class: "form-label fw-medium" %>
-              <%= f.email_field :email, autofocus: true,
-                  autocomplete: "email",
-                  class: "form-control form-control-lg",
-                  placeholder: "Entrez votre email" %>
+          
+          <div class="alert alert-info" style="background-color: #F5E6D3; border: 2px solid #6B7459; border-radius: 10px;">
+            <div class="text-center">
+              <i class="fa-solid fa-envelope fs-1 mb-3" style="color: #6B7459;"></i>
+              <h5 class="fw-bold mb-3" style="color: #595E47;">
+                Contactez Roman en cas d'oubli de mot de passe
+              </h5>
+              <p class="mb-3" style="color: #595E47;">
+                Pour réinitialiser votre mot de passe, veuillez envoyer un email à :
+              </p>
+              <a href="mailto:roman.haduong@gmail.com" class="btn btn-lg fw-bold mb-3" style="background-color: #6B7459; color: white; border: none; padding: 12px 30px;">
+                <i class="fa-solid fa-envelope me-2"></i>roman.haduong@gmail.com
+              </a>
             </div>
+          </div>
 
-            <%= f.submit "Réinitialiser mon mot de passe",
-                class: "btn btn-primary w-100 btn-lg mb-4" %>
-          <% end %>
-
-          <div class="text-center">
+          <div class="text-center mt-4">
             <p class="text-muted">Retour à la</p>
             <%= link_to "page de connexion", new_session_path(resource_name),
                 class: "text-decoration-none fw-medium" %>

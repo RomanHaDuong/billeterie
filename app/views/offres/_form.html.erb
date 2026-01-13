@@ -101,12 +101,18 @@
             <%= f.text_area :besoin_logistique, class: "form-control", rows: 3, placeholder: "Matériel, équipement nécessaire..." %>
           </div>
 
-          <%# Deuxième intervenant (optionnel) %>
+          <%# Intervenants supplémentaires %>
           <div class="col-12">
-            <%= f.label :secondary_fournisseur_id, "Co-intervenant (optionnel)", class: "form-label fw-bold" %>
-            <%= f.collection_select :secondary_fournisseur_id, Fournisseur.all, :id, :name, 
-                { prompt: "Sélectionner un co-intervenant (optionnel)" }, 
-                { class: "form-select" } %>
+            <%= f.label :additional_fournisseur_ids, "Intervenants supplémentaires (optionnel)", class: "form-label fw-bold" %>
+            <small class="text-muted d-block mb-2">Vous pouvez sélectionner jusqu'à 4 intervenants supplémentaires (5 maximum au total incluant vous-même)</small>
+            <%= f.collection_check_boxes :additional_fournisseur_ids, 
+                Fournisseur.all.where.not(id: @offre.fournisseur_id), 
+                :id, :name do |b| %>
+              <div class="form-check">
+                <%= b.check_box class: "form-check-input" %>
+                <%= b.label class: "form-check-label" %>
+              </div>
+            <% end %>
           </div>
 
           <%# Autres commentaires %>
