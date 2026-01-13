@@ -105,10 +105,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: 587,
-    domain: ENV['SENDGRID_DOMAIN'],
+    domain: ENV['SENDGRID_DOMAIN'] || 'romanhdg.com',
     user_name: 'apikey',
     password: ENV['SENDGRID_API_KEY'],
-    authentication: :plain,
+    authentication: :login,
     enable_starttls_auto: true
   }
   config.action_mailer.default_url_options = { host: 'romanhdg.com', protocol: 'https' }
