@@ -105,12 +105,15 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: 587,
-    domain: ENV['SENDGRID_DOMAIN'] || 'romanhdg.com',
+    domain: 'les-ecoworkers.fr',
     user_name: 'apikey',
     password: ENV['SENDGRID_API_KEY'],
-    authentication: :login,
+    authentication: :plain,
     enable_starttls_auto: true
   }
-  config.action_mailer.default_url_options = { host: 'romanhdg.com', protocol: 'https' }
+  config.action_mailer.default_options = {
+    from: 'noreply@les-ecoworkers.fr'
+  }
+  config.action_mailer.default_url_options = { host: 'les-ecoworkers.fr', protocol: 'https' }
 
 end
