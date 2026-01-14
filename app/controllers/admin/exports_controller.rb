@@ -117,7 +117,7 @@ class Admin::ExportsController < ApplicationController
     require 'csv'
     
     csv_data = CSV.generate(headers: true) do |csv|
-      csv << ['ID', 'Nom', 'Email', 'Description courte', 'Description longue', 'Compétences', 
+      csv << ['ID', 'Nom', 'Email', 'Biographie', 'LinkedIn', 'Instagram', 'Offinity', 
               'Nombre d\'ateliers', 'Date de création']
       
       Fournisseur.includes(:offres, :user).find_each do |fournisseur|
@@ -125,9 +125,10 @@ class Admin::ExportsController < ApplicationController
           fournisseur.id,
           fournisseur.name,
           fournisseur.user&.email,
-          fournisseur.description_courte,
-          fournisseur.description_longue,
-          fournisseur.competences,
+          fournisseur.bio,
+          fournisseur.linkedin,
+          fournisseur.instagram,
+          fournisseur.offinity,
           fournisseur.offres.count,
           fournisseur.created_at.strftime('%Y-%m-%d %H:%M:%S')
         ]
@@ -222,12 +223,12 @@ class Admin::ExportsController < ApplicationController
 
   def generate_fournisseurs_csv(dir)
     CSV.open(File.join(dir, 'fournisseurs.csv'), 'w', headers: true) do |csv|
-      csv << ['ID', 'Nom', 'Email', 'Description courte', 'Description longue', 'Compétences', 
+      csv << ['ID', 'Nom', 'Email', 'Biographie', 'LinkedIn', 'Instagram', 'Offinity', 
               'Nombre d\'ateliers', 'Date de création']
       Fournisseur.includes(:offres, :user).find_each do |fournisseur|
-        csv << [fournisseur.id, fournisseur.name, fournisseur.user&.email, fournisseur.description_courte,
-                fournisseur.description_longue, fournisseur.competences, fournisseur.offres.count,
-                fournisseur.created_at.strftime('%Y-%m-%d %H:%M:%S')]
+        csv << [fournisseur.id, fournisseur.name, fournisseur.user&.email, fournisseur.bio,
+                fournisseur.linkedin, fournisseur.instagram, fournisseur.offinity,
+                fournisseur.offres.count, fournisseur.created_at.strftime('%Y-%m-%d %H:%M:%S')]
       end
     end
   end
