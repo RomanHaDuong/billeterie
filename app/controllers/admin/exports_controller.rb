@@ -28,7 +28,7 @@ class Admin::ExportsController < ApplicationController
       # Create zip file
       zip_path = Rails.root.join('tmp', zip_filename)
       
-      Zip::File.open(zip_path, Zip::File::CREATE) do |zipfile|
+      Zip::File.open(zip_path, create: true) do |zipfile|
         Dir[File.join(temp_dir, '*.csv')].each do |file|
           zipfile.add(File.basename(file), file)
         end
