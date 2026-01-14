@@ -47,14 +47,13 @@ class Admin::ExportsController < ApplicationController
     require 'csv'
     
     csv_data = CSV.generate(headers: true) do |csv|
-      csv << ['ID', 'Email', 'Nom', 'Téléphone', 'Admin', 'Intervenant', 'Date de création']
+      csv << ['ID', 'Email', 'Nom', 'Admin', 'Intervenant', 'Date de création']
       
       User.find_each do |user|
         csv << [
           user.id,
           user.email,
           user.name,
-          user.telephone,
           user.admin? ? 'Oui' : 'Non',
           user.intervenant? ? 'Oui' : 'Non',
           user.created_at.strftime('%Y-%m-%d %H:%M:%S')
@@ -188,9 +187,9 @@ class Admin::ExportsController < ApplicationController
   # Helper methods for generating CSVs in temp directory
   def generate_users_csv(dir)
     CSV.open(File.join(dir, 'users.csv'), 'w', headers: true) do |csv|
-      csv << ['ID', 'Email', 'Nom', 'Téléphone', 'Admin', 'Intervenant', 'Date de création']
+      csv << ['ID', 'Email', 'Nom', 'Admin', 'Intervenant', 'Date de création']
       User.find_each do |user|
-        csv << [user.id, user.email, user.name, user.telephone, 
+        csv << [user.id, user.email, user.name, 
                 user.admin? ? 'Oui' : 'Non', user.intervenant? ? 'Oui' : 'Non',
                 user.created_at.strftime('%Y-%m-%d %H:%M:%S')]
       end
