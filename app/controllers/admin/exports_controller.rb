@@ -77,7 +77,7 @@ class Admin::ExportsController < ApplicationController
           offre.titre,
           offre.sous_titre,
           offre.date_prevue&.strftime('%Y-%m-%d %H:%M'),
-          offre.fournisseur&.name || offre.fournisseur&.email,
+          offre.fournisseur&.name || offre.fournisseur&.user&.email,
           offre.duree,
           offre.place,
           offre.bookings.count,
@@ -120,11 +120,11 @@ class Admin::ExportsController < ApplicationController
       csv << ['ID', 'Nom', 'Email', 'Description courte', 'Description longue', 'Compétences', 
               'Nombre d\'ateliers', 'Date de création']
       
-      Fournisseur.includes(:offres).find_each do |fournisseur|
+      Fournisseur.includes(:offres, :user).find_each do |fournisseur|
         csv << [
           fournisseur.id,
           fournisseur.name,
-          fournisseur.email,
+          fournisseur.user&.email,
           fournisseur.description_courte,
           fournisseur.description_longue,
           fournisseur.competences,
@@ -202,7 +202,7 @@ class Admin::ExportsController < ApplicationController
               'Places réservées', 'Salle', 'Catégories', 'Descriptif', 'Date de création']
       Offre.includes(:fournisseur, :bookings).find_each do |offre|
         csv << [offre.id, offre.titre, offre.sous_titre, offre.date_prevue&.strftime('%Y-%m-%d %H:%M'),
-                offre.fournisseur&.name || offre.fournisseur&.email, offre.duree, offre.place,
+                offre.fournisseur&.name || offre.fournisseur&.user&.email, offre.duree, offre.place,
                 offre.bookings.count, offre.salle, offre.categories, offre.descriptif,
                 offre.created_at.strftime('%Y-%m-%d %H:%M:%S')]
       end
@@ -224,8 +224,8 @@ class Admin::ExportsController < ApplicationController
     CSV.open(File.join(dir, 'fournisseurs.csv'), 'w', headers: true) do |csv|
       csv << ['ID', 'Nom', 'Email', 'Description courte', 'Description longue', 'Compétences', 
               'Nombre d\'ateliers', 'Date de création']
-      Fournisseur.includes(:offres).find_each do |fournisseur|
-        csv << [fournisseur.id, fournisseur.name, fournisseur.email, fournisseur.description_courte,
+      Fournisseur.includes(:offres, :user).find_each do |fournisseur|
+        csv << [fournisseur.id, fournisseur.name, fournisseur.user&.email, fournisseur.description_courte,
                 fournisseur.description_longue, fournisseur.competences, fournisseur.offres.count,
                 fournisseur.created_at.strftime('%Y-%m-%d %H:%M:%S')]
       end
