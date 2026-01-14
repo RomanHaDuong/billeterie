@@ -29,7 +29,7 @@
       <%# Description - Order 2 on mobile %>
       <div class="card border-0 shadow-sm p-4 mb-4">
         <h5 class="fw-bold mb-3">Description de l'animation</h5>
-        <p class="mb-0"><%= @offre.descriptif %></p>
+        <div class="mb-0"><%= simple_format(@offre.descriptif) %></div>
       </div>
 
       <%# Registration Section - Order 3 on mobile %>

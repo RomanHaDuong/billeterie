@@ -107,7 +107,7 @@
               <div class="mb-4">
                 <h6 class="fw-bold mb-2">À propos</h6>
                 <% if @fournisseur.bio.present? %>
-                  <p class="text-muted"><%= @fournisseur.bio %></p>
+                  <div class="text-muted"><%= simple_format(@fournisseur.bio) %></div>
                 <% else %>
                   <p class="text-muted fst-italic">Aucune biographie</p>
                 <% end %>

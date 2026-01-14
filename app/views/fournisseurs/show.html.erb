@@ -58,7 +58,7 @@
       <%# Bio %>
       <div class="card border-0 shadow-sm p-4 mb-4">
         <h5 class="fw-bold mb-3">À propos</h5>
-        <p class="mb-0"><%= @fournisseur.bio %></p>
+        <div class="mb-0"><%= simple_format(@fournisseur.bio) %></div>
       </div>
 
       <%# Animations Section %>
