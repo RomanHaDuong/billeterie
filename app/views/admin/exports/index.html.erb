@@ -1,0 +1,39 @@
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold">Exportation des Données</h1>
+    <div>
+      <%= link_to "Retour à l'admin", admin_users_path, class: "btn btn-outline-secondary me-2" %>
+      <%= link_to "Retour au dashboard", dashboard_path, class: "btn btn-outline-secondary" %>
+    </div>
+  </div>
+
+  <%# Data Export Section %>
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-header text-white" style="background-color: #198754;">
+      <h5 class="mb-0"><i class="bi bi-download me-2"></i>Exportation Complète</h5>
+    </div>
+    <div class="card-body">
+      <p class="text-muted mb-3">Téléchargez toutes les données du site dans un fichier ZIP contenant les fichiers CSV suivants :</p>
+      <ul class="mb-3">
+        <li><strong>users.csv</strong> - Tous les utilisateurs (festivaliers, intervenants, admins)</li>
+        <li><strong>offres.csv</strong> - Tous les ateliers/offres</li>
+        <li><strong>bookings.csv</strong> - Toutes les réservations</li>
+        <li><strong>fournisseurs.csv</strong> - Tous les profils d'intervenants</li>
+        <li><strong>favoris.csv</strong> - Tous les favoris</li>
+        <li><strong>pre_registrations.csv</strong> - Pré-inscriptions en attente</li>
+      </ul>
+      <%= link_to export_all_admin_exports_path, class: "btn btn-lg text-white", style: "background-color: #198754;" do %>
+        <i class="bi bi-file-earmark-zip me-2"></i>Télécharger toutes les données (ZIP)
+      <% end %>
+    </div>
+  </div>
+
+  <%# Information Section %>
+  <div class="alert alert-info mt-4">
+    <h6 class="alert-heading"><i class="bi bi-info-circle me-2"></i>Format des données</h6>
+    <p class="mb-0 small">
+      Toutes les exportations sont au format CSV (valeurs séparées par des virgules) et peuvent être ouvertes dans Excel, 
+      Google Sheets, ou tout autre tableur. Les dates sont au format YYYY-MM-DD HH:MM:SS pour faciliter le tri et l'analyse.
+    </p>
+  </div>
+</div>

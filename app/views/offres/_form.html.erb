@@ -101,9 +101,19 @@
             <%= f.text_area :besoin_logistique, class: "form-control", rows: 3, placeholder: "Matériel, équipement nécessaire..." %>
           </div>
 
-          <%# Intervenants supplémentaires %>
+          <%# Option pour plusieurs intervenants %>
           <div class="col-12">
-            <%= f.label :additional_fournisseur_ids, "Intervenants supplémentaires (optionnel)", class: "form-label fw-bold" %>
+            <div class="form-check">
+              <%= check_box_tag :multiple_intervenants, '1', @offre.additional_fournisseurs.any?, 
+                  class: "form-check-input", 
+                  id: "multiple_intervenants_checkbox" %>
+              <%= label_tag :multiple_intervenants, "Il y aura plusieurs intervenants", class: "form-check-label fw-bold" %>
+            </div>
+          </div>
+
+          <%# Intervenants supplémentaires %>
+          <div class="col-12" id="additional_fournisseurs_section" style="<%= 'display: none;' unless @offre.additional_fournisseurs.any? %>">
+            <%= f.label :additional_fournisseur_ids, "Intervenants supplémentaires (co-intervenants)", class: "form-label fw-bold" %>
             <small class="text-muted d-block mb-2">Vous pouvez sélectionner jusqu'à 4 intervenants supplémentaires (5 maximum au total incluant vous-même)</small>
             <%= f.collection_check_boxes :additional_fournisseur_ids, 
                 Fournisseur.all.where.not(id: @offre.fournisseur_id), 
@@ -144,3 +154,23 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const checkbox = document.getElementById('multiple_intervenants_checkbox');
+    const section = document.getElementById('additional_fournisseurs_section');
+    
+    if (checkbox && section) {
+      checkbox.addEventListener('change', function() {
+        if (this.checked) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+          // Uncheck all co-intervenant checkboxes when hiding the section
+          const coIntervenantCheckboxes = section.querySelectorAll('input[type="checkbox"]');
+          coIntervenantCheckboxes.forEach(cb => cb.checked = false);
+        }
+      });
+    }
+  });
+</script>

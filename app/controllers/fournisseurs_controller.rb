@@ -69,7 +69,15 @@ class FournisseursController < ApplicationController
       return
     end
 
-    if @fournisseur.update(fournisseur_params)
+    # Handle image upload - attach to the fournisseur's user instead of the fournisseur
+    if params[:fournisseur][:image].present? && @fournisseur.user.present?
+      @fournisseur.user.image.attach(params[:fournisseur][:image])
+    end
+
+    # Remove image from params since we're handling it separately
+    fournisseur_update_params = fournisseur_params.except(:image)
+
+    if @fournisseur.update(fournisseur_update_params)
       redirect_to edit_fournisseur_path(@fournisseur), notice: "Profil intervenant mis à jour avec succès!"
     else
       render :edit, status: :unprocessable_entity

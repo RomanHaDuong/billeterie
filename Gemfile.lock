@@ -584,6 +584,7 @@ DEPENDENCIES
   rails-i18n
   rails_admin (~> 3.3)
   ruby-lsp
+  rubyzip
   sassc-rails
   selenium-webdriver
   sendgrid-ruby

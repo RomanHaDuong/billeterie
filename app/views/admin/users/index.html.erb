@@ -4,6 +4,20 @@
     <%= link_to "Retour au dashboard", dashboard_path, class: "btn btn-outline-secondary" %>
   </div>
 
+  <%# Data Export Section %>
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-header text-white" style="background-color: #198754;">
+      <h5 class="mb-0"><i class="bi bi-download me-2"></i>Exportation des Données</h5>
+    </div>
+    <div class="card-body">
+      <p class="text-muted mb-3">Téléchargez toutes les données du site au format CSV</p>
+      
+      <%= link_to export_all_admin_exports_path, class: "btn btn-lg w-100 text-white", style: "background-color: #198754;" do %>
+        <i class="bi bi-file-earmark-zip me-2"></i>Télécharger toutes les données (ZIP)
+      <% end %>
+    </div>
+  </div>
+
   <%# Pre-Registration Section %>
   <div class="card border-0 shadow-sm mb-4">
     <div class="card-header bg-primary text-white">

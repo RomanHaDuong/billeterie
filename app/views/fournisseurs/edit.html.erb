@@ -43,13 +43,13 @@
 
                 <div class="mb-3">
                   <%= f.label :image, "Photo de profil", class: "form-label fw-bold" %>
-                  <% if @fournisseur.image.attached? %>
+                  <% if @fournisseur.user&.image&.attached? %>
                     <div class="mb-2">
-                      <%= image_tag @fournisseur.image, class: "rounded-3", style: "width: 150px; height: 150px; object-fit: cover;" %>
+                      <%= image_tag @fournisseur.user.image, class: "rounded-3", style: "width: 150px; height: 150px; object-fit: cover;" %>
                     </div>
                   <% end %>
                   <%= f.file_field :image, class: "form-control", accept: "image/*" %>
-                  <small class="text-muted">Format recommandé : JPG ou PNG, max 5MB</small>
+                  <small class="text-muted">Cette image sera également utilisée pour le profil utilisateur. Format recommandé : JPG ou PNG, max 5MB</small>
                 </div>
 
                 <hr class="my-4">
@@ -96,8 +96,8 @@
             </div>
             <div class="card-body">
               <div class="text-center mb-4">
-                <% if @fournisseur.image.attached? %>
-                  <%= image_tag @fournisseur.image, class: "rounded-3 shadow-sm mb-3", style: "width: 100%; max-width: 300px; height: 300px; object-fit: cover;" %>
+                <% if @fournisseur.user&.image&.attached? %>
+                  <%= image_tag @fournisseur.user.image, class: "rounded-3 shadow-sm mb-3", style: "width: 100%; max-width: 300px; height: 300px; object-fit: cover;" %>
                 <% else %>
                   <%= image_tag "placeholder_person.png", class: "rounded-3 shadow-sm mb-3", style: "width: 100%; max-width: 300px; height: 300px; object-fit: cover;" %>
                 <% end %>

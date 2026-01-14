@@ -41,6 +41,19 @@ Rails.application.routes.draw do
         delete :destroy, to: 'users#destroy_pre_registration'
       end
     end
+    
+    # Data export routes
+    resources :exports, only: [:index] do
+      collection do
+        get :export_all
+        get :users
+        get :offres
+        get :bookings
+        get :fournisseurs
+        get :favoris
+        get :pre_registrations
+      end
+    end
   end
 
   # 2025 edition routes (archived version)
