@@ -156,12 +156,16 @@
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  function initializeMultipleIntervenantsToggle() {
     const checkbox = document.getElementById('multiple_intervenants_checkbox');
     const section = document.getElementById('additional_fournisseurs_section');
     
     if (checkbox && section) {
-      checkbox.addEventListener('change', function() {
+      // Remove existing listener if any to avoid duplicates
+      checkbox.replaceWith(checkbox.cloneNode(true));
+      const freshCheckbox = document.getElementById('multiple_intervenants_checkbox');
+      
+      freshCheckbox.addEventListener('change', function() {
         if (this.checked) {
           section.style.display = 'block';
         } else {
@@ -172,5 +176,17 @@
         }
       });
     }
-  });
+  }
+
+  // Initialize on both DOMContentLoaded and turbo:load
+  document.addEventListener('DOMContentLoaded', initializeMultipleIntervenantsToggle);
+  document.addEventListener('turbo:load', initializeMultipleIntervenantsToggle);
+  
+  // Also initialize immediately in case the script loads after DOM is ready
+  if (document.readyState === 'loading') {
+    // DOM is still loading
+  } else {
+    // DOM is already loaded, initialize immediately
+    initializeMultipleIntervenantsToggle();
+  }
 </script>
