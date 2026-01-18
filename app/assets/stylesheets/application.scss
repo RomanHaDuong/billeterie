@@ -27,3 +27,43 @@
 
 @import "bookings";
 @import "devise";
+
+/* Custom Scrollbar - Desktop only, hidden on mobile */
+html, body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(89, 94, 71, 0.4) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(89, 94, 71, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(89, 94, 71, 0.6);
+}
+
+/* Hide scrollbar completely on mobile */
+@media (max-width: 768px) {
+  html, body {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+}

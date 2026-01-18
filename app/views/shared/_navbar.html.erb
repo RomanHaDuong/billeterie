@@ -1,39 +1,3 @@
-<%# Custom Scrollbar Styles %>
-<style>
-  /* Sleek scrollbar styling for desktop */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(89, 94, 71, 0.4);
-    border-radius: 4px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(89, 94, 71, 0.6);
-  }
-  
-  /* Firefox */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(89, 94, 71, 0.4) transparent;
-  }
-  
-  /* Hide scrollbar on mobile devices */
-  @media (max-width: 768px) {
-    ::-webkit-scrollbar {
-      display: none;
-      width: 0;
-    }
-    * {
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-  }
-</style>
-
 <nav id="mainNavbar" class="navbar navbar-light py-3" style="background-color: transparent; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; transition: transform 0.3s ease;">
   <div class="container-fluid px-4">
     <%= link_to root_path, class: "navbar-brand d-flex align-items-center gap-2" do %>
