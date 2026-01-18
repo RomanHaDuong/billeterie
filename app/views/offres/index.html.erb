@@ -1,4 +1,5 @@
 <div class="container p-1 p-sm-3 p-md-5 rounded-3" style="background-color: #E9D7C3;">
+  
   <h1 class="text-center text-primary mb-3 mb-md-5">
     Programme
   </h1>
@@ -22,36 +23,49 @@
     </div>
   </div>
 
-  <div class="container py-2 py-md-5">
+  <div class="d-flex justify-content-center align-items-center mb-4">
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a id="listeTab" class="nav-link" data-bs-toggle="tab" href="#list-view" style="background-color: transparent; color: #595E47; border: 2px solid #6B7459;">Liste</a>
+      </li>
+      <li class="nav-item">
+        <a id="agendaTab" class="nav-link active" data-bs-toggle="tab" href="#agenda-view" style="background-color: #6B7459; color: white; border: 2px solid #6B7459;">Agenda</a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h2 class="fw-bold mb-0"></h2>
-      <ul class="nav nav-pills">
-        <li class="nav-item">
-          <a id="listeTab" class="nav-link" data-bs-toggle="tab" href="#list-view" style="background-color: transparent; color: #595E47; border: 2px solid #6B7459;">Liste</a>
-        </li>
-        <li class="nav-item">
-          <a id="agendaTab" class="nav-link active" data-bs-toggle="tab" href="#agenda-view" style="background-color: #6B7459; color: white; border: 2px solid #6B7459;">Agenda</a>
-        </li>
-      </ul>
+  <%# Plant decoration wrapper - starts below the buttons %>
+  <div class="position-relative">
+    <%# Left plants - repeating pattern %>
+    <div class="d-none d-lg-block position-absolute" style="left: -120px; top: 0; bottom: 0; width: 120px; pointer-events: none;">
+      <div style="background-image: url('<%= asset_path('left_plants.png') %>'); background-repeat: repeat-y; background-position: right top; background-size: 100px auto; height: calc(100% - 80px);"></div>
+      <%= image_tag "plant_top_end_left.png", style: "width: 100px; position: absolute; bottom: 0; right: 0;", alt: "" %>
+    </div>
+    
+    <%# Right plants - repeating pattern %>
+    <div class="d-none d-lg-block position-absolute" style="right: -120px; top: 0; bottom: 0; width: 120px; pointer-events: none;">
+      <div style="background-image: url('<%= asset_path('right_plants.png') %>'); background-repeat: repeat-y; background-position: left top; background-size: 100px auto; height: calc(100% - 80px);"></div>
+      <%= image_tag "plant_top_end_right.png", style: "width: 100px; position: absolute; bottom: 0; left: 0;", alt: "" %>
     </div>
 
-    <div class="tab-content">
+    <div class="container py-2 py-md-5">
 
-      <%# list view %>
-      <div class="tab-pane fade" id="list-view">
-        <div class="container-fluid">
-          <div class="row g-4">
-            <% @offres.each do |offre| %>
+      <div class="tab-content">
 
-              <div class="col-sm-6 col-md-4 mb-4">
+        <%# list view %>
+        <div class="tab-pane fade" id="list-view">
+          <div class="container-fluid">
+            <div class="row g-4">
+              <% @offres.each do |offre| %>
 
-                <div class="card workshop-card h-100 shadow-sm">
-                  <%# Image Section %>
-                  <div class="workshop-card-img-wrapper">
-                    <% if offre.image.attached? %>
-                      <%= image_tag offre.image, class: "workshop-card-img" %>
-                    <% else %>
+                <div class="col-sm-6 col-md-4 mb-4">
+
+                  <div class="card workshop-card h-100 shadow-sm">
+                    <%# Image Section %>
+                    <div class="workshop-card-img-wrapper">
+                      <% if offre.image.attached? %>
+                        <%= image_tag offre.image, class: "workshop-card-img" %>
+                      <% else %>
                       <%= image_tag "placeholder_offre.png", class: "workshop-card-img" %>
                     <% end %>
                   </div>
@@ -124,6 +138,8 @@
     </div>
 
   </div>
+  </div>
+  <%# End plant decoration wrapper %>
 </div>
 
 <script>
