@@ -1,20 +1,31 @@
 <%# Custom Scrollbar Styles %>
 <style>
-  /* Hide native scrollbar completely */
+  /* Hide native scrollbar completely - all browsers including mobile */
   html, body {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE/Edge */
+    -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
   }
   html::-webkit-scrollbar,
-  body::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    display: none;
-  }
+  body::-webkit-scrollbar,
   *::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    display: none;
+    width: 0 !important;
+    height: 0 !important;
+    display: none !important;
+    background: transparent !important;
+  }
+  /* Hide iOS/mobile white scrollbar */
+  html::-webkit-scrollbar-track,
+  body::-webkit-scrollbar-track,
+  *::-webkit-scrollbar-track {
+    display: none !important;
+    background: transparent !important;
+  }
+  html::-webkit-scrollbar-thumb,
+  body::-webkit-scrollbar-thumb,
+  *::-webkit-scrollbar-thumb {
+    display: none !important;
+    background: transparent !important;
   }
   
   /* Custom scrollbar overlay */
