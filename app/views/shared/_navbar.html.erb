@@ -1,12 +1,19 @@
 <%# Custom Scrollbar Styles %>
 <style>
-  /* Sleek overlay scrollbar */
-  body {
+  /* Hide native scrollbar completely */
+  html, body {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE/Edge */
   }
+  html::-webkit-scrollbar,
   body::-webkit-scrollbar {
     width: 0;
+    height: 0;
+    display: none;
+  }
+  *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
     display: none;
   }
   
@@ -15,7 +22,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    width: 3px;
+    width: 8px;
     height: 100vh;
     z-index: 9999;
     pointer-events: none;
@@ -23,9 +30,9 @@
   .custom-scrollbar-thumb {
     position: absolute;
     right: 0;
-    width: 3px;
+    width: 8px;
     background: rgba(89, 94, 71, 0.4);
-    border-radius: 3px;
+    border-radius: 4px;
     transition: background 0.2s ease;
   }
   .custom-scrollbar:hover .custom-scrollbar-thumb,
@@ -254,8 +261,9 @@
       const clientHeight = document.documentElement.clientHeight;
       const scrollTop = window.scrollY;
       
-      // Calculate thumb size (proportional to viewport/content ratio)
-      const thumbHeight = Math.max((clientHeight / scrollHeight) * clientHeight, 30);
+      // Calculate thumb size (proportional but smaller - 60% of normal proportion)
+      const proportion = (clientHeight / scrollHeight) * 0.6;
+      const thumbHeight = Math.max(proportion * clientHeight, 40);
       // Calculate thumb position
       const maxScroll = scrollHeight - clientHeight;
       const thumbTop = maxScroll > 0 ? (scrollTop / maxScroll) * (clientHeight - thumbHeight) : 0;
