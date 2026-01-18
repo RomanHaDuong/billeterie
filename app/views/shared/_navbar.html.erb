@@ -1,30 +1,66 @@
+<%# Custom Scrollbar Styles %>
+<style>
+  /* Sleek overlay scrollbar */
+  body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+  body::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+  
+  /* Custom scrollbar overlay */
+  .custom-scrollbar {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 3px;
+    height: 100vh;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  .custom-scrollbar-thumb {
+    position: absolute;
+    right: 0;
+    width: 3px;
+    background: rgba(89, 94, 71, 0.4);
+    border-radius: 3px;
+    transition: background 0.2s ease;
+  }
+  .custom-scrollbar:hover .custom-scrollbar-thumb,
+  .custom-scrollbar-thumb:hover {
+    background: rgba(89, 94, 71, 0.6);
+    pointer-events: auto;
+  }
+</style>
+
+<%# Custom scrollbar element %>
+<div class="custom-scrollbar" id="customScrollbar">
+  <div class="custom-scrollbar-thumb" id="customScrollbarThumb"></div>
+</div>
+
 <nav id="mainNavbar" class="navbar navbar-light py-3" style="background-color: transparent; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; transition: transform 0.3s ease;">
   <div class="container-fluid px-4">
     <%= link_to root_path, class: "navbar-brand d-flex align-items-center gap-2" do %>
       <%= image_tag "logo.png", class: "rounded-circle logo-responsive", width: 40, height: 40, alt: "Festival logo" %>
       <span id="festivalText" class="fw-bold fs-4 text-primary" style="<%= 'display: none;' if current_page?(root_path) %> transition: opacity 0.3s ease, transform 0.3s ease, width 0.3s ease; overflow: hidden; white-space: nowrap;">Festival</span>
     <% end %>
-
-    <%# Hamburger Menu Button - Always visible on the right %>
-    <button id="mobileMenuBtn" class="hamburger-responsive" style="background-color: #ede4de; border: none; padding: 12px; cursor: pointer; width: 50px; height: 50px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; position: fixed; right: 20px; top: 20px; z-index: 1001; transition: transform 0.3s ease;">
-      <span id="menuLine1" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
-      <span id="menuLine2" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
-      <span id="menuLine3" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
-    </button>
   </div>
 </nav>
 
+<%# Hamburger Menu Button - Outside nav, always on top %>
+<button id="mobileMenuBtn" class="hamburger-responsive" style="background-color: #ede4de; border: none; padding: 12px; cursor: pointer; width: 50px; height: 50px; border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; position: fixed; right: 20px; top: 20px; z-index: 10000; transition: transform 0.3s ease;">
+  <span id="menuLine1" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
+  <span id="menuLine2" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
+  <span id="menuLine3" class="hamburger-line" style="display: block; width: 24px; height: 2px; background-color: #595E47; border-radius: 2px; transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);"></span>
+</button>
+
 <%# Mobile Fullscreen Menu %>
-<div id="mobileMenuOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: white; z-index: 9999; overflow-y: auto; opacity: 0; transition: opacity 0.4s ease-in-out;">
+<div id="mobileMenuOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: white; z-index: 9998; overflow-y: auto; opacity: 0; transition: opacity 0.4s ease-in-out;">
   <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-      <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
-        <%= image_tag "logo.png", class: "rounded-circle me-2", width: 40, height: 40, alt: "Festival logo" %>
-        <span class="fw-bold fs-4 text-primary">Festival</span>
-      <% end %>
-      
-      <button id="mobileMenuClose" style="background: none; border: none; font-size: 2.5rem; padding: 0; cursor: pointer; color: #595E47; line-height: 1; transition: transform 0.3s ease, opacity 0.3s ease;" onmouseover="this.style.transform='rotate(90deg)'" onmouseout="this.style.transform='rotate(0deg)'">&times;</button>
-    </div>
+    <%# Empty header space to maintain layout consistency %>
+    <div class="mb-5" style="height: 50px;"></div>
 
     <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 60vh;">
       <ul class="list-unstyled text-center mb-5" id="menuItems">
@@ -78,7 +114,6 @@
   function initNavbar() {
     const menuBtn = document.getElementById('mobileMenuBtn');
     const menuOverlay = document.getElementById('mobileMenuOverlay');
-    const menuClose = document.getElementById('mobileMenuClose');
     const menuItems = document.querySelectorAll('#menuItems li, #menuCTA, #menuAccount');
     const line1 = document.getElementById('menuLine1');
     const line2 = document.getElementById('menuLine2');
@@ -91,6 +126,7 @@
     
     let lastScrollY = window.scrollY;
     let ticking = false;
+    let menuOpen = false;
 
     // Check if device is mobile (viewport width)
     function isMobile() {
@@ -154,6 +190,7 @@
     });
 
     function openMenu() {
+      menuOpen = true;
       menuOverlay.style.display = 'block';
       setTimeout(() => {
         menuOverlay.style.opacity = '1';
@@ -174,6 +211,7 @@
     }
 
     function closeMenu() {
+      menuOpen = false;
       menuOverlay.style.opacity = '0';
       menuItems.forEach(item => {
         item.style.opacity = '0';
@@ -193,14 +231,12 @@
     }
 
     menuBtn.addEventListener('click', function() {
-      if (menuOverlay.style.display === 'none' || menuOverlay.style.display === '') {
-        openMenu();
-      } else {
+      if (menuOpen) {
         closeMenu();
+      } else {
+        openMenu();
       }
     });
-
-    menuClose.addEventListener('click', closeMenu);
 
     // Close menu when clicking on a link
     document.querySelectorAll('#mobileMenuOverlay a').forEach(link => {
@@ -208,7 +244,38 @@
     });
   }
 
+  // Custom scrollbar functionality
+  function initCustomScrollbar() {
+    const thumb = document.getElementById('customScrollbarThumb');
+    if (!thumb) return;
+    
+    function updateScrollbar() {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const clientHeight = document.documentElement.clientHeight;
+      const scrollTop = window.scrollY;
+      
+      // Calculate thumb size (proportional to viewport/content ratio)
+      const thumbHeight = Math.max((clientHeight / scrollHeight) * clientHeight, 30);
+      // Calculate thumb position
+      const maxScroll = scrollHeight - clientHeight;
+      const thumbTop = maxScroll > 0 ? (scrollTop / maxScroll) * (clientHeight - thumbHeight) : 0;
+      
+      thumb.style.height = thumbHeight + 'px';
+      thumb.style.top = thumbTop + 'px';
+    }
+    
+    window.addEventListener('scroll', updateScrollbar);
+    window.addEventListener('resize', updateScrollbar);
+    updateScrollbar();
+  }
+
   // Initialize on both regular page load and Turbo navigation
-  document.addEventListener('DOMContentLoaded', initNavbar);
-  document.addEventListener('turbo:load', initNavbar);
+  document.addEventListener('DOMContentLoaded', function() {
+    initNavbar();
+    initCustomScrollbar();
+  });
+  document.addEventListener('turbo:load', function() {
+    initNavbar();
+    initCustomScrollbar();
+  });
 </script>
