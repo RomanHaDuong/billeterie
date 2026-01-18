@@ -1,11 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  bio: MyString
-  user: one
-  name: MyString
+fournisseur_one:
+  name: Jean Dupont
+  bio: Expert en développement personnel avec 10 ans d'expérience
+  user: intervenant_user
+  instagram: https://instagram.com/jean
+  linkedin: https://linkedin.com/in/jean
+  offinity: https://offinity.com/jean
 
-two:
-  bio: MyString
-  user: two
-  name: MyString
+fournisseur_two:
+  name: Marie Martin
+  bio: Coach et formatrice passionnée
+  user: other_user
+  instagram: https://instagram.com/marie
+  linkedin: https://linkedin.com/in/marie
+
+fournisseur_three:
+  name: Pierre Durand
+  bio: Animateur d'ateliers créatifs
+  user:
+  instagram: https://instagram.com/pierre

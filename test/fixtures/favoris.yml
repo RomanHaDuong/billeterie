@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  offre: one
+favori_one:
+  user: regular_user
+  offre: offre_one
 
-two:
-  user: two
-  offre: two
+favori_two:
+  user: regular_user
+  offre: offre_two
+
+favori_three:
+  user: other_user
+  offre: offre_one

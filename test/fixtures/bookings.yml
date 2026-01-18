@@ -1,11 +1,29 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user: one
-  offre: one
-  status: MyString
+booking_one:
+  user: regular_user
+  offre: offre_one
+  status: confirmed
+  user_name: Regular User
+  user_email: user@example.com
 
-two:
-  user: two
-  offre: two
-  status: MyString
+booking_two:
+  user: other_user
+  offre: offre_one
+  status: confirmed
+  user_name: Other User
+  user_email: other@example.com
+
+booking_full_one:
+  user: regular_user
+  offre: offre_full
+  status: confirmed
+  user_name: Regular User
+  user_email: user@example.com
+
+booking_full_two:
+  user: other_user
+  offre: offre_full
+  status: confirmed
+  user_name: Other User
+  user_email: other@example.com

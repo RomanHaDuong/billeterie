@@ -1,9 +1,50 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  price: 1
-  fournisseur: one
+offre_one:
+  titre: Introduction au yoga
+  sous_titre: Atelier pratique
+  descriptif: Découvrez les bases du yoga
+  categories: Sport & Bien-être
+  duree: 1h30
+  place: 15
+  date_prevue: <%= 30.days.from_now %>
+  salle: Salle A
+  fournisseur: fournisseur_one
+  intervenant: Jean Dupont
 
-two:
-  price: 1
-  fournisseur: two
+offre_two:
+  titre: Méditation pleine conscience
+  sous_titre: Initiation
+  descriptif: Apprenez à méditer en pleine conscience
+  categories: Développement personnel
+  duree: 1h
+  place: 20
+  date_prevue: <%= 31.days.from_now %>
+  salle: Salle B
+  fournisseur: fournisseur_two
+  secondary_fournisseur: fournisseur_one
+  intervenant: Marie Martin
+
+offre_full:
+  titre: Atelier complet
+  sous_titre: Plus de places
+  descriptif: Cet atelier est complet
+  categories: Art & Créativité
+  duree: 2h
+  place: 2
+  date_prevue: <%= 32.days.from_now %>
+  salle: Salle C
+  fournisseur: fournisseur_three
+  intervenant: Pierre Durand
+
+offre_past:
+  titre: Atelier passé
+  sous_titre: Déjà eu lieu
+  descriptif: Cet atelier a déjà eu lieu
+  categories: Technologie
+  duree: 1h
+  place: 10
+  date_prevue: <%= 10.days.ago %>
+  salle: Salle D
+  fournisseur: fournisseur_one
+  intervenant: Jean Dupont

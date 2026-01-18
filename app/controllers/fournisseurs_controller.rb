@@ -2,10 +2,14 @@ class FournisseursController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   
   def index
-    @fournisseurs = Fournisseur.where.not(name: nil)
-      .joins(:offres)
-      .distinct
-      .order(:name)
+    # Get fournisseurs who have any type of offres (primary, secondary, or additional)
+    primary_animateurs = Fournisseur.where.not(name: nil).joins(:offres).distinct
+    secondary_animateurs = Fournisseur.where.not(name: nil).joins(:secondary_offres).distinct
+    additional_animateurs = Fournisseur.where.not(name: nil).joins(:additional_offres).distinct
+    
+    # Combine all unique fournisseurs
+    @fournisseurs = (primary_animateurs + secondary_animateurs + additional_animateurs).uniq.sort_by(&:name)
+    
     no_render = Fournisseur.find_by(name: "Isabelle Forestier, Lucille Couturier, Prisca Elizabeth")
     alex = Fournisseur.find_by(name: "Alexandra Gautrand Ha Duong")
     @fournisseurs = @fournisseurs - [no_render]
@@ -47,7 +51,7 @@ class FournisseursController < ApplicationController
     @fournisseur = Fournisseur.find(params[:id])
     @offres = Offre.where(fournisseur_id: @fournisseur.id).order(:date_prevue)
 
-    @all_offres = (@fournisseur.offres + @fournisseur.secondary_offres).sort_by(&:date_prevue)
+    @all_offres = (@fournisseur.offres + @fournisseur.secondary_offres + @fournisseur.additional_offres).uniq.sort_by(&:date_prevue)
   end
 
   def your_profile
