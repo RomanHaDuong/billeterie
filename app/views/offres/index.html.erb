@@ -23,6 +23,20 @@
     </div>
   </div>
 
+  <%# Plant decoration wrapper - starts just above the buttons %>
+  <div class="position-relative">
+    <%# Left plants - repeating pattern - positioned at screen edge %>
+    <div class="position-absolute d-flex flex-column" style="left: calc(-50vw + 50%); top: -120px; bottom: -200px; width: 200px; pointer-events: none; z-index: 0;">
+      <%= image_tag "plant_top_end_left.png", style: "width: 200px; display: block; flex-shrink: 0;", alt: "" %>
+      <div style="background-image: url('<%= asset_path('left_plants.png') %>'); background-repeat: repeat-y; background-position: right top; background-size: 200px auto; flex: 1;"></div>
+    </div>
+    
+    <%# Right plants - repeating pattern - positioned at screen edge %>
+    <div class="position-absolute d-flex flex-column" style="right: calc(-50vw + 50%); top: -120px; bottom: -200px; width: 200px; pointer-events: none; z-index: 0;">
+      <%= image_tag "plant_top_end_right.png", style: "width: 200px; display: block; flex-shrink: 0;", alt: "" %>
+      <div style="background-image: url('<%= asset_path('right_plants.png') %>'); background-repeat: repeat-y; background-position: left top; background-size: 200px auto; flex: 1;"></div>
+    </div>
+
   <div class="d-flex justify-content-center align-items-center mb-4">
     <ul class="nav nav-pills">
       <li class="nav-item">
@@ -33,20 +47,6 @@
       </li>
     </ul>
   </div>
-
-  <%# Plant decoration wrapper - starts below the buttons %>
-  <div class="position-relative">
-    <%# Left plants - repeating pattern %>
-    <div class="d-none d-lg-block position-absolute" style="left: -120px; top: 0; bottom: 0; width: 120px; pointer-events: none;">
-      <div style="background-image: url('<%= asset_path('left_plants.png') %>'); background-repeat: repeat-y; background-position: right top; background-size: 100px auto; height: calc(100% - 80px);"></div>
-      <%= image_tag "plant_top_end_left.png", style: "width: 100px; position: absolute; bottom: 0; right: 0;", alt: "" %>
-    </div>
-    
-    <%# Right plants - repeating pattern %>
-    <div class="d-none d-lg-block position-absolute" style="right: -120px; top: 0; bottom: 0; width: 120px; pointer-events: none;">
-      <div style="background-image: url('<%= asset_path('right_plants.png') %>'); background-repeat: repeat-y; background-position: left top; background-size: 100px auto; height: calc(100% - 80px);"></div>
-      <%= image_tag "plant_top_end_right.png", style: "width: 100px; position: absolute; bottom: 0; left: 0;", alt: "" %>
-    </div>
 
     <div class="container py-2 py-md-5">
 
