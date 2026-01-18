@@ -1,62 +1,38 @@
 <%# Custom Scrollbar Styles %>
 <style>
-  /* Hide native scrollbar completely - all browsers including mobile */
-  html, body {
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-    -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
-  }
-  html::-webkit-scrollbar,
-  body::-webkit-scrollbar,
-  *::-webkit-scrollbar {
-    width: 0 !important;
-    height: 0 !important;
-    display: none !important;
-    background: transparent !important;
-  }
-  /* Hide iOS/mobile white scrollbar */
-  html::-webkit-scrollbar-track,
-  body::-webkit-scrollbar-track,
-  *::-webkit-scrollbar-track {
-    display: none !important;
-    background: transparent !important;
-  }
-  html::-webkit-scrollbar-thumb,
-  body::-webkit-scrollbar-thumb,
-  *::-webkit-scrollbar-thumb {
-    display: none !important;
-    background: transparent !important;
-  }
-  
-  /* Custom scrollbar overlay */
-  .custom-scrollbar {
-    position: fixed;
-    right: 0;
-    top: 0;
+  /* Sleek scrollbar styling for desktop */
+  ::-webkit-scrollbar {
     width: 8px;
-    height: 100vh;
-    z-index: 9999;
-    pointer-events: none;
   }
-  .custom-scrollbar-thumb {
-    position: absolute;
-    right: 0;
-    width: 8px;
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
     background: rgba(89, 94, 71, 0.4);
     border-radius: 4px;
-    transition: background 0.2s ease;
   }
-  .custom-scrollbar:hover .custom-scrollbar-thumb,
-  .custom-scrollbar-thumb:hover {
+  ::-webkit-scrollbar-thumb:hover {
     background: rgba(89, 94, 71, 0.6);
-    pointer-events: auto;
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(89, 94, 71, 0.4) transparent;
+  }
+  
+  /* Hide scrollbar on mobile devices */
+  @media (max-width: 768px) {
+    ::-webkit-scrollbar {
+      display: none;
+      width: 0;
+    }
+    * {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
   }
 </style>
-
-<%# Custom scrollbar element %>
-<div class="custom-scrollbar" id="customScrollbar">
-  <div class="custom-scrollbar-thumb" id="customScrollbarThumb"></div>
-</div>
 
 <nav id="mainNavbar" class="navbar navbar-light py-3" style="background-color: transparent; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; transition: transform 0.3s ease;">
   <div class="container-fluid px-4">
@@ -262,39 +238,7 @@
     });
   }
 
-  // Custom scrollbar functionality
-  function initCustomScrollbar() {
-    const thumb = document.getElementById('customScrollbarThumb');
-    if (!thumb) return;
-    
-    function updateScrollbar() {
-      const scrollHeight = document.documentElement.scrollHeight;
-      const clientHeight = document.documentElement.clientHeight;
-      const scrollTop = window.scrollY;
-      
-      // Calculate thumb size (proportional but smaller - 60% of normal proportion)
-      const proportion = (clientHeight / scrollHeight) * 0.6;
-      const thumbHeight = Math.max(proportion * clientHeight, 40);
-      // Calculate thumb position
-      const maxScroll = scrollHeight - clientHeight;
-      const thumbTop = maxScroll > 0 ? (scrollTop / maxScroll) * (clientHeight - thumbHeight) : 0;
-      
-      thumb.style.height = thumbHeight + 'px';
-      thumb.style.top = thumbTop + 'px';
-    }
-    
-    window.addEventListener('scroll', updateScrollbar);
-    window.addEventListener('resize', updateScrollbar);
-    updateScrollbar();
-  }
-
   // Initialize on both regular page load and Turbo navigation
-  document.addEventListener('DOMContentLoaded', function() {
-    initNavbar();
-    initCustomScrollbar();
-  });
-  document.addEventListener('turbo:load', function() {
-    initNavbar();
-    initCustomScrollbar();
-  });
+  document.addEventListener('DOMContentLoaded', initNavbar);
+  document.addEventListener('turbo:load', initNavbar);
 </script>
