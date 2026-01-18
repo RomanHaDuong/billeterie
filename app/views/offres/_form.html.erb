@@ -114,7 +114,6 @@
           <%# Intervenants supplémentaires %>
           <div class="col-12" id="additional_fournisseurs_section" style="<%= 'display: none;' unless @offre.additional_fournisseurs.any? %>">
             <%= f.label :additional_fournisseur_ids, "Intervenants supplémentaires (co-intervenants)", class: "form-label fw-bold" %>
-            <small class="text-muted d-block mb-2">Vous pouvez sélectionner jusqu'à 4 intervenants supplémentaires (5 maximum au total incluant vous-même)</small>
             <%= f.collection_check_boxes :additional_fournisseur_ids, 
                 Fournisseur.all.where.not(id: @offre.fournisseur_id), 
                 :id, :name do |b| %>
