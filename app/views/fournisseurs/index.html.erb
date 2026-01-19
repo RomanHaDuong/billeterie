@@ -6,13 +6,13 @@
   <%# Plant decoration wrapper %>
   <div class="position-relative">
     <%# Left plants - repeating pattern - positioned at screen edge %>
-    <div class="position-absolute d-flex flex-column" style="left: calc(-50vw + 50%); top: -120px; bottom: -200px; width: 200px; pointer-events: none; z-index: 0;">
+    <div class="position-absolute d-flex flex-column" style="left: calc(-50vw + 50%); top: -120px; bottom: -200px; width: 200px; pointer-events: none; z-index: 0; opacity: 0.5;">
       <%= image_tag "plant_top_end_left.png", style: "width: 200px; display: block; flex-shrink: 0;", alt: "" %>
       <div style="background-image: url('<%= asset_path('left_plants.png') %>'); background-repeat: repeat-y; background-position: right top; background-size: 200px auto; flex: 1;"></div>
     </div>
     
     <%# Right plants - repeating pattern - positioned at screen edge %>
-    <div class="position-absolute d-flex flex-column" style="right: calc(-50vw + 50%); top: -120px; bottom: -200px; width: 200px; pointer-events: none; z-index: 0;">
+    <div class="position-absolute d-flex flex-column" style="right: calc(-50vw + 50%); top: -120px; bottom: -200px; width: 200px; pointer-events: none; z-index: 0; opacity: 0.5;">
       <%= image_tag "plant_top_end_right.png", style: "width: 200px; display: block; flex-shrink: 0;", alt: "" %>
       <div style="background-image: url('<%= asset_path('right_plants.png') %>'); background-repeat: repeat-y; background-position: left top; background-size: 200px auto; flex: 1;"></div>
     </div>
